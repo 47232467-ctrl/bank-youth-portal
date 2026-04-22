@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>银YOUNG空间 - 银行青年的成长加油站</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --primary-dark: #0d1f3c;
+            --accent: #ed8936;
+            --accent-light: #f6ad55;
+            --accent-soft: #fbd38d;
+            --bg-main: #f7fafc;
+            --bg-card: #ffffff;
+            --text-dark: #1a202c;
+            --text-body: #4a5568;
+            --text-light: #718096;
+            --gradient-hero: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%);
+            --gradient-card: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.8) 100%);
+            --shadow-soft: 0 4px 20px rgba(26, 54, 93, 0.08);
+            --shadow-hover: 0 12px 40px rgba(26, 54, 93, 0.15);
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(26, 54, 93, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.8rem 2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-hero);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
+        }
+
+        .logo-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-body);
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .nav-cta {
+            background: var(--accent) !important;
+            color: white !important;
+            box-shadow: 0 4px 12px rgba(237, 137, 54, 0.4);
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light) !important;
+            transform: translateY(-2px);
+        }
+
+        /* 移动端菜单 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero 区域 */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-hero);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            color: white;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-badge::before {
+            content: '✨';
+        }
+
+        .hero h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 em {
+            font-style: normal;
+            color: var(--accent-soft);
+        }
+
+        .hero-desc {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 20px rgba(237, 137, 54, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(237, 137, 54, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .mini-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            color: white;
+            transition: all 0.4s ease;
+        }
+
+        .mini-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .mini-card:nth-child(2) {
+            transform: translateY(2rem);
+        }
+
+        .mini-card:nth-child(3) {
+            transform: translateY(-1rem);
+        }
+
+        .mini-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mini-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .mini-card p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* 统计区域 */
+        .stats {
+            background: white;
+            padding: 3rem 2rem;
+            margin-top: -3rem;
+            position: relative;
+            z-index: 10;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* 内容区块 */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 知识库卡片 */
+        .knowledge-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .knowledge-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .knowledge-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .knowledge-card-img {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .knowledge-card-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(26, 54, 93, 0.6) 100%);
+        }
+
+        .knowledge-card-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+
+        .knowledge-card-content {
+            padding: 1.5rem;
+        }
+
+        .knowledge-card h3 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .knowledge-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .knowledge-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .knowledge-card-author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .knowledge-card-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        .knowledge-card-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .knowledge-card-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* 分类导航 */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            color: var(--text-body);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-tab:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .category-tab.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* 礼仪专区 */
+        .etiquette-section {
+            background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
+            padding: 5rem 2rem;
+            margin: 3rem 0;
+        }
+
+        .etiquette-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .etiquette-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .etiquette-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-hero);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .etiquette-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .etiquette-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .etiquette-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .etiquette-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .etiquette-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* 营销技巧 */
+        .marketing-section {
+            background: var(--gradient-hero);
+            padding: 5rem 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .marketing-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(237, 137, 54, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .marketing-section .section-tag {
+            background: var(--accent);
+        }
+
+        .marketing-section .section-title {
+            color: white;
+        }
+
+        .marketing-section .section-desc {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .marketing-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .marketing-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .marketing-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .marketing-card-number {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            opacity: 0.6;
+            margin-bottom: 1rem;
+        }
+
+        .marketing-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .marketing-card p {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            margin-bottom: 1.5rem;
+        }
+
+        .marketing-tag {
+            display: inline-block;
+            background: rgba(237, 137, 54, 0.3);
+            padding: 0.4rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 前辈说 */
+        .seniors-section {
+            padding: 5rem 2rem;
+            background: #f8fafc;
+        }
+
+        .seniors-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .senior-quote {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+        }
+
+        .senior-quote::before {
+            content: '"';
+            font-family: 'Noto Serif SC', serif;
+            font-size: 6rem;
+            color: var(--primary);
+            opacity: 0.1;
+            position: absolute;
+            top: 0;
+            left: 1.5rem;
+            line-height: 1;
+        }
+
+        .senior-quote-text {
+            font-size: 1.15rem;
+            color: var(--text-body);
+            margin-bottom: 1.5rem;
+            line-height: 1.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .senior-quote-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .senior-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .senior-info h4 {
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        .senior-info p {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .senior-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .senior-tag {
+            background: #edf2f7;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        /* 心理疏导 */
+        .mental-section {
+            padding: 5rem 2rem;
+        }
+
+        .mental-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .mental-card {
+            background: linear-gradient(135deg, #fff 0%, #f0f4ff 100%);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mental-card-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mental-card h3 {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .mental-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .mental-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .mental-btn:hover {
+            color: var(--accent);
+            gap: 0.8rem;
+        }
+
+        /* 轻松一刻 */
+        .relax-section {
+            background: linear-gradient(135deg, #fef3e2 0%, #fbd38d 100%);
+            padding: 5rem 2rem;
+        }
+
+        .relax-section .section-title {
+            color: var(--primary);
+        }
+
+        .relax-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .relax-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .relax-card-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .relax-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .relax-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .daily-quote {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .daily-quote-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .daily-quote-author {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* 底部区域 */
+        .footer {
+            background: var(--primary-dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-brand .logo-text {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            opacity: 0.7;
+            font-size: 0.95rem;
+        }
+
+        .footer-title {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .knowledge-grid,
+            .etiquette-grid,
+            .marketing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .seniors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow-soft);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding: 7rem 1.5rem 3rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 3rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .knowledge-grid,
+            .etiquette-grid,
+            .marketing-grid,
+            .mental-grid,
+            .relax-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .footer-brand {
+                max-width: 100%;
+            }
+        }
+
+        /* 动画 */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .animate-delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .animate-delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .animate-delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .animate-delay-4 { animation-delay: 0.4s; opacity: 0; }
+
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">Y</div>
+                <div class="logo-text">银<span>YOUNG</span>空间</div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#knowledge">知识库</a></li>
+                <li><a href="#etiquette">礼仪课堂</a></li>
+                <li><a href="#marketing">营销锦囊</a></li>
+                <li><a href="#seniors">前辈说</a></li>
+                <li><a href="#mental">心灵驿站</a></li>
+                <li><a href="#relax" class="nav-cta">轻松一刻</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">专为银行青年打造</div>
+                <h1>你的职场成长<br><em>加油站</em></h1>
+                <p class="hero-desc">
+                    在这里，你可以找到银行业务知识、服务礼仪、营销技巧、前辈经验，
+                    也能获得心理疏导和轻松一刻。工作累了？来这里充充电吧！
+                </p>
+                <div class="hero-buttons">
+                    <a href="#knowledge" class="btn btn-primary">
+                        <span>🚀</span> 开始探索
+                    </a>
+                    <a href="#seniors" class="btn btn-outline">
+                        <span>💬</span> 听听前辈说
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-cards">
+                    <div class="mini-card animate-fadeInUp animate-delay-1">
+                        <div class="mini-card-icon">📚</div>
+                        <h3>业务知识库</h3>
+                        <p>涵盖存贷款、理财、信用卡等核心业务</p>
+                    </div>
+                    <div class="mini-card animate-fadeInUp animate-delay-2">
+                        <div class="mini-card-icon">🤝</div>
+                        <h3>服务礼仪</h3>
+                        <p>让客户感受专业的服务体验</p>
+                    </div>
+                    <div class="mini-card animate-fadeInUp animate-delay-3">
+                        <div class="mini-card-icon">💡</div>
+                        <h3>营销技巧</h3>
+                        <p>获客转化不再是难题</p>
+                    </div>
+                    <div class="mini-card animate-fadeInUp animate-delay-4">
+                        <div class="mini-card-icon">🧘</div>
+                        <h3>心理疏导</h3>
+                        <p>释放压力，轻松工作</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 统计 -->
+    <div class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">精选内容</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">前辈分享</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">营销案例</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">同龄人都在看</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 知识库 -->
+    <section class="section" id="knowledge">
+        <div class="section-header">
+            <div class="section-tag">知识库</div>
+            <h2 class="section-title">银行人的必修课</h2>
+            <p class="section-desc">从业务知识到职场技能，这里有你成长所需的一切</p>
+        </div>
+
+        <div class="category-tabs">
+            <button class="category-tab active" onclick="filterCategory(this, 'all')">全部</button>
+            <button class="category-tab" onclick="filterCategory(this, 'business')">业务知识</button>
+            <button class="category-tab" onclick="filterCategory(this, 'skill')">职场技能</button>
+            <button class="category-tab" onclick="filterCategory(this, 'product')">产品解读</button>
+            <button class="category-tab" onclick="filterCategory(this, 'compliance')">合规风控</button>
+        </div>
+
+        <div class="knowledge-grid">
+            <div class="knowledge-card" data-category="business">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <span class="knowledge-card-badge">热门</span>
+                </div>
+                <div class="knowledge-card-content">
+                    <h3>存款业务全攻略：从定期到结构性存款</h3>
+                    <p>详细讲解各类存款产品的特点、利率计算方法及营销技巧，让你快速成为存款业务能手。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author">
+                            <div class="knowledge-card-avatar">李</div>
+                            <span>李明 · 5分钟前</span>
+                        </div>
+                        <div class="knowledge-card-stats">
+                            <span>👁️ 2.3k</span>
+                            <span>❤️ 128</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="knowledge-card" data-category="skill">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <span class="knowledge-card-badge">必读</span>
+                </div>
+                <div class="knowledge-card-content">
+                    <h3>客户需求挖掘四步法</h3>
+                    <p>SPIN法则实战应用，用专业的问题引导客户说出真实需求，提升面谈效率。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author">
+                            <div class="knowledge-card-avatar">王</div>
+                            <span>王芳 · 12分钟前</span>
+                        </div>
+                        <div class="knowledge-card-stats">
+                            <span>👁️ 1.8k</span>
+                            <span>❤️ 256</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="knowledge-card" data-category="product">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <span class="knowledge-card-badge">新品</span>
+                </div>
+                <div class="knowledge-card-content">
+                    <h3>净值型理财产品解读</h3>
+                    <p>资管新规下理财产品的变化，客户常问问题汇总，帮你从容应对。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author">
+                            <div class="knowledge-card-avatar">陈</div>
+                            <span>陈静 · 30分钟前</span>
+                        </div>
+                        <div class="knowledge-card-stats">
+                            <span>👁️ 956</span>
+                            <span>❤️ 67</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="knowledge-card" data-category="compliance">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <span class="knowledge-card-badge">重要</span>
+                </div>
+                <div class="knowledge-card-content">
+                    <h3>反电信诈骗识别与防范</h3>
+                    <p>最新诈骗手法揭秘，一线员工必备的防骗指南，保护客户也保护自己。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author">
+                            <div class="knowledge-card-avatar">张</div>
+                            <span>张伟 · 1小时前</span>
+                        </div>
+                        <div class="knowledge-card-stats">
+                            <span>👁️ 3.2k</span>
+                            <span>❤️ 412</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="knowledge-card" data-category="business">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                    <span class="knowledge-card-badge">实用</span>
+                </div>
+                <div class="knowledge-card-content">
+                    <h3>贷款业务合规要点100条</h3>
+                    <p>信贷业务常见合规风险点，案例分析帮你避开雷区。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author">
+                            <div class="knowledge-card-avatar">刘</div>
+                            <span>刘洋 · 2小时前</span>
+                        </div>
+                        <div class="knowledge-card-stats">
+                            <span>👁️ 1.5k</span>
+                            <span>❤️ 189</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="knowledge-card" data-category="skill">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+                    <span class="knowledge-card-badge">技巧</span>
+                </div>
+                <div class="knowledge-card-content">
+                    <h3>电话营销的话术模板库</h3>
+                    <p>开场白、异议处理、促成签单，全流程话术参考，直接可用。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author">
+                            <div class="knowledge-card-avatar">赵</div>
+                            <span>赵敏 · 3小时前</span>
+                        </div>
+                        <div class="knowledge-card-stats">
+                            <span>👁️ 2.1k</span>
+                            <span>❤️ 334</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 礼仪专区 -->
+    <section class="etiquette-section" id="etiquette">
+        <div class="section-header">
+            <div class="section-tag">礼仪课堂</div>
+            <h2 class="section-title">专业，从细节开始</h2>
+            <p class="section-desc">服务礼仪不仅是规范，更是打动客户的艺术</p>
+        </div>
+
+        <div class="etiquette-grid">
+            <div class="etiquette-card">
+                <div class="etiquette-icon">🙋</div>
+                <h3>服务七步曲</h3>
+                <p>从迎接到送别，每个环节都让客户感受到专业与温暖</p>
+            </div>
+            <div class="etiquette-card">
+                <div class="etiquette-icon">🗣️</div>
+                <h3>客户沟通话术</h3>
+                <p>如何用语言传递信任，处理投诉也有技巧</p>
+            </div>
+            <div class="etiquette-card">
+                <div class="etiquette-icon">👔</div>
+                <h3>职场着装规范</h3>
+                <p>银行人的形象管理，从正装到配饰全指南</p>
+            </div>
+            <div class="etiquette-card">
+                <div class="etiquette-icon">📱</div>
+                <h3>数字礼仪</h3>
+                <p>微信沟通、电话礼仪，线上服务同样专业</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 营销锦囊 -->
+    <section class="marketing-section" id="marketing">
+        <div class="section-header">
+            <div class="section-tag">营销锦囊</div>
+            <h2 class="section-title">业绩提升的秘密武器</h2>
+            <p class="section-desc">实战营销案例，帮你打开思路、提升业绩</p>
+        </div>
+
+        <div class="marketing-grid">
+            <div class="marketing-card">
+                <div class="marketing-card-number">01</div>
+                <h3>厅堂获客三板斧</h3>
+                <p>如何把进店客户变成有效客户，再到忠实客户？实战经验分享。</p>
+                <div class="marketing-tag">厅堂营销</div>
+                <div class="marketing-tag">客户转介</div>
+                <div class="marketing-tag">交叉销售</div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">02</div>
+                <h3>存量客户激活术</h3>
+                <p>沉睡客户的唤醒策略，让你的客户资源发挥最大价值。</p>
+                <div class="marketing-tag">客户分层</div>
+                <div class="marketing-tag">精准触达</div>
+                <div class="marketing-tag">产品匹配</div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">03</div>
+                <h3>线上营销全攻略</h3>
+                <p>微信经营、社群运营、短视频获客，数字化营销从0到1。</p>
+                <div class="marketing-tag">私域流量</div>
+                <div class="marketing-tag">内容营销</div>
+                <div class="marketing-tag">数字化工具</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 前辈说 -->
+    <section class="seniors-section" id="seniors">
+        <div class="section-header">
+            <div class="section-tag">前辈说</div>
+            <h2 class="section-title">听听过来人的故事</h2>
+            <p class="section-desc">前人的经验教训，让你少走弯路</p>
+        </div>
+
+        <div class="seniors-grid">
+            <div class="senior-quote">
+                <p class="senior-quote-text">
+                    "刚入职时我也害怕营销，觉得在求人。后来想通了——我们不是求人，是帮人。我们帮客户管好钱、实现目标，这是一件有价值的事。心态变了，一切就都变了。"
+                </p>
+                <div class="senior-quote-author">
+                    <div class="senior-avatar">周</div>
+                    <div class="senior-info">
+                        <h4>周经理</h4>
+                        <p>某国有大行理财经理 · 入行8年</p>
+                    </div>
+                </div>
+                <div class="senior-tags">
+                    <span class="senior-tag">#心态调整</span>
+                    <span class="senior-tag">#成长感悟</span>
+                </div>
+            </div>
+
+            <div class="senior-quote">
+                <p class="senior-quote-text">
+                    "客户投诉不可怕，可怕的是不知道怎么应对。我的经验是：先处理情绪，再处理事情。让客户把气撒完，你就已经成功了一半。"
+                </p>
+                <div class="senior-quote-author">
+                    <div class="senior-avatar">林</div>
+                    <div class="senior-info">
+                        <h4>林主管</h4>
+                        <p>某股份制银行柜员主管 · 入行12年</p>
+                    </div>
+                </div>
+                <div class="senior-tags">
+                    <span class="senior-tag">#投诉处理</span>
+                    <span class="senior-tag">#服务技巧</span>
+                </div>
+            </div>
+
+            <div class="senior-quote">
+                <p class="senior-quote-text">
+                    "考证不是目的，但考证的过程会让你系统地学习。AFP、CFP、对公信贷……每考一个，你就比同龄人领先一步。别说什么工作忙，时间挤挤总是有的。"
+                </p>
+                <div class="senior-quote-author">
+                    <div class="senior-avatar">吴</div>
+                    <div class="senior-info">
+                        <h4>吴行长</h4>
+                        <p>某城商行支行副行长 · 入行15年</p>
+                    </div>
+                </div>
+                <div class="senior-tags">
+                    <span class="senior-tag">#职业规划</span>
+                    <span class="senior-tag">#自我提升</span>
+                </div>
+            </div>
+
+            <div class="senior-quote">
+                <p class="senior-quote-text">
+                    "银行工作确实累，但也有它的好处。稳定、体面、能让家人安心。找到工作的意义感很重要，不然真的撑不下去。找到你喜欢的那部分，然后放大它。"
+                </p>
+                <div class="senior-quote-author">
+                    <div class="senior-avatar">孙</div>
+                    <div class="senior-info">
+                        <h4>孙姐</h4>
+                        <p>某农商行业务骨干 · 入行10年</p>
+                    </div>
+                </div>
+                <div class="senior-tags">
+                    <span class="senior-tag">#工作平衡</span>
+                    <span class="senior-tag">#生活感悟</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 心理疏导 -->
+    <section class="mental-section" id="mental">
+        <div class="section-header">
+            <div class="section-tag">心灵驿站</div>
+            <h2 class="section-title">累了，就来歇一歇</h2>
+            <p class="section-desc">工作压力大？情绪低落？这里有你需要的身心调适指南</p>
+        </div>
+
+        <div class="mental-grid">
+            <div class="mental-card">
+                <div class="mental-card-icon">🧘</div>
+                <h3>3分钟呼吸放松法</h3>
+                <p>柜台前被客户气到了？试试这个，快速平复情绪的小技巧。</p>
+                <a href="#" class="mental-btn">开始练习 →</a>
+            </div>
+            <div class="mental-card">
+                <div class="mental-card-icon">📝</div>
+                <h3>职场情绪日记</h3>
+                <p>记录每天的情绪变化，发现规律，更好地管理自己。</p>
+                <a href="#" class="mental-btn">开始记录 →</a>
+            </div>
+            <div class="mental-card">
+                <div class="mental-card-icon">🎧</div>
+                <h3>减压音频合集</h3>
+                <p>轻音乐、白噪音、助眠冥想，上班路上、午休时都能听。</p>
+                <a href="#" class="mental-btn">立即收听 →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 轻松一刻 -->
+    <section class="relax-section" id="relax">
+        <div class="section-header">
+            <div class="section-tag">轻松一刻</div>
+            <h2 class="section-title">笑一笑，十年少</h2>
+            <p class="section-desc">银行人的日常吐槽与欢乐时光</p>
+        </div>
+
+        <div class="relax-grid">
+            <div class="relax-card">
+                <div class="relax-card-emoji">😂</div>
+                <h3>银行人才能懂的梗</h3>
+                <p>"您好，请问办什么业务？" "我要开户。" "好的，请出示身份证。" "我没带。" "……" 懂的都懂！</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">🤣</div>
+                <h3>客户奇葩问题合集</h3>
+                <p>定期利息怎么算？国债和国库券有什么区别？这些问题你遇到过几个？</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">😅</div>
+                <h3>柜员の日常</h3>
+                <p>授权老师的"再来一遍"、主管的灵魂拷问、同事的默契配合……这就是我们的日常。</p>
+            </div>
+        </div>
+
+        <div class="daily-quote">
+            <p class="daily-quote-text" id="dailyQuote">"银行工作是一场马拉松，不是百米冲刺。保持节奏，照顾好自己，才能走得更远。"</p>
+            <p class="daily-quote-author" id="quoteAuthor">—— 银YOUNG空间</p>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="logo-text" style="color: white;">银<span style="color: var(--accent);">YOUNG</span>空间</div>
+                <p>专为银行青年打造的知识加油站，让成长不再孤单。</p>
+            </div>
+            <div>
+                <div class="footer-title">内容广场</div>
+                <ul class="footer-links">
+                    <li><a href="#knowledge">知识库</a></li>
+                    <li><a href="#etiquette">礼仪课堂</a></li>
+                    <li><a href="#marketing">营销锦囊</a></li>
+                    <li><a href="#seniors">前辈说</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">身心关怀</div>
+                <ul class="footer-links">
+                    <li><a href="#mental">心灵驿站</a></li>
+                    <li><a href="#relax">轻松一刻</a></li>
+                    <li><a href="#">减压音频</a></li>
+                    <li><a href="#">情绪日记</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-title">关于我们</div>
+                <ul class="footer-links">
+                    <li><a href="#">平台介绍</a></li>
+                    <li><a href="#">投稿入口</a></li>
+                    <li><a href="#">意见反馈</a></li>
+                    <li><a href="#">联系我们</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 银YOUNG空间 · 让银行人的成长更有温度</span>
+            <span>Made with ❤️ for 银行青年</span>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 移动端菜单
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // 分类筛选
+        function filterCategory(btn, category) {
+            document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.querySelectorAll('.knowledge-card').forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 每日语录
+        const quotes = [
+            { text: "银行工作是一场马拉松，不是百米冲刺。保持节奏，照顾好自己，才能走得更远。", author: "银YOUNG空间" },
+            { text: "今天的辛苦，都是明天简历上的亮点。", author: "某位前辈" },
+            { text: "不要害怕犯错，害怕的是犯了错不改正。", author: "老员工忠告" },
+            { text: "客户虐我千百遍，我待客户如初恋。", author: "银行人自嘲" },
+            { text: "考证不是目的，但考证的过程会让你变得更强。", author: "吴行长" },
+            { text: "学会说不，也是一种成长。", author: "职场建议" },
+            { text: "把每一次挫折都当作成长的养分。", author: "银YOUNG空间" }
+        ];
+
+        function updateDailyQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            document.getElementById('dailyQuote').textContent = '"' + quotes[randomIndex].text + '"';
+            document.getElementById('quoteAuthor').textContent = '—— ' + quotes[randomIndex].author;
+        }
+
+        updateDailyQuote();
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.knowledge-card, .etiquette-card, .marketing-card, .senior-quote, .mental-card, .relax-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
