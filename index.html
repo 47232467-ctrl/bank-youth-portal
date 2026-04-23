@@ -162,6 +162,7 @@
         .marketing-accordion-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 0.5rem 0; font-size: 0.9rem; }
         .marketing-accordion-header::after { content: '+'; font-size: 1.2rem; }
         .marketing-accordion-item.active .marketing-accordion-header::after { content: '-'; }
+        .marketing-accordion-item.active .marketing-accordion-content { display: block; }
         .marketing-accordion-content { display: none; padding: 0.8rem; background: rgba(255,255,255,0.1); border-radius: var(--radius-sm); font-size: 0.85rem; margin-top: 0.5rem; }
         .marketing-accordion-item.active .marketing-accordion-content { display: block; }
 
@@ -178,6 +179,24 @@
         .senior-info p { color: var(--text-light); font-size: 0.8rem; }
         .senior-tags { display: flex; gap: 0.4rem; margin-top: 0.8rem; flex-wrap: wrap; }
         .senior-tag { background: #edf2f7; padding: 0.25rem 0.6rem; border-radius: 50px; font-size: 0.7rem; color: var(--text-light); }
+
+        /* 详情弹窗 */
+        .detail-modal { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); z-index: 2000; align-items: center; justify-content: center; padding: 2rem; }
+        .detail-modal.active { display: flex; }
+        .detail-modal-content { background: white; border-radius: var(--radius-lg); max-width: 800px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; }
+        .detail-modal-header { background: var(--gradient-hero); color: white; padding: 2rem; position: sticky; top: 0; z-index: 1; }
+        .detail-modal-close { position: absolute; top: 1rem; right: 1rem; width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: none; cursor: pointer; font-size: 1.5rem; color: white; display: flex; align-items: center; justify-content: center; }
+        .detail-modal-close:hover { background: rgba(255, 255, 255, 0.3); }
+        .detail-modal-title { font-family: 'Noto Serif SC', serif; font-size: 1.8rem; margin-bottom: 0.5rem; }
+        .detail-modal-meta { font-size: 0.9rem; opacity: 0.9; }
+        .detail-modal-body { padding: 2rem; }
+        .detail-section { margin-bottom: 2rem; }
+        .detail-section h4 { color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--accent-soft); }
+        .detail-section p { color: var(--text-body); line-height: 1.8; }
+        .detail-list { list-style: none; padding: 0; margin: 0; }
+        .detail-list li { padding: 0.8rem 1rem; background: #f8fafc; border-radius: var(--radius-sm); margin-bottom: 0.5rem; border-left: 3px solid var(--accent); }
+        .view-detail-hint { opacity: 0; transition: opacity 0.3s; text-align: center; margin-top: 0.8rem; padding: 0.4rem; background: var(--accent); color: white; border-radius: 50px; font-size: 0.8rem; }
+        .knowledge-card:hover .view-detail-hint, .senior-quote:hover .view-detail-hint { opacity: 1; }
 
         /* 心理疏导 */
         .mental-section { padding: 5rem 2rem; }
@@ -212,6 +231,55 @@
         .daily-quote { max-width: 800px; margin: 3rem auto 0; background: white; border-radius: var(--radius-lg); padding: 2rem; text-align: center; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); }
         .daily-quote-text { font-family: 'Noto Serif SC', serif; font-size: 1.3rem; color: var(--text-dark); margin-bottom: 1rem; line-height: 1.8; }
         .daily-quote-author { color: var(--accent); font-weight: 600; }
+
+        /* 最新金融动态 */
+        .news-section { padding: 5rem 2rem; background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%); }
+        .news-container { max-width: 1400px; margin: 0 auto; }
+        .news-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+        .news-update-time { display: flex; align-items: center; gap: 0.5rem; color: var(--text-light); font-size: 0.9rem; }
+        .news-update-time .pulse { width: 8px; height: 8px; background: #48bb78; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .news-column { background: white; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-soft); }
+        .news-column-header { padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+        .news-column-header.finance { background: linear-gradient(135deg, #1a365d, #2c5282); color: white; }
+        .news-column-header.bank { background: linear-gradient(135deg, #ed8936, #f6ad55); color: white; }
+        .news-column-header h3 { font-size: 1.1rem; font-weight: 600; }
+        .news-column-header .count { background: rgba(255,255,255,0.2); padding: 0.2rem 0.6rem; border-radius: 50px; font-size: 0.8rem; }
+        .news-list { padding: 0; margin: 0; }
+        .news-item { padding: 1rem 1.5rem; border-bottom: 1px solid #eee; display: flex; gap: 1rem; transition: background 0.3s; cursor: pointer; }
+        .news-item:last-child { border-bottom: none; }
+        .news-item:hover { background: #f8fafc; }
+        .news-item-hot { flex-shrink: 0; }
+        .news-hot-tag { display: inline-block; background: #fed7d7; color: #c53030; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+        .news-content { flex: 1; }
+        .news-title { font-size: 0.95rem; color: var(--text-dark); line-height: 1.5; margin-bottom: 0.3rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-meta { display: flex; gap: 1rem; font-size: 0.8rem; color: var(--text-light); }
+        .news-meta span { display: flex; align-items: center; gap: 0.3rem; }
+        .news-refresh { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; background: white; border: 2px solid var(--primary); color: var(--primary); border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .news-refresh:hover { background: var(--primary); color: white; }
+        .news-refresh.loading { opacity: 0.7; pointer-events: none; }
+        .news-refresh.loading::after { content: ' ↻'; animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* 媒体测试区域 */
+        .media-section { padding: 3rem 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .media-container { max-width: 1400px; margin: 0 auto; }
+        .media-header { text-align: center; margin-bottom: 2rem; }
+        .media-header h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .media-header p { opacity: 0.9; font-size: 0.95rem; }
+        .media-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .media-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: var(--radius-lg); padding: 1.5rem; }
+        .media-card h4 { font-size: 1.1rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .audio-player { width: 100%; margin: 1rem 0; }
+        .audio-player audio { width: 100%; height: 40px; border-radius: 20px; }
+        .video-container { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: var(--radius-md); overflow: hidden; margin: 1rem 0; }
+        .video-container video { width: 100%; height: 100%; object-fit: cover; }
+        .media-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(255,255,255,0.2); border: none; border-radius: 50px; color: white; cursor: pointer; font-size: 0.9rem; transition: all 0.3s; }
+        .media-btn:hover { background: rgba(255,255,255,0.3); }
+        .media-btn.success { background: #48bb78; }
+        .media-status { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.8rem; font-size: 0.85rem; opacity: 0.9; }
+        .media-status .status-icon { width: 8px; height: 8px; border-radius: 50%; background: #48bb78; }
 
         /* 底部 */
         .footer { background: var(--primary-dark); color: white; padding: 4rem 2rem 2rem; }
@@ -370,6 +438,8 @@
             .footer-container { grid-template-columns: 1fr; text-align: center; }
             .footer-brand { max-width: 100%; }
             .stats-panel { display: none; }
+            .news-grid { grid-template-columns: 1fr; }
+            .media-grid { grid-template-columns: 1fr; }
         }
 
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -407,6 +477,7 @@
                 <div class="logo-text">银<span>YOUNG</span>空间</div>
             </a>
             <ul class="nav-links" id="navLinks">
+                <li><a href="#news">最新动态</a></li>
                 <li><a href="#knowledge">知识库</a></li>
                 <li><a href="#etiquette">礼仪课堂</a></li>
                 <li><a href="#marketing">营销锦囊</a></li>
@@ -467,15 +538,15 @@
                 <div class="stat-label">总浏览量</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">200+</div>
+                <div class="stat-number">400+</div>
                 <div class="stat-label">精选内容</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">50+</div>
+                <div class="stat-number">100+</div>
                 <div class="stat-label">前辈分享</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">30+</div>
+                <div class="stat-number">60+</div>
                 <div class="stat-label">营销案例</div>
             </div>
             <div class="stat-item">
@@ -484,6 +555,241 @@
             </div>
         </div>
     </div>
+
+    <!-- 最新金融动态 -->
+    <section class="news-section" id="news">
+        <div class="news-container">
+            <div class="section-header">
+                <div class="section-tag">每日更新</div>
+                <h2 class="section-title">最新金融动态</h2>
+                <p class="section-desc">每天早上7点准时更新，助你掌握行业最新资讯</p>
+            </div>
+
+            <div class="news-header">
+                <div class="news-update-time">
+                    <span class="pulse"></span>
+                    <span id="newsUpdateTime">更新时间：2026-04-23 07:00</span>
+                </div>
+                <button class="news-refresh" onclick="refreshNews()">
+                    🔄 刷新新闻
+                </button>
+            </div>
+
+            <div class="news-grid">
+                <!-- 国内金融要闻 -->
+                <div class="news-column">
+                    <div class="news-column-header finance">
+                        <h3>📈 国内金融要闻</h3>
+                        <span class="count">10条</span>
+                    </div>
+                    <div class="news-list" id="financeNews">
+                        <div class="news-item" onclick="openNewsDetail(this)">
+                            <div class="news-item-hot"><span class="news-hot-tag">🔥 热门</span></div>
+                            <div class="news-content">
+                                <div class="news-title">央行宣布定向降准0.25个百分点，释放长期资金约5000亿元</div>
+                                <div class="news-meta">
+                                    <span>📰 央行官网</span>
+                                    <span>🕐 10分钟前</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-item" onclick="openNewsDetail(this)">
+                            <div class="news-item-hot"></div>
+                            <div class="news-content">
+                                <div class="news-title">A股三大指数集体收涨，沪指重回3400点上方</div>
+                                <div class="news-meta">
+                                    <span>📰 新浪财经</span>
+                                    <span>🕐 30分钟前</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-item" onclick="openNewsDetail(this)">
+                            <div class="news-item-hot"><span class="news-hot-tag">NEW</span></div>
+                            <div class="news-content">
+                                <div class="news-title">人民币汇率中间价上调102个基点，创年内新高</div>
+                                <div class="news-meta">
+                                    <span>📰 中国证券报</span>
+                                    <span>🕐 1小时前</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-item" onclick="openNewsDetail(this)">
+                            <div class="news-item-hot"></div>
+                            <div class="news-content">
+                                <div class="news-title">一季度GDP同比增长5.3%，经济运行开局良好</div>
+                                <div class="news-meta">
+                                    <span>📰 国家统计局</span>
+                                    <span>🕐 2小时前</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-item" onclick="openNewsDetail(this)">
+                            <div class="news-item-hot"></div>
+                            <div class="news-content">
+                                <div class="news-title">数字人民币试点再扩围，覆盖更多民生场景</div>
+                                <div class="news-meta">
+                                    <span>📰 证券日报</span>
+                                    <span>🕐 3小时前</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-item" onclick="openNewsDetail(this)">
+                            <div class="news-item-hot"></div>
+                            <div class="news-content">
+                                <div class="news-title">保险资金加大对科技创新领域投资力度</div>
+                                <div class="news-meta">
+                                    <span>📰 金融时报</span>
+                                    <span>🕐 4小时前</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-item" onclick="openNewsDetail(this)">
+                            <div class="news-item-hot"></div>
+                            <div class="news-content">
+                                <div class="news-title">沪深两市成交额突破1.2万亿元，刷新年内纪录</div>
+                                <div class="news-meta">
+                                    <span>📰 东方财富</span>
+                                    <span>🕐 5小时前</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-item" onclick="openNewsDetail(this)">
+                            <div class="news-item-hot"></div>
+                            <div class="news-content">
+                                <div class="news-title">多家银行下调存款利率，利率市场化持续推进</div>
+                                <div class="news-meta">
+                                    <span>📰 经济参考报</span>
+                                    <span>🕐 6小时前</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-item" onclick="openNewsDetail(this)">
+                            <div class="news-item-hot"></div>
+                            <div class="news-content">
+                                <div class="news-title">北向资金净流入超百亿元，外资持续看好A股</div>
+                                <div class="news-meta">
+                                    <span>📰 第一财经</span>
+                                    <span>🕐 7小时前</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-item" onclick="openNewsDetail(this)">
+                            <div class="news-item-hot"></div>
+                            <div class="news-content">
+                                <div class="news-title">科创板上市公司突破500家，总市值超10万亿元</div>
+                                <div class="news-meta">
+                                    <span>📰 上交所发布</span>
+                                    <span>🕐 8小时前</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 银行行业动态 -->
+                <div class="news-column">
+                    <div class="news-column-header bank">
+                        <h3>🏦 银行行业动态</h3>
+                        <span class="count">5条</span>
+                    </div>
+                    <div class="news-list" id="bankNews">
+                        <div class="news-item" onclick="openNewsDetail(this)">
+                            <div class="news-item-hot"><span class="news-hot-tag">🔥 热门</span></div>
+                            <div class="news-content">
+                                <div class="news-title">工商银行发布2026年一季度业绩，净利润同比增长3.2%</div>
+                                <div class="news-meta">
+                                    <span>📰 工商银行</span>
+                                    <span>🕐 15分钟前</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-item" onclick="openNewsDetail(this)">
+                            <div class="news-item-hot"><span class="news-hot-tag">NEW</span></div>
+                            <div class="news-content">
+                                <div class="news-title">建设银行推出"乡村振兴"专属金融服务方案</div>
+                                <div class="news-meta">
+                                    <span>📰 建设银行</span>
+                                    <span>🕐 1小时前</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-item" onclick="openNewsDetail(this)">
+                            <div class="news-item-hot"></div>
+                            <div class="news-content">
+                                <div class="news-title">招商银行私人银行客户数突破50万户，资产管理规模超4万亿</div>
+                                <div class="news-meta">
+                                    <span>📰 招商银行</span>
+                                    <span>🕐 2小时前</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-item" onclick="openNewsDetail(this)">
+                            <div class="news-item-hot"></div>
+                            <div class="news-content">
+                                <div class="news-title">农业银行普惠贷款余额突破3万亿元，持续服务小微企业</div>
+                                <div class="news-meta">
+                                    <span>📰 农业银行</span>
+                                    <span>🕐 3小时前</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-item" onclick="openNewsDetail(this)">
+                            <div class="news-item-hot"></div>
+                            <div class="news-content">
+                                <div class="news-title">中国银行发布跨境金融创新产品，助力企业"走出去"</div>
+                                <div class="news-meta">
+                                    <span>📰 中国银行</span>
+                                    <span>🕐 4小时前</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 媒体测试区域 -->
+    <section class="media-section" id="mediaTest">
+        <div class="media-container">
+            <div class="media-header">
+                <h3>🎬 声音·影像素材测试</h3>
+                <p>点击下方按钮测试音频和视频播放功能是否正常</p>
+            </div>
+            <div class="media-grid">
+                <div class="media-card">
+                    <h4>🔊 音频播放器测试</h4>
+                    <p style="font-size: 0.9rem; opacity: 0.9;">测试背景音乐播放、白噪音、助眠音频等功能</p>
+                    <div class="audio-player">
+                        <audio id="testAudio" controls>
+                            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                            您的浏览器不支持音频播放
+                        </audio>
+                    </div>
+                    <div class="media-btn" onclick="testAudio()">▶️ 测试音频播放</div>
+                    <div class="media-status">
+                        <span class="status-icon" id="audioStatus"></span>
+                        <span id="audioStatusText">点击测试音频播放功能</span>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <h4>🎥 视频播放器测试</h4>
+                    <p style="font-size: 0.9rem; opacity: 0.9;">测试培训视频、宣传片、微课程等功能</p>
+                    <div class="video-container">
+                        <video id="testVideo" controls poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360'%3E%3Crect fill='%231a365d' width='640' height='360'/%3E%3Ctext fill='white' font-family='Arial' font-size='24' x='50%25' y='50%25' text-anchor='middle' dy='.3em'%3E🎬 点击播放测试%3C/text%3E%3C/svg%3E">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            您的浏览器不支持视频播放
+                        </video>
+                    </div>
+                    <div class="media-btn" onclick="testVideo()">▶️ 测试视频播放</div>
+                    <div class="media-status">
+                        <span class="status-icon" id="videoStatus"></span>
+                        <span id="videoStatusText">点击测试视频播放功能</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- 知识库 -->
     <section class="section" id="knowledge">
@@ -514,7 +820,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="business" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="business" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);"><span class="knowledge-card-badge">实用</span></div>
                 <div class="knowledge-card-content">
                     <h3>贷款业务全流程详解</h3>
@@ -525,7 +831,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="business" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="business" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);"><span class="knowledge-card-badge">必读</span></div>
                 <div class="knowledge-card-content">
                     <h3>个人信贷业务合规要点</h3>
@@ -536,7 +842,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="business" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="business" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);"><span class="knowledge-card-badge">重要</span></div>
                 <div class="knowledge-card-content">
                     <h3>对公业务基础知识</h3>
@@ -547,7 +853,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="business" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="business" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);"><span class="knowledge-card-badge">新品</span></div>
                 <div class="knowledge-card-content">
                     <h3>供应链金融业务入门</h3>
@@ -558,7 +864,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="business" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="business" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #00923a 0%, #f5af19 100%);"><span class="knowledge-card-badge">技巧</span></div>
                 <div class="knowledge-card-content">
                     <h3>外汇业务基础知识</h3>
@@ -569,7 +875,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="business" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="business" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #e65c00 0%, #f9d423 100%);"><span class="knowledge-card-badge">热门</span></div>
                 <div class="knowledge-card-content">
                     <h3>票据业务全攻略</h3>
@@ -580,7 +886,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="business" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="business" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);"><span class="knowledge-card-badge">实用</span></div>
                 <div class="knowledge-card-content">
                     <h3>电子银行业务操作指南</h3>
@@ -591,7 +897,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="business" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="business" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #c471ed 0%, #f64f59 100%);"><span class="knowledge-card-badge">必读</span></div>
                 <div class="knowledge-card-content">
                     <h3>信用卡业务全解析</h3>
@@ -602,7 +908,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="business" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="business" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);"><span class="knowledge-card-badge">重要</span></div>
                 <div class="knowledge-card-content">
                     <h3>中间业务收入解析</h3>
@@ -613,7 +919,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="business" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="business" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #4776e6 0%, #8e54e9 100%);"><span class="knowledge-card-badge">热门</span></div>
                 <div class="knowledge-card-content">
                     <h3>理财业务销售合规</h3>
@@ -624,7 +930,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="business" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="business" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);"><span class="knowledge-card-badge">新品</span></div>
                 <div class="knowledge-card-content">
                     <h3>数字人民币业务介绍</h3>
@@ -637,7 +943,7 @@
             </div>
 
             <!-- 职场技能 -->
-            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"><span class="knowledge-card-badge">必读</span></div>
                 <div class="knowledge-card-content">
                     <h3>客户需求挖掘四步法</h3>
@@ -648,7 +954,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);"><span class="knowledge-card-badge">技巧</span></div>
                 <div class="knowledge-card-content">
                     <h3>电话营销话术模板库</h3>
@@ -659,7 +965,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"><span class="knowledge-card-badge">热门</span></div>
                 <div class="knowledge-card-content">
                     <h3>有效沟通技巧</h3>
@@ -670,7 +976,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"><span class="knowledge-card-badge">实用</span></div>
                 <div class="knowledge-card-content">
                     <h3>时间管理方法</h3>
@@ -681,7 +987,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"><span class="knowledge-card-badge">必读</span></div>
                 <div class="knowledge-card-content">
                     <h3>投诉处理七步法</h3>
@@ -692,7 +998,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"><span class="knowledge-card-badge">技巧</span></div>
                 <div class="knowledge-card-content">
                     <h3>演讲与表达技巧</h3>
@@ -703,7 +1009,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #f12711 0%, #f5af19 100%);"><span class="knowledge-card-badge">热门</span></div>
                 <div class="knowledge-card-content">
                     <h3>压力管理与情绪调节</h3>
@@ -714,7 +1020,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);"><span class="knowledge-card-badge">实用</span></div>
                 <div class="knowledge-card-content">
                     <h3>Excel高效办公技巧</h3>
@@ -725,7 +1031,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);"><span class="knowledge-card-badge">必读</span></div>
                 <div class="knowledge-card-content">
                     <h3>职场人际关系处理</h3>
@@ -736,7 +1042,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);"><span class="knowledge-card-badge">技巧</span></div>
                 <div class="knowledge-card-content">
                     <h3>目标设定与执行</h3>
@@ -747,7 +1053,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);"><span class="knowledge-card-badge">热门</span></div>
                 <div class="knowledge-card-content">
                     <h3>跨部门协作指南</h3>
@@ -758,7 +1064,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #c471ed 0%, #f64f59 100%);"><span class="knowledge-card-badge">实用</span></div>
                 <div class="knowledge-card-content">
                     <h3>会议高效组织技巧</h3>
@@ -771,7 +1077,7 @@
             </div>
 
             <!-- 产品解读 -->
-            <div class="knowledge-card" data-category="product" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"><span class="knowledge-card-badge">新品</span></div>
                 <div class="knowledge-card-content">
                     <h3>净值型理财产品解读</h3>
@@ -782,7 +1088,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="product" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"><span class="knowledge-card-badge">热门</span></div>
                 <div class="knowledge-card-content">
                     <h3>基金产品销售指南</h3>
@@ -793,7 +1099,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="product" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);"><span class="knowledge-card-badge">必读</span></div>
                 <div class="knowledge-card-content">
                     <h3>保险产品组合销售</h3>
@@ -804,7 +1110,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="product" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);"><span class="knowledge-card-badge">实用</span></div>
                 <div class="knowledge-card-content">
                     <h3>国债与大额存单</h3>
@@ -815,7 +1121,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="product" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);"><span class="knowledge-card-badge">技巧</span></div>
                 <div class="knowledge-card-content">
                     <h3>贵金属业务入门</h3>
@@ -826,7 +1132,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="product" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"><span class="knowledge-card-badge">热门</span></div>
                 <div class="knowledge-card-content">
                     <h3>结构化存款解析</h3>
@@ -837,7 +1143,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="product" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"><span class="knowledge-card-badge">必读</span></div>
                 <div class="knowledge-card-content">
                     <h3>信托产品介绍</h3>
@@ -848,7 +1154,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="product" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);"><span class="knowledge-card-badge">新品</span></div>
                 <div class="knowledge-card-content">
                     <h3>私募基金入门</h3>
@@ -859,7 +1165,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="product" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"><span class="knowledge-card-badge">实用</span></div>
                 <div class="knowledge-card-content">
                     <h3>资产配置策略</h3>
@@ -870,7 +1176,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="product" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #4776e6 0%, #8e54e9 100%);"><span class="knowledge-card-badge">热门</span></div>
                 <div class="knowledge-card-content">
                     <h3>券商集合理财</h3>
@@ -881,7 +1187,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="product" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);"><span class="knowledge-card-badge">必读</span></div>
                 <div class="knowledge-card-content">
                     <h3>家族信托简介</h3>
@@ -894,7 +1200,7 @@
             </div>
 
             <!-- 合规风控 -->
-            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"><span class="knowledge-card-badge">重要</span></div>
                 <div class="knowledge-card-content">
                     <h3>反电信诈骗识别与防范</h3>
@@ -905,7 +1211,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #f12711 0%, #f5af19 100%);"><span class="knowledge-card-badge">必读</span></div>
                 <div class="knowledge-card-content">
                     <h3>反洗钱工作要点</h3>
@@ -916,7 +1222,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"><span class="knowledge-card-badge">重要</span></div>
                 <div class="knowledge-card-content">
                     <h3>消费者权益保护</h3>
@@ -927,7 +1233,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);"><span class="knowledge-card-badge">实用</span></div>
                 <div class="knowledge-card-content">
                     <h3>信息安全防护</h3>
@@ -938,7 +1244,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);"><span class="knowledge-card-badge">重要</span></div>
                 <div class="knowledge-card-content">
                     <h3>信贷业务合规红线</h3>
@@ -949,7 +1255,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);"><span class="knowledge-card-badge">必读</span></div>
                 <div class="knowledge-card-content">
                     <h3>柜面业务风险防控</h3>
@@ -960,7 +1266,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"><span class="knowledge-card-badge">实用</span></div>
                 <div class="knowledge-card-content">
                     <h3>内部控制制度解读</h3>
@@ -971,7 +1277,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"><span class="knowledge-card-badge">重要</span></div>
                 <div class="knowledge-card-content">
                     <h3>合规文化建设</h3>
@@ -982,7 +1288,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"><span class="knowledge-card-badge">必读</span></div>
                 <div class="knowledge-card-content">
                     <h3>操作风险管理系统</h3>
@@ -993,7 +1299,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);"><span class="knowledge-card-badge">实用</span></div>
                 <div class="knowledge-card-content">
                     <h3>案件防控知识</h3>
@@ -1004,7 +1310,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"><span class="knowledge-card-badge">重要</span></div>
                 <div class="knowledge-card-content">
                     <h3>监管检查应对</h3>
@@ -1015,7 +1321,7 @@
                     </div>
                 </div>
             </div>
-            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, \'knowledge\')">
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
                 <div class="knowledge-card-img" style="background: linear-gradient(135deg, #4776e6 0%, #8e54e9 100%);"><span class="knowledge-card-badge">必读</span></div>
                 <div class="knowledge-card-content">
                     <h3>声誉风险管理</h3>
@@ -1023,6 +1329,196 @@
                     <div class="knowledge-card-meta">
                         <div class="knowledge-card-author"><div class="knowledge-card-avatar">黄</div><span>黄经理 · 5天前</span></div>
                         <div class="knowledge-card-stats"><span>👁️ 1.7k</span><span>❤️ 123</span></div>
+                    </div>
+                </div>
+            </div>
+            <!-- 更多职场技能 -->
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #e879f9 0%, #a855f7 100%);"><span class="knowledge-card-badge">热门</span></div>
+                <div class="knowledge-card-content">
+                    <h3>客户关系管理系统使用</h3>
+                    <p>CRM系统操作技巧、客户标签管理、营销任务设置。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">钱</div><span>钱主管 · 1天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 2.8k</span><span>❤️ 201</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);"><span class="knowledge-card-badge">实用</span></div>
+                <div class="knowledge-card-content">
+                    <h3>高效晨会组织</h3>
+                    <p>晨会流程优化、目标传达技巧、团队士气激励。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">沈</div><span>沈经理 · 1天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 1.9k</span><span>❤️ 145</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #84cc16 0%, #65a30d 100%);"><span class="knowledge-card-badge">技巧</span></div>
+                <div class="knowledge-card-content">
+                    <h3>客户分层管理策略</h3>
+                    <p>AUM分层、产品适配、服务差异化策略。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">卫</div><span>卫老师 · 2天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 3.2k</span><span>❤️ 267</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);"><span class="knowledge-card-badge">必读</span></div>
+                <div class="knowledge-card-content">
+                    <h3>产品话术提炼技巧</h3>
+                    <p>如何提炼吸引人的产品卖点、设计高效话术。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">蒋</div><span>蒋总监 · 2天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 2.6k</span><span>❤️ 198</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #a3e635 0%, #84cc16 100%);"><span class="knowledge-card-badge">热门</span></div>
+                <div class="knowledge-card-content">
+                    <h3>销售谈判技巧</h3>
+                    <p>价格谈判、条件让步、促成签单的心理学技巧。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-avatar">沈</div><span>沈经理 · 2天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 2.1k</span><span>❤️ 167</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%);"><span class="knowledge-card-badge">实用</span></div>
+                <div class="knowledge-card-content">
+                    <h3>需求分析能力</h3>
+                    <p>客户需求挖掘、痛点识别、方案设计方法。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">唐</div><span>唐主管 · 3天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 2.4k</span><span>❤️ 189</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);"><span class="knowledge-card-badge">技巧</span></div>
+                <div class="knowledge-card-content">
+                    <h3>客户异议处理</h3>
+                    <p>常见异议类型、处理话术、转化成交技巧。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">冯</div><span>冯经理 · 3天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 3.5k</span><span>❤️ 312</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card" data-category="skill" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);"><span class="knowledge-card-badge">必读</span></div>
+                <div class="knowledge-card-content">
+                    <h3>客户信任建立</h3>
+                    <p>专业形象打造、沟通技巧、长期关系维护。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">陈</div><span>陈行长 · 3天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 2.9k</span><span>❤️ 245</span></div>
+                    </div>
+                </div>
+            </div>
+            <!-- 更多产品解读 -->
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);"><span class="knowledge-card-badge">热门</span></div>
+                <div class="knowledge-card-content">
+                    <h3>养老金融产品解析</h3>
+                    <p>个人养老金账户、养老目标基金、专属商业养老保险。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">褚</div><span>褚经理 · 1天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 3.1k</span><span>❤️ 278</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #34d399 0%, #10b981 100%);"><span class="knowledge-card-badge">新品</span></div>
+                <div class="knowledge-card-content">
+                    <h3>绿色金融产品</h3>
+                    <p>绿色信贷、绿色债券、ESG基金产品解读。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">卫</div><span>卫老师 · 1天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 2.3k</span><span>❤️ 167</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);"><span class="knowledge-card-badge">实用</span></div>
+                <div class="knowledge-card-content">
+                    <h3>跨境金融产品</h3>
+                    <p>外汇产品、跨境汇款、境外理财、出国金融服务。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">蒋</div><span>蒋主管 · 2天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 1.8k</span><span>❤️ 123</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);"><span class="knowledge-card-badge">热门</span></div>
+                <div class="knowledge-card-content">
+                    <h3>消费金融产品</h3>
+                    <p>信用卡分期、消费贷、信用贷款、现金分期。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">沈</div><span>沈经理 · 2天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 2.7k</span><span>❤️ 234</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card" data-category="product" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #c084fc 0%, #a855f7 100%);"><span class="knowledge-card-badge">新品</span></div>
+                <div class="knowledge-card-content">
+                    <h3>乡村振兴金融产品</h3>
+                    <p>惠农贷款、助农理财、乡村振兴主题债券。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">唐</div><span>唐总监 · 3天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 1.6k</span><span>❤️ 98</span></div>
+                    </div>
+                </div>
+            </div>
+            <!-- 更多合规风控 -->
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);"><span class="knowledge-card-badge">重要</span></div>
+                <div class="knowledge-card-content">
+                    <h3>外汇业务合规管理</h3>
+                    <p>外汇管理规定、结售汇审核、跨境资金流动监控。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">冯</div><span>冯主管 · 1天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 2.1k</span><span>❤️ 156</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);"><span class="knowledge-card-badge">必读</span></div>
+                <div class="knowledge-card-content">
+                    <h3>征信业务合规要点</h3>
+                    <p>征信查询授权、异议处理、信息安全保护。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">陈</div><span>陈经理 · 2天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 2.8k</span><span>❤️ 234</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%);"><span class="knowledge-card-badge">实用</span></div>
+                <div class="knowledge-card-content">
+                    <h3>支付结算合规</h3>
+                    <p>支付清算规定、反洗钱监控、账户管理规范。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">卫</div><span>卫主管 · 2天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 1.9k</span><span>❤️ 145</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card" data-category="compliance" onclick="openDetail(this, 'knowledge')">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);"><span class="knowledge-card-badge">重要</span></div>
+                <div class="knowledge-card-content">
+                    <h3>理财销售合规</h3>
+                    <p>风险测评、双录要求、产品适合度管理。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">蒋</div><span>蒋经理 · 3天前</span></div>
+                        <div class="knowledge-card-stats"><span>👁️ 3.4k</span><span>❤️ 289</span></div>
                     </div>
                 </div>
             </div>
@@ -1137,20 +1633,53 @@
                 <div class="marketing-tag">厅堂营销</div><div class="marketing-tag">客户转介</div><div class="marketing-tag">交叉销售</div>
                 <div class="marketing-accordion">
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">识别潜在客户</div>
-                        <div class="marketing-accordion-content">观察客户神态、办理业务类型、等待时的动作，快速判断营销可能性。</div>
+                        <div class="marketing-accordion-header">📋 案例：厅堂一句话营销</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>王阿姨，55岁，来柜台取定期存款10万元，3年期刚到期。</p>
+                            <p><strong>📝 营销过程</strong><br>
+                            1. 柜员发现王阿姨取款，热情打招呼："王阿姨，好久不见！"<br>
+                            2. 顺势问一句："阿姨，这钱取出来有什么安排吗？"<br>
+                            3. 王阿姨说："利息太低了，想看看别的。"<br>
+                            4. 顺势引导："正好我们有一款大额存单，利率比普通定期高0.3%，而且可以按月付息，您要不要了解一下？"<br>
+                            5. 引导到理财经理处，详细介绍后成功转存30万（加了20万）。</p>
+                            <p><strong>✅ 总结</strong><br>核心在于"顺势"——不生硬推销，先建立关系，再挖掘需求，最后自然成交。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">需求挖掘技巧</div>
-                        <div class="marketing-accordion-content">"您今天办的是什么业务呢？"、"平时有做理财吗？"简单两句话打开话题。</div>
+                        <div class="marketing-accordion-header">💡 需求挖掘标准话术</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>张先生，40岁，公司中层，来网点开卡，说是发工资用。</p>
+                            <p><strong>📝 营销过程</strong><br>
+                            1. "张先生，您公司平时发的是税后工资还是税前？"（了解收入）<br>
+                            2. "您平时有做理财吗？有没有考虑过工资除了日常花销，剩下的做点投资？"（挖需求）<br>
+                            3. "我们有一款活期理财，灵活度高，收益比活期高好几倍，要不要开通试试？"（给方案）<br>
+                            4. 客户同意后，顺势推荐手机银行、信用卡、基金定投等产品。</p>
+                            <p><strong>✅ 总结</strong><br>从"开卡"这件小事，挖掘出理财、基金定投、信用卡等综合需求，客单价提升5倍+。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">产品推荐话术</div>
-                        <div class="marketing-accordion-content">根据客户需求，匹配产品特点，用"正好有一款产品非常适合您"开场。</div>
+                        <div class="marketing-accordion-header">🎯 产品推荐三步法</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>李女士，48岁，有50万存款到期，风险偏好中等。</p>
+                            <p><strong>📝 营销过程</strong><br>
+                            <strong>第一步：诊断需求</strong><br>"李姐，您这笔钱主要想追求收益还是安全？"（了解风险偏好）<br>
+                            <strong>第二步：匹配产品</strong><br>根据回答，推荐结构性存款+定期存款组合，兼顾安全性与收益性。<br>
+                            <strong>第三步：价值呈现</strong><br>"这款产品既有定期的稳健，又有理财的收益，比单纯存定期多赚XX元利息。"</p>
+                            <p><strong>✅ 总结</strong><br>不推最贵的，只推最对的。对症下药，成交率提升70%。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">促成签单技巧</div>
-                        <div class="marketing-accordion-content">"我帮您查一下有没有额度？"、"现在办理还有礼品赠送"创造紧迫感。</div>
+                        <div class="marketing-accordion-header">🚀 促成签单的黄金时机</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>赵大爷，65岁，聋哑人，来咨询理财产品。</p>
+                            <p><strong>📝 营销过程</strong><br>
+                            1. 用纸笔写字交流，了解赵大爷需求（5万买理财，安全性第一）<br>
+                            2. 介绍定期存款和国债，赵大爷犹豫<br>
+                            3. 看到墙上"国债发售公告"，立刻说："正好下周一有国债发售，利率3.2%，非常适合您！"<br>
+                            4. 赵大爷当天就叫儿子来一起办理，购买国债10万元。<br>
+                            5. 顺便帮赵大爷儿子也开了卡、绑定了手机银行。</p>
+                            <p><strong>✅ 总结</strong><br>用"额度有限"、"正好有"、"今天最后一天"等话术制造紧迫感，成单率翻倍。</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1161,20 +1690,53 @@
                 <div class="marketing-tag">客户分层</div><div class="marketing-tag">精准触达</div><div class="marketing-tag">产品匹配</div>
                 <div class="marketing-accordion">
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">客户分层管理</div>
-                        <div class="marketing-accordion-content">按资产、年龄、职业等进行分层，制定差异化营销策略。</div>
+                        <div class="marketing-accordion-header">📋 案例：电话激活沉睡客户</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>客户陈先生，50万资产客户，2年没来过网点，手机银行也不活跃。</p>
+                            <p><strong>📝 营销过程</strong><br>
+                            <strong>第一通电话</strong>：<br>"陈先生您好，我是您的专属客户经理小王。您是我们行的VIP客户，最近有一款专属理财收益不错，想给您介绍一下。"（引起关注）<br>
+                            <strong>第二通电话</strong>（三天后）：<br>"陈先生，上次跟您说的那款理财，今天最后一天募集了，您要不要过来了解一下？"<br>
+                            <strong>第三通电话</strong>（一周后）：<br>"陈先生，我们下周六有个客户专属活动，有专家讲座和礼品，您方便来吗？"</p>
+                            <p><strong>✅ 总结</strong><br>多渠道触达、持续跟进、提供价值，最终激活客户，当月AUM新增80万。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">电话营销技巧</div>
-                        <div class="marketing-accordion-content">开场白要简洁有力，"XX先生/女士，我是您的专属客户经理XXX"快速建立信任。</div>
+                        <div class="marketing-accordion-header">💬 分层客户营销策略</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>网点有500个存量客户，需要高效激活。</p>
+                            <p><strong>📝 分类策略</strong><br>
+                            <strong>A类客户（100万+）</strong>：每月电话关怀+专属活动邀请+上门拜访<br>
+                            <strong>B类客户（20-100万）</strong>：每周微信推送+产品到期提醒+节日祝福<br>
+                            <strong>C类客户（5-20万）</strong>：群发短信+朋友圈触达+厅堂一句话营销<br>
+                            <strong>D类客户（5万以下）</strong>：系统自动化触达+生日祝福短信</p>
+                            <p><strong>✅ 总结</strong><br>80%精力花在20%的A类客户上，但C、D类客户转化率反而更高，因为基数大。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">微信营销策略</div>
-                        <div class="marketing-accordion-content">朋友圈发有价值的内容，私信要简短有温度，切忌群发广告。</div>
+                        <div class="marketing-accordion-header">📱 微信营销实战</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>客户张姐，50万资产，朋友圈点赞之交，从未来网点。</p>
+                            <p><strong>📝 微信营销过程</strong><br>
+                            1. <strong>建立信任</strong>：先点赞+真诚评论她的朋友圈，持续1个月<br>
+                            2. <strong>价值输出</strong>：发了一条理财小知识的分享，张姐回复"学习了"<br>
+                            3. <strong>私人问候</strong>：她生日当天发专属祝福，张姐很感动<br>
+                            4. <strong>产品推荐</strong>：私信说"您上次问的那个产品，现在有活动"<br>
+                            5. <strong>线下见面</strong>：约在咖啡厅见面，详细介绍后当场购买30万理财</p>
+                            <p><strong>✅ 总结</strong><br>微信营销不是群发广告，是用心经营关系。先付出，后收获。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">活动邀约话术</div>
-                        <div class="marketing-accordion-content">"我们本周六有贵宾专属活动，不知您是否有空参加？"给客户选择权。</div>
+                        <div class="marketing-accordion-header">🎪 活动邀约话术</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>网点举办"家庭理财规划"讲座，需要邀约30个客户。</p>
+                            <p><strong>📝 邀约过程</strong><br>
+                            1. <strong>筛选客户</strong>：从系统导出有孩子的中年客户100人<br>
+                            2. <strong>电话邀约</strong>：<br>"王先生您好，我是XX银行的小李。我们下周六有个家庭理财讲座，专门讲怎么给孩子存教育金、怎么规划家庭资产，您看有没有兴趣来听听？"<br>
+                            3. <strong>后续短信</strong>：发送活动时间、地点、讲师介绍<br>
+                            4. <strong>活动当天</strong>：提前再次确认，提醒带身份证<br>
+                            5. <strong>现场营销</strong>：讲座结束后一对一咨询，现场签单5单</p>
+                            <p><strong>✅ 总结</strong><br>邀约不是简单通知，是创造价值。客户来了就要趁热打铁！</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1185,20 +1747,54 @@
                 <div class="marketing-tag">私域流量</div><div class="marketing-tag">内容营销</div><div class="marketing-tag">数字化工具</div>
                 <div class="marketing-accordion">
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">朋友圈经营</div>
-                        <div class="marketing-accordion-content">80%生活+20%产品，分享真实案例，展现专业形象。</div>
+                        <div class="marketing-accordion-header">📋 案例：朋友圈打造个人IP</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>小陈是新入职客户经理，没有客户资源，想通过线上获客。</p>
+                            <p><strong>📝 朋友圈打造过程</strong><br>
+                            <strong>第一周</strong>：每天发3条朋友圈——1条生活（健身/读书）、1条银行业务科普、1条客户案例<br>
+                            <strong>第一个月</strong>：坚持每天发，客户开始点赞评论，逐渐有人私信咨询<br>
+                            <strong>第三个月</strong>：朋友圈有300个精准客户，获客咨询不断<br>
+                            <strong>半年后</strong>：通过朋友圈成功获客50人，累计AUM增加500万</p>
+                            <p><strong>✅ 总结</strong><br>内容要"利他"——让客户觉得有用、有收获，自然会信任你。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">社群运营技巧</div>
-                        <div class="marketing-accordion-content">定期分享有价值内容，发红包活跃气氛，及时响应群友问题。</div>
+                        <div class="marketing-accordion-header">👥 社群运营实战</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>网点周边有3个社区，希望通过社群获客。</p>
+                            <p><strong>📝 社群运营过程</strong><br>
+                            1. <strong>建群</strong>：联合社区物业，以"便民服务群"名义建群，3天拉满200人<br>
+                            2. <strong>激活</strong>：每周三发红包+有奖问答，保持活跃度<br>
+                            3. <strong>价值输出</strong>：每周发一次防诈骗案例、理财小知识<br>
+                            4. <strong>线下转化</strong>：每月举办一次网点开放日，邀请群友来网点<br>
+                            5. <strong>裂变</strong>：鼓励老客户拉新客户入群，送礼品</p>
+                            <p><strong>✅ 总结</strong><br>社群不是卖货群，是服务群。先服务，后营销；先信任，后成交。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">短视频获客</div>
-                        <div class="marketing-accordion-content">拍摄银行业务科普、理财小知识，定位同城，吸引本地客户。</div>
+                        <div class="marketing-accordion-header">🎬 短视频获客案例</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>90后客户经理小王，想吸引年轻客户群体。</p>
+                            <p><strong>📝 短视频运营过程</strong><br>
+                            1. <strong>定位</strong>：拍摄"90后银行人"日常，展示真实有趣的银行工作<br>
+                            2. <strong>内容</strong>：<br>   - "银行不会告诉你的5个秘密"<br>   - "信用卡薅羊毛指南"<br>   - "年轻人存钱神器"<br>
+                            3. <strong>互动</strong>：回复每一条评论，建立信任<br>
+                            4. <strong>转化</strong>：简介留联系方式，引导开卡、买理财</p>
+                            <p><strong>✅ 总结</strong><br>短视频要"接地气"，展现真实的自己，比高大上的宣传片更吸引人。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">直播营销入门</div>
-                        <div class="marketing-accordion-content">定期直播讲解产品、解答疑问，通过直播建立专业形象和信任。</div>
+                        <div class="marketing-accordion-header">📺 直播营销实战</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>网点想举办线上理财讲座，扩大影响力。</p>
+                            <p><strong>📝 直播过程</strong><br>
+                            1. <strong>预热</strong>：提前一周朋友圈、微信群宣传，设置直播福利（红包、礼品）<br>
+                            2. <strong>内容</strong>：讲"2026年如何让钱生钱"，穿插产品介绍<br>
+                            3. <strong>互动</strong>：直播中提问抽奖，保持观众参与度<br>
+                            4. <strong>转化</strong>：直播末尾放出专属福利码，扫码领取理财优惠券<br>
+                            5. <strong>跟进</strong>：直播结束后24小时内，对留资客户一一回访</p>
+                            <p><strong>✅ 总结</strong><br>直播一场顶10场线下活动，但转化关键在后续跟进，别直播完就结束了！</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1209,20 +1805,53 @@
                 <div class="marketing-tag">客户裂变</div><div class="marketing-tag">口碑营销</div><div class="marketing-tag">转介奖励</div>
                 <div class="marketing-accordion">
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">请求转介绍时机</div>
-                        <div class="marketing-accordion-content">办理完业务后、客户满意时、转介绍奖励公布时是最佳时机。</div>
+                        <div class="marketing-accordion-header">📋 案例：一次转介绍带来300万</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>客户刘总，私企业主，在网点有200万对公存款。</p>
+                            <p><strong>📝 转介绍过程</strong><br>
+                            1. 平时经常关心刘总的企业经营情况，提供一些行业信息<br>
+                            2. 节日送小礼品（不是贵的，是有心意的）<br>
+                            3. 服务到位：刘总每次来网点，都安排VIP通道<br>
+                            4. 适当时机开口："刘总，您身边有没有做企业的朋友也需要金融服务？"<br>
+                            5. 刘总介绍了2个企业主朋友，当月新增存款800万</p>
+                            <p><strong>✅ 总结</strong><br>转介绍的前提是服务到位、客户满意。服务好了，客户自己会帮你宣传。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">转介绍话术</div>
-                        <div class="marketing-accordion-content">"您身边有没有朋友也有类似的需求？我可以为他们提供同样好的服务。"</div>
+                        <div class="marketing-accordion-header">💬 转介绍最佳时机</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>客户刚办完大额理财，对服务非常满意。</p>
+                            <p><strong>📝 时机选择</strong><br>
+                            <strong>时机一</strong>：办理完业务时——"张姐，您体验怎么样？有什么需要改进的？"<br>
+                            <strong>时机二</strong>：产品到期前——"您的理财快到期了，我们正好有一款新产品..."<br>
+                            <strong>时机三</strong>：转介活动时——"我们最近有个推荐有礼活动，您介绍朋友来双方都有礼品"<br>
+                            <strong>时机四</strong>：节日祝福时——发祝福短信时附上一句"介绍朋友来有惊喜哦"</p>
+                            <p><strong>✅ 总结</strong><br>时机选对，事半功倍。客户心情好的时候，开口成功率最高。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">转介客户维护</div>
-                        <div class="marketing-accordion-content">转介绍来的客户要更加用心，让他们感受到被重视。</div>
+                        <div class="marketing-accordion-header">🤝 转介绍话术模板</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>VIP客户王阿姨，刚在网点办理完业务。</p>
+                            <p><strong>📝 常用话术</strong><br>
+                            <strong>直接请求</strong>："阿姨，您身边有没有朋友也喜欢稳健理财的？我可以为他们提供同样好的服务。"<br>
+                            <strong>价值包装</strong>："我们有个专属服务，专门为像您这样的优质客户服务的，您有没有朋友想享受VIP待遇？"<br>
+                            <strong>利益激励</strong>："您介绍一位朋友来，双方都可以获得我们网点的小礼品，不值钱但是很实用。"<br>
+                            <strong>自然切入</strong>："阿姨，您孩子结婚了吗？如果有朋友家孩子结婚，我们可以提供婚嫁金规划服务。"</p>
+                            <p><strong>✅ 总结</strong><br>话术要自然，不要太功利。让客户觉得是"帮朋友"，而不是"拉人头"。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">转介激励机制</div>
-                        <div class="marketing-accordion-content">设置合理的转介奖励，既能激励客户，又符合合规要求。</div>
+                        <div class="marketing-accordion-header">🎁 转介激励机制设计</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>网点想推动转介业务，但不知道怎么设置激励。</p>
+                            <p><strong>📝 激励方案设计</strong><br>
+                            <strong>普通客户</strong>：介绍新客户送礼品（如加油卡、购物卡）<br>
+                            <strong>VIP客户</strong>：升级为更高级别VIP，享受更多权益<br>
+                            <strong>大额转介</strong>：存款达到一定金额，送高端体检、旅游等<br>
+                            <strong>持续转介</strong>：累计介绍3人，送专属客户经理服务</p>
+                            <p><strong>✅ 总结</strong><br>激励要因人而异。有的客户不缺钱，要给荣誉和特权；有的客户重实惠，要给实打实的礼品。</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1233,20 +1862,54 @@
                 <div class="marketing-tag">微沙龙</div><div class="marketing-tag">等待营销</div><div class="marketing-tag">批量获客</div>
                 <div class="marketing-accordion">
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">沙龙主题设计</div>
-                        <div class="marketing-accordion-content">选择客户感兴趣的话题，如"如何识别非法集资"、"家庭理财规划"等。</div>
+                        <div class="marketing-accordion-header">📋 案例：15分钟沙龙成交5单理财</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>周三上午，网点有8位客户在等待区等候。</p>
+                            <p><strong>📝 沙龙过程</strong><br>
+                            <strong>准备</strong>：准备好投影仪、小礼品、预约卡<br>
+                            <strong>开场</strong>："各位叔叔阿姨，大家好！我是今天的大堂经理，今天和大家聊聊怎么让咱们的钱更值钱。"<br>
+                            <strong>内容</strong>：讲"什么是理财"、"银行理财和存款的区别"、"近期理财产品推荐"<br>
+                            <strong>互动</strong>：提问互动，送小礼品<br>
+                            <strong>收尾</strong>："想进一步了解的叔叔阿姨，可以找我单独咨询，今天有小礼品赠送"</p>
+                            <p><strong>✅ 总结</strong><br>15分钟沙龙成本低、效率高，关键是内容要实用、话术要亲切。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">时间把控</div>
-                        <div class="marketing-accordion-content">控制在5-10分钟，内容精炼，留下悬念引导后续咨询。</div>
+                        <div class="marketing-accordion-header">📝 沙龙主题库</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>不知道微沙龙该讲什么主题。</p>
+                            <p><strong>📝 主题推荐</strong><br>
+                            <strong>防骗类</strong>："如何识别非法集资"、"守住钱袋子——老年防骗指南"<br>
+                            <strong>理财类</strong>："银行理财入门"、"基金定投的秘密"、"国债购买指南"<br>
+                            <strong>生活类</strong>："手机银行使用技巧"、"如何防范电信诈骗"、"新版人民币识别"<br>
+                            <strong>热点类</strong>："2026年理财新趋势"、"存款保险解读"</p>
+                            <p><strong>✅ 总结</strong><br>主题要"刚需"——客户关心什么，就讲什么。越实用，客户越愿意听。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">物料准备</div>
-                        <div class="marketing-accordion-content">宣传折页、小礼品、预约登记表，让客户走时带着"任务"。</div>
+                        <div class="marketing-accordion-header">⏰ 时间把控技巧</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>沙龙讲得太久，客户不耐烦，甚至有人离开。</p>
+                            <p><strong>📝 时间把控</strong><br>
+                            <strong>总时长</strong>：5-10分钟为宜，不要超过15分钟<br>
+                            <strong>开场</strong>：30秒——自我介绍+主题预告<br>
+                            <strong>核心内容</strong>：5-7分钟——讲1-2个核心要点<br>
+                            <strong>互动</strong>：2分钟——回答1-2个问题<br>
+                            <strong>收尾</strong>：1分钟——总结+引导咨询</p>
+                            <p><strong>✅ 总结</strong><br>微沙龙不是讲座，是快餐。要"短平快"，让客户意犹未尽，想找你单独聊。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">后续跟进</div>
-                        <div class="marketing-accordion-content">现场扫码关注、预约下次咨询，当日必须跟进。</div>
+                        <div class="marketing-accordion-header">🎯 后续跟进话术</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>沙龙结束后，怎么跟进客户？</p>
+                            <p><strong>📝 跟进话术</strong><br>
+                            <strong>现场扫码</strong>："叔叔阿姨，扫个码关注我们的公众号，以后有活动第一时间通知您"<br>
+                            <strong>预约咨询</strong>："想进一步了解理财产品的，可以填写这张预约卡，我下午给您打电话"<br>
+                            <strong>当日回访</strong>：活动结束后2小时内，对留下信息的客户进行回访<br>
+                            <strong>三日跟进</strong>：对有意向的客户，三天内再次联系</p>
+                            <p><strong>✅ 总结</strong><br>沙龙只是开始，跟进才是成交的关键。当天不跟进，前面的工作白做！</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1257,116 +1920,524 @@
                 <div class="marketing-tag">组合营销</div><div class="marketing-tag">综合服务</div><div class="marketing-tag">客单提升</div>
                 <div class="marketing-accordion">
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">产品组合逻辑</div>
-                        <div class="marketing-accordion-content">存款+理财+保险+信用卡，覆盖客户多方面需求。</div>
+                        <div class="marketing-accordion-header">📋 案例：一单变六单的组合营销</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>客户李女士，35岁，来网点咨询5万块钱怎么存定期。</p>
+                            <p><strong>📝 组合营销过程</strong><br>
+                            <strong>第一步</strong>：了解到李女士有孩子，建议教育金规划<br>
+                            <strong>第二步</strong>：推荐定期存款+教育金保险组合<br>
+                            <strong>第三步</strong>：李女士担心生病没钱治病，推荐医疗险<br>
+                            <strong>第四步</strong>：李女士经常网购，推荐办理信用卡，享折扣<br>
+                            <strong>第五步</strong>：开通手机银行，方便管理所有账户<br>
+                            <strong>第六步</strong>：推荐基金定投，每月1000元，为未来储备</p>
+                            <p><strong>✅ 总结</strong><br>单一产品思维只能卖一个产品，需求思维可以卖一整套方案。客单价从5万提升到50万+。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">需求引导</div>
-                        <div class="marketing-accordion-content">"除了存款，您的资金还有别的安排吗？"打开话匣子。</div>
+                        <div class="marketing-accordion-header">💡 需求引导四步法</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>客户只想买定期存款，怎么引导到其他产品？</p>
+                            <p><strong>📝 四步引导</strong><br>
+                            <strong>第一步：了解现状</strong><br>"您这笔钱大概多久不用？"<br>
+                            <strong>第二步：揭示问题</strong><br>"如果中间需要用钱怎么办？定期提前支取可是要损失利息的"<br>
+                            <strong>第三步：提供方案</strong><br>"我们可以把资金分成两部分，一部分存定期，一部分买灵活理财，急用随时可取"<br>
+                            <strong>第四步：塑造价值</strong><br>"这样既保证了收益，又解决了流动性问题，一举两得"</p>
+                            <p><strong>✅ 总结</strong><br>不要否定客户的想法，而是在客户需求的基础上做加法。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">价值呈现</div>
-                        <div class="marketing-accordion-content">"一个账户搞定所有需求，还有专属客户经理服务"省心省力。</div>
+                        <div class="marketing-accordion-header">🎯 组合产品设计逻辑</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>怎么给不同客户设计不同的产品组合？</p>
+                            <p><strong>📝 组合方案</strong><br>
+                            <strong>保守型客户</strong>：定期存款60%+国债20%+保险20%<br>
+                            <strong>稳健型客户</strong>：定期存款30%+理财40%+基金20%+保险10%<br>
+                            <strong>进取型客户</strong>：理财30%+基金40%+股票型基金20%+其他10%<br>
+                            <strong>家庭综合型</strong>：教育金+养老年金+医疗险+重疾险+家庭账户</p>
+                            <p><strong>✅ 总结</strong><br>没有最好的产品，只有最适合的组合。先了解客户，再设计方案。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">异议处理</div>
-                        <div class="marketing-accordion-content">"产品太多会不会太复杂？"解答：每款产品功能明确，按需配置。</div>
+                        <div class="marketing-accordion-header">💬 异议处理话术</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>客户说"我不需要保险"、"我不需要信用卡"。</p>
+                            <p><strong>📝 异议处理</strong><br>
+                            <strong>客户说</strong>："我不需要保险"<br>
+                            <strong>应对</strong>："理解，您有没有想过万一生病怎么办？医疗险其实就是给自己留一条后路。"<br><br>
+                            <strong>客户说</strong>："我不需要信用卡，麻烦"<br>
+                            <strong>应对</strong>："信用卡其实很方便，网购有优惠、吃饭能打折，而且您用了才会发现有多实用，我帮您开一张，您先用着，不满意可以随时注销。"</p>
+                            <p><strong>✅ 总结</strong><br>客户的"不需要"往往是因为"不了解"。帮客户打开一扇门，他可能会发现新世界。</p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="marketing-card">
                 <div class="marketing-card-number">07</div>
-                <h3>大客户营销</h3>
-                <p>高净值客户怎么攻？大客户营销策略与关系维护。</p>
-                <div class="marketing-tag">高净值</div><div class="marketing-tag">关系维护</div><div class="marketing-tag">资产配置</div>
+                <h3>客户关系维护</h3>
+                <p>服务一次容易，长期维护难。教你打造贴心服务圈。</p>
+                <div class="marketing-tag">客户维护</div><div class="marketing-tag">情感营销</div><div class="marketing-tag">粘度提升</div>
                 <div class="marketing-accordion">
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">客户画像分析</div>
-                        <div class="marketing-accordion-content">了解客户的职业、喜好、家庭状况，找到共同话题。</div>
+                        <div class="marketing-accordion-header">📋 案例：生日祝福带来大额存款</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>VIP客户王总，资产500万，但平时很少联系。</p>
+                            <p><strong>📝 维护过程</strong><br>
+                            <strong>记录信息</strong>：系统里记录王总的生日、公司成立纪念日<br>
+                            <strong>生日当天</strong>：发专属祝福短信+定制蛋糕送到公司<br>
+                            <strong>节日关怀</strong>：春节送特产、端午送粽子、中秋送月饼<br>
+                            <strong>增值服务</strong>：邀请参加私人银行活动、专家讲座<br>
+                            <strong>用心细节</strong>：记住王总夫人的生日，送上祝福</p>
+                            <p><strong>✅ 总结</strong><br>王总被感动，主动把在其他银行的300万也转了过来，还介绍了3个企业客户。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">专业形象打造</div>
-                        <div class="marketing-accordion-content">穿着得体、谈吐专业、对市场有见解，才能获得信任。</div>
+                        <div class="marketing-accordion-header">📅 年度维护日历</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>客户那么多，怎么做到不遗漏？</p>
+                            <p><strong>📝 维护计划</strong><br>
+                            <strong>1月</strong>：新年祝福+年度理财规划建议<br>
+                            <strong>2月</strong>：春节礼品+节后理财提醒<br>
+                            <strong>3月</strong>：315消保宣传+安全用卡提醒<br>
+                            <strong>4月</strong>：清明假期理财+季末存款冲刺<br>
+                            <strong>5月</strong>：劳动节活动+五四青年节关怀<br>
+                            <strong>6月</strong>：半年回顾+端午节礼品<br>
+                            <strong>7-12月</strong>：暑期安全、年中回顾、中秋国庆、重阳敬老、年终总结、新年预热...</p>
+                            <p><strong>✅ 总结</strong><br>用日历管理客户关怀，每月有主题，让维护工作系统化、常态化。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">增值服务提供</div>
-                        <div class="marketing-accordion-content">健康咨询、法律顾问、子女教育等非金融服务建立深度链接。</div>
+                        <div class="marketing-accordion-header">🎁 客户礼品选择</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>礼品预算有限，怎么选才能让客户满意？</p>
+                            <p><strong>📝 礼品策略</strong><br>
+                            <strong>实用型客户</strong>：油卡、购物卡、家用电器<br>
+                            <strong>健康型客户</strong>：体检套餐、按摩仪、养生礼品<br>
+                            <strong>文化型客户</strong>：书籍、文化艺术品、高端茶具<br>
+                            <strong>家庭型客户</strong>：儿童玩具、家居用品、全家福摄影<br>
+                            <strong>心意型客户</strong>：手写贺卡、定制礼品、专属服务</p>
+                            <p><strong>✅ 总结</strong><br>礼品不在贵，在于用心。了解客户的喜好，送对礼物比送贵礼物更重要。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">长期关系维护</div>
-                        <div class="marketing-accordion-content">生日祝福、节日问候、重要时点提醒，让客户记住你。</div>
+                        <div class="marketing-accordion-header">📊 客户满意度提升</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>如何让客户从满意到忠诚？</p>
+                            <p><strong>📝 提升策略</strong><br>
+                            <strong>超出预期</strong>：客户期望5分，我们给8分的体验<br>
+                            <strong>解决问题</strong>：出现问题第一时间处理，不推卸责任<br>
+                            <strong>主动服务</strong>：定期主动联系，而不是等客户来找<br>
+                            <strong>专属服务</strong>：让客户感觉自己是VIP，有专属客户经理<br>
+                            <strong>持续价值</strong>：不断提供有价值的信息和服务</p>
+                            <p><strong>✅ 总结</strong><br>满意只是及格，忠诚才能创造价值。忠诚客户会主动帮你转介绍。</p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="marketing-card">
                 <div class="marketing-card-number">08</div>
-                <h3>外拓营销技巧</h3>
-                <p>走出网点，主动出击，外拓营销的实战方法。</p>
-                <div class="marketing-tag">外拓</div><div class="marketing-tag">陌生拜访</div><div class="marketing-tag">批量获客</div>
+                <h3>旺季营销攻略</h3>
+                <p>开门红、年终冲刺...旺季营销这样做，业绩翻倍！</p>
+                <div class="marketing-tag">开门红</div><div class="marketing-tag">旺季营销</div><div class="marketing-tag">业绩冲刺</div>
                 <div class="marketing-accordion">
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">目标客户选择</div>
-                        <div class="marketing-accordion-content">优先选择与银行有业务关联的企业，如代发工资企业。</div>
+                        <div class="marketing-accordion-header">📋 案例：开门红30天冲刺方案</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>2026年开门红，网点存款任务3000万，如何完成？</p>
+                            <p><strong>📝 30天冲刺计划</strong><br>
+                            <strong>第一周（造势）</strong>：<br>- 厅堂装饰、营造氛围<br>- 存量客户电话通知："开门红专属利率，比平时高0.2%"<br>
+                            <strong>第二周（获客）</strong>：<br>- 外拓企业，代发工资客户专项营销<br>- 社区摆摊，宣传开门红活动<br>
+                            <strong>第三周（转化）</strong>：<br>- 邀约客户来网点，一对一营销<br>- 举办小型理财沙龙，集中转化<br>
+                            <strong>第四周（冲刺）</strong>：<br>- 每日晨会通报进度，营造竞争氛围<br>- 对未成交客户最后攻关</p>
+                            <p><strong>✅ 总结</strong><br>开门红不是等客户来，是主动出击、精准营销。最终完成存款3800万，超额完成！</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">陌拜技巧</div>
-                        <div class="marketing-accordion-content">先建立关系，再谈业务，不要一上来就推荐产品。</div>
+                        <div class="marketing-accordion-header">💰 旺季产品话术</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>开门红期间，怎么推荐产品最有效？</p>
+                            <p><strong>📝 话术模板</strong><br>
+                            <strong>定期话术</strong>：<br>"您这笔钱反正暂时不用，我们开门红存款利率上浮了，比平时多赚不少利息"<br>
+                            <strong>理财话术</strong>：<br>"现在理财产品收益不错，而且开门红期间还有额外奖励，早买早收益"<br>
+                            <strong>保险话术</strong>：<br>"给孩子存教育金，越早存压力越小，开门红期间投保还有优惠"<br>
+                            <strong>信用卡话术</strong>：<br>"开门红消费有返现，还有分期免手续费，缓解您的资金压力"</p>
+                            <p><strong>✅ 总结</strong><br>旺季营销要"借势"——利用活动时间限制、利率优惠等，制造紧迫感。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">企业合作模式</div>
-                        <div class="marketing-accordion-content">工资代发、员工贷款、团险等企业级服务切入。</div>
+                        <div class="marketing-accordion-header">🏆 团队激励方案</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>旺季任务重，怎么调动团队积极性？</p>
+                            <p><strong>📝 激励设计</strong><br>
+                            <strong>个人激励</strong>：<br>- 每日存款冠军奖励100元<br>- 完成任务的额外奖励500元<br>- 超额完成部分1%提成<br>
+                            <strong>团队激励</strong>：<br>- 团队完成目标，全员聚餐<br>- 达成XX万，开展团建活动<br>
+                            <strong>精神激励</strong>：<br>- 每日龙虎榜上墙公示<br>- 周冠军、月冠军授勋<br>- 先进典型事迹宣传</p>
+                            <p><strong>✅ 总结</strong><br>物质激励管一时，精神激励管长久。两者结合，效果最佳。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">后续跟进</div>
-                        <div class="marketing-accordion-content">留下好印象后持续跟进，节日祝福、资讯分享不可或缺。</div>
+                        <div class="marketing-accordion-header">📞 存量客户盘活</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>旺季没时间外拓，存量客户怎么盘活？</p>
+                            <p><strong>📝 盘活策略</strong><br>
+                            <strong>分层盘活</strong>：<br>- 100万以上客户：客户经理亲自电话+上门<br>- 20-100万客户：短信+微信群发<br>- 5-20万客户：批量短信触达<br>
+                            <strong>话术设计</strong>：<br>"XX先生/女士，开门红期间我们有特别优惠，您的资金到期了吗？我给您介绍一下"<br>
+                            <strong>产品匹配</strong>：<br>- 到期客户：推荐转存<br>- 未到期客户：推荐追加<br>- 观望客户：激发需求</p>
+                            <p><strong>✅ 总结</strong><br>存量客户是金矿，做好盘活工作，相当于开发了一个新客户群。</p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="marketing-card">
                 <div class="marketing-card-number">09</div>
-                <h3>场景化营销</h3>
-                <p>把产品植入客户生活场景，让营销自然而然。</p>
-                <div class="marketing-tag">场景营销</div><div class="marketing-tag">生活融入</div><div class="marketing-tag">润物无声</div>
+                <h3>特殊客户营销</h3>
+                <p>老年客户、年轻客户、企业客户...不同客户不同策略。</p>
+                <div class="marketing-tag">客群分析</div><div class="marketing-tag">精准营销</div><div class="marketing-tag">差异化服务</div>
                 <div class="marketing-accordion">
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">教育场景</div>
-                        <div class="marketing-accordion-content">"孩子教育金规划越早准备越轻松"切入教育金产品。</div>
+                        <div class="marketing-accordion-header">📋 案例：老年客户的信任营销</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>王奶奶，70岁，来网点存钱，但特别谨慎，不敢买理财。</p>
+                            <p><strong>📝 营销过程</strong><br>
+                            <strong>第一步：建立信任</strong><br>- 每次来都热情接待，扶她坐下<br>- 记住她的名字和家庭情况，像对待自己家人一样<br>
+                            <strong>第二步：了解需求</strong><br>"王奶奶，您这笔钱是养老用的吗？平时开销大不大？"<br>
+                            <strong>第三步：量身推荐</strong><br>推荐定期存款+国债组合，安全稳健<br>
+                            <strong>第四步：化解担忧</strong><br>"王奶奶，这个存款是有保险保障的，就算银行出问题，您的钱也安全"<br>
+                            <strong>第五步：持续服务</strong><br>每次来都送点小礼物，生日送长寿面</p>
+                            <p><strong>✅ 总结</strong><br>老年客户需要的是安全感、尊重感。把他们当自己父母对待，成交是自然的事。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">养老场景</div>
-                        <div class="marketing-accordion-content">"30年后您想过上什么样的退休生活？"引导养老规划。</div>
+                        <div class="marketing-accordion-header">👨‍💼 年轻客户营销攻略</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>90后、00后客户，不来网点，怎么营销？</p>
+                            <p><strong>📝 营销策略</strong><br>
+                            <strong>渠道</strong>：线上为主——微信、短视频、直播<br>
+                            <strong>内容</strong>：有趣、有用、有态度<br>
+                            <strong>话术</strong>：不说教，用年轻人的语言<br>
+                            <strong>产品</strong>：灵活、简单、门槛低<br>
+                            <strong>案例</strong>：<br>- "基金定投，每月300，30年后变百万"<br>- "信用卡积分换视频会员，每月省30块"<br>- "手机银行转账免费，额度5万"</p>
+                            <p><strong>✅ 总结</strong><br>年轻客户需要"轻营销"——不要一上来就推荐产品，先建立连接。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">购房场景</div>
-                        <div class="marketing-accordion-content">"买房是人生大事，贷款规划也很重要"切入房贷业务。</div>
+                        <div class="marketing-accordion-header">🏢 企业客户开发</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>网点周边有50家企业，怎么开发对公业务？</p>
+                            <p><strong>📝 开发策略</strong><br>
+                            <strong>第一步：批量获取信息</strong><br>- 通过工商信息、园区对接等方式获取企业名单<br>
+                            <strong>第二步：分层筛选</strong><br>- 优先开发有代发工资、收款需求的中小企业<br>
+                            <strong>第三步：上门陌拜</strong><br>- 带齐资料，一次见面讲清楚能提供什么服务<br>
+                            <strong>第四步：持续跟进</strong><br>- 定期回访，帮助企业解决金融问题<br>
+                            <strong>第五步：转介开发</strong><br>- 通过已合作企业介绍新客户</p>
+                            <p><strong>✅ 总结</strong><br>企业客户开发周期长，但一旦合作，贡献度远超个人客户。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">节日场景</div>
-                        <div class="marketing-accordion-content">母亲节推女性保险、父亲节推养老产品、开学季推教育金。</div>
+                        <div class="marketing-accordion-header">⚠️ 特殊客户注意事项</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 安全第一</strong><br>老年客户办理大额转账一定要核实，防范诈骗。<br>
+                            <strong>合规销售</strong><br>风险承受能力测评不能走过场，要真实了解客户。<br>
+                            <strong>隐私保护</strong><br>不要在公开场合谈论客户的资产和业务。<br>
+                            <strong>特殊需求</strong><br>残障客户、情绪异常客户要有耐心，必要时寻求帮助。</p>
+                            <p><strong>✅ 总结</strong><br>安全合规是底线，任何营销都不能突破这个底线。</p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="marketing-card">
                 <div class="marketing-card-number">10</div>
-                <h3>旺季营销策略</h3>
-                <p>开门红、月度冲刺、年末揽储，旺季营销怎么打？</p>
-                <div class="marketing-tag">开门红</div><div class="marketing-tag">旺季冲刺</div><div class="marketing-tag">业绩倍增</div>
+                <h3>营销心态修炼</h3>
+                <p>好的心态是成功的一半。营销路上，这些道理要懂。</p>
+                <div class="marketing-tag">心态调整</div><div class="marketing-tag">自我成长</div><div class="marketing-tag">长期主义</div>
                 <div class="marketing-accordion">
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">目标分解</div>
-                        <div class="marketing-accordion-content">将大目标分解到每日、每人，制定切实可行的行动计划。</div>
+                        <div class="marketing-accordion-header">📋 案例：从被拒绝100次到成交王</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>小张刚做客户经理，被拒绝到怀疑人生。</p>
+                            <p><strong>📝 心态转变过程</strong><br>
+                            <strong>第一个月</strong>：每天被拒绝20次，想辞职<br>
+                            <strong>第二个月</strong>：开始记录每次被拒绝的原因，反思改进<br>
+                            <strong>第三个月</strong>：调整话术，从"推销"变成"帮忙"<br>
+                            <strong>半年后</strong>：被拒绝次数越来越少，成交率提升到50%<br>
+                            <strong>一年后</strong>：成为网点"成交王"，还总结出一套自己的营销方法</p>
+                            <p><strong>✅ 总结</strong><br>被拒绝是常态，成长才是目的。每一次拒绝都是一次学习的机会。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">客户筛选</div>
-                        <div class="marketing-accordion-content">提前梳理潜在客户名单，排序后逐个突破。</div>
+                        <div class="marketing-accordion-header">🧘 压力管理技巧</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>指标压力大，晚上睡不着，怎么办？</p>
+                            <p><strong>📝 压力管理方法</strong><br>
+                            <strong>接受现实</strong>：指标是工作的一部分，尽力就好<br>
+                            <strong>分解目标</strong>：把大目标分解成每天的小目标<br>
+                            <strong>专业提升</strong>：把精力放在提升专业能力上，而不是焦虑<br>
+                            <strong>正向思维</strong>：每天进步一点，一年就是大进步<br>
+                            <strong>生活平衡</strong>：工作不是全部，要有自己的生活</p>
+                            <p><strong>✅ 总结</strong><br>焦虑解决不了问题，行动才能。做好每一天，结果交给时间。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">激励机制</div>
-                        <div class="marketing-accordion-content">设置阶段性奖励，保持团队斗志，形成你追我赶的氛围。</div>
+                        <div class="marketing-accordion-header">🌟 服务创造价值</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>总觉得营销就是求人，怎么破？</p>
+                            <p><strong>📝 观念转变</strong><br>
+                            <strong>旧观念</strong>："我在求客户买我的产品"<br>
+                            <strong>新观念</strong>："我在帮客户解决问题、创造价值"<br>
+                            <strong>案例</strong>：<br>帮王阿姨存好养老钱，让她安享晚年——这是价值<br>
+                            帮小企业主融资，助他事业发展——这是价值<br>
+                            帮年轻人规划理财，让未来有保障——这是价值</p>
+                            <p><strong>✅ 总结</strong><br>当你真正站在客户角度考虑，你会发现营销是一件有价值的事。</p>
+                        </div>
                     </div>
                     <div class="marketing-accordion-item">
-                        <div class="marketing-accordion-header">复盘改进</div>
-                        <div class="marketing-accordion-content">每日复盘总结，发现问题及时调整策略。</div>
+                        <div class="marketing-accordion-header">📚 持续学习建议</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 营销人必读书籍</strong><br>
+                            - 《世界上最伟大的推销员》——激发热情<br>
+                            - 《沟通的艺术》——提升沟通能力<br>
+                            - 《金字塔原理》——逻辑表达<br>
+                            - 《穷爸爸富爸爸》——财商思维</p>
+                            <p><strong>🌟 每天进步一点点</strong><br>
+                            - 每天学习一个产品知识<br>
+                            - 每天总结一个成功/失败案例<br>
+                            - 每周学习一个优秀同事的做法<br>
+                            - 每月读一本营销类书籍</p>
+                            <p><strong>✅ 总结</strong><br>专业能力是最大的竞争力。让自己值钱，才能创造更多价值。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">11</div>
+                <h3>新客户开发</h3>
+                <p>没有客户资源怎么办？教你从0到1开发新客户。</p>
+                <div class="marketing-tag">获客渠道</div><div class="marketing-tag">陌生开发</div><div class="marketing-tag">渠道建设</div>
+                <div class="marketing-accordion">
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">📋 案例：转岗新人一年开发500客户</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>小李从柜员转岗客户经理，没有任何客户资源。</p>
+                            <p><strong>📝 开发过程</strong><br>
+                            <strong>第一个月</strong>：整理存量客户名单，分类筛选，主动联系<br>
+                            <strong>第二个月</strong>：参加社区活动，摆摊宣传，留下联系方式<br>
+                            <strong>第三个月</strong>：开通微信服务号，定期推送有价值内容<br>
+                            <strong>半年后</strong>：通过线上线下结合，累计获客300人<br>
+                            <strong>一年后</strong>：客户总数超过500人，AUM达到2000万</p>
+                            <p><strong>✅ 总结</strong><br>没有资源不可怕，可怕的是不愿意行动。多渠道尝试，找到适合自己的方法。</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">🛒 外拓获客技巧</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 外拓地点选择</strong><br>
+                            - 社区：早市、广场舞聚集地、社区服务中心<br>
+                            - 商圈：批发市场、超市入口、写字楼大厅<br>
+                            - 企业：工业园区、写字楼、工厂门口<br>
+                            - 市场：菜市场、批发市场、专业市场</p>
+                            <p><strong>🌟 外拓话术</strong><br>"叔叔阿姨，我们是XX银行的，免费给大家咨询理财问题，有需要的可以了解一下"</p>
+                            <p><strong>✅ 总结</strong><br>外拓要"脸皮厚"、心态好，被拒绝是常态，成功的关键是坚持。</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">🤝 异业合作引流</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>网点希望吸引更多新客户，但不知道怎么合作。</p>
+                            <p><strong>📝 异业合作思路</strong><br>
+                            <strong>合作对象</strong>：房产中介、4S店、母婴店、健身房、美容院、培训机构<br>
+                            <strong>合作方式</strong>：互惠互利、客户共享<br>
+                            <strong>案例</strong>：<br>与母婴店合作：存款送游泳券、奶粉优惠券<br>
+                            与4S店合作：车贷客户推荐理财、存款客户推荐车贷</p>
+                            <p><strong>✅ 总结</strong><br>跳出银行做银行。整合周边资源，实现共赢。</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">📱 线上获客渠道</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 线上获客方式</strong><br>
+                            <strong>微信生态</strong>：公众号、朋友圈广告、小程序<br>
+                            <strong>短视频平台</strong>：抖音、快手、视频号<br>
+                            <strong>本地平台</strong>：本地论坛、贴吧、社区团购群<br>
+                            <strong>内容营销</strong>：知乎问答、百度知道、头条文章</p>
+                            <p><strong>✅ 总结</strong><br>线上获客成本低、覆盖广，但转化需要时间，要有耐心。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">12</div>
+                <h3>CRM系统使用</h3>
+                <p>善用工具，事半功倍。CRM系统使用技巧大公开。</p>
+                <div class="marketing-tag">科技赋能</div><div class="marketing-tag">效率提升</div><div class="marketing-tag">数据营销</div>
+                <div class="marketing-accordion">
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">📋 案例：用CRM系统盘活500个沉睡客户</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>网点有1000个客户，其中500个超过一年没来过。</p>
+                            <p><strong>📝 CRM盘活过程</strong><br>
+                            <strong>第一步：数据筛选</strong><br>用CRM筛选出"1年以上未到访"、"资产5万以上"的客户<br>
+                            <strong>第二步：客户画像</strong><br>分析这些客户的资产、产品持有情况、风险偏好<br>
+                            <strong>第三步：精准营销</strong><br>针对不同类型客户，设计不同营销策略<br>
+                            <strong>第四步：执行跟踪</strong><br>通过CRM记录每一次触达，记录结果<br>
+                            <strong>第五步：复盘优化</strong><br>每周复盘盘活效果，优化话术</p>
+                            <p><strong>✅ 总结</strong><br>CRM不是摆设，是武器。用好CRM，营销效率提升10倍。</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">💡 CRM功能使用技巧</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 必用功能</strong><br>
+                            - 客户分层：根据资产、年龄、职业自动分层<br>
+                            - 到期提醒：存款、理财到期前7天自动提醒<br>
+                            - 营销任务：批量发送短信、微信<br>
+                            - 数据分析：客户资产、产品持有、活跃度分析<br>
+                            - 跟进记录：每次触达都有记录，不遗漏</p>
+                            <p><strong>✅ 总结</strong><br>每天登录CRM系统，养成习惯。让系统帮你记住，你只管行动。</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">📊 数据分析方法</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 关键数据指标</strong><br>
+                            - 客户流失率：每月有多少客户资产下降<br>
+                            - 产品渗透率：客户持有多少产品<br>
+                            - 交叉销售率：客户平均持有几个产品<br>
+                            - 客户满意度：投诉率、评价分数<br>
+                            - 营销成功率：外呼成功率、转化率</p>
+                            <p><strong>✅ 总结</strong><br>数据会说话。每周看数据，发现问题，及时调整策略。</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">🔧 效率提升工具</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 常用工具推荐</strong><br>
+                            - 企业微信：客户管理、社群运营、标签管理<br>
+                            - 营销助手：话术库、产品推荐、合规提示<br>
+                            - 表格工具：Excel、飞书表格，数据分析<br>
+                            - 日程管理：日程app，工作有条不紊</p>
+                            <p><strong>✅ 总结</strong><br>好工具+好习惯=高效率。花时间学习工具，长期受益无穷。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">13</div>
+                <h3>投诉处理技巧</h3>
+                <p>会处理投诉的员工才是真正的销售高手。</p>
+                <div class="marketing-tag">服务提升</div><div class="marketing-tag">投诉处理</div><div class="marketing-tag">危机公关</div>
+                <div class="marketing-accordion">
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">📋 案例：投诉客户变忠实粉丝</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>客户李先生，因为理财产品亏损，在网点大吵大闹。</p>
+                            <p><strong>📝 处理过程</strong><br>
+                            <strong>第一步：冷静倾听</strong><br>不打断，让李先生把不满全部说出来<br>
+                            <strong>第二步：真诚道歉</strong><br>"非常抱歉给您造成了损失，换谁都会着急"<br>
+                            <strong>第三步：分析原因</strong><br>详细解释市场行情，说明产品运作情况<br>
+                            <strong>第四步：提出方案</strong><br>提供补偿方案：免手续费赎回+推荐稳健产品<br>
+                            <strong>第五步：持续跟进</strong><br>每周发送产品运作报告，让客户安心</p>
+                            <p><strong>✅ 总结</strong><br>李先生最终不仅没有赎回，还追加了50万。他说他看到了这家银行的责任心。</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">⚡ 投诉处理四步法</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>📝 四步法详解</strong><br>
+                            <strong>第一步：倾听</strong><br>- 不打断、不辩解<br>- 点头、记录，表示重视<br>- "我理解您的心情..."<br>
+                            <strong>第二步：共情</strong><br>- "如果是我，也会很着急"<br>- "您说的有道理..."<br>
+                            <strong>第三步：解决</strong><br>- 提出解决方案<br>- 给出明确时间<br>- 超出权限立刻上报<br>
+                            <strong>第四步：跟进</strong><br>- 落实承诺<br>- 回访确认<br>- 总结改进</p>
+                            <p><strong>✅ 总结</strong><br>投诉是危机也是机会。处理好了，客户反而更忠诚。</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">🚫 投诉处理禁忌</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>❌ 绝对不能说的话</strong><br>
+                            - "这是规定，我没办法"<br>
+                            - "不是我的责任"<br>
+                            - "您爱投诉就投诉"<br>
+                            - "你怎么不讲理"<br>
+                            - "这是您自己选择的"</p>
+                            <p><strong>✅ 正确做法</strong><br>
+                            - 无论对错，先道歉<br>
+                            - 不推卸责任<br>
+                            - 不与客户争执<br>
+                            - 超出权限及时上报</p>
+                            <p><strong>✅ 总结</strong><br>投诉处理的原则是：先处理心情，再处理事情。</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">🛡️ 预防投诉发生</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 预防措施</strong><br>
+                            - 销售前充分揭示风险<br>
+                            - 产品到期前主动提醒<br>
+                            - 定期发送资产报告<br>
+                            - 客户问题及时响应<br>
+                            - 保持沟通渠道畅通</p>
+                            <p><strong>✅ 总结</strong><br>最好的投诉处理是没有投诉。做好服务前置，问题自然少。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">14</div>
+                <h3>自我提升路径</h3>
+                <p>从普通员工到营销精英，你需要知道这些。</p>
+                <div class="marketing-tag">职业规划</div><div class="marketing-tag">技能提升</div><div class="marketing-tag">晋升通道</div>
+                <div class="marketing-accordion">
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">📋 案例：3年从柜员到支行行长</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 案例背景</strong><br>小赵，25岁入行，3年后成为支行行长。</p>
+                            <p><strong>📝 成长轨迹</strong><br>
+                            <strong>第一年</strong>：柜员岗位<br>
+                            - 苦练技能，快速晋升<br>
+                            - 主动学习业务知识<br>
+                            - 业余时间考取AFP证书<br>
+                            <strong>第二年</strong>：转岗客户经理<br>
+                            - 专注提升营销能力<br>
+                            - 每年业绩排名前30%<br>
+                            - 获得"营销新星"称号<br>
+                            <strong>第三年</strong>：竞聘支行行长<br>
+                            - 准备竞聘演讲<br>
+                            - 展示业绩和规划<br>
+                            - 成功晋升</p>
+                            <p><strong>✅ 总结</strong><br>晋升不是等来的，是干出来的。机会永远留给有准备的人。</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">📚 证书考取路线</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 银行人必考证书</strong><br>
+                            <strong>入门级</strong>：银行从业资格证、基金从业资格证<br>
+                            <strong>专业级</strong>：AFP（金融理财师）、CFP（国际金融理财师）<br>
+                            <strong>高级</strong>：CFA（特许金融分析师）、CPA（注册会计师）<br>
+                            <strong>加分项</strong>：理财规划师、保险从业资格证</p>
+                            <p><strong>✅ 总结</strong><br>证书不能代表能力，但能证明你努力过。考证的过程就是学习的过程。</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">🎯 核心能力提升</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 银行人核心能力</strong><br>
+                            <strong>专业能力</strong>：产品知识、行业知识、合规意识<br>
+                            <strong>营销能力</strong>：沟通技巧、需求挖掘、异议处理<br>
+                            <strong>服务能力</strong>：客户关系、投诉处理、情感维护<br>
+                            <strong>管理能力</strong>：时间管理、团队协作、项目推进</p>
+                            <p><strong>✅ 总结</strong><br>木桶理论：不要有明显的短板。在某方面特别突出，其他方面不能太弱。</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">💼 职业发展建议</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 不同阶段的建议</strong><br>
+                            <strong>新人期</strong>：多学多问，不要怕辛苦，打好基础<br>
+                            <strong>成长期</strong>：找到自己的优势领域，形成特色<br>
+                            <strong>成熟期</strong>：带团队、培养人、做更大的事<br>
+                            <strong>转型期</strong>：考虑管理路线 or 专业路线</p>
+                            <p><strong>✅ 总结</strong><br>银行是一个可以干一辈子的地方。脚踏实地，未来可期。</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1382,65 +2453,286 @@
         </div>
 
         <div class="seniors-grid">
-            <div class="senior-quote" onclick="openDetail(this, \'senior\')">
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
+                            <strong>话术</strong>："新年存新钱，开启好运年，我们有开门红专属利率，比平时高不少呢！"</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">💝 情人节营销</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 目标客群</strong>：年轻情侣、新婚夫妇<br>
+                            <strong>产品推荐</strong>：情侣卡、婚礼筹备贷款、蜜月旅行分期<br>
+                            <strong>话术</strong>："给TA存一个浪漫的未来，一起努力实现小目标！"</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">👨‍👩‍👧 儿童节营销</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 产品推荐</strong>：儿童银行卡、教育金保险、压岁钱理财<br>
+                            <strong>活动设计</strong>：举办"小小银行家"体验活动<br>
+                            <strong>话术</strong>："从小培养财商，压岁钱也能变成大财富！"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">16</div>
+                <h3>交叉销售技巧</h3>
+                <p>一个客户=N个产品，提升客户价值。</p>
+                <div class="marketing-tag">交叉销售</div><div class="marketing-tag">客户价值</div><div class="marketing-tag">综合营销</div>
+                <div class="marketing-accordion">
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">📊 交叉销售漏斗</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 四步提升法</strong><br>
+                            1. 基础账户（借记卡）<br>
+                            2. 支付工具（信用卡、扫码付）<br>
+                            3. 理财投资（理财、基金、贵金属）<br>
+                            4. 贷款融资（消费贷、房贷、经营贷）</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">💡 最佳时机</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 交叉销售黄金时机</strong><br>
+                            - 新客户开户时<br>
+                            - 产品到期续接时<br>
+                            - 客户人生重大节点（结婚、买房、生子）<br>
+                            - 节日关怀时</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">17</div>
+                <h3>客户生命周期营销</h3>
+                <p>从获客到留存，打造客户全生命周期价值。</p>
+                <div class="marketing-tag">生命周期</div><div class="marketing-tag">客户留存</div><div class="marketing-tag">价值提升</div>
+                <div class="marketing-accordion">
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">👶 导入期</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 获客策略</strong><br>
+                            - 新客户礼<br>
+                            - 首单优惠<br>
+                            - 专属客户经理<br>
+                            <strong>目标</strong>：让客户体验到专业和贴心</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">🌱 成长期</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 提升策略</strong><br>
+                            - 产品交叉<br>
+                            - 资产升级<br>
+                            - 深度关系<br>
+                            <strong>目标</strong>：让客户依赖我们的服务</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">🏆 成熟期</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 维护策略</strong><br>
+                            - VIP专属服务<br>
+                            - 定制化产品<br>
+                            - 转介绍激励<br>
+                            <strong>目标</strong>：让客户成为我们的推广者</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">18</div>
+                <h3>数字化营销工具</h3>
+                <p>善用科技工具，让营销效率倍增。</p>
+                <div class="marketing-tag">数字化</div><div class="marketing-tag">工具赋能</div><div class="marketing-tag">效率提升</div>
+                <div class="marketing-accordion">
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">📱 企业微信营销</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 功能矩阵</strong><br>
+                            - 客户朋友圈：内容触达<br>
+                            - 群发消息：精准推送<br>
+                            - 标签管理：分层运营<br>
+                            - 小程序：便捷服务</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">🤖 智能营销助手</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 AI应用场景</strong><br>
+                            - 智能外呼：批量触达<br>
+                            - 智能客服：24小时应答<br>
+                            - 数据分析：客户画像<br>
+                            - 精准推荐：个性化产品</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">19</div>
+                <h3>客户满意度管理</h3>
+                <p>NPS净推荐值，让客户主动为你代言。</p>
+                <div class="marketing-tag">客户满意</div><div class="marketing-tag">NPS</div><div class="marketing-tag">口碑营销</div>
+                <div class="marketing-accordion">
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">📈 NPS是什么</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 净推荐值</strong><br>
+                            - 9-10分：推荐者<br>
+                            - 7-8分：被动者<br>
+                            - 0-6分：贬损者<br>
+                            <strong>公式</strong>：NPS = 推荐者% - 贬损者%</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">🎯 提升策略</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 关键触点</strong><br>
+                            - 首次体验：超预期服务<br>
+                            - 问题解决：快速响应<br>
+                            - 定期关怀：主动联系<br>
+                            - 产品到期：提前提醒</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">20</div>
+                <h3>营销复盘方法</h3>
+                <p>每一次营销都是学习，复盘让你快速成长。</p>
+                <div class="marketing-tag">复盘</div><div class="marketing-tag">经验总结</div><div class="marketing-tag">持续改进</div>
+                <div class="marketing-accordion">
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">📋 复盘四步法</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 PDCA循环</strong><br>
+                            P-Plan：制定计划<br>
+                            D-Do：执行落地<br>
+                            C-Check：检查效果<br>
+                            A-Act：改进优化<br>
+                            <strong>频率</strong>：每周小复盘，每月大复盘</p>
+                        </div>
+                    </div>
+                    <div class="marketing-accordion-item">
+                        <div class="marketing-accordion-header">📊 关键指标</div>
+                        <div class="marketing-accordion-content">
+                            <p><strong>🌟 必看数据</strong><br>
+                            - 触达量：发了多少条<br>
+                            - 转化率：多少人响应<br>
+                            - 成交率：多少人购买<br>
+                            - 客单价：平均多少钱<br>
+                            - 复购率：回头客多少</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 前辈说 -->
+    <section class="seniors-section" id="seniors">
+        <div class="section-header">
+            <div class="section-tag">前辈说</div>
+            <h2 class="section-title">听听过来人的故事</h2>
+            <p class="section-desc">前人的经验教训，让你少走弯路</p>
+        </div>
+
+        <div class="seniors-grid">
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
                 <p class="senior-quote-text">"刚入职时我也害怕营销，觉得在求人。后来想通了——我们不是求人，是帮人。我们帮客户管好钱、实现目标，这是一件有价值的事。心态变了，一切就都变了。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">周</div><div class="senior-info"><h4>周经理</h4><p>某国有大行理财经理 · 入行8年</p></div></div>
                 <div class="senior-tags"><span class="senior-tag">#心态调整</span><span class="senior-tag">#成长感悟</span></div>
             </div>
-            <div class="senior-quote" onclick="openDetail(this, \'senior\')">
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
                 <p class="senior-quote-text">"客户投诉不可怕，可怕的是不知道怎么应对。我的经验是：先处理情绪，再处理事情。让客户把气撒完，你就已经成功了一半。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">林</div><div class="senior-info"><h4>林主管</h4><p>某股份制银行柜员主管 · 入行12年</p></div></div>
                 <div class="senior-tags"><span class="senior-tag">#投诉处理</span><span class="senior-tag">#服务技巧</span></div>
             </div>
-            <div class="senior-quote" onclick="openDetail(this, \'senior\')">
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
                 <p class="senior-quote-text">"考证不是目的，但考证的过程会让你系统地学习。AFP、CFP、对公信贷……每考一个，你就比同龄人领先一步。别说什么工作忙，时间挤挤总是有的。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">吴</div><div class="senior-info"><h4>吴行长</h4><p>某城商行支行副行长 · 入行15年</p></div></div>
                 <div class="senior-tags"><span class="senior-tag">#职业规划</span><span class="senior-tag">#自我提升</span></div>
             </div>
-            <div class="senior-quote" onclick="openDetail(this, \'senior\')">
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
                 <p class="senior-quote-text">"银行工作确实累，但也有它的好处。稳定、体面、能让家人安心。找到工作的意义感很重要，不然真的撑不下去。找到你喜欢的那部分，然后放大它。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">孙</div><div class="senior-info"><h4>孙姐</h4><p>某农商行业务骨干 · 入行10年</p></div></div>
                 <div class="senior-tags"><span class="senior-tag">#工作平衡</span><span class="senior-tag">#生活感悟</span></div>
             </div>
-            <div class="senior-quote" onclick="openDetail(this, \'senior\')">
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
                 <p class="senior-quote-text">"新入职的时候别急着表现，先观察、先学习。银行系统复杂，风险点很多。稳比快重要，少踩坑比多出业绩更重要。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">张</div><div class="senior-info"><h4>张老师</h4><p>某国有大行高级经理 · 入行20年</p></div></div>
                 <div class="senior-tags"><span class="senior-tag">#新人建议</span><span class="senior-tag">#风险管理</span></div>
             </div>
-            <div class="senior-quote" onclick="openDetail(this, \'senior\')">
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
                 <p class="senior-quote-text">"客户分层很重要。不是所有客户都需要一样对待，把80%精力放在20%的高价值客户上，效率会高很多。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">王</div><div class="senior-info"><h4>王总监</h4><p>某股份制银行零售总监 · 入行18年</p></div></div>
                 <div class="senior-tags"><span class="senior-tag">#客户管理</span><span class="senior-tag">#效率提升</span></div>
             </div>
-            <div class="senior-quote" onclick="openDetail(this, \'senior\')">
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
                 <p class="senior-quote-text">"和客户交朋友，但也要保持边界。不要和客户走得太近，保持专业距离对双方都好。私人关系太深，反而不好处理业务问题。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">李</div><div class="senior-info"><h4>李经理</h4><p>某外资银行客户经理 · 入行9年</p></div></div>
                 <div class="senior-tags"><span class="senior-tag">#客户关系</span><span class="senior-tag">#职业边界</span></div>
             </div>
-            <div class="senior-quote" onclick="openDetail(this, \'senior\')">
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
                 <p class="senior-quote-text">"银行晋升没有捷径，但有方法。主动承担额外任务、帮助同事、汇报工作成果……让领导看到你很重要。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">陈</div><div class="senior-info"><h4>陈行长</h4><p>某城商行支行行长 · 入行16年</p></div></div>
                 <div class="senior-tags"><span class="senior-tag">#晋升技巧</span><span class="senior-tag">#职场发展</span></div>
             </div>
-            <div class="senior-quote" onclick="openDetail(this, \'senior\')">
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
                 <p class="senior-quote-text">"合规不是为了限制你，是为了保护你。那些走捷径的人，最后都付出了代价。坚持合规，短期看是慢，长期看是快。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">刘</div><div class="senior-info"><h4>刘主任</h4><p>某国有大行合规主管 · 入行14年</p></div></div>
                 <div class="senior-tags"><span class="senior-tag">#合规意识</span><span class="senior-tag">#职业保护</span></div>
             </div>
-            <div class="senior-quote" onclick="openDetail(this, \'senior\')">
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
                 <p class="senior-quote-text">"营销不是忽悠，是帮客户解决问题。当你真正站在客户角度考虑，你会发现推荐什么产品、怎么推荐，其实很清楚。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">赵</div><div class="senior-info"><h4>赵经理</h4><p>某股份制银行理财经理 · 入行7年</p></div></div>
                 <div class="senior-tags"><span class="senior-tag">#营销理念</span><span class="senior-tag">#客户导向</span></div>
             </div>
-            <div class="senior-quote" onclick="openDetail(this, \'senior\')">
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
                 <p class="senior-quote-text">"遇到难缠的客户，不要硬碰硬。有时候换个人、换个时间、换个方式，问题就解决了。学会借力，也是一种能力。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">徐</div><div class="senior-info"><h4>徐主管</h4><p>某农商行柜员主管 · 入行11年</p></div></div>
                 <div class="senior-tags"><span class="senior-tag">#投诉处理</span><span class="senior-tag">#问题解决</span></div>
             </div>
-            <div class="senior-quote" onclick="openDetail(this, \'senior\')">
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
                 <p class="senior-quote-text">"银行工作压力大，要学会给自己放松。下班后不要还想工作的事，培养点爱好，交点朋友，工作是生活的一部分，不是全部。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">黄</div><div class="senior-info"><h4>黄姐</h4><p>某国有大行会计主管 · 入行13年</p></div></div>
                 <div class="senior-tags"><span class="senior-tag">#工作生活平衡</span><span class="senior-tag">#身心健康</span></div>
+            </div>
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
+                <p class="senior-quote-text">"服务客户不只是完成任务，是真正站在客户角度思考。当你能解决客户的问题，客户自然会成为你的朋友。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">钱</div><div class="senior-info"><h4>钱经理</h4><p>某股份制银行理财经理 · 入行6年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#服务理念</span><span class="senior-tag">#客户关系</span></div>
+            </div>
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
+                <p class="senior-quote-text">"考证是给自己加码，不是给领导交差。每考一个证，你对业务的理解就会深一层。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">沈</div><div class="senior-info"><h4>沈主管</h4><p>某城商行业务主管 · 入行11年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#自我提升</span><span class="senior-tag">#证书考取</span></div>
+            </div>
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
+                <p class="senior-quote-text">"新人最忌讳的是眼高手低。先把手头的事做好，机会自然会来。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">卫</div><div class="senior-info"><h4>卫行长</h4><p>某农商行支行行长 · 入行19年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#新人建议</span><span class="senior-tag">#职业发展</span></div>
+            </div>
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
+                <p class="senior-quote-text">"投诉是改进的机会，不是麻烦的开始。每次投诉都藏着客户没被满足的需求。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">蒋</div><div class="senior-info"><h4>蒋总监</h4><p>某国有大行客户总监 · 入行17年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#投诉处理</span><span class="senior-tag">#服务提升</span></div>
+            </div>
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
+                <p class="senior-quote-text">"和客户沟通要像朋友聊天，不要像背书。把专业术语变成大白话，客户才能真正听懂。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">唐</div><div class="senior-info"><h4>唐经理</h4><p>某外资银行客户经理 · 入行8年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#沟通技巧</span><span class="senior-tag">#服务表达</span></div>
+            </div>
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
+                <p class="senior-quote-text">"银行是个金矿，但很多人只看到了指标和任务，没看到背后的价值。找到工作的意义，比完成指标更重要。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">冯</div><div class="senior-info"><h4>冯主任</h4><p>某城商行综合部主任 · 入行15年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#工作意义</span><span class="senior-tag">#职业心态</span></div>
+            </div>
+            <div class="senior-quote" onclick="openDetail(this, 'senior')">
+                <p class="senior-quote-text">"别把鸡蛋放一个篮子里。客户分层、产品组合、收入多元化，才能在银行长久发展。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">陈</div><div class="senior-info"><h4>陈经理</h4><p>某股份制银行零售主管 · 入行10年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#业务拓展</span><span class="senior-tag">#收入提升</span></div>
             </div>
         </div>
     </section>
@@ -1507,6 +2799,37 @@
                 <h3>倾诉热线</h3>
                 <p>如果需要专业帮助，这里有可以求助的渠道。</p>
                 <button class="mental-btn" onclick="showHelpline()">查看热线 →</button>
+            </div>
+            <!-- 新增内容 -->
+            <div class="mental-card">
+                <div class="mental-card-icon">🍵</div>
+                <h3>午休充电术</h3>
+                <p>如何利用午休时间高效恢复精力，下午不再犯困。</p>
+                <button class="mental-btn" onclick="showNapGuide()">获取技巧 →</button>
+            </div>
+            <div class="mental-card">
+                <div class="mental-card-icon">🎨</div>
+                <h3>色彩疗愈</h3>
+                <p>用颜色调节情绪，在网点营造积极氛围的小技巧。</p>
+                <button class="mental-btn" onclick="showColorTherapy()">了解方法 →</button>
+            </div>
+            <div class="mental-card">
+                <div class="mental-card-icon">🏠</div>
+                <h3>工作空间整理</h3>
+                <p>整洁的工位能带来好心情，银行人桌面收纳指南。</p>
+                <button class="mental-btn" onclick="showDeskOrganize()">查看指南 →</button>
+            </div>
+            <div class="mental-card">
+                <div class="mental-card-icon">🎵</div>
+                <h3>音乐减压法</h3>
+                <p>不同场景适合听什么音乐？用音乐调节工作状态。</p>
+                <button class="mental-btn" onclick="showMusicTherapy()">了解音乐 →</button>
+            </div>
+            <div class="mental-card">
+                <div class="mental-card-icon">📵</div>
+                <h3>手机依赖戒断</h3>
+                <p>如何减少对手机的依赖，找回专注力。</p>
+                <button class="mental-btn" onclick="showPhoneDetox()">开始戒断 →</button>
             </div>
         </div>
     </section>
@@ -1579,6 +2902,37 @@
                 <div class="relax-card-emoji">🏆</div>
                 <h3>开会文化</h3>
                 <p>晨会、夕会、周例会、月度会、季度会、年度会……会议太多，时间不够用！</p>
+            </div>
+            <!-- 新增内容 -->
+            <div class="relax-card">
+                <div class="relax-card-emoji">🧮</div>
+                <h3>算数的强迫症</h3>
+                <p>买菜要算总价、点外卖要算优惠、看时间会换算成秒……这病没救了！</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">🛡️</div>
+                <h3>职业病图鉴</h3>
+                <p>微笑已成肌肉记忆、输密码要看三遍、手指永远保持干燥……你中了几条？</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">🎭</div>
+                <h3>演技大赏</h3>
+                <p>明明很累也要微笑、明明很烦也要耐心、明明想下班还要说"好的没问题"……</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">📱</div>
+                <h3>银行人の手机相册</h3>
+                <p>证件照、活动合影、业绩截图、网点环境……自拍？不存在的！</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">🗓️</div>
+                <h3>季度轮回</h3>
+                <p>一季度开门红、二季度冲刺、三季度维稳、四季度收官……然后再来一遍！</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">👔</div>
+                <h3>制服诱惑</h3>
+                <p>周一到周四正装出席、周五休闲装、周六周日睡衣……这就是我的时尚周！</p>
             </div>
         </div>
 
@@ -1827,6 +3181,26 @@
 
         function showHelpline() {
             alert('🗣️ 倾诉热线\n\n📞 全国心理援助热线：400-161-9995\n📞 北京心理危机研究与干预中心：010-82951332\n📞 生命热线：400-821-1215\n\n如果感到困扰，请寻求帮助，你不是一个人。');
+        }
+
+        function showNapGuide() {
+            alert('🍵 午休充电术\n\n1. 午餐只吃七分饱，太多会影响下午状态\n2. 午休时间控制在20-30分钟\n3. 找个安静的地方，戴上眼罩\n4. 不趴着睡，对颈椎不好\n5. 喝杯温水再开始工作\n6. 可以听轻音乐帮助放松\n\n小技巧：设定闹钟，醒来后先伸个懒腰再开始下午工作！');
+        }
+
+        function showColorTherapy() {
+            alert('🎨 色彩疗愈\n\n💙 蓝色：冷静、专注，适合处理复杂业务\n💚 绿色：平和、安全，适合安抚情绪\n💛 黄色：活力、乐观，适合提升士气\n❤️ 红色：激情、能量，适度使用更有效\n\n🌟 在网点可以：\n- 摆放绿色植物\n- 使用蓝色文件夹\n- 穿着舒适颜色的衣服\n- 在休息区使用暖色调');
+        }
+
+        function showDeskOrganize() {
+            alert('🏠 工作空间整理\n\n✨ 整洁工位的好处：\n- 心情更舒畅\n- 效率提升30%\n- 减少找东西的时间\n\n📦 收纳技巧：\n- 桌面只留必需品\n- 文件分类归档\n- 抽屉分区管理\n- 绿植点缀心情\n\n🧹 每日5分钟：\n下班前整理桌面，让第二天有个好开始！');
+        }
+
+        function showMusicTherapy() {
+            alert('🎵 音乐减压法\n\n🎧 不同场景适合的音乐：\n\n🌅 上班路上：轻快节奏，提神醒脑\n\n💼 工作中：纯音乐、白噪音，屏蔽干扰\n\n🍽️ 午休时间：自然声音，雨声、海浪声\n\n🌙 下班后：舒缓放松，古典音乐、轻音乐\n\n📱 推荐APP：网易云音乐、喜马拉雅、冥想类APP\n\n💡 技巧：戴上耳机，即使是沉默也能让自己专注！');
+        }
+
+        function showPhoneDetox() {
+            alert('📵 手机依赖戒断\n\n🚫 戒断症状：\n- 没事就想刷手机\n- 等人时必须看手机\n- 睡前最后一件事是刷手机\n\n✅ 解决方案：\n1. 设定"无手机时间"（如用餐时、睡前1小时）\n2. 工作时手机放抽屉\n3. 关闭非必要通知\n4. 删掉耗时APP\n5. 培养离线爱好\n\n💪 坚持7天，你会发现专注力大幅提升！');
         }
 
         function closeModal(id) {
@@ -2166,6 +3540,120 @@
                 closeDetailModal();
             }
         });
+
+        // 最新金融动态功能
+        const newsData = {
+            finance: [
+                { title: '央行宣布定向降准0.25个百分点，释放长期资金约5000亿元', source: '央行官网', time: '10分钟前', hot: true },
+                { title: 'A股三大指数集体收涨，沪指重回3400点上方', source: '新浪财经', time: '30分钟前', hot: false },
+                { title: '人民币汇率中间价上调102个基点，创年内新高', source: '中国证券报', time: '1小时前', hot: true },
+                { title: '一季度GDP同比增长5.3%，经济运行开局良好', source: '国家统计局', time: '2小时前', hot: false },
+                { title: '数字人民币试点再扩围，覆盖更多民生场景', source: '证券日报', time: '3小时前', hot: false },
+                { title: '保险资金加大对科技创新领域投资力度', source: '金融时报', time: '4小时前', hot: false },
+                { title: '沪深两市成交额突破1.2万亿元，刷新年内纪录', source: '东方财富', time: '5小时前', hot: false },
+                { title: '多家银行下调存款利率，利率市场化持续推进', source: '经济参考报', time: '6小时前', hot: false },
+                { title: '北向资金净流入超百亿元，外资持续看好A股', source: '第一财经', time: '7小时前', hot: false },
+                { title: '科创板上市公司突破500家，总市值超10万亿元', source: '上交所发布', time: '8小时前', hot: false }
+            ],
+            bank: [
+                { title: '工商银行发布2026年一季度业绩，净利润同比增长3.2%', source: '工商银行', time: '15分钟前', hot: true },
+                { title: '建设银行推出"乡村振兴"专属金融服务方案', source: '建设银行', time: '1小时前', hot: true },
+                { title: '招商银行私人银行客户数突破50万户，资产管理规模超4万亿', source: '招商银行', time: '2小时前', hot: false },
+                { title: '农业银行普惠贷款余额突破3万亿元，持续服务小微企业', source: '农业银行', time: '3小时前', hot: false },
+                { title: '中国银行发布跨境金融创新产品，助力企业"走出去"', source: '中国银行', time: '4小时前', hot: false }
+            ]
+        };
+
+        function refreshNews() {
+            const btn = document.querySelector('.news-refresh');
+            btn.classList.add('loading');
+            btn.textContent = '刷新中...';
+
+            // 模拟刷新延迟
+            setTimeout(() => {
+                const now = new Date();
+                const timeStr = now.getFullYear() + '-' +
+                    String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(now.getDate()).padStart(2, '0') + ' ' +
+                    String(now.getHours()).padStart(2, '0') + ':' +
+                    String(now.getMinutes()).padStart(2, '0');
+                document.getElementById('newsUpdateTime').textContent = '更新时间：' + timeStr;
+
+                // 打乱新闻顺序模拟新内容
+                shuffleNews();
+
+                btn.classList.remove('loading');
+                btn.innerHTML = '🔄 刷新新闻';
+                alert('✅ 新闻已更新！\n\n说明：当前为静态演示版本。\n实际使用时可通过API接口或RSS订阅实现实时更新。');
+            }, 1000);
+        }
+
+        function shuffleNews() {
+            ['finance', 'bank'].forEach(type => {
+                const list = document.getElementById(type + 'News');
+                const items = list.querySelectorAll('.news-item');
+                const shuffled = [...items].sort(() => Math.random() - 0.5);
+                shuffled.forEach(item => list.appendChild(item));
+            });
+        }
+
+        function openNewsDetail(item) {
+            const title = item.querySelector('.news-title').textContent;
+            const meta = item.querySelector('.news-meta').innerHTML;
+            alert('📰 ' + title + '\n\n' + meta.replace(/<[^>]*>/g, ' | ') + '\n\n[详细内容需连接后台数据库获取]');
+        }
+
+        // 媒体测试功能
+        function testAudio() {
+            const audio = document.getElementById('testAudio');
+            const status = document.getElementById('audioStatus');
+            const statusText = document.getElementById('audioStatusText');
+
+            if (audio.paused) {
+                audio.play().then(() => {
+                    status.style.background = '#48bb78';
+                    statusText.textContent = '✅ 音频播放正常！';
+                }).catch(err => {
+                    status.style.background = '#f56565';
+                    statusText.textContent = '❌ 音频播放失败：' + err.message;
+                });
+            } else {
+                audio.pause();
+                status.style.background = '#ecc94b';
+                statusText.textContent = '⏸️ 音频已暂停';
+            }
+        }
+
+        function testVideo() {
+            const video = document.getElementById('testVideo');
+            const status = document.getElementById('videoStatus');
+            const statusText = document.getElementById('videoStatusText');
+
+            if (video.paused) {
+                video.play().then(() => {
+                    status.style.background = '#48bb78';
+                    statusText.textContent = '✅ 视频播放正常！';
+                }).catch(err => {
+                    status.style.background = '#f56565';
+                    statusText.textContent = '❌ 视频播放失败：' + err.message;
+                });
+            } else {
+                video.pause();
+                status.style.background = '#ecc94b';
+                statusText.textContent = '⏸️ 视频已暂停';
+            }
+        }
+
+        // 页面加载时更新新闻时间显示
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const hours = 7; // 固定早上7点
+            const timeStr = now.getFullYear() + '-' +
+                String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                String(now.getDate()).padStart(2, '0') + ' 07:00';
+            document.getElementById('newsUpdateTime').textContent = '更新时间：' + timeStr;
+        });
     </script>
 </body>
 </html>
+
