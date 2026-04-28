@@ -6,24 +6,34 @@
     <title>心灵驿站 - 银YOUNG空间</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #1a365d;
+            --primary-light: #2c5282;
+            --primary-dark: #0d1f3c;
             --accent: #ed8936;
+            --accent-light: #f6ad55;
+            --accent-soft: #fbd38d;
             --bg-main: #f7fafc;
+            --bg-card: #ffffff;
+            --text-dark: #1a202c;
+            --text-body: #4a5568;
+            --text-light: #718096;
             --shadow-soft: 0 4px 20px rgba(26, 54, 93, 0.08);
             --shadow-hover: 0 12px 40px rgba(26, 54, 93, 0.15);
             --radius-lg: 20px;
+            --radius-md: 12px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Noto Sans SC', sans-serif;
-            background: var(--bg-main);
-            color: #4a5568;
-            line-height: 1.7;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 50%, #f7fafc 100%);
+            color: var(--text-body);
+            line-height: 1.8;
+            min-height: 100vh;
         }
 
         .navbar {
@@ -35,50 +45,91 @@
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
         .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; font-weight: 700; }
-        .logo-text { font-size: 1.5rem; font-weight: 600; color: var(--primary); }
+        .logo-text { font-family: 'Noto Serif SC', serif; font-size: 1.5rem; font-weight: 600; color: var(--primary); }
         .logo-text span { color: var(--accent); }
         .nav-links { display: flex; gap: 0.5rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: #4a5568; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; }
+        .nav-links a { text-decoration: none; color: var(--text-body); padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; }
         .nav-links a:hover { background: var(--primary); color: white; }
         .nav-links a.active { background: var(--primary); color: white; }
         .nav-cta { background: var(--accent) !important; color: white !important; }
 
         .page-header {
             padding: 8rem 2rem 4rem;
-            background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        .page-header-content { max-width: 800px; margin: 0 auto; }
-        .page-badge { display: inline-block; background: var(--accent); color: white; padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1rem; }
-        .page-header h1 { font-size: 3rem; color: var(--primary); margin-bottom: 1rem; }
-        .page-header p { font-size: 1.2rem; color: #718096; }
+        .page-header::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); opacity: 0.5; }
+        .page-header-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+        .page-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1rem; }
+        .page-header h1 { font-family: 'Noto Serif SC', serif; font-size: 3rem; margin-bottom: 1rem; }
+        .page-header p { font-size: 1.2rem; opacity: 0.9; }
 
-        .content { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .content { padding: 4rem 2rem; max-width: 1400px; margin: 0 auto; }
 
-        .mental-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .mental-card { background: linear-gradient(135deg, #fff 0%, #f0f4ff 100%); border-radius: var(--radius-lg); padding: 2rem; transition: all 0.3s ease; }
+        .section-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+        .section-title:first-of-type { margin-top: 0; }
+
+        .mental-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .mental-card { 
+            background: linear-gradient(135deg, #fff 0%, #f0f4ff 100%); 
+            border-radius: var(--radius-lg); 
+            padding: 1.5rem; 
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .mental-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent), #764ba2); transform: scaleX(0); transition: transform 0.3s ease; }
+        .mental-card:hover::before { transform: scaleX(1); }
         .mental-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
-        .mental-card-icon { font-size: 3.5rem; margin-bottom: 1rem; }
-        .mental-card h3 { font-size: 1.2rem; color: #1a202c; margin-bottom: 0.8rem; }
-        .mental-card p { font-size: 0.95rem; color: #718096; margin-bottom: 1.5rem; }
-        .mental-btn { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-weight: 600; cursor: pointer; border: none; background: none; font-size: 1rem; }
-        .mental-btn:hover { color: var(--accent); gap: 0.8rem; }
+        .mental-card-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .mental-card h3 { color: var(--primary); margin-bottom: 0.8rem; font-size: 1.1rem; font-weight: 600; }
+        .mental-card p { color: var(--text-light); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.7; }
+        .mental-btn { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--accent); font-weight: 600; cursor: pointer; border: none; background: none; font-size: 0.9rem; }
+        .mental-btn:hover { color: var(--primary); }
 
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; padding: 2rem; }
         .modal.active { display: flex; }
-        .modal-content { background: white; border-radius: var(--radius-lg); padding: 2.5rem; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; }
-        .modal-close { position: absolute; top: 1rem; right: 1rem; width: 30px; height: 30px; border-radius: 50%; background: #eee; border: none; cursor: pointer; font-size: 1.2rem; }
-        .breathing-circle { width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); margin: 2rem auto; transition: transform 4s ease-in-out; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; }
-        .breathing-circle.inhale { transform: scale(1.3); }
+        .modal-content { background: white; border-radius: var(--radius-lg); padding: 2.5rem; max-width: 600px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; box-shadow: var(--shadow-hover); }
+        .modal-close { position: absolute; top: 1rem; right: 1rem; width: 36px; height: 36px; border-radius: 50%; background: #eee; border: none; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; }
+        .modal-close:hover { background: #ddd; }
+        .modal-icon { font-size: 4rem; text-align: center; margin-bottom: 1.5rem; }
+        .modal h2 { font-family: 'Noto Serif SC', serif; color: var(--primary); margin-bottom: 1rem; text-align: center; }
+        .modal p { color: var(--text-body); line-height: 1.9; margin-bottom: 1rem; }
+        .modal-section { background: #f8fafc; padding: 1.5rem; border-radius: var(--radius-md); margin-top: 1rem; }
+        .modal-section h4 { color: var(--accent); margin-bottom: 0.5rem; font-size: 0.95rem; }
+        .modal-section ul { list-style: none; }
+        .modal-section li { padding: 0.3rem 0; color: var(--text-body); font-size: 0.9rem; }
+        .modal-section li::before { content: '✓ '; color: var(--accent); }
+
+        .breathing-section { text-align: center; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: var(--radius-lg); color: white; margin: 2rem 0; }
+        .breathing-circle { width: 150px; height: 150px; border-radius: 50%; background: rgba(255,255,255,0.2); margin: 1.5rem auto; transition: transform 4s ease-in-out; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+        .breathing-circle.inhale { transform: scale(1.3); background: rgba(255,255,255,0.4); }
         .breathing-circle.exhale { transform: scale(1); }
+        .breathing-tips { margin-top: 1rem; font-size: 0.9rem; opacity: 0.9; }
 
-        .back-home { text-align: center; margin-top: 3rem; }
+        .back-home { text-align: center; margin-top: 4rem; }
         .back-home-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: var(--primary); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
-        .back-home-btn:hover { transform: translateY(-3px); }
+        .back-home-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 
-        .footer { background: #0d1f3c; color: white; padding: 4rem 2rem 2rem; text-align: center; }
+        .footer { background: var(--primary-dark); color: white; padding: 4rem 2rem 2rem; text-align: center; }
         .footer p { opacity: 0.7; font-size: 0.95rem; }
 
+        @media (max-width: 1024px) {
+            .mental-grid { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .mental-grid { grid-template-columns: 1fr; }
@@ -106,67 +157,220 @@
 
     <header class="page-header">
         <div class="page-header-content">
-            <div class="page-badge">🧘 身心调适指南</div>
-            <h1>心灵驿站</h1>
-            <p>累了，就来歇一歇</p>
+            <div class="page-badge">🧘 42+心理文章</div>
+            <h1>心 灵 驿 站</h1>
+            <p>累了就停一停，在这里找回平静的自己</p>
         </div>
     </header>
 
     <main class="content">
+        <h2 class="section-title">🌟 压力管理</h2>
         <div class="mental-grid">
-            <div class="mental-card">
+            <div class="mental-card" onclick="openModal('pressure1')">
+                <div class="mental-card-icon">💆</div>
+                <h3>识别压力信号</h3>
+                <p>身体和心理都在告诉你压力过大的信号，学会识别它们。</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('pressure2')">
                 <div class="mental-card-icon">🧘</div>
-                <h3>3分钟呼吸放松法</h3>
-                <p>柜台前被客户气到了？试试这个，快速平复情绪的小技巧。</p>
-                <button class="mental-btn" onclick="openBreathingModal()">开始练习 →</button>
+                <h3>5分钟呼吸放松法</h3>
+                <p>用简单的呼吸技巧，快速缓解紧张情绪。</p>
+                <span class="mental-btn">点击体验 →</span>
             </div>
-            <div class="mental-card">
-                <div class="mental-card-icon">📝</div>
-                <h3>职场情绪日记</h3>
-                <p>记录每天的情绪变化，发现规律，更好地管理自己。</p>
-                <button class="mental-btn" onclick="openDiaryModal()">开始记录 →</button>
-            </div>
-            <div class="mental-card">
-                <div class="mental-card-icon">🎧</div>
-                <h3>减压音频合集</h3>
-                <p>轻音乐、白噪音、助眠冥想，上班路上、午休时都能听。</p>
-                <button class="mental-btn" onclick="openAudioModal()">立即收听 →</button>
-            </div>
-            <div class="mental-card">
-                <div class="mental-card-icon">💪</div>
-                <h3>正能量语录</h3>
-                <p>每天一句正能量，陪你度过艰难时刻。</p>
-                <button class="mental-btn" onclick="showPositiveQuote()">获取鼓励 →</button>
-            </div>
-            <div class="mental-card">
-                <div class="mental-card-icon">🌙</div>
-                <h3>睡眠改善指南</h3>
-                <p>银行人常见的睡眠问题及改善方法。</p>
-                <button class="mental-btn" onclick="showSleepGuide()">查看指南 →</button>
-            </div>
-            <div class="mental-card">
-                <div class="mental-card-icon">🏃</div>
-                <h3>工作与运动</h3>
-                <p>久坐银行的你，需要这些简单运动来放松。</p>
-                <button class="mental-btn" onclick="showExerciseGuide()">获取方案 →</button>
-            </div>
-            <div class="mental-card">
-                <div class="mental-card-icon">👥</div>
-                <h3>同事关系处理</h3>
-                <p>如何与不同性格的同事相处，构建和谐团队。</p>
-                <button class="mental-btn" onclick="showColleagueGuide()">查看建议 →</button>
-            </div>
-            <div class="mental-card">
+            <div class="mental-card" onclick="openModal('pressure3')">
                 <div class="mental-card-icon">🎯</div>
-                <h3>职业倦怠应对</h3>
-                <p>当工作失去新鲜感，如何重新找到动力？</p>
-                <button class="mental-btn" onclick="showBurnoutGuide()">获取建议 →</button>
+                <h3>四象限时间管理</h3>
+                <p>用重要紧急四象限，告别忙乱焦虑。</p>
+                <span class="mental-btn">点击学习 →</span>
             </div>
-            <div class="mental-card">
-                <div class="mental-card-icon">🍵</div>
-                <h3>午休充电术</h3>
-                <p>如何利用午休时间高效恢复精力，下午不再犯困。</p>
-                <button class="mental-btn" onclick="showNapGuide()">获取技巧 →</button>
+            <div class="mental-card" onclick="openModal('pressure4')">
+                <div class="mental-card-icon">⏰</div>
+                <h3>番茄工作法</h3>
+                <p>25分钟专注工作，5分钟休息，效率翻倍。</p>
+                <span class="mental-btn">点击了解 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('pressure5')">
+                <div class="mental-card-icon">🛏️</div>
+                <h3>告别加班熬夜</h3>
+                <p>提高效率准时下班，拒绝无效加班。</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('pressure6')">
+                <div class="mental-card-icon">🧠</div>
+                <h3>正念冥想入门</h3>
+                <p>每天10分钟，找回内心的平静。</p>
+                <span class="mental-btn">点击开始 →</span>
+            </div>
+        </div>
+
+        <div class="breathing-section">
+            <h2>🎧 呼吸引导练习</h2>
+            <p>跟随节奏，让呼吸带你放松</p>
+            <div class="breathing-circle" id="breathingCircle">
+                <span id="breathingText">点击开始</span>
+            </div>
+            <button class="mental-btn" style="background: white; padding: 0.6rem 1.5rem; border-radius: 50px; color: #667eea; margin-top: 1rem;" onclick="startBreathing()">▶ 开始呼吸练习</button>
+            <p class="breathing-tips">吸气4秒 → 屏住4秒 → 呼气6秒</p>
+        </div>
+
+        <h2 class="section-title">💪 情绪调节</h2>
+        <div class="mental-grid">
+            <div class="mental-card" onclick="openModal('emotion1')">
+                <div class="mental-card-icon">😤</div>
+                <h3>愤怒管理技巧</h3>
+                <p>当怒火中烧时，如何快速冷静下来。</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('emotion2')">
+                <div class="mental-card-icon">😰</div>
+                <h3>焦虑情绪化解</h3>
+                <p>面对未知和压力，如何不焦虑。</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('emotion3')">
+                <div class="mental-card-icon">😢</div>
+                <h3>允许自己脆弱</h3>
+                <p>承认情绪不是软弱，而是自我关怀。</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('emotion4')">
+                <div class="mental-card-icon">😊</div>
+                <h3>培养积极心态</h3>
+                <p>每天3件好事，改变看世界的角度。</p>
+                <span class="mental-btn">点击学习 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('emotion5')">
+                <div class="mental-card-icon">🙏</div>
+                <h3>感恩的力量</h3>
+                <p>感恩让人更幸福，你今天感恩了吗？</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('emotion6')">
+                <div class="mental-card-icon">🎭</div>
+                <h3>情绪ABC理论</h3>
+                <p>换个想法，就能换个情绪。</p>
+                <span class="mental-btn">点击学习 →</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">🤝 人际关系</h2>
+        <div class="mental-grid">
+            <div class="mental-card" onclick="openModal('relation1')">
+                <div class="mental-card-icon">👥</div>
+                <h3>与难缠客户相处</h3>
+                <p>用同理心化解冲突，把投诉变成机会。</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('relation2')">
+                <div class="mental-card-icon">👔</div>
+                <h3>与领导沟通技巧</h3>
+                <p>汇报工作有技巧，让领导看到你的价值。</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('relation3')">
+                <div class="mental-card-icon">💼</div>
+                <h3>同事关系经营</h3>
+                <p>既合作又不卷，职场关系轻松处。</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('relation4')">
+                <div class="mental-card-icon">🚪</div>
+                <h3>设立心理边界</h3>
+                <p>学会说"不"，不当职场老好人。</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('relation5')">
+                <div class="mental-card-icon">🗣️</div>
+                <h3>非暴力沟通</h3>
+                <p>好好说话，让沟通更高效。</p>
+                <span class="mental-btn">点击学习 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('relation6')">
+                <div class="mental-card-icon">🎁</div>
+                <h3>接受批评的心态</h3>
+                <p>批评是成长的礼物，学会欣然接受。</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">⚖️ 工作生活平衡</h2>
+        <div class="mental-grid">
+            <div class="mental-card" onclick="openModal('balance1')">
+                <div class="mental-card-icon">🏠</div>
+                <h3>下班后断开连接</h3>
+                <p>工作群消息，不再是24小时待命。</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('balance2')">
+                <div class="mental-card-icon">🎯</div>
+                <h3>找到工作的意义</h3>
+                <p>每一份工作都有价值，你的是什么呢？</p>
+                <span class="mental-btn">点击探索 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('balance3')">
+                <div class="mental-card-icon">🎨</div>
+                <h3>培养工作外爱好</h3>
+                <p>工作之外，还有诗和远方。</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('balance4')">
+                <div class="mental-card-icon">👨‍👩‍👧</div>
+                <h3>高效陪伴家人</h3>
+                <p>时间不在多，在于用心。</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('balance5')">
+                <div class="mental-card-icon">🏃</div>
+                <h3>运动是最好的减压</h3>
+                <p>每天30分钟，彻底释放压力。</p>
+                <span class="mental-btn">点击了解 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('balance6')">
+                <div class="mental-card-icon">📚</div>
+                <h3>持续学习成长</h3>
+                <p>成长让你更有掌控感。</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+        </div>
+
+        <h2 class="section-title">🌈 自我成长</h2>
+        <div class="mental-grid">
+            <div class="mental-card" onclick="openModal('growth1')">
+                <div class="mental-card-icon">⭐</div>
+                <h3>银行人的职业规划</h3>
+                <p>在银行发展，你有哪些可能？</p>
+                <span class="mental-btn">点击规划 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('growth2')">
+                <div class="mental-card-icon">💪</div>
+                <h3>建立自信心态</h3>
+                <p>相信自己能行，你就真的能行。</p>
+                <span class="mental-btn">点击培养 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('growth3')">
+                <div class="mental-card-icon">🔄</div>
+                <h3>接受不完美</h3>
+                <p>完美主义是进步的大敌。</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('growth4')">
+                <div class="mental-card-icon">🎯</div>
+                <h3>设定合理目标</h3>
+                <p>SMART原则，让目标更可行。</p>
+                <span class="mental-btn">点击学习 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('growth5')">
+                <div class="mental-card-icon">🏆</div>
+                <h3>庆祝每一个小进步</h3>
+                <p>别忘了给自己点赞！</p>
+                <span class="mental-btn">点击阅读 →</span>
+            </div>
+            <div class="mental-card" onclick="openModal('growth6')">
+                <div class="mental-card-icon">🌅</div>
+                <h3>做自己的人生主角</h3>
+                <p>你的人生，你做主。</p>
+                <span class="mental-btn">点击阅读 →</span>
             </div>
         </div>
 
@@ -175,16 +379,13 @@
         </div>
     </main>
 
-    <!-- 呼吸放松弹窗 -->
-    <div class="modal" id="breathingModal">
+    <!-- 弹窗 -->
+    <div class="modal" id="mentalModal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('breathingModal')">×</button>
-            <h3 style="text-align:center; color:#1a365d; margin-bottom:1rem;">3分钟呼吸放松法</h3>
-            <div class="breathing-circle" id="breathingCircle">吸气</div>
-            <p style="text-align:center; color:#718096;">跟随圆形呼吸，4秒吸气，7秒屏息，8秒呼气</p>
-            <div style="text-align:center; margin-top:1rem;">
-                <button class="mental-btn" onclick="startBreathing()" style="background:#1a365d; color:white; padding:0.8rem 2rem; border-radius:50px;">开始练习</button>
-            </div>
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-icon" id="modalIcon">💆</div>
+            <h2 id="modalTitle">标题</h2>
+            <div id="modalContent"></div>
         </div>
     </div>
 
@@ -193,24 +394,189 @@
     </footer>
 
     <script>
-        function openBreathingModal() { document.getElementById('breathingModal').classList.add('active'); }
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-        function showPositiveQuote() { alert('💪 正能量语录：\n\n"困难只是暂时的，坚持就是胜利。"'); }
-        function showSleepGuide() { alert('🌙 睡眠改善指南：\n\n1. 睡前1小时不看手机\n2. 保持卧室黑暗安静\n3. 固定作息时间\n4. 午后少喝咖啡'); }
-        function showExerciseGuide() { alert('🏃 办公室运动：\n\n1. 颈部旋转\n2. 肩部放松\n3. 腰部伸展\n4. 踮脚尖'); }
-        function showColleagueGuide() { alert('👥 同事关系建议：\n\n1. 尊重差异\n2. 主动沟通\n3. 乐于助人\n4. 保持边界'); }
-        function showBurnoutGuide() { alert('🎯 应对倦怠：\n\n1. 设定小目标\n2. 培养兴趣爱好\n3. 寻求支持\n4. 适当休息'); }
-        function showNapGuide() { alert('🍵 午休充电术：\n\n1. 午餐别太饱\n2. 控制在20分钟内\n3. 下午2点前完成\n4. 醒来后喝杯水'); }
+        const content = {
+            pressure1: {
+                icon: '💆',
+                title: '识别压力信号',
+                content: `
+                    <p>压力过大时，身体和心理都会发出警报。学会识别这些信号，及时调整状态。</p>
+                    <div class="modal-section">
+                        <h4>🔴 身体信号</h4>
+                        <ul>
+                            <li>头痛、肩颈酸痛</li>
+                            <li>睡眠质量下降</li>
+                            <li>食欲改变（暴饮暴食或没胃口）</li>
+                            <li>容易疲劳</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>🟡 情绪信号</h4>
+                        <ul>
+                            <li>莫名烦躁</li>
+                            <li>对工作失去热情</li>
+                            <li>容易发脾气</li>
+                            <li>负面想法增多</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>🟢 应对建议</h4>
+                        <ul>
+                            <li>保证充足睡眠</li>
+                            <li>每天运动30分钟</li>
+                            <li>和信任的人倾诉</li>
+                            <li>必要时寻求专业帮助</li>
+                        </ul>
+                    </div>
+                `
+            },
+            pressure2: {
+                icon: '🧘',
+                title: '5分钟呼吸放松法',
+                content: `
+                    <p>当你感到紧张或焦虑时，试试这个简单的呼吸练习。</p>
+                    <div class="modal-section">
+                        <h4>📋 步骤</h4>
+                        <ul>
+                            <li>找一个舒适的姿势坐好</li>
+                            <li>闭上眼睛或放松注视</li>
+                            <li>深吸一口气，数到4</li>
+                            <li>屏住呼吸，数到4</li>
+                            <li>慢慢呼气，数到6</li>
+                            <li>重复5-10次</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>💡 提示</h4>
+                        <p>可以在工位上进行，不会引起注意。感觉紧张时，随时都可以做。</p>
+                    </div>
+                `
+            },
+            pressure3: {
+                icon: '🎯',
+                title: '四象限时间管理',
+                content: `
+                    <p>把任务按重要性和紧急性分类，高效工作不焦虑。</p>
+                    <div class="modal-section">
+                        <h4>📊 四象限</h4>
+                        <ul>
+                            <li><b>第一象限</b>：重要且紧急 → 立即处理</li>
+                            <li><b>第二象限</b>：重要不紧急 → 计划处理</li>
+                            <li><b>第三象限</b>：紧急不重要 → 尽量委托</li>
+                            <li><b>第四象限</b>：不紧急不重要 → 减少或删除</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>💡 关键</h4>
+                        <p>把精力多放在第二象限（重要不紧急），可以预防第一象限任务越来越多。</p>
+                    </div>
+                `
+            },
+            emotion1: {
+                icon: '😤',
+                title: '愤怒管理技巧',
+                content: `
+                    <p>当愤怒来临时，不要压抑，也不要爆发，试试这些方法。</p>
+                    <div class="modal-section">
+                        <h4>🚿 立即降温</h4>
+                        <ul>
+                            <li>深呼吸10次</li>
+                            <li>离开现场（去洗手间）</li>
+                            <li>数到10再说话</li>
+                            <li>想象"暂停键"</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>💭 认知重构</h4>
+                        <p>问自己：这件事真的值得我这么生气吗？一年后这还重要吗？</p>
+                    </div>
+                `
+            },
+            relation1: {
+                icon: '👥',
+                title: '与难缠客户相处',
+                content: `
+                    <p>难缠的客户是挑战，也是提升服务能力的机会。</p>
+                    <div class="modal-section">
+                        <h4>🛡️ 应对策略</h4>
+                        <ul>
+                            <li>保持专业微笑</li>
+                            <li>先倾听，让客户发泄</li>
+                            <li>用"我理解您的心情"共情</li>
+                            <li>聚焦解决方案</li>
+                            <li>必要时寻求主管支持</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>💡 心态调整</h4>
+                        <p>客户的愤怒往往不是针对你，而是针对问题。把注意力放在解决问题上，而不是情绪上。</p>
+                    </div>
+                `
+            },
+            balance1: {
+                icon: '🏠',
+                title: '下班后断开连接',
+                content: `
+                    <p>工作群消息24小时轰炸？你有权享受下班时间。</p>
+                    <div class="modal-section">
+                        <h4>📵 断连技巧</h4>
+                        <ul>
+                            <li>设定固定查看消息时间（如早中晚各一次）</li>
+                            <li>关闭非必要的群通知</li>
+                            <li>下班后把工作APP移到屏幕外</li>
+                            <li>周末设定"无工作日"</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>💬 沟通话术</h4>
+                        <p>"下班后我有私人安排，紧急事务请联系我手机。"</p>
+                    </div>
+                `
+            }
+        };
+
+        function openModal(key) {
+            const modal = document.getElementById('mentalModal');
+            const data = content[key] || {
+                icon: '💡',
+                title: '更多内容持续更新中...',
+                content: '<p>感谢关注，我们会陆续更新更多心理健康内容。如有需要，可以联系人力资源部获取更多支持。</p>'
+            };
+            document.getElementById('modalIcon').textContent = data.icon;
+            document.getElementById('modalTitle').textContent = data.title;
+            document.getElementById('modalContent').innerHTML = data.content;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('mentalModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('mentalModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
 
         let breathingInterval;
         function startBreathing() {
             const circle = document.getElementById('breathingCircle');
-            circle.classList.add('inhale');
-            circle.textContent = '吸气...';
-            setTimeout(() => {
-                circle.classList.remove('inhale');
-                circle.classList.add('exhale');
-                circle.textContent = '呼气...';
+            const text = document.getElementById('breathingText');
+            let phase = 0;
+            
+            if (breathingInterval) clearInterval(breathingInterval);
+            
+            breathingInterval = setInterval(() => {
+                if (phase % 3 === 0) {
+                    circle.className = 'breathing-circle inhale';
+                    text.textContent = '吸气...';
+                } else if (phase % 3 === 1) {
+                    circle.className = 'breathing-circle';
+                    text.textContent = '屏住...';
+                } else {
+                    circle.className = 'breathing-circle exhale';
+                    text.textContent = '呼气...';
+                }
+                phase++;
             }, 4000);
         }
     </script>
