@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>营销锦囊 - 银YOUNG空间</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --primary-dark: #0d1f3c;
+            --accent: #ed8936;
+            --accent-light: #f6ad55;
+            --accent-soft: #fbd38d;
+            --bg-main: #f7fafc;
+            --shadow-soft: 0 4px 20px rgba(26, 54, 93, 0.08);
+            --shadow-hover: 0 12px 40px rgba(26, 54, 93, 0.15);
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-main);
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(26, 54, 93, 0.05);
+        }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; font-weight: 700; }
+        .logo-text { font-family: 'Noto Serif SC', serif; font-size: 1.5rem; font-weight: 600; color: var(--primary); }
+        .logo-text span { color: var(--accent); }
+        .nav-links { display: flex; gap: 0.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: #4a5568; padding: 0.6rem 1.2rem; border-radius: var(--radius-sm); font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; }
+        .nav-links a:hover { background: var(--primary); color: white; }
+        .nav-links a.active { background: var(--primary); color: white; }
+        .nav-cta { background: var(--accent) !important; color: white !important; }
+
+        .page-header {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%);
+            color: white;
+            text-align: center;
+        }
+        .page-header-content { max-width: 800px; margin: 0 auto; }
+        .page-badge { display: inline-block; background: var(--accent); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1rem; }
+        .page-header h1 { font-family: 'Noto Serif SC', serif; font-size: 3rem; margin-bottom: 1rem; }
+        .page-header p { font-size: 1.2rem; opacity: 0.9; }
+
+        .content { padding: 4rem 2rem; max-width: 1400px; margin: 0 auto; }
+
+        .marketing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .marketing-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: var(--radius-lg); padding: 2rem; color: white; position: relative; overflow: hidden; }
+        .marketing-card::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(237, 137, 54, 0.3) 0%, transparent 70%); border-radius: 50%; }
+        .marketing-card-number { font-family: 'Noto Serif SC', serif; font-size: 3rem; font-weight: 700; color: var(--accent); opacity: 0.6; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .marketing-card h3 { font-size: 1.3rem; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .marketing-card p { font-size: 0.95rem; opacity: 0.85; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+        .marketing-tag { display: inline-block; background: rgba(237, 137, 54, 0.3); padding: 0.3rem 0.7rem; border-radius: 50px; font-size: 0.75rem; margin-right: 0.4rem; margin-bottom: 0.4rem; position: relative; z-index: 1; }
+
+        .accordion { margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 1rem; position: relative; z-index: 1; }
+        .accordion-item { margin-bottom: 0.8rem; }
+        .accordion-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 0.5rem 0; font-size: 0.9rem; }
+        .accordion-header::after { content: '+'; font-size: 1.2rem; }
+        .accordion-item.active .accordion-header::after { content: '-'; }
+        .accordion-item.active .accordion-content { display: block; }
+        .accordion-content { display: none; padding: 0.8rem; background: rgba(255,255,255,0.1); border-radius: var(--radius-sm); font-size: 0.85rem; margin-top: 0.5rem; }
+
+        .back-home { text-align: center; margin-top: 3rem; }
+        .back-home-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: white; color: var(--primary); border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
+        .back-home-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+
+        .footer { background: var(--primary-dark); color: white; padding: 4rem 2rem 2rem; text-align: center; }
+        .footer p { opacity: 0.7; font-size: 0.95rem; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .marketing-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">Y</div>
+                <div class="logo-text">银<span>YOUNG</span>空间</div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="knowledge.html">知识库</a></li>
+                <li><a href="marketing.html" class="active">营销锦囊</a></li>
+                <li><a href="seniors.html">前辈说</a></li>
+                <li><a href="mental.html">心灵驿站</a></li>
+                <li><a href="relax.html" class="nav-cta">轻松一刻</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="page-header-content">
+            <div class="page-badge">💡 营销技巧与案例</div>
+            <h1>营销锦囊</h1>
+            <p>从获客到转化，让营销变得简单</p>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="marketing-grid">
+            <div class="marketing-card">
+                <div class="marketing-card-number">1</div>
+                <h3>客户获取技巧</h3>
+                <p>如何吸引新客户，扩大客户基础。</p>
+                <div class="marketing-tag">获客</div><div class="marketing-tag">引流</div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">网点获客</div>
+                        <div class="accordion-content">
+                            <p><strong>🌟 网点自然获客</strong><br>
+                            - 热情服务，让客户愿意介绍朋友<br>
+                            - 举办小型活动，如理财讲座<br>
+                            - 优化网点动线，让客户停留更久</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">外拓获客</div>
+                        <div class="accordion-content">
+                            <p><strong>🌟 外拓技巧</strong><br>
+                            - 社区营销：与居委会合作<br>
+                            - 企业团办：代发工资客户<br>
+                            - 商户拓展：扫码支付商户</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">2</div>
+                <h3>产品推荐话术</h3>
+                <p>不同产品的推荐技巧和话术模板。</p>
+                <div class="marketing-tag">话术</div><div class="marketing-tag">产品</div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">理财推荐</div>
+                        <div class="accordion-content">
+                            <p><strong>🌟 理财话术</strong><br>
+                            "根据您的情况，我推荐这款理财，收益稳定，风险适中，非常适合您这样追求稳健的投资者。"</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">存款产品</div>
+                        <div class="accordion-content">
+                            <p><strong>🌟 存款话术</strong><br>
+                            "我们有定期存款和大额存单，利率比普通储蓄高，而且保本保息，非常安全。"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">3</div>
+                <h3>客户维护策略</h3>
+                <p>如何留住客户，提高客户粘性。</p>
+                <div class="marketing-tag">维护</div><div class="marketing-tag">留存</div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">定期联系</div>
+                        <div class="accordion-content">
+                            <p><strong>🌟 联系频率</strong><br>
+                            - 重点客户：每周一次<br>
+                            - 普通客户：每月一次<br>
+                            - 产品到期前：提前7天联系</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">4</div>
+                <h3>活动营销设计</h3>
+                <p>如何策划一场成功的营销活动。</p>
+                <div class="marketing-tag">活动</div><div class="marketing-tag">策划</div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">节日营销</div>
+                        <div class="accordion-content">
+                            <p><strong>🌟 节日活动示例</strong><br>
+                            - 春节：存款送春联<br>
+                            - 端午节：粽情好礼<br>
+                            - 中秋节：月饼团购优惠</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">5</div>
+                <h3>异议处理技巧</h3>
+                <p>客户有顾虑？教你巧妙化解。</p>
+                <div class="marketing-tag">异议</div><div class="marketing-tag">处理</div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">价格异议</div>
+                        <div class="accordion-content">
+                            <p><strong>🌟 处理方法</strong><br>
+                            "确实比别的产品略高，但这款产品的优势在于..."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">6</div>
+                <h3>交叉销售技巧</h3>
+                <p>一个客户=N个产品，提升客户价值。</p>
+                <div class="marketing-tag">交叉</div><div class="marketing-tag">价值</div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">销售漏斗</div>
+                        <div class="accordion-content">
+                            <p><strong>🌟 四步提升法</strong><br>
+                            1. 基础账户（借记卡）<br>
+                            2. 支付工具（信用卡）<br>
+                            3. 理财投资（理财、基金）<br>
+                            4. 贷款融资（消费贷）</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-home">
+            <a href="index.html" class="back-home-btn">← 返回首页</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>银YOUNG空间 · 银行青年的成长加油站</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', function() {
+                this.parentElement.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
