@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心灵驿站 - 银YOUNG空间</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #ed8936;
+            --bg-main: #f7fafc;
+            --shadow-soft: 0 4px 20px rgba(26, 54, 93, 0.08);
+            --shadow-hover: 0 12px 40px rgba(26, 54, 93, 0.15);
+            --radius-lg: 20px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--bg-main);
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; font-weight: 700; }
+        .logo-text { font-size: 1.5rem; font-weight: 600; color: var(--primary); }
+        .logo-text span { color: var(--accent); }
+        .nav-links { display: flex; gap: 0.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: #4a5568; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; }
+        .nav-links a:hover { background: var(--primary); color: white; }
+        .nav-links a.active { background: var(--primary); color: white; }
+        .nav-cta { background: var(--accent) !important; color: white !important; }
+
+        .page-header {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+            text-align: center;
+        }
+        .page-header-content { max-width: 800px; margin: 0 auto; }
+        .page-badge { display: inline-block; background: var(--accent); color: white; padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1rem; }
+        .page-header h1 { font-size: 3rem; color: var(--primary); margin-bottom: 1rem; }
+        .page-header p { font-size: 1.2rem; color: #718096; }
+
+        .content { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+
+        .mental-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .mental-card { background: linear-gradient(135deg, #fff 0%, #f0f4ff 100%); border-radius: var(--radius-lg); padding: 2rem; transition: all 0.3s ease; }
+        .mental-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        .mental-card-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+        .mental-card h3 { font-size: 1.2rem; color: #1a202c; margin-bottom: 0.8rem; }
+        .mental-card p { font-size: 0.95rem; color: #718096; margin-bottom: 1.5rem; }
+        .mental-btn { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-weight: 600; cursor: pointer; border: none; background: none; font-size: 1rem; }
+        .mental-btn:hover { color: var(--accent); gap: 0.8rem; }
+
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; }
+        .modal.active { display: flex; }
+        .modal-content { background: white; border-radius: var(--radius-lg); padding: 2.5rem; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; }
+        .modal-close { position: absolute; top: 1rem; right: 1rem; width: 30px; height: 30px; border-radius: 50%; background: #eee; border: none; cursor: pointer; font-size: 1.2rem; }
+        .breathing-circle { width: 150px; height: 150px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); margin: 2rem auto; transition: transform 4s ease-in-out; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; }
+        .breathing-circle.inhale { transform: scale(1.3); }
+        .breathing-circle.exhale { transform: scale(1); }
+
+        .back-home { text-align: center; margin-top: 3rem; }
+        .back-home-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: var(--primary); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
+        .back-home-btn:hover { transform: translateY(-3px); }
+
+        .footer { background: #0d1f3c; color: white; padding: 4rem 2rem 2rem; text-align: center; }
+        .footer p { opacity: 0.7; font-size: 0.95rem; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mental-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">Y</div>
+                <div class="logo-text">银<span>YOUNG</span>空间</div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="knowledge.html">知识库</a></li>
+                <li><a href="marketing.html">营销锦囊</a></li>
+                <li><a href="seniors.html">前辈说</a></li>
+                <li><a href="mental.html" class="active">心灵驿站</a></li>
+                <li><a href="relax.html" class="nav-cta">轻松一刻</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="page-header-content">
+            <div class="page-badge">🧘 身心调适指南</div>
+            <h1>心灵驿站</h1>
+            <p>累了，就来歇一歇</p>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="mental-grid">
+            <div class="mental-card">
+                <div class="mental-card-icon">🧘</div>
+                <h3>3分钟呼吸放松法</h3>
+                <p>柜台前被客户气到了？试试这个，快速平复情绪的小技巧。</p>
+                <button class="mental-btn" onclick="openBreathingModal()">开始练习 →</button>
+            </div>
+            <div class="mental-card">
+                <div class="mental-card-icon">📝</div>
+                <h3>职场情绪日记</h3>
+                <p>记录每天的情绪变化，发现规律，更好地管理自己。</p>
+                <button class="mental-btn" onclick="openDiaryModal()">开始记录 →</button>
+            </div>
+            <div class="mental-card">
+                <div class="mental-card-icon">🎧</div>
+                <h3>减压音频合集</h3>
+                <p>轻音乐、白噪音、助眠冥想，上班路上、午休时都能听。</p>
+                <button class="mental-btn" onclick="openAudioModal()">立即收听 →</button>
+            </div>
+            <div class="mental-card">
+                <div class="mental-card-icon">💪</div>
+                <h3>正能量语录</h3>
+                <p>每天一句正能量，陪你度过艰难时刻。</p>
+                <button class="mental-btn" onclick="showPositiveQuote()">获取鼓励 →</button>
+            </div>
+            <div class="mental-card">
+                <div class="mental-card-icon">🌙</div>
+                <h3>睡眠改善指南</h3>
+                <p>银行人常见的睡眠问题及改善方法。</p>
+                <button class="mental-btn" onclick="showSleepGuide()">查看指南 →</button>
+            </div>
+            <div class="mental-card">
+                <div class="mental-card-icon">🏃</div>
+                <h3>工作与运动</h3>
+                <p>久坐银行的你，需要这些简单运动来放松。</p>
+                <button class="mental-btn" onclick="showExerciseGuide()">获取方案 →</button>
+            </div>
+            <div class="mental-card">
+                <div class="mental-card-icon">👥</div>
+                <h3>同事关系处理</h3>
+                <p>如何与不同性格的同事相处，构建和谐团队。</p>
+                <button class="mental-btn" onclick="showColleagueGuide()">查看建议 →</button>
+            </div>
+            <div class="mental-card">
+                <div class="mental-card-icon">🎯</div>
+                <h3>职业倦怠应对</h3>
+                <p>当工作失去新鲜感，如何重新找到动力？</p>
+                <button class="mental-btn" onclick="showBurnoutGuide()">获取建议 →</button>
+            </div>
+            <div class="mental-card">
+                <div class="mental-card-icon">🍵</div>
+                <h3>午休充电术</h3>
+                <p>如何利用午休时间高效恢复精力，下午不再犯困。</p>
+                <button class="mental-btn" onclick="showNapGuide()">获取技巧 →</button>
+            </div>
+        </div>
+
+        <div class="back-home">
+            <a href="index.html" class="back-home-btn">← 返回首页</a>
+        </div>
+    </main>
+
+    <!-- 呼吸放松弹窗 -->
+    <div class="modal" id="breathingModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('breathingModal')">×</button>
+            <h3 style="text-align:center; color:#1a365d; margin-bottom:1rem;">3分钟呼吸放松法</h3>
+            <div class="breathing-circle" id="breathingCircle">吸气</div>
+            <p style="text-align:center; color:#718096;">跟随圆形呼吸，4秒吸气，7秒屏息，8秒呼气</p>
+            <div style="text-align:center; margin-top:1rem;">
+                <button class="mental-btn" onclick="startBreathing()" style="background:#1a365d; color:white; padding:0.8rem 2rem; border-radius:50px;">开始练习</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>银YOUNG空间 · 银行青年的成长加油站</p>
+    </footer>
+
+    <script>
+        function openBreathingModal() { document.getElementById('breathingModal').classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        function showPositiveQuote() { alert('💪 正能量语录：\n\n"困难只是暂时的，坚持就是胜利。"'); }
+        function showSleepGuide() { alert('🌙 睡眠改善指南：\n\n1. 睡前1小时不看手机\n2. 保持卧室黑暗安静\n3. 固定作息时间\n4. 午后少喝咖啡'); }
+        function showExerciseGuide() { alert('🏃 办公室运动：\n\n1. 颈部旋转\n2. 肩部放松\n3. 腰部伸展\n4. 踮脚尖'); }
+        function showColleagueGuide() { alert('👥 同事关系建议：\n\n1. 尊重差异\n2. 主动沟通\n3. 乐于助人\n4. 保持边界'); }
+        function showBurnoutGuide() { alert('🎯 应对倦怠：\n\n1. 设定小目标\n2. 培养兴趣爱好\n3. 寻求支持\n4. 适当休息'); }
+        function showNapGuide() { alert('🍵 午休充电术：\n\n1. 午餐别太饱\n2. 控制在20分钟内\n3. 下午2点前完成\n4. 醒来后喝杯水'); }
+
+        let breathingInterval;
+        function startBreathing() {
+            const circle = document.getElementById('breathingCircle');
+            circle.classList.add('inhale');
+            circle.textContent = '吸气...';
+            setTimeout(() => {
+                circle.classList.remove('inhale');
+                circle.classList.add('exhale');
+                circle.textContent = '呼气...';
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
