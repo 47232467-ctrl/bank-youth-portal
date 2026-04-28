@@ -16,6 +16,10 @@
             --accent-light: #f6ad55;
             --accent-soft: #fbd38d;
             --bg-main: #f7fafc;
+            --bg-card: #ffffff;
+            --text-dark: #1a202c;
+            --text-body: #4a5568;
+            --text-light: #718096;
             --shadow-soft: 0 4px 20px rgba(26, 54, 93, 0.08);
             --shadow-hover: 0 12px 40px rgba(26, 54, 93, 0.15);
             --radius-lg: 20px;
@@ -27,9 +31,10 @@
 
         body {
             font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-main);
-            color: #4a5568;
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            color: var(--text-body);
             line-height: 1.7;
+            min-height: 100vh;
         }
 
         .navbar {
@@ -45,7 +50,7 @@
         .logo-text { font-family: 'Noto Serif SC', serif; font-size: 1.5rem; font-weight: 600; color: var(--primary); }
         .logo-text span { color: var(--accent); }
         .nav-links { display: flex; gap: 0.5rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: #4a5568; padding: 0.6rem 1.2rem; border-radius: var(--radius-sm); font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; }
+        .nav-links a { text-decoration: none; color: var(--text-body); padding: 0.6rem 1.2rem; border-radius: var(--radius-sm); font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; }
         .nav-links a:hover { background: var(--primary); color: white; }
         .nav-links a.active { background: var(--primary); color: white; }
         .nav-cta { background: var(--accent) !important; color: white !important; }
@@ -55,40 +60,68 @@
             background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%);
             color: white;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        .page-header-content { max-width: 800px; margin: 0 auto; }
+        .page-header::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(237, 137, 54, 0.3) 0%, transparent 70%); border-radius: 50%; }
+        .page-header-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
         .page-badge { display: inline-block; background: var(--accent); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1rem; }
         .page-header h1 { font-family: 'Noto Serif SC', serif; font-size: 3rem; margin-bottom: 1rem; }
         .page-header p { font-size: 1.2rem; opacity: 0.9; }
 
         .content { padding: 4rem 2rem; max-width: 1400px; margin: 0 auto; }
 
-        .marketing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .marketing-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: var(--radius-lg); padding: 2rem; color: white; position: relative; overflow: hidden; }
-        .marketing-card::before { content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(237, 137, 54, 0.3) 0%, transparent 70%); border-radius: 50%; }
-        .marketing-card-number { font-family: 'Noto Serif SC', serif; font-size: 3rem; font-weight: 700; color: var(--accent); opacity: 0.6; margin-bottom: 1rem; position: relative; z-index: 1; }
-        .marketing-card h3 { font-size: 1.3rem; margin-bottom: 1rem; position: relative; z-index: 1; }
-        .marketing-card p { font-size: 0.95rem; opacity: 0.85; margin-bottom: 1.5rem; position: relative; z-index: 1; }
-        .marketing-tag { display: inline-block; background: rgba(237, 137, 54, 0.3); padding: 0.3rem 0.7rem; border-radius: 50px; font-size: 0.75rem; margin-right: 0.4rem; margin-bottom: 0.4rem; position: relative; z-index: 1; }
+        .section-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.5rem;
+            color: white;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+        .section-title:first-of-type { margin-top: 0; }
 
-        .accordion { margin-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 1rem; position: relative; z-index: 1; }
-        .accordion-item { margin-bottom: 0.8rem; }
-        .accordion-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 0.5rem 0; font-size: 0.9rem; }
-        .accordion-header::after { content: '+'; font-size: 1.2rem; }
+        .marketing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .marketing-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .marketing-card::before { content: ''; position: absolute; top: -50%; right: -20%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(237, 137, 54, 0.2) 0%, transparent 70%); border-radius: 50%; }
+        .marketing-card:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-5px); }
+        .marketing-card-number { font-family: 'Noto Serif SC', serif; font-size: 2.5rem; font-weight: 700; color: var(--accent); opacity: 0.6; margin-bottom: 0.5rem; position: relative; z-index: 1; }
+        .marketing-card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; position: relative; z-index: 1; }
+        .marketing-card p { font-size: 0.9rem; opacity: 0.85; margin-bottom: 1rem; position: relative; z-index: 1; }
+        .marketing-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; position: relative; z-index: 1; }
+        .marketing-tag { display: inline-block; background: rgba(237, 137, 54, 0.3); padding: 0.2rem 0.5rem; border-radius: 50px; font-size: 0.7rem; }
+
+        .accordion { margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 1rem; position: relative; z-index: 1; }
+        .accordion-item { margin-bottom: 0.5rem; }
+        .accordion-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 0.4rem 0; font-size: 0.85rem; opacity: 0.9; }
+        .accordion-header::after { content: '+'; font-size: 1rem; }
         .accordion-item.active .accordion-header::after { content: '-'; }
         .accordion-item.active .accordion-content { display: block; }
-        .accordion-content { display: none; padding: 0.8rem; background: rgba(255,255,255,0.1); border-radius: var(--radius-sm); font-size: 0.85rem; margin-top: 0.5rem; }
+        .accordion-content { display: none; padding: 0.6rem; background: rgba(255,255,255,0.08); border-radius: var(--radius-sm); font-size: 0.8rem; margin-top: 0.3rem; line-height: 1.6; }
 
-        .back-home { text-align: center; margin-top: 3rem; }
+        .back-home { text-align: center; margin-top: 4rem; }
         .back-home-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: white; color: var(--primary); border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
         .back-home-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 
-        .footer { background: var(--primary-dark); color: white; padding: 4rem 2rem 2rem; text-align: center; }
+        .footer { background: rgba(13, 31, 60, 0.9); color: white; padding: 4rem 2rem 2rem; text-align: center; }
         .footer p { opacity: 0.7; font-size: 0.95rem; }
 
+        @media (max-width: 1024px) {
+            .marketing-grid { grid-template-columns: repeat(2, 1fr); }
+        }
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .menu-toggle { display: flex; }
             .marketing-grid { grid-template-columns: 1fr; }
             .page-header h1 { font-size: 2rem; }
         }
@@ -114,126 +147,528 @@
 
     <header class="page-header">
         <div class="page-header-content">
-            <div class="page-badge">💡 营销技巧与案例</div>
-            <h1>营销锦囊</h1>
-            <p>从获客到转化，让营销变得简单</p>
+            <div class="page-badge">💡 60+营销方案</div>
+            <h1>营 销 锦 囊</h1>
+            <p>从节日营销到场景营销，让你的业绩蹭蹭往上涨</p>
         </div>
     </header>
 
     <main class="content">
+        <h2 class="section-title">🎊 节日营销方案</h2>
         <div class="marketing-grid">
             <div class="marketing-card">
-                <div class="marketing-card-number">1</div>
-                <h3>客户获取技巧</h3>
-                <p>如何吸引新客户，扩大客户基础。</p>
-                <div class="marketing-tag">获客</div><div class="marketing-tag">引流</div>
+                <div class="marketing-card-number">01</div>
+                <h3>元旦开门红营销</h3>
+                <p>新年第一天，用好彩头吸引客户。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">节日营销</span>
+                    <span class="marketing-tag">开门红</span>
+                </div>
                 <div class="accordion">
                     <div class="accordion-item">
-                        <div class="accordion-header">网点获客</div>
-                        <div class="accordion-content">
-                            <p><strong>🌟 网点自然获客</strong><br>
-                            - 热情服务，让客户愿意介绍朋友<br>
-                            - 举办小型活动，如理财讲座<br>
-                            - 优化网点动线，让客户停留更久</p>
-                        </div>
+                        <div class="accordion-header">营销话术</div>
+                        <div class="accordion-content">"新年新气象，我们特别推出了开门红专属利率，比平时高不少呢！存一年定期，送您一个开门红的好彩头！"</div>
                     </div>
                     <div class="accordion-item">
-                        <div class="accordion-header">外拓获客</div>
-                        <div class="accordion-content">
-                            <p><strong>🌟 外拓技巧</strong><br>
-                            - 社区营销：与居委会合作<br>
-                            - 企业团办：代发工资客户<br>
-                            - 商户拓展：扫码支付商户</p>
-                        </div>
+                        <div class="accordion-header">产品推荐</div>
+                        <div class="accordion-content">大额存单、节庆专属理财、新年定投计划</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">活动设计</div>
+                        <div class="accordion-content">开门红礼包（春联+福字+红包袋）、存款抽红包、积分翻倍</div>
                     </div>
                 </div>
             </div>
             <div class="marketing-card">
-                <div class="marketing-card-number">2</div>
-                <h3>产品推荐话术</h3>
-                <p>不同产品的推荐技巧和话术模板。</p>
-                <div class="marketing-tag">话术</div><div class="marketing-tag">产品</div>
+                <div class="marketing-card-number">02</div>
+                <h3>春节揽储大战</h3>
+                <p>年终奖金高峰，锁定客户资金。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">春节</span>
+                    <span class="marketing-tag">揽储</span>
+                </div>
                 <div class="accordion">
                     <div class="accordion-item">
-                        <div class="accordion-header">理财推荐</div>
-                        <div class="accordion-content">
-                            <p><strong>🌟 理财话术</strong><br>
-                            "根据您的情况，我推荐这款理财，收益稳定，风险适中，非常适合您这样追求稳健的投资者。"</p>
-                        </div>
+                        <div class="accordion-header">营销话术</div>
+                        <div class="accordion-content">"辛苦一年了，这笔钱放哪儿？放我们这儿，安心又放心，还有新年专属利率，给您的奖金找个好去处！"</div>
                     </div>
                     <div class="accordion-item">
-                        <div class="accordion-header">存款产品</div>
-                        <div class="accordion-content">
-                            <p><strong>🌟 存款话术</strong><br>
-                            "我们有定期存款和大额存单，利率比普通储蓄高，而且保本保息，非常安全。"</p>
-                        </div>
+                        <div class="accordion-header">产品推荐</div>
+                        <div class="accordion-content">春节限定存款、节后理财衔接、压岁钱专属账户</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">活动设计</div>
+                        <div class="accordion-content">存定期送年货礼盒、抽新年红包、专属利率上浮</div>
                     </div>
                 </div>
             </div>
             <div class="marketing-card">
-                <div class="marketing-card-number">3</div>
-                <h3>客户维护策略</h3>
-                <p>如何留住客户，提高客户粘性。</p>
-                <div class="marketing-tag">维护</div><div class="marketing-tag">留存</div>
+                <div class="marketing-card-number">03</div>
+                <h3>情人节甜蜜营销</h3>
+                <p>抓住情侣市场，打造浪漫金融。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">情人节</span>
+                    <span class="marketing-tag">甜蜜</span>
+                </div>
                 <div class="accordion">
                     <div class="accordion-item">
-                        <div class="accordion-header">定期联系</div>
-                        <div class="accordion-content">
-                            <p><strong>🌟 联系频率</strong><br>
-                            - 重点客户：每周一次<br>
-                            - 普通客户：每月一次<br>
-                            - 产品到期前：提前7天联系</p>
-                        </div>
+                        <div class="accordion-header">营销话术</div>
+                        <div class="accordion-content">"给TA存一个浪漫的未来，一起努力实现小目标！我们有情侣卡，存钱有收益，还能共享积分！"</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">产品推荐</div>
+                        <div class="accordion-content">情侣卡、婚礼筹备贷款、蜜月旅行分期</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">活动设计</div>
+                        <div class="accordion-content">情侣开户双倍积分、甜蜜存单（恋爱基金）、浪漫礼品</div>
                     </div>
                 </div>
             </div>
             <div class="marketing-card">
-                <div class="marketing-card-number">4</div>
-                <h3>活动营销设计</h3>
-                <p>如何策划一场成功的营销活动。</p>
-                <div class="marketing-tag">活动</div><div class="marketing-tag">策划</div>
+                <div class="marketing-card-number">04</div>
+                <h3>三八女神节营销</h3>
+                <p>关爱女性客户，打造贴心形象。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">女神节</span>
+                    <span class="marketing-tag">女性</span>
+                </div>
                 <div class="accordion">
                     <div class="accordion-item">
-                        <div class="accordion-header">节日营销</div>
-                        <div class="accordion-content">
-                            <p><strong>🌟 节日活动示例</strong><br>
-                            - 春节：存款送春联<br>
-                            - 端午节：粽情好礼<br>
-                            - 中秋节：月饼团购优惠</p>
-                        </div>
+                        <div class="accordion-header">营销话术</div>
+                        <div class="accordion-content">"女神节到了，送自己一份保障吧！我们有专为女性设计的理财和保险，关爱自己，从一份保单开始！"</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">产品推荐</div>
+                        <div class="accordion-content">女性专属理财、妇科保险、重疾险、养老规划</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">活动设计</div>
+                        <div class="accordion-content">女神专属礼盒、健康讲座、免费齿科检查</div>
                     </div>
                 </div>
             </div>
             <div class="marketing-card">
-                <div class="marketing-card-number">5</div>
-                <h3>异议处理技巧</h3>
-                <p>客户有顾虑？教你巧妙化解。</p>
-                <div class="marketing-tag">异议</div><div class="marketing-tag">处理</div>
+                <div class="marketing-card-number">05</div>
+                <h3>母亲节感恩营销</h3>
+                <p>感恩母爱，推广养老和保险。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">母亲节</span>
+                    <span class="marketing-tag">养老</span>
+                </div>
                 <div class="accordion">
                     <div class="accordion-item">
-                        <div class="accordion-header">价格异议</div>
-                        <div class="accordion-content">
-                            <p><strong>🌟 处理方法</strong><br>
-                            "确实比别的产品略高，但这款产品的优势在于..."</p>
-                        </div>
+                        <div class="accordion-header">营销话术</div>
+                        <div class="accordion-content">"妈妈辛苦了，给她存一份养老规划吧！我们有专属的养老理财产品，让妈妈的晚年生活更有保障！"</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">产品推荐</div>
+                        <div class="accordion-content">养老理财、终身寿险、长期护理险</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">活动设计</div>
+                        <div class="accordion-content">康乃馨送妈妈、养老规划讲座、健康体检套餐</div>
                     </div>
                 </div>
             </div>
             <div class="marketing-card">
-                <div class="marketing-card-number">6</div>
-                <h3>交叉销售技巧</h3>
-                <p>一个客户=N个产品，提升客户价值。</p>
-                <div class="marketing-tag">交叉</div><div class="marketing-tag">价值</div>
+                <div class="marketing-card-number">06</div>
+                <h3>父亲节温情营销</h3>
+                <p>感恩父爱，推广稳健理财。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">父亲节</span>
+                    <span class="marketing-tag">稳健</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">营销话术</div>
+                        <div class="accordion-content">"父爱如山，给爸爸存一份稳健的养老金吧！安全、省心，让爸爸的钱生钱！"</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">产品推荐</div>
+                        <div class="accordion-content">国债、大额存单、稳健型理财</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">活动设计</div>
+                        <div class="accordion-content">领带/皮带礼品、父亲节茶具套装、免费体检</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">🏠 场景营销方案</h2>
+        <div class="marketing-grid">
+            <div class="marketing-card">
+                <div class="marketing-card-number">07</div>
+                <h3>新婚燕尔营销</h3>
+                <p>抓住新婚客户，打造终身价值。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">新婚</span>
+                    <span class="marketing-tag">场景</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">营销话术</div>
+                        <div class="accordion-content">"恭喜恭喜！新婚新开始，我们有专门的新婚礼包，存款、贷款、信用卡一站式服务，帮你们打理好小家庭的钱袋子！"</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">产品推荐</div>
+                        <div class="accordion-content">新婚存款账户、装修贷款、联名信用卡</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">活动设计</div>
+                        <div class="accordion-content">新婚大礼包、婚纱照优惠、婚庆分期免息</div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">08</div>
+                <h3>乔迁新居营销</h3>
+                <p>新房装修一站式金融服务。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">乔迁</span>
+                    <span class="marketing-tag">装修贷</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">营销话术</div>
+                        <div class="accordion-content">"新房子到手了，装修资金够不够？我们有装修分期，额度高、利率低，最长可以分5年还，还送您装修大礼包！"</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">产品推荐</div>
+                        <div class="accordion-content">装修贷款、住房贷款、房屋保险</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">活动设计</div>
+                        <div class="accordion-content">装修分期费率优惠、家电优惠券、装修公司对接</div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">09</div>
+                <h3>有车一族营销</h3>
+                <p>车贷+信用卡+ETC全套服务。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">车贷</span>
+                    <span class="marketing-tag">有车族</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">营销话术</div>
+                        <div class="accordion-content">"恭喜提车！我们有专属的车主信用卡，加油打折、洗车优惠、免费道路救援，一卡搞定！还有车贷利率优惠哦！"</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">产品推荐</div>
+                        <div class="accordion-content">汽车贷款、车主信用卡、ETC</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">活动设计</div>
+                        <div class="accordion-content">加油满减、洗车优惠券、免费安装ETC</div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">10</div>
+                <h3>家有儿女营销</h3>
+                <p>儿童教育金，培养未来客户。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">儿童</span>
+                    <span class="marketing-tag">教育金</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">营销话术</div>
+                        <div class="accordion-content">"孩子是未来的希望，从小培养财商很重要！我们有专门的教育金规划，每月存一点，大学时就是一笔可观的资金啦！"</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">产品推荐</div>
+                        <div class="accordion-content">儿童银行卡、教育金保险、基金定投</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">活动设计</div>
+                        <div class="accordion-content">小小银行家体验活动、玩具礼物、绘本赠送</div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">11</div>
+                <h3>退休养老营销</h3>
+                <p>抓住银发市场，推广稳健产品。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">养老</span>
+                    <span class="marketing-tag">银发</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">营销话术</div>
+                        <div class="accordion-content">"辛苦一辈子，该享享福了！我们有专门的养老存款，安全稳健，还有国债、大额存单，让您的养老金稳稳增值！"</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">产品推荐</div>
+                        <div class="accordion-content">养老储蓄、国债、大额存单、长期护理险</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">活动设计</div>
+                        <div class="accordion-content">老年大学课程、健康讲座、旅游优惠</div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">12</div>
+                <h3>年终奖营销</h3>
+                <p>锁定年终奖金，年前必争之战。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">年终奖</span>
+                    <span class="marketing-tag">年前</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">营销话术</div>
+                        <div class="accordion-content">"辛苦一年拿了年终奖，怎么打理？我们有年终专属存款，利率上浮还有礼品相送，早来早得哦！"</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">产品推荐</div>
+                        <div class="accordion-content">年终专属存款、短期理财、基金组合</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">活动设计</div>
+                        <div class="accordion-content">年前存款有礼、年终理财沙龙、礼品兑换</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">🎯 客户维护技巧</h2>
+        <div class="marketing-grid">
+            <div class="marketing-card">
+                <div class="marketing-card-number">13</div>
+                <h3>到期客户挽留</h3>
+                <p>产品到期前15天开始跟进。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">挽留</span>
+                    <span class="marketing-tag">到期</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">营销话术</div>
+                        <div class="accordion-content">"您好张先生，您在我行的XX产品下个月就到期了，现在有一款专属续接产品，利率很优惠，要不要了解一下？"</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">跟进时机</div>
+                        <div class="accordion-content">到期前15天首次联系、7天再次确认、3天最后挽留</div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">14</div>
+                <h3>睡眠客户激活</h3>
+                <p>唤醒沉睡客户，提升活跃度。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">激活</span>
+                    <span class="marketing-tag">睡眠户</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">营销话术</div>
+                        <div class="accordion-content">"您好，我们是银行的老朋友了！最近有一个专属活动，专门回馈像您这样的老客户，您可以过来了解一下！"</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">激励措施</div>
+                        <div class="accordion-content">到店礼、专属利率、额外积分</div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">15</div>
+                <h3>客户转介绍</h3>
+                <p>老客户带新客户，效果翻倍。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">转介绍</span>
+                    <span class="marketing-tag">口碑</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">营销话术</div>
+                        <div class="accordion-content">"李姐，您在我们这儿体验不错的话，可以介绍朋友过来，开户有礼，您也能获得积分奖励，双赢哦！"</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">激励机制</div>
+                        <div class="accordion-content">新客户有礼、老客户奖励、积分翻倍</div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">16</div>
+                <h3>交叉销售策略</h3>
+                <p>一个客户=N个产品，提升价值。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">交叉销售</span>
+                    <span class="marketing-tag">产品叠加</span>
+                </div>
                 <div class="accordion">
                     <div class="accordion-item">
                         <div class="accordion-header">销售漏斗</div>
-                        <div class="accordion-content">
-                            <p><strong>🌟 四步提升法</strong><br>
-                            1. 基础账户（借记卡）<br>
-                            2. 支付工具（信用卡）<br>
-                            3. 理财投资（理财、基金）<br>
-                            4. 贷款融资（消费贷）</p>
-                        </div>
+                        <div class="accordion-content">基础账户→支付工具→理财投资→贷款融资</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">最佳时机</div>
+                        <div class="accordion-content">新客户开户时、产品到期时、人生重大节点</div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">17</div>
+                <h3>VIP客户维护</h3>
+                <p>高端客户专属服务，提升忠诚度。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">VIP</span>
+                    <span class="marketing-tag">高端</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">服务内容</div>
+                        <div class="accordion-content">专属客户经理、优先办理通道、专属产品、高端活动</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">维护频率</div>
+                        <div class="accordion-content">每月至少一次主动联系、每季度一次面谈、每半年一次高端活动</div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">18</div>
+                <h3>流失客户挽回</h3>
+                <p>分析流失原因，对症下药。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">挽回</span>
+                    <span class="marketing-tag">流失</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">流失原因</div>
+                        <div class="accordion-content">利率不够高、服务不满意、产品不合适、搬家换网点</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">挽回话术</div>
+                        <div class="accordion-content">"听说您之前在我们这儿办过业务，有什么不满意的地方吗？现在我们有很多改进，还有专属优惠想给您！"</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">📱 数字化营销工具</h2>
+        <div class="marketing-grid">
+            <div class="marketing-card">
+                <div class="marketing-card-number">19</div>
+                <h3>企业微信营销</h3>
+                <p>用好企业微信，留存客户更轻松。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">企业微信</span>
+                    <span class="marketing-tag">私域</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">功能矩阵</div>
+                        <div class="accordion-content">客户朋友圈内容触达、群发消息精准推送、标签分层运营</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">使用技巧</div>
+                        <div class="accordion-content">朋友圈发产品、群发发活动、一对一聊需求</div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">20</div>
+                <h3>微信群运营</h3>
+                <p>社群营销，打造活跃客户群。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">社群</span>
+                    <span class="marketing-tag">微信群</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">社群价值</div>
+                        <div class="accordion-content">产品发布、活动通知、问题解答、情感维系</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">运营节奏</div>
+                        <div class="accordion-content">每天早安问候、每周产品推荐、每月活动预告</div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">21</div>
+                <h3>朋友圈营销</h3>
+                <p>打造专业人设，吸引潜在客户。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">朋友圈</span>
+                    <span class="marketing-tag">个人IP</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">内容比例</div>
+                        <div class="accordion-content">60%生活分享、30%产品信息、10%专业知识</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">发布技巧</div>
+                        <div class="accordion-content">早7-8点、午12-13点、晚20-21点最佳</div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">22</div>
+                <h3>短视频营销</h3>
+                <p>抓住短视频红利，扩大影响力。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">短视频</span>
+                    <span class="marketing-tag">抖音</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">内容方向</div>
+                        <div class="accordion-content">金融知识科普、产品介绍、网点日常、客户故事</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">拍摄技巧</div>
+                        <div class="accordion-content">竖屏为主、15-60秒、开头要有吸引力</div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">23</div>
+                <h3>直播营销</h3>
+                <p>线上直播，批量获客新渠道。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">直播</span>
+                    <span class="marketing-tag">线上</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">直播主题</div>
+                        <div class="accordion-content">产品发布会、投资讲座、节日活动、问答互动</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">引流方式</div>
+                        <div class="accordion-content">朋友圈预热、微信群通知、短视频引流</div>
+                    </div>
+                </div>
+            </div>
+            <div class="marketing-card">
+                <div class="marketing-card-number">24</div>
+                <h3>智能营销助手</h3>
+                <p>AI赋能，提升营销效率。</p>
+                <div class="marketing-tags">
+                    <span class="marketing-tag">AI</span>
+                    <span class="marketing-tag">智能</span>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">应用场景</div>
+                        <div class="accordion-content">智能外呼批量触达、智能客服24小时应答、数据分析客户画像</div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">使用建议</div>
+                        <div class="accordion-content">人机结合、AI筛选+人工跟进</div>
                     </div>
                 </div>
             </div>
@@ -249,9 +684,11 @@
     </footer>
 
     <script>
+        // 手风琴交互
         document.querySelectorAll('.accordion-header').forEach(header => {
-            header.addEventListener('click', function() {
-                this.parentElement.classList.toggle('active');
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                item.classList.toggle('active');
             });
         });
     </script>
