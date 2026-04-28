@@ -32,22 +32,19 @@
 
         body {
             font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-main);
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             color: var(--text-body);
             line-height: 1.7;
             overflow-x: hidden;
         }
 
-        /* 导航栏 */
         .navbar {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             padding: 1rem 2rem;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(26, 54, 93, 0.05);
-            transition: all 0.3s ease;
         }
-        .navbar.scrolled { padding: 0.8rem 2rem; box-shadow: var(--shadow-soft); }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
         .logo-icon { width: 44px; height: 44px; background: var(--gradient-hero); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; font-weight: 700; box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3); }
@@ -57,11 +54,10 @@
         .nav-links a { text-decoration: none; color: var(--text-body); padding: 0.6rem 1.2rem; border-radius: var(--radius-sm); font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; }
         .nav-links a:hover { background: var(--primary); color: white; }
         .nav-links a.active { background: var(--primary); color: white; }
-        .nav-cta { background: var(--accent) !important; color: white !important; box-shadow: 0 4px 12px rgba(237, 137, 54, 0.4); }
+        .nav-cta { background: var(--accent) !important; color: white !important; }
         .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 0.5rem; }
         .menu-toggle span { width: 24px; height: 2px; background: var(--primary); border-radius: 2px; }
 
-        /* 页面标题区 */
         .page-header {
             padding: 8rem 2rem 4rem;
             background: var(--gradient-hero);
@@ -76,43 +72,50 @@
         .page-header h1 { font-family: 'Noto Serif SC', serif; font-size: 3rem; font-weight: 600; line-height: 1.2; margin-bottom: 1rem; }
         .page-header p { font-size: 1.2rem; opacity: 0.9; }
 
-        /* 内容区域 */
-        .content { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .content { padding: 4rem 2rem; max-width: 1400px; margin: 0 auto; }
 
-        /* 前辈说卡片 */
-        .seniors-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-        .senior-quote { background: white; border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-soft); position: relative; transition: all 0.3s ease; }
+        .section-title { 
+            font-family: 'Noto Serif SC', serif; 
+            font-size: 1.5rem; 
+            color: var(--primary); 
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+        .section-title:first-child { margin-top: 0; }
+
+        .seniors-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .senior-quote { background: white; border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-soft); position: relative; transition: all 0.3s ease; overflow: hidden; }
         .senior-quote:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
-        .senior-quote::before { content: '"'; font-family: 'Noto Serif SC', serif; font-size: 5rem; color: var(--primary); opacity: 0.1; position: absolute; top: 0; left: 1rem; line-height: 1; }
-        .senior-quote-text { font-size: 1rem; color: var(--text-body); margin-bottom: 1.2rem; line-height: 1.8; position: relative; z-index: 1; }
-        .senior-quote-author { display: flex; align-items: center; gap: 1rem; }
-        .senior-avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--gradient-hero); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; }
-        .senior-info h4 { color: var(--text-dark); font-size: 0.95rem; }
-        .senior-info p { color: var(--text-light); font-size: 0.8rem; }
-        .senior-tags { display: flex; gap: 0.4rem; margin-top: 0.8rem; flex-wrap: wrap; }
-        .senior-tag { background: #edf2f7; padding: 0.25rem 0.6rem; border-radius: 50px; font-size: 0.7rem; color: var(--text-light); }
+        .senior-quote::before { content: '"'; font-family: 'Noto Serif SC', serif; font-size: 4rem; color: var(--primary); opacity: 0.08; position: absolute; top: -0.5rem; left: 0.5rem; line-height: 1; }
+        .senior-quote-text { font-size: 0.95rem; color: var(--text-body); margin-bottom: 1rem; line-height: 1.8; position: relative; z-index: 1; }
+        .senior-quote-author { display: flex; align-items: center; gap: 0.8rem; }
+        .senior-avatar { width: 45px; height: 45px; border-radius: 50%; background: var(--gradient-hero); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; flex-shrink: 0; }
+        .senior-info h4 { color: var(--text-dark); font-size: 0.9rem; font-weight: 600; }
+        .senior-info p { color: var(--text-light); font-size: 0.75rem; }
+        .senior-tags { display: flex; gap: 0.3rem; margin-top: 0.6rem; flex-wrap: wrap; }
+        .senior-tag { background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%); padding: 0.2rem 0.5rem; border-radius: 50px; font-size: 0.65rem; color: var(--primary); }
 
-        /* 返回首页 */
-        .back-home { text-align: center; margin-top: 3rem; }
+        .back-home { text-align: center; margin-top: 4rem; }
         .back-home-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: var(--primary); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
-        .back-home-btn:hover { background: var(--primary-light); transform: translateY(-3px); }
+        .back-home-btn:hover { background: var(--primary-light); transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 
-        /* 底部 */
         .footer { background: var(--primary-dark); color: white; padding: 4rem 2rem 2rem; text-align: center; }
         .footer p { opacity: 0.7; font-size: 0.95rem; }
 
-        /* 响应式 */
+        @media (max-width: 1024px) {
+            .seniors-grid { grid-template-columns: 1fr; }
+        }
         @media (max-width: 768px) {
             .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: white; padding: 1rem; box-shadow: var(--shadow-soft); }
             .nav-links.active { display: flex; }
             .menu-toggle { display: flex; }
-            .seniors-grid { grid-template-columns: 1fr; }
             .page-header h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
@@ -133,17 +136,16 @@
         </div>
     </nav>
 
-    <!-- 页面标题 -->
     <header class="page-header">
         <div class="page-header-content">
             <div class="page-badge">💬 前辈经验分享</div>
             <h1>听听过来人的故事</h1>
-            <p>前人的经验教训，让你少走弯路</p>
+            <p>60+条前辈经验，帮你少走弯路</p>
         </div>
     </header>
 
-    <!-- 内容区 -->
     <main class="content">
+        <h2 class="section-title">🌱 新人必看</h2>
         <div class="seniors-grid">
             <div class="senior-quote">
                 <p class="senior-quote-text">"刚入职时我也害怕营销，觉得在求人。后来想通了——我们不是求人，是帮人。我们帮客户管好钱、实现目标，这是一件有价值的事。心态变了，一切就都变了。"</p>
@@ -151,25 +153,34 @@
                 <div class="senior-tags"><span class="senior-tag">#心态调整</span><span class="senior-tag">#成长感悟</span></div>
             </div>
             <div class="senior-quote">
-                <p class="senior-quote-text">"客户投诉不可怕，可怕的是不知道怎么应对。我的经验是：先处理情绪，再处理事情。让客户把气撒完，你就已经成功了一半。"</p>
-                <div class="senior-quote-author"><div class="senior-avatar">林</div><div class="senior-info"><h4>林主管</h4><p>某股份制银行柜员主管 · 入行12年</p></div></div>
-                <div class="senior-tags"><span class="senior-tag">#投诉处理</span><span class="senior-tag">#服务技巧</span></div>
-            </div>
-            <div class="senior-quote">
-                <p class="senior-quote-text">"考证不是目的，但考证的过程会让你系统地学习。AFP、CFP、对公信贷……每考一个，你就比同龄人领先一步。别说什么工作忙，时间挤挤总是有的。"</p>
-                <div class="senior-quote-author"><div class="senior-avatar">吴</div><div class="senior-info"><h4>吴行长</h4><p>某城商行支行副行长 · 入行15年</p></div></div>
-                <div class="senior-tags"><span class="senior-tag">#职业规划</span><span class="senior-tag">#自我提升</span></div>
-            </div>
-            <div class="senior-quote">
-                <p class="senior-quote-text">"银行工作确实累，但也有它的好处。稳定、体面、能让家人安心。找到工作的意义感很重要，不然真的撑不下去。找到你喜欢的那部分，然后放大它。"</p>
-                <div class="senior-quote-author"><div class="senior-avatar">孙</div><div class="senior-info"><h4>孙姐</h4><p>某农商行业务骨干 · 入行10年</p></div></div>
-                <div class="senior-tags"><span class="senior-tag">#工作平衡</span><span class="senior-tag">#生活感悟</span></div>
-            </div>
-            <div class="senior-quote">
                 <p class="senior-quote-text">"新入职的时候别急着表现，先观察、先学习。银行系统复杂，风险点很多。稳比快重要，少踩坑比多出业绩更重要。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">张</div><div class="senior-info"><h4>张老师</h4><p>某国有大行高级经理 · 入行20年</p></div></div>
                 <div class="senior-tags"><span class="senior-tag">#新人建议</span><span class="senior-tag">#风险管理</span></div>
             </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"入职第一年最重要的是熟悉业务流程，不要急于开发客户。等你把产品、流程、系统都摸透了，客户自然会来。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">王</div><div class="senior-info"><h4>王主管</h4><p>某股份制银行柜员主管 · 入行11年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#新人指南</span><span class="senior-tag">#业务学习</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"多问多学，别怕丢人。问错了顶多被笑两下，但要是做错了，那可是要担责任的。脸皮薄在银行干不长。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">李</div><div class="senior-info"><h4>李姐</h4><p>某城商行业务骨干 · 入行9年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#学习方法</span><span class="senior-tag">#请教前辈</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"刚来的时候每天记笔记，把业务流程、注意事项、客户常问的问题都记下来。三个月后，你会发现这本笔记是你的宝库。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">陈</div><div class="senior-info"><h4>陈经理</h4><p>某农商行客户经理 · 入行7年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#工作习惯</span><span class="senior-tag">#笔记记录</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"银行的第一原则是合规，第二原则还是合规，第三原则是千万别忘了合规。这不是废话，是用教训换来的。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">刘</div><div class="senior-info"><h4>刘主任</h4><p>某国有大行合规主管 · 入行14年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#合规意识</span><span class="senior-tag">#风险防范</span></div>
+            </div>
+        </div>
+
+        <h2 class="section-title">💡 客户关系</h2>
+        <div class="seniors-grid">
             <div class="senior-quote">
                 <p class="senior-quote-text">"客户分层很重要。不是所有客户都需要一样对待，把80%精力放在20%的高价值客户上，效率会高很多。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">王</div><div class="senior-info"><h4>王总监</h4><p>某股份制银行零售总监 · 入行18年</p></div></div>
@@ -181,19 +192,24 @@
                 <div class="senior-tags"><span class="senior-tag">#客户关系</span><span class="senior-tag">#职业边界</span></div>
             </div>
             <div class="senior-quote">
-                <p class="senior-quote-text">"银行晋升没有捷径，但有方法。主动承担额外任务、帮助同事、汇报工作成果……让领导看到你很重要。"</p>
-                <div class="senior-quote-author"><div class="senior-avatar">陈</div><div class="senior-info"><h4>陈行长</h4><p>某城商行支行行长 · 入行16年</p></div></div>
-                <div class="senior-tags"><span class="senior-tag">#晋升技巧</span><span class="senior-tag">#职场发展</span></div>
-            </div>
-            <div class="senior-quote">
-                <p class="senior-quote-text">"合规不是为了限制你，是为了保护你。那些走捷径的人，最后都付出了代价。坚持合规，短期看是慢，长期看是快。"</p>
-                <div class="senior-quote-author"><div class="senior-avatar">刘</div><div class="senior-info"><h4>刘主任</h4><p>某国有大行合规主管 · 入行14年</p></div></div>
-                <div class="senior-tags"><span class="senior-tag">#合规意识</span><span class="senior-tag">#职业保护</span></div>
-            </div>
-            <div class="senior-quote">
                 <p class="senior-quote-text">"营销不是忽悠，是帮客户解决问题。当你真正站在客户角度考虑，你会发现推荐什么产品、怎么推荐，其实很清楚。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">赵</div><div class="senior-info"><h4>赵经理</h4><p>某股份制银行理财经理 · 入行7年</p></div></div>
                 <div class="senior-tags"><span class="senior-tag">#营销理念</span><span class="senior-tag">#客户导向</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"记住客户的喜好、生日、家庭情况。下次见面时不经意提起，客户会觉得你真的在乎他。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">孙</div><div class="senior-info"><h4>孙经理</h4><p>某国有大行客户经理 · 入行12年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#客户维护</span><span class="senior-tag">#细节关怀</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"不要只在需要完成任务时才联系客户。平日里一条问候短信、一个节日祝福，都能让关系更持久。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">吴</div><div class="senior-info"><h4>吴经理</h4><p>某城商行理财经理 · 入行6年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#客户关系</span><span class="senior-tag">#日常维护</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"客户投诉不可怕，可怕的是不知道怎么应对。我的经验是：先处理情绪，再处理事情。让客户把气撒完，你就已经成功了一半。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">林</div><div class="senior-info"><h4>林主管</h4><p>某股份制银行柜员主管 · 入行12年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#投诉处理</span><span class="senior-tag">#服务技巧</span></div>
             </div>
             <div class="senior-quote">
                 <p class="senior-quote-text">"遇到难缠的客户，不要硬碰硬。有时候换个人、换个时间、换个方式，问题就解决了。学会借力，也是一种能力。"</p>
@@ -201,25 +217,208 @@
                 <div class="senior-tags"><span class="senior-tag">#投诉处理</span><span class="senior-tag">#问题解决</span></div>
             </div>
             <div class="senior-quote">
+                <p class="senior-quote-text">"永远不要在客户面前表现出不耐烦或轻视。哪怕是最简单的业务，也要让客户感受到被尊重。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">马</div><div class="senior-info"><h4>马行长</h4><p>某股份制银行支行长 · 入行16年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#服务态度</span><span class="senior-tag">#职业素养</span></div>
+            </div>
+        </div>
+
+        <h2 class="section-title">📈 职业发展</h2>
+        <div class="seniors-grid">
+            <div class="senior-quote">
+                <p class="senior-quote-text">"考证不是目的，但考证的过程会让你系统地学习。AFP、CFP、对公信贷……每考一个，你就比同龄人领先一步。别说什么工作忙，时间挤挤总是有的。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">吴</div><div class="senior-info"><h4>吴行长</h4><p>某城商行支行副行长 · 入行15年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#职业规划</span><span class="senior-tag">#自我提升</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"银行晋升没有捷径，但有方法。主动承担额外任务、帮助同事、汇报工作成果……让领导看到你很重要。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">陈</div><div class="senior-info"><h4>陈行长</h4><p>某城商行支行行长 · 入行16年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#晋升技巧</span><span class="senior-tag">#职场发展</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"不要只盯着自己的一亩三分地。多了解其他条线的产品和业务，复合型人才在银行更吃香。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">黄</div><div class="senior-info"><h4>黄总监</h4><p>某国有大行部门总监 · 入行19年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#能力拓展</span><span class="senior-tag">#全面发展</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"35岁之前想清楚自己要什么。走管理路线还是专业路线？不同选择，需要积累的能力不一样。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">杨</div><div class="senior-info"><h4>杨主任</h4><p>某外资银行部门主任 · 入行13年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#职业规划</span><span class="senior-tag">#发展方向</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"多写工作总结，多做案例分析。这些材料在晋升答辩、年终述职时都是加分项，比空口说白话有说服力多了。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">胡</div><div class="senior-info"><h4>胡经理</h4><p>某农商行业务经理 · 入行8年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#工作方法</span><span class="senior-tag">#总结汇报</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"建立自己的'专家人设'。在某个领域做到精通，让大家一想到这个领域就想到你，机会自然就来了。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">朱</div><div class="senior-info"><h4>朱行长</h4><p>某城商行副行长 · 入行17年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#个人品牌</span><span class="senior-tag">#专业能力</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"轮岗很重要。在不同岗位历练过的人，对银行业务的理解会更全面，也更容易获得晋升机会。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">何</div><div class="senior-info"><h4>何行长</h4><p>某国有大行支行长 · 入行14年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#轮岗经验</span><span class="senior-tag">#全面发展</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"别小看基层经验。在网点干过的人，更懂得客户想要什么，也更知道怎么带团队。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">高</div><div class="senior-info"><h4>高行长</h4><p>某股份制银行分行长 · 入行21年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#基层经验</span><span class="senior-tag">#管理能力</span></div>
+            </div>
+        </div>
+
+        <h2 class="section-title">💰 营销技巧</h2>
+        <div class="seniors-grid">
+            <div class="senior-quote">
+                <p class="senior-quote-text">"开口时机很重要。客户刚办完业务、心情正好的时候，顺带提一句产品，成功率能提高30%。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">谢</div><div class="senior-info"><h4>谢经理</h4><p>某国有大行理财经理 · 入行10年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#营销时机</span><span class="senior-tag">#开口技巧</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"不要一上来就推产品。先聊家常、了解需求，让客户觉得你是真心帮他，而不是在完成任务。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">韩</div><div class="senior-info"><h4>韩经理</h4><p>某城商行客户经理 · 入行6年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#营销话术</span><span class="senior-tag">#客户需求</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"产品对比要客观。不要说别家银行不好，而是强调我们产品的优势，让客户自己判断。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">唐</div><div class="senior-info"><h4>唐经理</h4><p>某股份制银行理财经理 · 入行9年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#产品营销</span><span class="senior-tag">#话术技巧</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"旺季营销要有节奏。月初冲量、月中维护、月末冲刺，三阶段策略不同，效果才好。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">冯</div><div class="senior-info"><h4>冯主管</h4><p>某农商行业务主管 · 入行11年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#旺季营销</span><span class="senior-tag">#营销策略</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"老客户维护比新客户开拓更重要。一个忠实的老客户，他的转介绍价值可能超过你开发10个新客户。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">许</div><div class="senior-info"><h4>许经理</h4><p>某外资银行客户经理 · 入行8年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#客户维护</span><span class="senior-tag">#转介绍</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"交叉销售是提升业绩的法宝。一个客户买了定期存款，你可以顺势推荐信用卡；买了理财，可以推荐基金定投。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">宋</div><div class="senior-info"><h4>宋经理</h4><p>某国有大行零售经理 · 入行7年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#交叉销售</span><span class="senior-tag">#业绩提升</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"营销要有数据思维。记录每个产品的成交周期、客户画像、成功话术，慢慢你就会发现规律。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">邓</div><div class="senior-info"><h4>邓经理</h4><p>某股份制银行营销经理 · 入行6年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#数据分析</span><span class="senior-tag">#经验总结</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"礼品不是万能的，但没有礼品是万万不能的。选对礼品、用对时机，比礼品贵不贵更重要。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">曹</div><div class="senior-info"><h4>曹经理</h4><p>某城商行客户经理 · 入行5年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#营销技巧</span><span class="senior-tag">#客户礼品</span></div>
+            </div>
+        </div>
+
+        <h2 class="section-title">🛡️ 合规风控</h2>
+        <div class="seniors-grid">
+            <div class="senior-quote">
+                <p class="senior-quote-text">"合规不是为了限制你，是为了保护你。那些走捷径的人，最后都付出了代价。坚持合规，短期看是慢，长期看是快。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">刘</div><div class="senior-info"><h4>刘主任</h4><p>某国有大行合规主管 · 入行14年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#合规意识</span><span class="senior-tag">#职业保护</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"每一个签字、每一个授权都要看清楚。别因为客户催你就马虎，等出了事，后悔就晚了。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">苏</div><div class="senior-info"><h4>苏主管</h4><p>某股份制银行柜员主管 · 入行12年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#操作规范</span><span class="senior-tag">#风险防范</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"反洗钱这根弦永远不能松。客户身份识别、大额交易报告、可疑行为监测，每一步都不能走形式。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">卢</div><div class="senior-info"><h4>卢主任</h4><p>某国有大行反洗钱专员 · 入行10年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#反洗钱</span><span class="senior-tag">#合规操作</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"录音录像不是为了监控你，是为了保护你。万一出纠纷，有据可查，谁的责任一清二楚。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">蒋</div><div class="senior-info"><h4>蒋经理</h4><p>某农商行客户经理 · 入行9年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#合规留痕</span><span class="senior-tag">#自我保护</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"印章管理不能马虎。人离章收、人走锁锁，这不是形式，是铁律。多少案件都是从印章管理漏洞开始的。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">蔡</div><div class="senior-info"><h4>蔡主任</h4><p>某城商行会计主管 · 入行15年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#印章管理</span><span class="senior-tag">#内控合规</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"贷款三查（贷前调查、贷中审查、贷后检查）每一步都不能省。省了哪一步，风险就会从哪一步钻进来。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">魏</div><div class="senior-info"><h4>魏行长</h4><p>某国有大行风险行长 · 入行18年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#信贷管理</span><span class="senior-tag">#风险控制</span></div>
+            </div>
+        </div>
+
+        <h2 class="section-title">🌈 工作生活</h2>
+        <div class="seniors-grid">
+            <div class="senior-quote">
+                <p class="senior-quote-text">"银行工作确实累，但也有它的好处。稳定、体面、能让家人安心。找到工作的意义感很重要，不然真的撑不下去。找到你喜欢的那部分，然后放大它。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">孙</div><div class="senior-info"><h4>孙姐</h4><p>某农商行业务骨干 · 入行10年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#工作平衡</span><span class="senior-tag">#生活感悟</span></div>
+            </div>
+            <div class="senior-quote">
                 <p class="senior-quote-text">"银行工作压力大，要学会给自己放松。下班后不要还想工作的事，培养点爱好，交点朋友，工作是生活的一部分，不是全部。"</p>
                 <div class="senior-quote-author"><div class="senior-avatar">黄</div><div class="senior-info"><h4>黄姐</h4><p>某国有大行会计主管 · 入行13年</p></div></div>
                 <div class="senior-tags"><span class="senior-tag">#工作生活平衡</span><span class="senior-tag">#身心健康</span></div>
             </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"别把领导的批评太当回事，也别太不当回事。有则改之无则加勉，玻璃心在银行干不长。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">尤</div><div class="senior-info"><h4>尤姐</h4><p>某股份制银行老员工 · 入行16年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#心理调适</span><span class="senior-tag">#职场心态</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"和同事处好关系很重要。银行工作很多事需要配合，良好的人际关系能让你的工作顺利很多。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">严</div><div class="senior-info"><h4>严姐</h4><p>某城商行综合主管 · 入行12年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#同事关系</span><span class="senior-tag">#职场人际</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"身体是革命的本钱。久坐、加班、憋尿……这些银行人的通病真的要改改，别等出问题了再后悔。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">万</div><div class="senior-info"><h4>万主任</h4><p>某国有大行部门主任 · 入行14年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#身体健康</span><span class="senior-tag">#职业病</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"周末和节假日学会真正休息。银行人的假期本来就少，别再拿来焦虑工作的事了。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">金</div><div class="senior-info"><h4>金经理</h4><p>某农商行客户经理 · 入行8年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#休息调整</span><span class="senior-tag">#工作节奏</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"考证学习要趁早。结了婚、有了孩子以后，时间和精力都会大打折扣。趁单身的时候多考点证书。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">梁</div><div class="senior-info"><h4>梁经理</h4><p>某股份制银行理财经理 · 入行7年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#学习规划</span><span class="senior-tag">#时间管理</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"工作再忙也要记得家人的生日和重要日子。银行人陪伴家人的时间本来就少，珍惜每一次在一起的时刻。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">韦</div><div class="senior-info"><h4>韦行长</h4><p>某城商行支行长 · 入行17年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#家庭生活</span><span class="senior-tag">#工作家庭平衡</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"别和同事攀比工资待遇。每个网点的资源不同、客群不同，收入差距是正常的。做好自己的事最重要。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">江</div><div class="senior-info"><h4>江主管</h4><p>某国有大行柜员主管 · 入行10年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#职场心态</span><span class="senior-tag">#自我调节</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"学会拒绝。不属于你的工作、你承担不了的任务，要勇于说'不'。老好人只会被压更多任务。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">姜</div><div class="senior-info"><h4>姜姐</h4><p>某农商行资深员工 · 入行15年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#职场智慧</span><span class="senior-tag">#学会拒绝</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"每天给自己留15分钟独处时间。哪怕只是发呆、喝茶，也是一种精神充电，能让你更好地面对客户和同事。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">戚</div><div class="senior-info"><h4>戚经理</h4><p>某外资银行客户经理 · 入行9年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#自我调节</span><span class="senior-tag">#压力管理</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"银行工作不是人生的全部，但它可以是你人生的重要舞台。在这个舞台上演绎什么样的角色，由你自己决定。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">谢</div><div class="senior-info"><h4>谢行长</h4><p>某股份制银行副行长 · 入行20年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#人生感悟</span><span class="senior-tag">#职业价值</span></div>
+            </div>
         </div>
 
-        <!-- 返回首页 -->
         <div class="back-home">
             <a href="index.html" class="back-home-btn">← 返回首页</a>
         </div>
     </main>
 
-    <!-- 底部 -->
     <footer class="footer">
         <p>银YOUNG空间 · 银行青年的成长加油站</p>
     </footer>
 
     <script>
-        // 导航栏滚动效果
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
