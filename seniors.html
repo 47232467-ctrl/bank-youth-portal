@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前辈说 - 银YOUNG空间</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --primary-dark: #0d1f3c;
+            --accent: #ed8936;
+            --accent-light: #f6ad55;
+            --accent-soft: #fbd38d;
+            --bg-main: #f7fafc;
+            --bg-card: #ffffff;
+            --text-dark: #1a202c;
+            --text-body: #4a5568;
+            --text-light: #718096;
+            --gradient-hero: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%);
+            --shadow-soft: 0 4px 20px rgba(26, 54, 93, 0.08);
+            --shadow-hover: 0 12px 40px rgba(26, 54, 93, 0.15);
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-main);
+            color: var(--text-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(26, 54, 93, 0.05);
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled { padding: 0.8rem 2rem; box-shadow: var(--shadow-soft); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 44px; height: 44px; background: var(--gradient-hero); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; font-weight: 700; box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3); }
+        .logo-text { font-family: 'Noto Serif SC', serif; font-size: 1.5rem; font-weight: 600; color: var(--primary); }
+        .logo-text span { color: var(--accent); }
+        .nav-links { display: flex; gap: 0.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-body); padding: 0.6rem 1.2rem; border-radius: var(--radius-sm); font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; }
+        .nav-links a:hover { background: var(--primary); color: white; }
+        .nav-links a.active { background: var(--primary); color: white; }
+        .nav-cta { background: var(--accent) !important; color: white !important; box-shadow: 0 4px 12px rgba(237, 137, 54, 0.4); }
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 0.5rem; }
+        .menu-toggle span { width: 24px; height: 2px; background: var(--primary); border-radius: 2px; }
+
+        /* 页面标题区 */
+        .page-header {
+            padding: 8rem 2rem 4rem;
+            background: var(--gradient-hero);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); opacity: 0.5; }
+        .page-header-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+        .page-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.2); }
+        .page-header h1 { font-family: 'Noto Serif SC', serif; font-size: 3rem; font-weight: 600; line-height: 1.2; margin-bottom: 1rem; }
+        .page-header p { font-size: 1.2rem; opacity: 0.9; }
+
+        /* 内容区域 */
+        .content { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+
+        /* 前辈说卡片 */
+        .seniors-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .senior-quote { background: white; border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-soft); position: relative; transition: all 0.3s ease; }
+        .senior-quote:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        .senior-quote::before { content: '"'; font-family: 'Noto Serif SC', serif; font-size: 5rem; color: var(--primary); opacity: 0.1; position: absolute; top: 0; left: 1rem; line-height: 1; }
+        .senior-quote-text { font-size: 1rem; color: var(--text-body); margin-bottom: 1.2rem; line-height: 1.8; position: relative; z-index: 1; }
+        .senior-quote-author { display: flex; align-items: center; gap: 1rem; }
+        .senior-avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--gradient-hero); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; }
+        .senior-info h4 { color: var(--text-dark); font-size: 0.95rem; }
+        .senior-info p { color: var(--text-light); font-size: 0.8rem; }
+        .senior-tags { display: flex; gap: 0.4rem; margin-top: 0.8rem; flex-wrap: wrap; }
+        .senior-tag { background: #edf2f7; padding: 0.25rem 0.6rem; border-radius: 50px; font-size: 0.7rem; color: var(--text-light); }
+
+        /* 返回首页 */
+        .back-home { text-align: center; margin-top: 3rem; }
+        .back-home-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: var(--primary); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
+        .back-home-btn:hover { background: var(--primary-light); transform: translateY(-3px); }
+
+        /* 底部 */
+        .footer { background: var(--primary-dark); color: white; padding: 4rem 2rem 2rem; text-align: center; }
+        .footer p { opacity: 0.7; font-size: 0.95rem; }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: white; padding: 1rem; box-shadow: var(--shadow-soft); }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: flex; }
+            .seniors-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">Y</div>
+                <div class="logo-text">银<span>YOUNG</span>空间</div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="knowledge.html">知识库</a></li>
+                <li><a href="marketing.html">营销锦囊</a></li>
+                <li><a href="seniors.html" class="active">前辈说</a></li>
+                <li><a href="mental.html">心灵驿站</a></li>
+                <li><a href="relax.html" class="nav-cta">轻松一刻</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="document.getElementById('navLinks').classList.toggle('active')">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <header class="page-header">
+        <div class="page-header-content">
+            <div class="page-badge">💬 前辈经验分享</div>
+            <h1>听听过来人的故事</h1>
+            <p>前人的经验教训，让你少走弯路</p>
+        </div>
+    </header>
+
+    <!-- 内容区 -->
+    <main class="content">
+        <div class="seniors-grid">
+            <div class="senior-quote">
+                <p class="senior-quote-text">"刚入职时我也害怕营销，觉得在求人。后来想通了——我们不是求人，是帮人。我们帮客户管好钱、实现目标，这是一件有价值的事。心态变了，一切就都变了。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">周</div><div class="senior-info"><h4>周经理</h4><p>某国有大行理财经理 · 入行8年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#心态调整</span><span class="senior-tag">#成长感悟</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"客户投诉不可怕，可怕的是不知道怎么应对。我的经验是：先处理情绪，再处理事情。让客户把气撒完，你就已经成功了一半。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">林</div><div class="senior-info"><h4>林主管</h4><p>某股份制银行柜员主管 · 入行12年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#投诉处理</span><span class="senior-tag">#服务技巧</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"考证不是目的，但考证的过程会让你系统地学习。AFP、CFP、对公信贷……每考一个，你就比同龄人领先一步。别说什么工作忙，时间挤挤总是有的。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">吴</div><div class="senior-info"><h4>吴行长</h4><p>某城商行支行副行长 · 入行15年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#职业规划</span><span class="senior-tag">#自我提升</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"银行工作确实累，但也有它的好处。稳定、体面、能让家人安心。找到工作的意义感很重要，不然真的撑不下去。找到你喜欢的那部分，然后放大它。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">孙</div><div class="senior-info"><h4>孙姐</h4><p>某农商行业务骨干 · 入行10年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#工作平衡</span><span class="senior-tag">#生活感悟</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"新入职的时候别急着表现，先观察、先学习。银行系统复杂，风险点很多。稳比快重要，少踩坑比多出业绩更重要。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">张</div><div class="senior-info"><h4>张老师</h4><p>某国有大行高级经理 · 入行20年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#新人建议</span><span class="senior-tag">#风险管理</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"客户分层很重要。不是所有客户都需要一样对待，把80%精力放在20%的高价值客户上，效率会高很多。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">王</div><div class="senior-info"><h4>王总监</h4><p>某股份制银行零售总监 · 入行18年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#客户管理</span><span class="senior-tag">#效率提升</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"和客户交朋友，但也要保持边界。不要和客户走得太近，保持专业距离对双方都好。私人关系太深，反而不好处理业务问题。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">李</div><div class="senior-info"><h4>李经理</h4><p>某外资银行客户经理 · 入行9年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#客户关系</span><span class="senior-tag">#职业边界</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"银行晋升没有捷径，但有方法。主动承担额外任务、帮助同事、汇报工作成果……让领导看到你很重要。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">陈</div><div class="senior-info"><h4>陈行长</h4><p>某城商行支行行长 · 入行16年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#晋升技巧</span><span class="senior-tag">#职场发展</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"合规不是为了限制你，是为了保护你。那些走捷径的人，最后都付出了代价。坚持合规，短期看是慢，长期看是快。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">刘</div><div class="senior-info"><h4>刘主任</h4><p>某国有大行合规主管 · 入行14年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#合规意识</span><span class="senior-tag">#职业保护</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"营销不是忽悠，是帮客户解决问题。当你真正站在客户角度考虑，你会发现推荐什么产品、怎么推荐，其实很清楚。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">赵</div><div class="senior-info"><h4>赵经理</h4><p>某股份制银行理财经理 · 入行7年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#营销理念</span><span class="senior-tag">#客户导向</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"遇到难缠的客户，不要硬碰硬。有时候换个人、换个时间、换个方式，问题就解决了。学会借力，也是一种能力。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">徐</div><div class="senior-info"><h4>徐主管</h4><p>某农商行柜员主管 · 入行11年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#投诉处理</span><span class="senior-tag">#问题解决</span></div>
+            </div>
+            <div class="senior-quote">
+                <p class="senior-quote-text">"银行工作压力大，要学会给自己放松。下班后不要还想工作的事，培养点爱好，交点朋友，工作是生活的一部分，不是全部。"</p>
+                <div class="senior-quote-author"><div class="senior-avatar">黄</div><div class="senior-info"><h4>黄姐</h4><p>某国有大行会计主管 · 入行13年</p></div></div>
+                <div class="senior-tags"><span class="senior-tag">#工作生活平衡</span><span class="senior-tag">#身心健康</span></div>
+            </div>
+        </div>
+
+        <!-- 返回首页 -->
+        <div class="back-home">
+            <a href="index.html" class="back-home-btn">← 返回首页</a>
+        </div>
+    </main>
+
+    <!-- 底部 -->
+    <footer class="footer">
+        <p>银YOUNG空间 · 银行青年的成长加油站</p>
+    </footer>
+
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
