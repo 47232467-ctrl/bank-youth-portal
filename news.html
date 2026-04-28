@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最新金融动态 - 银YOUNG空间</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #ed8936;
+            --bg-main: #f7fafc;
+            --shadow-soft: 0 4px 20px rgba(26, 54, 93, 0.08);
+            --radius-lg: 20px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; font-weight: 700; }
+        .logo-text { font-size: 1.5rem; font-weight: 600; color: var(--primary); }
+        .logo-text span { color: var(--accent); }
+        .nav-links { display: flex; gap: 0.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: #4a5568; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; }
+        .nav-links a:hover { background: var(--primary); color: white; }
+        .nav-links a.active { background: var(--primary); color: white; }
+
+        .page-header {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+            color: white;
+            text-align: center;
+        }
+        .page-header-content { max-width: 800px; margin: 0 auto; }
+        .page-badge { display: inline-block; background: var(--accent); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1rem; }
+        .page-header h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .page-header p { font-size: 1.2rem; opacity: 0.9; }
+
+        .content { padding: 4rem 2rem; max-width: 1400px; margin: 0 auto; }
+
+        .news-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+        .news-update-time { display: flex; align-items: center; gap: 0.5rem; color: #718096; font-size: 0.9rem; }
+        .news-update-time .pulse { width: 8px; height: 8px; background: #48bb78; border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .news-refresh { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; background: white; border: 2px solid var(--primary); color: var(--primary); border-radius: 50px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .news-refresh:hover { background: var(--primary); color: white; }
+
+        .news-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .news-column { background: white; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-soft); }
+        .news-column-header { padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+        .news-column-header.finance { background: linear-gradient(135deg, #1a365d, #2c5282); color: white; }
+        .news-column-header.bank { background: linear-gradient(135deg, #ed8936, #f6ad55); color: white; }
+        .news-column-header h3 { font-size: 1.1rem; font-weight: 600; }
+        .news-column-header .count { background: rgba(255,255,255,0.2); padding: 0.2rem 0.6rem; border-radius: 50px; font-size: 0.8rem; }
+        .news-list { padding: 0; margin: 0; }
+        .news-item { padding: 1rem 1.5rem; border-bottom: 1px solid #eee; display: flex; gap: 1rem; transition: background 0.3s; cursor: pointer; }
+        .news-item:last-child { border-bottom: none; }
+        .news-item:hover { background: #f8fafc; }
+        .news-item-hot { flex-shrink: 0; }
+        .news-hot-tag { display: inline-block; background: #fed7d7; color: #c53030; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+        .news-content { flex: 1; }
+        .news-title { font-size: 0.95rem; color: #1a202c; line-height: 1.5; margin-bottom: 0.3rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .news-meta { display: flex; gap: 1rem; font-size: 0.8rem; color: #718096; }
+        .news-meta span { display: flex; align-items: center; gap: 0.3rem; }
+
+        .back-home { text-align: center; margin-top: 3rem; }
+        .back-home-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: var(--primary); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
+        .back-home-btn:hover { transform: translateY(-3px); }
+
+        .footer { background: #0d1f3c; color: white; padding: 4rem 2rem 2rem; text-align: center; }
+        .footer p { opacity: 0.7; font-size: 0.95rem; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .news-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">Y</div>
+                <div class="logo-text">银<span>YOUNG</span>空间</div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="knowledge.html">知识库</a></li>
+                <li><a href="marketing.html">营销锦囊</a></li>
+                <li><a href="seniors.html">前辈说</a></li>
+                <li><a href="mental.html">心灵驿站</a></li>
+                <li><a href="relax.html">轻松一刻</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="page-header-content">
+            <div class="page-badge">📈 每日更新</div>
+            <h1>最新金融动态</h1>
+            <p>每天早上7点准时更新，助你掌握行业最新资讯</p>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="news-header">
+            <div class="news-update-time">
+                <span class="pulse"></span>
+                <span id="newsUpdateTime">更新时间：2026-04-23 07:00</span>
+            </div>
+            <button class="news-refresh" onclick="refreshNews()">🔄 刷新新闻</button>
+        </div>
+
+        <div class="news-grid">
+            <div class="news-column">
+                <div class="news-column-header finance">
+                    <h3>📈 国内金融要闻</h3>
+                    <span class="count">10条</span>
+                </div>
+                <div class="news-list" id="financeNews">
+                    <div class="news-item">
+                        <div class="news-item-hot"><span class="news-hot-tag">🔥 热</span></div>
+                        <div class="news-content">
+                            <div class="news-title">央行宣布定向降准0.25个百分点，释放长期资金约5000亿元</div>
+                            <div class="news-meta"><span>📰 央行官网</span><span>⏰ 10分钟前</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-content">
+                            <div class="news-title">A股三大指数集体收涨，沪指重回3400点上方</div>
+                            <div class="news-meta"><span>📰 新浪财经</span><span>⏰ 30分钟前</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-item-hot"><span class="news-hot-tag">🔥 热</span></div>
+                        <div class="news-content">
+                            <div class="news-title">人民币汇率中间价上调102个基点，创年内新高</div>
+                            <div class="news-meta"><span>📰 中国证券报</span><span>⏰ 1小时前</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-content">
+                            <div class="news-title">一季度GDP同比增长5.3%，经济运行开局良好</div>
+                            <div class="news-meta"><span>📰 国家统计局</span><span>⏰ 2小时前</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-content">
+                            <div class="news-title">数字人民币试点再扩围，覆盖更多民生场景</div>
+                            <div class="news-meta"><span>📰 证券日报</span><span>⏰ 3小时前</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-content">
+                            <div class="news-title">保险资金加大对科技创新领域投资力度</div>
+                            <div class="news-meta"><span>📰 金融时报</span><span>⏰ 4小时前</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-content">
+                            <div class="news-title">沪深两市成交额突破1.2万亿元，刷新年内纪录</div>
+                            <div class="news-meta"><span>📰 东方财富</span><span>⏰ 5小时前</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-content">
+                            <div class="news-title">多家银行下调存款利率，利率市场化持续推进</div>
+                            <div class="news-meta"><span>📰 经济参考报</span><span>⏰ 6小时前</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-content">
+                            <div class="news-title">北向资金净流入超百亿元，外资持续看好A股</div>
+                            <div class="news-meta"><span>📰 第一财经</span><span>⏰ 7小时前</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-content">
+                            <div class="news-title">科创板上市公司突破500家，总市值超10万亿元</div>
+                            <div class="news-meta"><span>📰 上交所发布</span><span>⏰ 8小时前</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="news-column">
+                <div class="news-column-header bank">
+                    <h3>🏦 银行行业动态</h3>
+                    <span class="count">5条</span>
+                </div>
+                <div class="news-list" id="bankNews">
+                    <div class="news-item">
+                        <div class="news-item-hot"><span class="news-hot-tag">🔥 热</span></div>
+                        <div class="news-content">
+                            <div class="news-title">工商银行发布2026年一季度业绩，净利润同比增长3.2%</div>
+                            <div class="news-meta"><span>📰 工商银行</span><span>⏰ 15分钟前</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-item-hot"><span class="news-hot-tag">🔥 热</span></div>
+                        <div class="news-content">
+                            <div class="news-title">建设银行推出"乡村振兴"专属金融服务方案</div>
+                            <div class="news-meta"><span>📰 建设银行</span><span>⏰ 1小时前</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-content">
+                            <div class="news-title">招商银行私人银行客户数突破50万户，资产管理规模超4万亿</div>
+                            <div class="news-meta"><span>📰 招商银行</span><span>⏰ 2小时前</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-content">
+                            <div class="news-title">农业银行普惠贷款余额突破3万亿元，持续服务小微企业</div>
+                            <div class="news-meta"><span>📰 农业银行</span><span>⏰ 3小时前</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item">
+                        <div class="news-content">
+                            <div class="news-title">中国银行发布跨境金融创新产品，助力企业"走出去"</div>
+                            <div class="news-meta"><span>📰 中国银行</span><span>⏰ 4小时前</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-home">
+            <a href="index.html" class="back-home-btn">← 返回首页</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>银YOUNG空间 · 银行青年的成长加油站</p>
+    </footer>
+
+    <script>
+        function refreshNews() {
+            const btn = document.querySelector('.news-refresh');
+            btn.textContent = '刷新中...';
+            btn.style.opacity = '0.7';
+            
+            setTimeout(() => {
+                const now = new Date();
+                const timeStr = now.getFullYear() + '-' +
+                    String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                    String(now.getDate()).padStart(2, '0') + ' ' +
+                    String(now.getHours()).padStart(2, '0') + ':' +
+                    String(now.getMinutes()).padStart(2, '0');
+                document.getElementById('newsUpdateTime').textContent = '更新时间：' + timeStr;
+                
+                btn.innerHTML = '🔄 刷新新闻';
+                btn.style.opacity = '1';
+                alert('✅ 新闻已更新！');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
