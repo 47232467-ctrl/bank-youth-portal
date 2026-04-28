@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轻松一刻 - 银YOUNG空间</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #ed8936;
+            --shadow-soft: 0 4px 20px rgba(26, 54, 93, 0.08);
+            --shadow-hover: 0 12px 40px rgba(26, 54, 93, 0.15);
+            --radius-lg: 20px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #fef3e2 0%, #fbd38d 100%);
+            color: #4a5568;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; font-weight: 700; }
+        .logo-text { font-size: 1.5rem; font-weight: 600; color: var(--primary); }
+        .logo-text span { color: var(--accent); }
+        .nav-links { display: flex; gap: 0.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: #4a5568; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; }
+        .nav-links a:hover { background: var(--primary); color: white; }
+        .nav-links a.active { background: var(--primary); color: white; }
+        .nav-cta { background: var(--accent) !important; color: white !important; }
+
+        .page-header {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+        }
+        .page-header-content { max-width: 800px; margin: 0 auto; }
+        .page-badge { display: inline-block; background: var(--primary); color: white; padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1rem; }
+        .page-header h1 { font-size: 3rem; color: var(--primary); margin-bottom: 1rem; }
+        .page-header p { font-size: 1.2rem; color: #718096; }
+
+        .content { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+
+        .relax-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .relax-card { background: white; border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-soft); transition: all 0.3s ease; }
+        .relax-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+        .relax-card-emoji { font-size: 2.5rem; margin-bottom: 1rem; }
+        .relax-card h3 { color: #1a202c; margin-bottom: 0.8rem; font-size: 1.1rem; }
+        .relax-card p { color: #718096; font-size: 0.9rem; }
+
+        .daily-quote { max-width: 800px; margin: 3rem auto 0; background: white; border-radius: var(--radius-lg); padding: 2rem; text-align: center; box-shadow: var(--shadow-soft); }
+        .daily-quote-text { font-size: 1.3rem; color: #1a202c; margin-bottom: 1rem; line-height: 1.8; }
+        .daily-quote-author { color: var(--accent); font-weight: 600; }
+
+        .back-home { text-align: center; margin-top: 3rem; }
+        .back-home-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: var(--primary); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
+        .back-home-btn:hover { transform: translateY(-3px); }
+
+        .footer { background: var(--primary); color: white; padding: 4rem 2rem 2rem; text-align: center; }
+        .footer p { opacity: 0.7; font-size: 0.95rem; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .relax-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">Y</div>
+                <div class="logo-text">银<span>YOUNG</span>空间</div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="knowledge.html">知识库</a></li>
+                <li><a href="marketing.html">营销锦囊</a></li>
+                <li><a href="seniors.html">前辈说</a></li>
+                <li><a href="mental.html">心灵驿站</a></li>
+                <li><a href="relax.html" class="active nav-cta">轻松一刻</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="page-header-content">
+            <div class="page-badge">😄 银行人的欢乐时光</div>
+            <h1>轻松一刻</h1>
+            <p>笑一笑，十年少</p>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="relax-grid">
+            <div class="relax-card">
+                <div class="relax-card-emoji">😂</div>
+                <h3>银行人才能懂的梗</h3>
+                <p>"您好，请问办什么业务？" "我要开户。" "好的，请出示身份证。" "我没带。" "……" 懂的都懂！</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">🤣</div>
+                <h3>客户奇葩问题合集</h3>
+                <p>定期利息怎么算？国债和国库券有什么区别？这些问题你遇到过几个？</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">😅</div>
+                <h3>柜员の日常</h3>
+                <p>授权老师的"再来一遍"、主管的灵魂拷问、同事的默契配合……这就是我们的日常。</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">🤦</div>
+                <h3>那些年我们追过的指标</h3>
+                <p>存款任务、贷款任务、信用卡任务、APP下载任务……任务千万条，完成第一条！</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">🙈</div>
+                <h3>网点惊悚故事</h3>
+                <p>当客户说"我要销户"的时候，整个网点都安静了……</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">🤝</div>
+                <h3>同事暗号</h3>
+                <p>"授权老师来了"=安静 "主任查监控"=端正 "客户要见领导"=准备应对</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">💼</div>
+                <h3>银行人穿衣进化史</h3>
+                <p>从西装革履到休闲周五，从正装配领带到白衬衫打天下，银行的穿搭也有故事。</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">📅</div>
+                <h3>银行人的节假日</h3>
+                <p>别人过节，我们过关。春节、国庆、五一……都是我们的"旺季营销"时刻！</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">🧮</div>
+                <h3>算数的强迫症</h3>
+                <p>买菜要算总价、点外卖要算优惠、看时间会换算成秒……这病没救了！</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">🛡️</div>
+                <h3>职业病图鉴</h3>
+                <p>微笑已成肌肉记忆、输密码要看三遍、手指永远保持干燥……你中了几条？</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">🎭</div>
+                <h3>演技大赏</h3>
+                <p>明明很累也要微笑、明明很烦也要耐心、明明想下班还要说"好的没问题"……</p>
+            </div>
+            <div class="relax-card">
+                <div class="relax-card-emoji">🏆</div>
+                <h3>开会文化</h3>
+                <p>晨会、夕会、周例会、月度会、季度会、年度会……会议太多，时间不够用！</p>
+            </div>
+        </div>
+
+        <div class="daily-quote">
+            <div class="daily-quote-text">"生活不止眼前的指标，还有诗和远方的假期。"</div>
+            <div class="daily-quote-author">—— 某银行人的梦想</div>
+        </div>
+
+        <div class="back-home">
+            <a href="index.html" class="back-home-btn">← 返回首页</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>银YOUNG空间 · 银行青年的成长加油站</p>
+    </footer>
+</body>
+</html>
