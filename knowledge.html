@@ -477,5 +477,55 @@
     <footer class="footer">
         <p>银YOUNG空间 · 银行青年的成长加油站</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.category-tab');
+            const sections = document.querySelectorAll('.content > .section-title, .content > .knowledge-grid');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // 切换激活状态
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const category = this.textContent;
+                    
+                    // 获取所有 section 和 grid
+                    const allSections = document.querySelectorAll('.content > .section-title');
+                    const allGrids = document.querySelectorAll('.content > .knowledge-grid');
+                    
+                    if (category === '全部') {
+                        // 显示所有
+                        allSections.forEach(s => s.style.display = 'block');
+                        allGrids.forEach(g => g.style.display = 'grid');
+                    } else {
+                        // 分类名称映射
+                        const categoryMap = {
+                            '存款业务': ['💰 存款业务'],
+                            '贷款业务': ['🏠 贷款业务'],
+                            '理财投资': ['💎 理财投资'],
+                            '信用卡': ['💳 信用卡业务'],
+                            '电子银行': ['📱 电子银行业务'],
+                            '外汇保险': ['🌍 外汇与保险']
+                        };
+                        
+                        const targetSections = categoryMap[category] || [];
+                        
+                        allSections.forEach(s => {
+                            s.style.display = targetSections.includes(s.textContent) ? 'block' : 'none';
+                        });
+                        allGrids.forEach(g => {
+                            const prevSection = g.previousElementSibling;
+                            g.style.display = prevSection && targetSections.includes(prevSection.textContent) ? 'grid' : 'none';
+                        });
+                    }
+                    
+                    // 滚动到顶部
+                    window.scrollTo({ top: 300, behavior: 'smooth' });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
