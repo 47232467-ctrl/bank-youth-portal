@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识库 - 银YOUNG空间</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #ed8936;
+            --bg-main: #f7fafc;
+            --shadow-soft: 0 4px 20px rgba(26, 54, 93, 0.08);
+            --shadow-hover: 0 12px 40px rgba(26, 54, 93, 0.15);
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--bg-main);
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+        .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; font-weight: 700; }
+        .logo-text { font-size: 1.5rem; font-weight: 600; color: var(--primary); }
+        .logo-text span { color: var(--accent); }
+        .nav-links { display: flex; gap: 0.5rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: #4a5568; padding: 0.6rem 1.2rem; border-radius: var(--radius-sm); font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; }
+        .nav-links a:hover { background: var(--primary); color: white; }
+        .nav-links a.active { background: var(--primary); color: white; }
+        .nav-cta { background: var(--accent) !important; color: white !important; }
+
+        .page-header {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%);
+            color: white;
+            text-align: center;
+        }
+        .page-header-content { max-width: 800px; margin: 0 auto; }
+        .page-badge { display: inline-block; background: var(--accent); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1rem; }
+        .page-header h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .page-header p { font-size: 1.2rem; opacity: 0.9; }
+
+        .content { padding: 4rem 2rem; max-width: 1400px; margin: 0 auto; }
+
+        .category-tabs { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .category-tab { padding: 0.6rem 1.2rem; border-radius: 50px; border: 2px solid #e2e8f0; background: white; color: #4a5568; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; }
+        .category-tab:hover { border-color: var(--primary); color: var(--primary); }
+        .category-tab.active { background: var(--primary); border-color: var(--primary); color: white; }
+
+        .knowledge-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .knowledge-card { background: white; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-soft); transition: all 0.4s ease; cursor: pointer; }
+        .knowledge-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+        .knowledge-card-img { height: 140px; background-size: cover; background-position: center; position: relative; }
+        .knowledge-card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(26, 54, 93, 0.6) 100%); }
+        .knowledge-card-badge { position: absolute; top: 0.8rem; left: 0.8rem; background: var(--accent); color: white; padding: 0.25rem 0.6rem; border-radius: 50px; font-size: 0.7rem; font-weight: 600; z-index: 1; }
+        .knowledge-card-content { padding: 1.2rem; }
+        .knowledge-card h3 { font-size: 1rem; color: #1a202c; margin-bottom: 0.5rem; line-height: 1.4; }
+        .knowledge-card p { color: #718096; font-size: 0.85rem; margin-bottom: 0.8rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .knowledge-card-meta { display: flex; justify-content: space-between; align-items: center; padding-top: 0.8rem; border-top: 1px solid #eee; }
+        .knowledge-card-author { display: flex; align-items: center; gap: 0.4rem; font-size: 0.75rem; color: #718096; }
+        .knowledge-card-avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; }
+
+        .back-home { text-align: center; margin-top: 3rem; }
+        .back-home-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: var(--primary); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
+        .back-home-btn:hover { transform: translateY(-3px); }
+
+        .footer { background: #0d1f3c; color: white; padding: 4rem 2rem 2rem; text-align: center; }
+        .footer p { opacity: 0.7; font-size: 0.95rem; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .knowledge-grid { grid-template-columns: repeat(2, 1fr); }
+            .page-header h1 { font-size: 2rem; }
+        }
+        @media (max-width: 480px) {
+            .knowledge-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">Y</div>
+                <div class="logo-text">银<span>YOUNG</span>空间</div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="knowledge.html" class="active">知识库</a></li>
+                <li><a href="marketing.html">营销锦囊</a></li>
+                <li><a href="seniors.html">前辈说</a></li>
+                <li><a href="mental.html">心灵驿站</a></li>
+                <li><a href="relax.html" class="nav-cta">轻松一刻</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="page-header-content">
+            <div class="page-badge">📚 业务知识库</div>
+            <h1>知识库</h1>
+            <p>涵盖存贷款、理财、信用卡等核心银行业务</p>
+        </div>
+    </header>
+
+    <main class="content">
+        <div class="category-tabs">
+            <div class="category-tab active">全部</div>
+            <div class="category-tab">存款业务</div>
+            <div class="category-tab">贷款业务</div>
+            <div class="category-tab">理财投资</div>
+            <div class="category-tab">信用卡</div>
+            <div class="category-tab">电子银行</div>
+        </div>
+
+        <div class="knowledge-grid">
+            <div class="knowledge-card">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <span class="knowledge-card-badge">热门</span>
+                </div>
+                <div class="knowledge-card-content">
+                    <h3>个人定期存款业务详解</h3>
+                    <p>详细介绍各类定期存款产品、利率计算方式及支取规则。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">业</div>业务部</div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                    <span class="knowledge-card-badge">实用</span>
+                </div>
+                <div class="knowledge-card-content">
+                    <h3>住房贷款申请全流程</h3>
+                    <p>从材料准备到审批放款，完整业务流程详解。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">贷</div>贷款中心</div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);">
+                    <span class="knowledge-card-badge">必读</span>
+                </div>
+                <div class="knowledge-card-content">
+                    <h3>理财产品风险等级划分</h3>
+                    <p>R1到R5各等级产品特点及适合客群分析。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">理</div>理财部</div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);">
+                    <span class="knowledge-card-badge">重要</span>
+                </div>
+                <div class="knowledge-card-content">
+                    <h3>信用卡申请与使用指南</h3>
+                    <p>信用卡申请流程、账单还款及优惠活动介绍。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">卡</div>信用卡部</div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);">
+                    <span class="knowledge-card-badge">新品</span>
+                </div>
+                <div class="knowledge-card-content">
+                    <h3>手机银行新功能操作手册</h3>
+                    <p>最新版手机银行功能介绍及操作指引。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">数</div>数字银行部</div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #00923a 0%, #f5af19 100%);">
+                    <span class="knowledge-card-badge">技巧</span>
+                </div>
+                <div class="knowledge-card-content">
+                    <h3>企业开户流程与注意事项</h3>
+                    <p>对公账户开户所需材料、流程及时限说明。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">对</div>对公业务部</div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #e65c00 0%, #f9d423 100%);">
+                    <span class="knowledge-card-badge">热门</span>
+                </div>
+                <div class="knowledge-card-content">
+                    <h3>反洗钱客户身份识别</h3>
+                    <p>客户身份识别要求及可疑交易报告要点。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">合</div>合规部</div>
+                    </div>
+                </div>
+            </div>
+            <div class="knowledge-card">
+                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);">
+                    <span class="knowledge-card-badge">实用</span>
+                </div>
+                <div class="knowledge-card-content">
+                    <h3>外汇业务基础知识</h3>
+                    <p>常见外币产品及结售汇业务操作要点。</p>
+                    <div class="knowledge-card-meta">
+                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">外</div>外汇部</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-home">
+            <a href="index.html" class="back-home-btn">← 返回首页</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>银YOUNG空间 · 银行青年的成长加油站</p>
+    </footer>
+</body>
+</html>
