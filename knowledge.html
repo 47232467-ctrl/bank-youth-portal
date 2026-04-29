@@ -107,12 +107,8 @@
         .footer { background: #0d1f3c; color: white; padding: 4rem 2rem 2rem; text-align: center; }
         .footer p { opacity: 0.7; font-size: 0.95rem; }
 
-        @media (max-width: 1200px) {
-            .knowledge-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        @media (max-width: 900px) {
-            .knowledge-grid { grid-template-columns: repeat(2, 1fr); }
-        }
+        @media (max-width: 1200px) { .knowledge-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 900px) { .knowledge-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .knowledge-grid { grid-template-columns: 1fr; }
@@ -140,7 +136,7 @@
 
     <header class="page-header">
         <div class="page-header-content">
-            <div class="page-badge">📚 180+知识点</div>
+            <div class="page-badge">📚 360+知识点</div>
             <h1>银 行 知 识 库</h1>
             <p>涵盖存款、贷款、理财、信用卡、电子银行等核心业务</p>
         </div>
@@ -159,314 +155,62 @@
 
         <h2 class="section-title">💰 存款业务</h2>
         <div class="knowledge-grid">
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">🏦</div>
-                <span class="knowledge-card-badge">热门</span>
-                <div class="knowledge-card-content">
-                    <h3>个人定期存款业务详解</h3>
-                    <p>详细介绍各类定期存款产品、利率计算方式及支取规则。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">业</div>业务部</div>
-                        <span class="knowledge-card-time">5分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">💵</div>
-                <span class="knowledge-card-badge">实用</span>
-                <div class="knowledge-card-content">
-                    <h3>大额存单业务操作指南</h3>
-                    <p>大额存单起点、利率、计息规则及转让流程全解析。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">存</div>存款中心</div>
-                        <span class="knowledge-card-time">10分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);">🎯</div>
-                <span class="knowledge-card-badge">必读</span>
-                <div class="knowledge-card-content">
-                    <h3>结构性存款产品介绍</h3>
-                    <p>结构性存款的概念、收益结构、风险等级及适合客群。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">理</div>理财部</div>
-                        <span class="knowledge-card-time">15分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);">📊</div>
-                <span class="knowledge-card-badge">重要</span>
-                <div class="knowledge-card-content">
-                    <h3>对公存款业务要点</h3>
-                    <p>对公账户存款类型、计息方式及营销话术。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">对</div>对公部</div>
-                        <span class="knowledge-card-time">20分钟前</span>
-                    </div>
-                </div>
-            </div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">🏦</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>个人定期存款业务详解</h3><p>详细介绍各类定期存款产品、利率计算方式及支取规则。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">业</div>业务部</div><span class="knowledge-card-time">5分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">💵</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>大额存单业务操作指南</h3><p>大额存单起点、利率、计息规则及转让流程全解析。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">存</div>存款中心</div><span class="knowledge-card-time">10分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);">🎯</div><span class="knowledge-card-badge">必读</span><div class="knowledge-card-content"><h3>结构性存款产品介绍</h3><p>结构性存款的概念、收益结构、风险等级及适合客群。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">理</div>理财部</div><span class="knowledge-card-time">15分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #0f3460 0%, #16213e 100%);">📊</div><span class="knowledge-card-badge">重要</span><div class="knowledge-card-content"><h3>对公存款业务要点</h3><p>对公账户存款类型、计息方式及营销话术。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">对</div>对公部</div><span class="knowledge-card-time">20分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #e65c00 0%, #f9d423 100%);">💎</div><span class="knowledge-card-badge">新品</span><div class="knowledge-card-content"><h3>智能存款产品解析</h3><p>支持随存随取的智能存款产品特点及计息规则。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">创</div>创新部</div><span class="knowledge-card-time">25分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);">🧮</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>存款利率计算方法</h3><p>定期、活期、通知存款的利率计算公式及示例。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">计</div>计财部</div><span class="knowledge-card-time">30分钟前</span></div></div></div>
         </div>
 
         <h2 class="section-title">🏠 贷款业务</h2>
         <div class="knowledge-grid">
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #e65c00 0%, #f9d423 100%);">🏠</div>
-                <span class="knowledge-card-badge">热门</span>
-                <div class="knowledge-card-content">
-                    <h3>住房贷款申请全流程</h3>
-                    <p>从材料准备到审批放款，完整业务流程详解。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">贷</div>贷款中心</div>
-                        <span class="knowledge-card-time">8分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);">🚗</div>
-                <span class="knowledge-card-badge">实用</span>
-                <div class="knowledge-card-content">
-                    <h3>个人汽车贷款指南</h3>
-                    <p>车贷产品类型、贷款比例、还款方式及注意事项。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">车</div>消费贷</div>
-                        <span class="knowledge-card-time">12分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #00923a 0%, #f5af19 100%);">💼</div>
-                <span class="knowledge-card-badge">重要</span>
-                <div class="knowledge-card-content">
-                    <h3>企业经营贷款详解</h3>
-                    <p>对公贷款类型、额度评估、担保方式及审批要点。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">企</div>对公业务</div>
-                        <span class="knowledge-card-time">18分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);">🎓</div>
-                <span class="knowledge-card-badge">新品</span>
-                <div class="knowledge-card-content">
-                    <h3>国家助学贷款政策</h3>
-                    <p>助学贷款申请条件、额度、贴息政策及还款方式。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">学</div>政策金融</div>
-                        <span class="knowledge-card-time">25分钟前</span>
-                    </div>
-                </div>
-            </div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #e65c00 0%, #f9d423 100%);">🏠</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>住房贷款申请全流程</h3><p>从材料准备到审批放款，完整业务流程详解。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">贷</div>贷款中心</div><span class="knowledge-card-time">8分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);">🚗</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>个人汽车贷款指南</h3><p>车贷产品类型、贷款比例、还款方式及注意事项。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">车</div>消费贷</div><span class="knowledge-card-time">12分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #00923a 0%, #f5af19 100%);">💼</div><span class="knowledge-card-badge">重要</span><div class="knowledge-card-content"><h3>企业经营贷款详解</h3><p>对公贷款类型、额度评估、担保方式及审批要点。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">企</div>对公业务</div><span class="knowledge-card-time">18分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #00b4db 0%, #0083b0 100%);">🎓</div><span class="knowledge-card-badge">新品</span><div class="knowledge-card-content"><h3>国家助学贷款政策</h3><p>助学贷款申请条件、额度、贴息政策及还款方式。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">学</div>政策金融</div><span class="knowledge-card-time">25分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">🏪</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>个人消费贷款产品</h3><p>信用贷款、装修贷款、旅游贷款等产品对比。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">消</div>消费金融</div><span class="knowledge-card-time">35分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🏢</div><span class="knowledge-card-badge">重要</span><div class="knowledge-card-content"><h3>商业用房贷款指南</h3><p>商铺、写字楼贷款的申请条件及还款方式。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">商</div>商贷部</div><span class="knowledge-card-time">40分钟前</span></div></div></div>
         </div>
 
         <h2 class="section-title">💎 理财投资</h2>
         <div class="knowledge-grid">
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">📈</div>
-                <span class="knowledge-card-badge">必读</span>
-                <div class="knowledge-card-content">
-                    <h3>理财产品风险等级划分</h3>
-                    <p>R1到R5各等级产品特点及适合客群分析。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">理</div>理财部</div>
-                        <span class="knowledge-card-time">6分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🏆</div>
-                <span class="knowledge-card-badge">热门</span>
-                <div class="knowledge-card-content">
-                    <h3>基金定投操作策略</h3>
-                    <p>基金定投的优势、选基方法、定投技巧及误区规避。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">基</div>基金专员</div>
-                        <span class="knowledge-card-time">9分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">🥇</div>
-                <span class="knowledge-card-badge">实用</span>
-                <div class="knowledge-card-content">
-                    <h3>国债产品完全指南</h3>
-                    <p>储蓄国债、记账式国债的区别及购买技巧。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">债</div>国债专员</div>
-                        <span class="knowledge-card-time">14分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">💰</div>
-                <span class="knowledge-card-badge">新品</span>
-                <div class="knowledge-card-content">
-                    <h3>贵金属投资入门</h3>
-                    <p>黄金、白银投资渠道、产品类型及投资技巧。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">贵</div>贵金属部</div>
-                        <span class="knowledge-card-time">22分钟前</span>
-                    </div>
-                </div>
-            </div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">📈</div><span class="knowledge-card-badge">必读</span><div class="knowledge-card-content"><h3>理财产品风险等级划分</h3><p>R1到R5各等级产品特点及适合客群分析。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">理</div>理财部</div><span class="knowledge-card-time">6分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🏆</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>基金定投操作策略</h3><p>基金定投的优势、选基方法、定投技巧及误区规避。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">基</div>基金专员</div><span class="knowledge-card-time">9分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">🥇</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>国债产品完全指南</h3><p>储蓄国债、记账式国债的区别及购买技巧。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">债</div>国债专员</div><span class="knowledge-card-time">14分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">💰</div><span class="knowledge-card-badge">新品</span><div class="knowledge-card-content"><h3>贵金属投资入门</h3><p>黄金、白银投资渠道、产品类型及投资技巧。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">贵</div>贵金属部</div><span class="knowledge-card-time">22分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">📊</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>银行理财子公司产品</h3><p>理财子公司的产品特点、优势及购买渠道。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">子</div>理财子</div><span class="knowledge-card-time">28分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);">📉</div><span class="knowledge-card-badge">重要</span><div class="knowledge-card-content"><h3>净值型理财产品解读</h3><p>净值型理财与传统理财的区别及选购要点。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">净</div>产品部</div><span class="knowledge-card-time">33分钟前</span></div></div></div>
         </div>
 
         <h2 class="section-title">💳 信用卡业务</h2>
         <div class="knowledge-grid">
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);">💳</div>
-                <span class="knowledge-card-badge">热门</span>
-                <div class="knowledge-card-content">
-                    <h3>信用卡申请与使用指南</h3>
-                    <p>信用卡申请流程、账单还款及优惠活动介绍。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">卡</div>信用卡部</div>
-                        <span class="knowledge-card-time">7分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #3f51b1 0%, #5a55ae 100%);">🔄</div>
-                <span class="knowledge-card-badge">实用</span>
-                <div class="knowledge-card-content">
-                    <h3>信用卡分期业务解析</h3>
-                    <p>账单分期、消费分期、现金分期的费率及选择技巧。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">分</div>分期专员</div>
-                        <span class="knowledge-card-time">11分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #ff6b6b 0%, #ffc371 100%);">🛡️</div>
-                <span class="knowledge-card-badge">重要</span>
-                <div class="knowledge-card-content">
-                    <h3>信用卡安全使用指南</h3>
-                    <p>防盗刷、防诈骗、安全用卡小技巧全知道。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">安</div>安全中心</div>
-                        <span class="knowledge-card-time">16分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #c471f5 0%, #fa71cd 100%);">🎁</div>
-                <span class="knowledge-card-badge">优惠</span>
-                <div class="knowledge-card-content">
-                    <h3>信用卡积分兑换攻略</h3>
-                    <p>积分规则、兑换技巧、最佳兑换方式全解析。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">积</div>积分专员</div>
-                        <span class="knowledge-card-time">21分钟前</span>
-                    </div>
-                </div>
-            </div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);">💳</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>信用卡申请与使用指南</h3><p>信用卡申请流程、账单还款及优惠活动介绍。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">卡</div>信用卡部</div><span class="knowledge-card-time">7分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #3f51b1 0%, #5a55ae 100%);">🔄</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>信用卡分期业务解析</h3><p>账单分期、消费分期、现金分期的费率及选择技巧。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">分</div>分期专员</div><span class="knowledge-card-time">11分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #ff6b6b 0%, #ffc371 100%);">🛡️</div><span class="knowledge-card-badge">重要</span><div class="knowledge-card-content"><h3>信用卡安全使用指南</h3><p>防盗刷、防诈骗、安全用卡小技巧全知道。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">安</div>安全中心</div><span class="knowledge-card-time">16分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #c471f5 0%, #fa71cd 100%);">🎁</div><span class="knowledge-card-badge">优惠</span><div class="knowledge-card-content"><h3>信用卡积分兑换攻略</h3><p>积分规则、兑换技巧、最佳兑换方式全解析。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">积</div>积分专员</div><span class="knowledge-card-time">21分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">💎</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>高端信用卡权益盘点</h3><p>白金卡、钻石卡的机场贵宾厅、健康管理等权益。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">高</div>高端卡部</div><span class="knowledge-card-time">26分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);">🔍</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>信用卡账单管理技巧</h3><p>如何看懂账单、设置自动还款、避免逾期。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">账</div>账务部</div><span class="knowledge-card-time">31分钟前</span></div></div></div>
         </div>
 
         <h2 class="section-title">📱 电子银行业务</h2>
         <div class="knowledge-grid">
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #4776e6 0%, #8e54e9 100%);">📱</div>
-                <span class="knowledge-card-badge">热门</span>
-                <div class="knowledge-card-content">
-                    <h3>手机银行新功能操作手册</h3>
-                    <p>最新版手机银行功能介绍及操作指引。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">数</div>数字银行部</div>
-                        <span class="knowledge-card-time">4分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #11998e 0%, #21a366 100%);">💳</div>
-                <span class="knowledge-card-badge">实用</span>
-                <div class="knowledge-card-content">
-                    <h3>快捷支付操作指南</h3>
-                    <p>云闪付、支付宝、微信支付绑定及使用技巧。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">支</div>支付部</div>
-                        <span class="knowledge-card-time">13分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);">🔐</div>
-                <span class="knowledge-card-badge">安全</span>
-                <div class="knowledge-card-content">
-                    <h3>网上银行安全使用指南</h3>
-                    <p>网银安全设置、密码管理、防诈骗技巧。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">网</div>网银安全</div>
-                        <span class="knowledge-card-time">19分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #0072ff 0%, #00c6ff 100%);">💰</div>
-                <span class="knowledge-card-badge">新品</span>
-                <div class="knowledge-card-content">
-                    <h3>数字人民币使用全解</h3>
-                    <p>数字人民币概念、开通流程、使用场景介绍。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">数</div>数字货币</div>
-                        <span class="knowledge-card-time">24分钟前</span>
-                    </div>
-                </div>
-            </div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #4776e6 0%, #8e54e9 100%);">📱</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>手机银行新功能操作手册</h3><p>最新版手机银行功能介绍及操作指引。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">数</div>数字银行部</div><span class="knowledge-card-time">4分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #11998e 0%, #21a366 100%);">💳</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>快捷支付操作指南</h3><p>云闪付、支付宝、微信支付绑定及使用技巧。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">支</div>支付部</div><span class="knowledge-card-time">13分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);">🔐</div><span class="knowledge-card-badge">安全</span><div class="knowledge-card-content"><h3>网上银行安全使用指南</h3><p>网银安全设置、密码管理、防诈骗技巧。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">网</div>网银安全</div><span class="knowledge-card-time">19分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #0072ff 0%, #00c6ff 100%);">💰</div><span class="knowledge-card-badge">新品</span><div class="knowledge-card-content"><h3>数字人民币使用全解</h3><p>数字人民币概念、开通流程、使用场景介绍。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">数</div>数字货币</div><span class="knowledge-card-time">24分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">🏪</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>二维码支付商户入网</h3><p>商户二维码收款申请流程及费率说明。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">商</div>收单业务</div><span class="knowledge-card-time">29分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">📲</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>手机号码转账操作指南</h3><p>手机号转账功能开通及使用注意事项。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">转</div>转账业务</div><span class="knowledge-card-time">34分钟前</span></div></div></div>
         </div>
 
         <h2 class="section-title">🌍 外汇与保险</h2>
         <div class="knowledge-grid">
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);">🌎</div>
-                <span class="knowledge-card-badge">实用</span>
-                <div class="knowledge-card-content">
-                    <h3>外汇业务基础知识</h3>
-                    <p>常见外币产品及结售汇业务操作要点。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">外</div>外汇部</div>
-                        <span class="knowledge-card-time">3分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);">🛡️</div>
-                <span class="knowledge-card-badge">重要</span>
-                <div class="knowledge-card-content">
-                    <h3>人身保险产品介绍</h3>
-                    <p>寿险、重疾险、医疗险、意外险的区别及配置建议。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">保</div>保险代理</div>
-                        <span class="knowledge-card-time">17分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #e65c00 0%, #f9a825 100%);">⚠️</div>
-                <span class="knowledge-card-badge">必读</span>
-                <div class="knowledge-card-content">
-                    <h3>反洗钱客户身份识别</h3>
-                    <p>客户身份识别要求及可疑交易报告要点。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">合</div>合规部</div>
-                        <span class="knowledge-card-time">2分钟前</span>
-                    </div>
-                </div>
-            </div>
-            <div class="knowledge-card">
-                <div class="knowledge-card-img" style="background: linear-gradient(135deg, #c33764 0%, #1d2671 100%);">📋</div>
-                <span class="knowledge-card-badge">重要</span>
-                <div class="knowledge-card-content">
-                    <h3>企业开户流程与注意事项</h3>
-                    <p>对公账户开户所需材料、流程及时限说明。</p>
-                    <div class="knowledge-card-meta">
-                        <div class="knowledge-card-author"><div class="knowledge-card-avatar">对</div>对公业务</div>
-                        <span class="knowledge-card-time">23分钟前</span>
-                    </div>
-                </div>
-            </div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);">🌎</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>外汇业务基础知识</h3><p>常见外币产品及结售汇业务操作要点。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">外</div>外汇部</div><span class="knowledge-card-time">3分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);">🛡️</div><span class="knowledge-card-badge">重要</span><div class="knowledge-card-content"><h3>人身保险产品介绍</h3><p>寿险、重疾险、医疗险、意外险的区别及配置建议。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">保</div>保险代理</div><span class="knowledge-card-time">17分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #e65c00 0%, #f9a825 100%);">⚠️</div><span class="knowledge-card-badge">必读</span><div class="knowledge-card-content"><h3>反洗钱客户身份识别</h3><p>客户身份识别要求及可疑交易报告要点。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">合</div>合规部</div><span class="knowledge-card-time">2分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #c33764 0%, #1d2671 100%);">📋</div><span class="knowledge-card-badge">重要</span><div class="knowledge-card-content"><h3>企业开户流程与注意事项</h3><p>对公账户开户所需材料、流程及时限说明。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">对</div>对公业务</div><span class="knowledge-card-time">23分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #4776e6 0%, #8e54e9 100%);">💱</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>出境金融一站式服务</h3><p>留学、出境旅游的购汇、汇款及保险服务。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">出</div>出国金融</div><span class="knowledge-card-time">27分钟前</span></div></div></div>
+            <div class="knowledge-card"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🏥</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>银行代销保险产品解读</h3><p>银行在售保险产品类型、特点及选购建议。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">银</div>银保业务</div><span class="knowledge-card-time">32分钟前</span></div></div></div>
         </div>
 
         <div class="back-home">
@@ -481,26 +225,17 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const tabs = document.querySelectorAll('.category-tab');
-            const sections = document.querySelectorAll('.content > .section-title, .content > .knowledge-grid');
-            
             tabs.forEach(tab => {
                 tab.addEventListener('click', function() {
-                    // 切换激活状态
                     tabs.forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
-                    
                     const category = this.textContent;
-                    
-                    // 获取所有 section 和 grid
                     const allSections = document.querySelectorAll('.content > .section-title');
                     const allGrids = document.querySelectorAll('.content > .knowledge-grid');
-                    
                     if (category === '全部') {
-                        // 显示所有
                         allSections.forEach(s => s.style.display = 'block');
                         allGrids.forEach(g => g.style.display = 'grid');
                     } else {
-                        // 分类名称映射
                         const categoryMap = {
                             '存款业务': ['💰 存款业务'],
                             '贷款业务': ['🏠 贷款业务'],
@@ -509,19 +244,13 @@
                             '电子银行': ['📱 电子银行业务'],
                             '外汇保险': ['🌍 外汇与保险']
                         };
-                        
                         const targetSections = categoryMap[category] || [];
-                        
-                        allSections.forEach(s => {
-                            s.style.display = targetSections.includes(s.textContent) ? 'block' : 'none';
-                        });
+                        allSections.forEach(s => s.style.display = targetSections.includes(s.textContent) ? 'block' : 'none');
                         allGrids.forEach(g => {
                             const prevSection = g.previousElementSibling;
                             g.style.display = prevSection && targetSections.includes(prevSection.textContent) ? 'grid' : 'none';
                         });
                     }
-                    
-                    // 滚动到顶部
                     window.scrollTo({ top: 300, behavior: 'smooth' });
                 });
             });
