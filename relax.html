@@ -8,118 +8,54 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #1a365d;
-            --primary-light: #2c5282;
-            --primary-dark: #0d1f3c;
-            --accent: #ed8936;
-            --accent-light: #f6ad55;
-            --accent-soft: #fbd38d;
-            --bg-main: #fef9f3;
-            --shadow-soft: 0 4px 20px rgba(26, 54, 93, 0.08);
-            --shadow-hover: 0 12px 40px rgba(26, 54, 93, 0.15);
-            --radius-lg: 20px;
-            --radius-md: 12px;
-        }
-
+        :root { --primary: #1a365d; --accent: #ed8936; --bg-main: #fef9f3; --shadow-soft: 0 4px 20px rgba(26, 54, 93, 0.08); --shadow-hover: 0 12px 40px rgba(26, 54, 93, 0.15); --radius-lg: 20px; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Noto Sans SC', sans-serif;
-            background: linear-gradient(135deg, #fef9f3 0%, #fef3e2 50%, #fbd38d 100%);
-            color: #4a5568;
-            line-height: 1.8;
-            min-height: 100vh;
-        }
-
-        .navbar {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-        }
+        body { font-family: 'Noto Sans SC', sans-serif; background: linear-gradient(135deg, #fef9f3 0%, #fef3e2 100%); color: #4a5568; line-height: 1.8; min-height: 100vh; }
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); }
         .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
-        .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; font-weight: 700; }
+        .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, #1a365d, #2c5282, #3182ce); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; font-weight: 700; }
         .logo-text { font-family: 'Noto Serif SC', serif; font-size: 1.5rem; font-weight: 600; color: var(--primary); }
         .logo-text span { color: var(--accent); }
         .nav-links { display: flex; gap: 0.5rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: #4a5568; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; }
+        .nav-links a { text-decoration: none; color: #4a5568; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 500; transition: all 0.3s; }
         .nav-links a:hover { background: var(--primary); color: white; }
-        .nav-links a.active { background: var(--primary); color: white; }
         .nav-cta { background: var(--accent) !important; color: white !important; }
-
-        .page-header {
-            padding: 8rem 2rem 4rem;
-            text-align: center;
-            position: relative;
-        }
+        .page-header { padding: 8rem 2rem 4rem; text-align: center; }
         .page-header-content { max-width: 800px; margin: 0 auto; }
         .page-badge { display: inline-block; background: var(--primary); color: white; padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1rem; }
         .page-header h1 { font-family: 'Noto Serif SC', serif; font-size: 3rem; color: var(--primary); margin-bottom: 1rem; }
         .page-header p { font-size: 1.2rem; color: #718096; }
-
         .content { padding: 4rem 2rem; max-width: 1400px; margin: 0 auto; }
-
-        .section-title {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin: 3rem 0 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid var(--accent);
-            display: inline-block;
-        }
+        .section-title { font-family: 'Noto Serif SC', serif; font-size: 1.5rem; color: var(--primary); margin: 3rem 0 1.5rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--accent); display: inline-block; }
         .section-title:first-of-type { margin-top: 0; }
-
-        .relax-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        .relax-card { background: white; border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-soft); transition: all 0.3s ease; position: relative; overflow: hidden; }
-        .relax-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent), var(--accent-light)); transform: scaleX(0); transition: transform 0.3s ease; }
+        .relax-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .relax-card { background: white; border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-soft); transition: all 0.3s; position: relative; overflow: hidden; }
+        .relax-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent), #f6ad55); transform: scaleX(0); transition: transform 0.3s; }
         .relax-card:hover::before { transform: scaleX(1); }
         .relax-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
         .relax-card-emoji { font-size: 2.5rem; margin-bottom: 1rem; }
         .relax-card h3 { color: var(--primary); margin-bottom: 0.8rem; font-size: 1.05rem; font-weight: 600; }
-        .relax-card p { color: #718096; font-size: 0.9rem; line-height: 1.7; }
-        .relax-card-tag { display: inline-block; background: linear-gradient(135deg, #fef3e2 0%, #fbd38d 100%); color: var(--accent); padding: 0.2rem 0.6rem; border-radius: 50px; font-size: 0.7rem; margin-top: 0.8rem; font-weight: 600; }
-
-        .daily-quote { 
-            max-width: 900px; 
-            margin: 4rem auto 0; 
-            background: white; 
-            border-radius: var(--radius-lg); 
-            padding: 2.5rem; 
-            text-align: center; 
-            box-shadow: var(--shadow-hover);
-            position: relative;
-        }
-        .daily-quote::before { content: '💭'; font-size: 3rem; position: absolute; top: -1.5rem; left: 50%; transform: translateX(-50%); background: white; padding: 0 1rem; border-radius: 50%; }
+        .relax-card p { color: #718096; font-size: 0.85rem; line-height: 1.7; }
+        .relax-card-tag { display: inline-block; background: linear-gradient(135deg, #fef3e2, #fbd38d); color: #b45309; padding: 0.2rem 0.6rem; border-radius: 50px; font-size: 0.7rem; margin-top: 0.8rem; font-weight: 600; }
+        .daily-quote { max-width: 900px; margin: 4rem auto 0; background: white; border-radius: var(--radius-lg); padding: 2.5rem; text-align: center; box-shadow: var(--shadow-hover); position: relative; }
+        .daily-quote::before { content: '💭'; font-size: 3rem; position: absolute; top: -1.5rem; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #fef9f3, #fef3e2); padding: 0 1rem; border-radius: 50%; }
         .daily-quote-text { font-family: 'Noto Serif SC', serif; font-size: 1.4rem; color: var(--primary); margin-bottom: 1rem; line-height: 1.9; }
         .daily-quote-author { color: var(--accent); font-weight: 600; }
-
         .back-home { text-align: center; margin-top: 4rem; }
-        .back-home-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: var(--primary); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
+        .back-home-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 2rem; background: var(--primary); color: white; border-radius: 50px; text-decoration: none; font-weight: 600; transition: all 0.3s; }
         .back-home-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
-
         .footer { background: var(--primary); color: white; padding: 4rem 2rem 2rem; text-align: center; }
-        .footer p { opacity: 0.7; font-size: 0.95rem; }
-
-        @media (max-width: 1024px) {
-            .relax-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .relax-grid { grid-template-columns: 1fr; }
-            .page-header h1 { font-size: 2rem; }
-        }
+        .footer p { opacity: 0.7; }
+        @media (max-width: 1024px) { .relax-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 768px) { .nav-links { display: none; } .relax-grid { grid-template-columns: 1fr 1fr; } .page-header h1 { font-size: 2rem; } }
+        @media (max-width: 480px) { .relax-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">
-                <div class="logo-icon">Y</div>
-                <div class="logo-text">银<span>YOUNG</span>空间</div>
-            </a>
+            <a href="index.html" class="logo"><div class="logo-icon">Y</div><div class="logo-text">银<span>YOUNG</span>空间</div></a>
             <ul class="nav-links">
                 <li><a href="index.html">首页</a></li>
                 <li><a href="knowledge.html">知识库</a></li>
@@ -133,7 +69,7 @@
 
     <header class="page-header">
         <div class="page-header-content">
-            <div class="page-badge">😄 54+趣味内容</div>
+            <div class="page-badge">😄 108+趣味内容</div>
             <h1>轻 松 一 刻</h1>
             <p>笑一笑，十年少，轻松面对每一天</p>
         </div>
@@ -142,256 +78,108 @@
     <main class="content">
         <h2 class="section-title">😂 银行人才能懂的梗</h2>
         <div class="relax-grid">
-            <div class="relax-card">
-                <div class="relax-card-emoji">😂</div>
-                <h3>开户的哲学</h3>
-                <p>"您好，请问办什么业务？"<br>"我要开户。"<br>"好的，请出示身份证。"<br>"我没带。"<br>"……"<br>懂的都懂！</p>
-                <span class="relax-card-tag">#开户日常</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🤣</div>
-                <h3>利息怎么算</h3>
-                <p>"定期利息怎么算？"<br>"请问您存多少？"<br>"10万。"<br>"存多久？"<br>"3年。"<br>"我帮您算算..."<br>"算了，你直接告诉我多少吧！"</p>
-                <span class="relax-card-tag">#客户灵魂</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">😅</div>
-                <h3>柜员の日常</h3>
-                <p>授权老师的"再来一遍"、主管的灵魂拷问、同事的默契配合……这就是我们的日常，每天都是现场直播！</p>
-                <span class="relax-card-tag">#网点日常</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🤦</div>
-                <h3>任务千万条</h3>
-                <p>存款任务、贷款任务、信用卡任务、APP下载任务、电子医保激活任务……任务千万条，完成第一条！</p>
-                <span class="relax-card-tag">#旺季营销</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🙈</div>
-                <h3>销户的恐惧</h3>
-                <p>当客户说"我要销户"的时候，整个网点都安静了……空气中弥漫着紧张的气氛，主管已经悄悄走了过来。</p>
-                <span class="relax-card-tag">#网点惊悚</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🤝</div>
-                <h3>同事暗号</h3>
-                <p>"授权老师来了"=安静<br>"主任查监控"=端正<br>"客户要见领导"=准备应对<br>"今天人少"=快去吃饭</p>
-                <span class="relax-card-tag">#职场暗语</span>
-            </div>
+            <div class="relax-card"><div class="relax-card-emoji">😂</div><h3>开户的哲学</h3><p>"您好，请问办什么业务？"<br>"我要开户。"<br>"好的，请出示身份证。"<br>"我没带。"<br>"……"<br>懂的都懂！</p><span class="relax-card-tag">#开户日常</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🤣</div><h3>利息怎么算</h3><p>"定期利息怎么算？"<br>"请问您存多少？"<br>"10万。"<br>"存多久？"<br>"3年。"<br>"我帮您算算..."<br>"算了，你直接告诉我多少吧！"</p><span class="relax-card-tag">#客户灵魂</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">😅</div><h3>柜员の日常</h3><p>授权老师的"再来一遍"、主管的灵魂拷问、同事的默契配合……这就是我们的日常，每天都是现场直播！</p><span class="relax-card-tag">#网点日常</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🤦</div><h3>任务千万条</h3><p>存款任务、贷款任务、信用卡任务、APP下载任务、电子医保激活任务……任务千万条，完成第一条！</p><span class="relax-card-tag">#旺季营销</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🙈</div><h3>销户的恐惧</h3><p>当客户说"我要销户"的时候，整个网点都安静了……空气中弥漫着紧张的气氛，主管已经悄悄走了过来。</p><span class="relax-card-tag">#网点惊悚</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🤝</div><h3>同事暗号</h3><p>"授权老师来了"=安静<br>"主任查监控"=端正<br>"客户要见领导"=准备应对<br>"今天人少"=快去吃饭</p><span class="relax-card-tag">#职场暗语</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🤫</div><h3>密码的秘密</h3><p>客户："密码忘了"<br>柜员："没关系，重置一下"<br>客户："但是...我连用户名都忘了"<br>柜员：？？？</p><span class="relax-card-tag">#密码之谜</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">📱</div><h3>手机银行推广</h3><p>"叔叔，帮您下载手机银行，以后查账转账都方便"<br>"不用了，我查账都是打电话问你们"<br>这才是真·VIP客户！</p><span class="relax-card-tag">#手机银行</span></div>
         </div>
 
         <h2 class="section-title">😤 银行人的崩溃瞬间</h2>
         <div class="relax-grid">
-            <div class="relax-card">
-                <div class="relax-card-emoji">😱</div>
-                <h3>系统崩了</h3>
-                <p>正准备给客户办业务，系统提示"网络连接失败"。看着后面排队的人群，心里默默祈祷：快点好啊快点好……</p>
-                <span class="relax-card-tag">#系统崩溃</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">😭</div>
-                <h3>授权被拒</h3>
-                <p>小心翼翼地点下授权按钮，屏幕上赫然显示"授权拒绝"。那一瞬间，感觉整个世界都灰暗了……</p>
-                <span class="relax-card-tag">#授权之痛</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">😩</div>
-                <h3>客户发飙</h3>
-                <p>"你们银行怎么这样！"<br>"我要投诉你们！"<br>"叫你们领导来！"<br>而你只能保持微笑，内心已经崩溃……</p>
-                <span class="relax-card-tag">#投诉时刻</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🤯</div>
-                <h3>临时加班</h3>
-                <p>下班前5分钟，工作群弹出消息："今晚全员加班，开会。"那一刻，感觉今天又是元气满满的一天呢！</p>
-                <span class="relax-card-tag">#加班日常</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">😤</div>
-                <h3>晨会太早</h3>
-                <p>每天7:50到岗，8点晨会。6点起床，7点到单位，8点开会，9点开始正式工作……银行人的早晨，比太阳还早！</p>
-                <span class="relax-card-tag">#早起挑战</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">💀</div>
-                <h3>技能比赛</h3>
-                <p>点钞、翻打传票、录入……看着技能标兵的表演，我只想说：这是怎么做到的？？？</p>
-                <span class="relax-card-tag">#技能大赛</span>
-            </div>
+            <div class="relax-card"><div class="relax-card-emoji">😱</div><h3>系统崩了</h3><p>正准备给客户办业务，系统提示"网络连接失败"。看着后面排队的人群，心里默默祈祷：快点好啊快点好……</p><span class="relax-card-tag">#系统崩溃</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">😭</div><h3>授权被拒</h3><p>小心翼翼地点下授权按钮，屏幕上赫然显示"授权拒绝"。那一瞬间，感觉整个世界都灰暗了……</p><span class="relax-card-tag">#授权之痛</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">😩</div><h3>客户发飙</h3><p>"你们银行怎么这样！"<br>"我要投诉你们！"<br>"叫你们领导来！"<br>而你只能保持微笑，内心已经崩溃……</p><span class="relax-card-tag">#客户投诉</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">😤</div><h3>扎账不平</h3><p>日终扎账，发现短款100元。翻了三个小时凭证，问了所有同事，最后发现是自己中午买咖啡的时候多付了100……</p><span class="relax-card-tag">#扎账崩溃</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">😰</div><h3>打印机又卡了</h3><p>凭证打印机第三次卡纸了，客户在旁边叹气，后面排队的大叔已经在看手机了，而你还在和那张该死的纸较劲……</p><span class="relax-card-tag">#打印机</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">😓</div><h3>月末冲刺</h3><p>每个月最后三天，就像打仗一样。存款任务还差800万，贷款任务还差1500万，信用卡还差200张……</p><span class="relax-card-tag">#月末冲刺</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🤯</div><h3>培训考试</h3><p>刚结束季度考试，又来合规培训；合规培训结束，又有新产品上线培训。银行人的学习热情，永不熄灭！</p><span class="relax-card-tag">#培训考试</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">😞</div><h3>客户失联</h3><p>跟了一个月的客户终于说要来办业务，结果前一天晚上打电话确认，客户说："哦，我今天有事，改天吧。"然后就没有然后了……</p><span class="relax-card-tag">#客户失联</span></div>
         </div>
 
-        <h2 class="section-title">🎭 银行人的演技</h2>
+        <h2 class="section-title">💼 银行人职业病</h2>
         <div class="relax-grid">
-            <div class="relax-card">
-                <div class="relax-card-emoji">🎭</div>
-                <h3>微笑表演</h3>
-                <p>明明很累也要微笑、明明很烦也要耐心、明明想下班还要说"好的没问题"……我们都是天生的演员！</p>
-                <span class="relax-card-tag">#职业微笑</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🎪</div>
-                <h3>开会达人</h3>
-                <p>晨会、夕会、周例会、月度会、季度会、年度会、专题会、动员会……会议太多，时间不够用！但我们依然认真听讲。</p>
-                <span class="relax-card-tag">#开会文化</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🏆</div>
-                <h3>旺季营销</h3>
-                <p>开门红、年中冲刺、年末收官……每一个节日都是营销日，每一个假期都是决战时。这就是银行人的旺季！</p>
-                <span class="relax-card-tag">#旺季营销</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">📊</div>
-                <h3>数据达人</h3>
-                <p>日均、时点、余额、增量……银行人的一天就是和数据打交道的一天。离开了数据，我们什么都不是（bushi）！</p>
-                <span class="relax-card-tag">#数据人生</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🎯</div>
-                <h3>目标达成</h3>
-                <p>"本月目标XXX万！"<br>"已完成120%！"<br>"很好，下月目标翻倍！"<br>……我太难了！</p>
-                <span class="relax-card-tag">#目标压力</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">💬</div>
-                <h3>话术表演</h3>
-                <p>"您好，欢迎光临！"<br>"请问有什么可以帮您？"<br>"好的，请您稍等！"<br>……这些话术，我们每天要说一百遍！</p>
-                <span class="relax-card-tag">#话术满分</span>
-            </div>
+            <div class="relax-card"><div class="relax-card-emoji">🔢</div><h3>数字敏感症</h3><p>走在街上看到车牌，第一反应是：这个数字能凑多少？看到价格牌，忍不住计算年化收益率……职业病无药可医！</p><span class="relax-card-tag">#职业病</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">📋</div><h3>检查强迫症</h3><p>下班前必须检查三遍：电脑锁了吗？印章收了吗？凭证整理了吗？不检查三遍绝对不敢走……</p><span class="relax-card-tag">#强迫症</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🗣️</div><h3>职业微笑</h3><p>下班后在超市、餐厅、地铁上，也会条件反射地保持微笑。朋友说：你放松点！但这是本能反应啊！</p><span class="relax-card-tag">#职业微笑</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">👀</div><h3>观察力爆棚</h3><p>在外面吃饭，会不自觉地观察服务员的态度、餐厅的收银系统、POS机型号……走在街上，看哪家银行人少哪家排队多……</p><span class="relax-card-tag">#观察力</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">⏰</div><h3>时间强迫症</h3><p>银行人对时间特别敏感，9:00开门、11:30轧账、16:00人少……时间节点刻在骨子里，到点就条件反射……</p><span class="relax-card-tag">#时间强迫</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🧮</div><h3>心算高手</h3><p>不管对方报什么数字，柜员们都能秒算利息。客户："30万，存3年，定期利率多少来着？"脑子已经开始算了……</p><span class="relax-card-tag">#心算高手</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">📝</div><h3>记录狂魔</h3><p>看到任何重要的信息，第一反应是记下来。开会用本子记、客户信息用笔记、工作计划用APP记……不记下来不安心！</p><span class="relax-card-tag">#记录狂</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🔐</div><h3>密码焦虑</h3><p>设置了太多密码：电脑密码、柜面系统密码、网银密码、手机银行密码……有一次做梦，梦到所有密码都忘了……</p><span class="relax-card-tag">#密码焦虑</span></div>
         </div>
 
-        <h2 class="section-title">🤓 银行人的职业病</h2>
+        <h2 class="section-title">🎭 银行人神对话</h2>
         <div class="relax-grid">
-            <div class="relax-card">
-                <div class="relax-card-emoji">🧮</div>
-                <h3>算数的强迫症</h3>
-                <p>买菜要算总价、点外卖要算优惠、看时间会换算成秒……这病没救了！出门不带计算器就没安全感！</p>
-                <span class="relax-card-tag">#强迫症患者</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🛡️</div>
-                <h3>职业病图鉴</h3>
-                <p>微笑已成肌肉记忆、输密码要看三遍、手指永远保持干燥、看到长队就焦虑……你中了几条？</p>
-                <span class="relax-card-tag">#职业病大全</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🔒</div>
-                <h3>安全强迫症</h3>
-                <p>出门检查三遍门锁、离开工位必锁屏、密码要设8位以上……安全意识已经刻进DNA了！</p>
-                <span class="relax-card-tag">#安全第一</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">👀</div>
-                <h3>监控意识</h3>
-                <p>走到哪儿都觉得有监控，去哪儿都要看看有没有摄像头。这就是银行人独有的"监控意识"！</p>
-                <span class="relax-card-tag">#监控恐惧</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">📝</div>
-                <h3>记录强迫症</h3>
-                <p>开会要记笔记、客户说的话要记下来、重要的事要反复确认……不做笔记就感觉不踏实！</p>
-                <span class="relax-card-tag">#笔记达人</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">⏰</div>
-                <h3>时间焦虑</h3>
-                <p>5分钟倒计时、限时服务、准时下班=不敬业……银行人对时间的焦虑，是刻在骨子里的！</p>
-                <span class="relax-card-tag">#时间管理</span>
-            </div>
+            <div class="relax-card"><div class="relax-card-emoji">💁</div><h3>客户神回复</h3><p>柜员："请问您要办什么业务？"<br>客户："你们这能办什么业务？"<br>柜员：……请问您的需求是什么？<br>客户："就是办业务啊！"</p><span class="relax-card-tag">#神对话</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🧐</div><h3>证件识别</h3><p>柜员："请出示您的身份证"<br>客户掏出一张名片<br>柜员："……这个不是身份证"<br>客户："这个不是有我的名字吗？"</p><span class="relax-card-tag">#证件之谜</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🤔</div><h3>VIP客户</h3><p>客户："我这是VIP账户"<br>柜员查了一下："您卡里只有100块"<br>客户："对，我存了100 VIP费用"<br>柜员：……VIP不是这样用的啊！</p><span class="relax-card-tag">#VIP迷思</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">😑</div><h3>排队哲学</h3><p>客户："怎么这么慢？"<br>柜员："前面还有3位"<br>客户："那已经等了30分钟了！"<br>柜员内心：大哥您前面才2个人啊……</p><span class="relax-card-tag">#排队哲学</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">😒</div><h3>密码设置</h3><p>客户："我密码忘了"<br>柜员："那您设置一个新密码吧"<br>客户："不行，我所有密码都是忘记的那个"<br>柜员：……那您怎么记住新密码呢？</p><span class="relax-card-tag">#密码悖论</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🙄</div><h3>转账限额</h3><p>客户："我要转500万"<br>柜员："您的限额是50万"<br>客户："那你帮我转500万"<br>柜员："这……限额不是我能改的"<br>客户："那要你们有什么用？"</p><span class="relax-card-tag">#限额之痛</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🤨</div><h3>业务咨询</h3><p>客户："你们这儿能办信用卡吗？"<br>柜员："可以的，请问您有需求吗？"<br>客户："我看看"<br>然后客户转身就走了……留下柜员在风中凌乱……</p><span class="relax-card-tag">#咨询玄学</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">😏</div><h3>预约客户</h3><p>客户："我预约了10点"<br>柜员查了一下："您预约的是下周三10点"<br>客户："今天是周三吗？"<br>柜员："……今天是周一"</p><span class="relax-card-tag">#时间迷宫</span></div>
         </div>
 
-        <h2 class="section-title">🏢 银行穿搭进化史</h2>
+        <h2 class="section-title">🌟 银行人专属福利</h2>
         <div class="relax-grid">
-            <div class="relax-card">
-                <div class="relax-card-emoji">👔</div>
-                <h3>正装时代</h3>
-                <p>西装革履、白衬衫、领带、皮鞋……那个年代的银行人，永远是最正式、最精神的！</p>
-                <span class="relax-card-tag">#经典穿搭</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">👚</div>
-                <h3>日常进化</h3>
-                <p>从正装配领带到白衬衫打天下，从黑皮鞋到黑布鞋……银行的穿搭也在与时俱进！</p>
-                <span class="relax-card-tag">#穿搭变迁</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🎉</div>
-                <h3>周五休闲</h3>
-                <p>终于等到周五！可以穿休闲一点了……等等，还有客户要来？赶紧换回正装！</p>
-                <span class="relax-card-tag">#周五穿搭</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">👟</div>
-                <h3>网点运动鞋</h3>
-                <p>一天站下来，腿都不是自己的了。高跟鞋？那是什么？能吃吗？运动鞋才是网点生存必备！</p>
-                <span class="relax-card-tag">#网点生存</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">💄</div>
-                <h3>淡妆上岗</h3>
-                <p>银行人都知道：可以不化妆，但不能化浓妆。淡妆上岗是基本礼仪，但早上真的起不来啊！</p>
-                <span class="relax-card-tag">#职场礼仪</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🎀</div>
-                <h3>丝巾文化</h3>
-                <p>银行姐姐们的丝巾，是网点里最靓丽的风景线。每一条丝巾都有自己的故事！</p>
-                <span class="relax-card-tag">#丝巾艺术</span>
-            </div>
+            <div class="relax-card"><div class="relax-card-emoji">🎂</div><h3>节日礼包</h3><p>新年礼包、端午粽子、中秋月饼、春节福利……银行人对节日最大的期待：今天发什么？</p><span class="relax-card-tag">#节日福利</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🏥</div><h3>年度体检</h3><p>银行人最怕的不是业绩，而是年度体检。每次体检前，都要默默祈祷：这次一定要正常啊！</p><span class="relax-card-tag">#年度体检</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">👔</div><h3>统一着装</h3><p>省去了每天早上纠结穿什么的烦恼。柜员服一穿，形象瞬间专业——虽然夏天热冬天冷……</p><span class="relax-card-tag">#制服诱惑</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">💆</div><h3>午休特权</h3><p>银行午休是奢侈品。能有个完整的午休，简直是人生赢家。很多网点午饭都是轮流吃……</p><span class="relax-card-tag">#午休珍贵</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🏆</div><h3>荣誉时刻</h3><p>拿到季度优秀员工奖状的那一刻，所有的委屈和加班都值了。虽然奖状只值5块钱，但荣誉无价！</p><span class="relax-card-tag">#荣誉时刻</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">📚</div><h3>专业培训</h3><p>银行培训多到数不清。从业务培训到合规培训，从技能比赛到演讲比赛……虽然累，但确实能学到东西！</p><span class="relax-card-tag">#培训福利</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🧧</div><h3>五险一金</h3><p>虽然工资可能没有外面高，但五险一金绝对足额缴纳。还有企业年金、补充医疗……这福利，小公司羡慕不来的！</p><span class="relax-card-tag">#福利保障</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🤝</div><h3>人脉积累</h3><p>银行是个接触各行各业的地方。时间久了，你会发现自己的朋友圈越来越大：企业家、医生、律师、老师……这就是隐形财富！</p><span class="relax-card-tag">#人脉资源</span></div>
         </div>
 
-        <h2 class="section-title">💼 银行人的节假日</h2>
+        <h2 class="section-title">🔄 银行人的周一到周日</h2>
         <div class="relax-grid">
-            <div class="relax-card">
-                <div class="relax-card-emoji">🧧</div>
-                <h3>春节加班</h3>
-                <p>别人在家过年，我们在网点服务。腊月二十九还在上班，初一就开门营业……这就是银行人的春节！</p>
-                <span class="relax-card-tag">#春节坚守</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🎄</div>
-                <h3>国庆旺季</h3>
-                <p>别人出去旅游，我们在网点营销。国庆七天乐？那是别人的！我们的国庆是"旺季七天忙"！</p>
-                <span class="relax-card-tag">#旺季营销</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🏖️</div>
-                <h3>假期的梦想</h3>
-                <p>银行人的假期梦想：睡到自然醒、不看工作群、不接客户电话……然而现实是：手机24小时待命！</p>
-                <span class="relax-card-tag">#假期幻想</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">📱</div>
-                <h3>周末值班</h3>
-                <p>周末也要营业！轮流值班成了常态。别人的周末是诗和远方，我们的周末是网点和客户……</p>
-                <span class="relax-card-tag">#周末营业</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🎂</div>
-                <h3>生日怎么过</h3>
-                <p>"今天我生日，能请假吗？"<br>"网点人手不够，明天再过吧。"<br>……于是生日就在网点过了！</p>
-                <span class="relax-card-tag">#生日惊喜</span>
-            </div>
-            <div class="relax-card">
-                <div class="relax-card-emoji">🏥</div>
-                <h3>病假太难</h3>
-                <p>感冒发烧？吃点药撑着！腰酸背痛？贴个膏药继续干！请假？网点运转不开啊……</p>
-                <span class="relax-card-tag">#轻伤不下火线</span>
-            </div>
+            <div class="relax-card"><div class="relax-card-emoji">😫</div><h3>周一：黑色星期一</h3><p>周末综合症还没缓过来，又要面对一周的工作。晨会、周报、月度计划……周一永远是最累的！</p><span class="relax-card-tag">#周一综合症</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">💪</div><h3>周二：渐入佳境</h3><p>周一已经熬过去了，状态开始回升。工作节奏逐渐找回来，开始处理一些重要的事情。</p><span class="relax-card-tag">#周二状态</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">📊</div><h3>周三：半周冲刺</h3><p>一周过了一半，今天要开始关注本周任务完成情况了。看到进度条过了一半，动力满满！</p><span class="relax-card-tag">#周三冲刺</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🚀</div><h3>周四：冲刺前夜</h3><p>明天就是周五了，今天要把能完成的都完成。各种报表、客户跟进、任务冲刺……</p><span class="relax-card-tag">#周四冲刺</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🎉</div><h3>周五：解放日</h3><p>一周终于熬到头了！虽然可能还要开会、写周报，但心情已经放飞了！</p><span class="relax-card-tag">#周五快乐</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">😴</div><h3>周六：充电日</h3><p>睡个懒觉，看看剧，和朋友聚聚。银行人的周六，就是这么朴实无华且枯燥……</p><span class="relax-card-tag">#周六充电</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">😢</div><h3>周日：焦虑日</h3><p>明天又要上班了……晚上开始焦虑，各种"周一要做什么""这周任务完成了吗"……</p><span class="relax-card-tag">#周日焦虑</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">💭</div><h3>银行的周末</h3><p>什么？银行周末不放假？柜台没有周末，只能轮休。别人周末玩的时候，我们在上班……别人上班的时候，我们还在上班……</p><span class="relax-card-tag">#银行周末</span></div>
+        </div>
+
+        <h2 class="section-title">📱 银行人手机相册</h2>
+        <div class="relax-grid">
+            <div class="relax-card"><div class="relax-card-emoji">📸</div><h3>产品截图</h3><p>手机相册里最多的就是各种产品截图：理财收益截图、存款利率截图、活动海报截图……手机内存都快满了！</p><span class="relax-card-tag">#产品截图</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">📢</div><h3>营销素材</h3><p>各种营销海报、活动图片、产品介绍……每天都要在朋友圈发，用完就截图保存……</p><span class="relax-card-tag">#营销素材</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">📊</div><h3>业绩报表</h3><p>各种业绩报表截图、日均余额截图、任务完成进度截图……每天看三遍，进步看得见！</p><span class="relax-card-tag">#业绩报表</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🗓️</div><h3>工作日历</h3><p>手机日历里全是工作安排：会议、培训、考试、任务节点……生活和工作已经完全融合了……</p><span class="relax-card-tag">#工作日历</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">👨‍👩‍👧</div><h3>客户合影</h3><p>和重要客户合影留念，偶尔也会发发朋友圈。客户满意，就是最大的动力！</p><span class="relax-card-tag">#客户合影</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🎁</div><h3>活动现场</h3><p>各种营销活动现场照片、沙龙照片、客户答谢会照片……活动结束就截图保存，日报要用！</p><span class="relax-card-tag">#活动现场</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🏆</div><h3>荣誉时刻</h3><p>领奖照片、荣誉证书照片、表彰文件照片……这些照片，是职业生涯的见证！</p><span class="relax-card-tag">#荣誉时刻</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🍜</div><h3>食堂饭菜</h3><p>没错，银行人的相册里还有食堂饭菜！吐槽归吐槽，食堂饭菜还是要拍一下的……</p><span class="relax-card-tag">#食堂饭菜</span></div>
+        </div>
+
+        <h2 class="section-title">🎮 银行人游戏时间</h2>
+        <div class="relax-grid">
+            <div class="relax-card"><div class="relax-card-emoji">🎯</div><h3>任务接龙</h3><p>银行工作就像打游戏，每个月都有新任务：拉存款、办信用卡、卖理财、转介绍……完成一个接一个，成就感满满！</p><span class="relax-card-tag">#任务游戏</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🏰</div><h3>打怪升级</h3><p>柜员→高级柜员→柜员主管→网点主任……银行人的职业晋升路径，就是打怪升级的过程！</p><span class="relax-card-tag">#打怪升级</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">⏱️</div><h3>限时任务</h3><p>月末冲刺、季末冲刺、年末冲刺……每个节点都是限时任务。完成任务有奖励，完不成就要被追责……</p><span class="relax-card-tag">#限时任务</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">💰</div><h3>金币收集</h3><p>存款是金币，贷款是钻石，理财是点券……每个月都在努力收集更多金币，就为了达成月度目标！</p><span class="relax-card-tag">#金币收集</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🎁</div><h3>开箱惊喜</h3><p>季度奖、年终奖、节日福利……就像游戏开箱一样，永远不知道里面有什么。虽然可能不是自己想要的……</p><span class="relax-card-tag">#开箱惊喜</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">👥</div><h3>组队副本</h3><p>网点就像一个战队：大堂经理是前排，柜员是输出，客户经理是辅助，网点主任是队长……一起打副本！</p><span class="relax-card-tag">#组队副本</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🛡️</div><h3>防护装备</h3><p>银行人必装"防护装备"：微笑是隐身衣，专业是护甲，耐心是盾牌……不然早被客户"击杀"了！</p><span class="relax-card-tag">#防护装备</span></div>
+            <div class="relax-card"><div class="relax-card-emoji">🆘</div><h3>呼叫支援</h3><p>"这个业务怎么办？""系统又出问题了！""客户要求见领导！"每天都在呼叫队友支援……</p><span class="relax-card-tag">#呼叫支援</span></div>
         </div>
 
         <div class="daily-quote">
-            <div class="daily-quote-text">"生活不止眼前的指标，还有诗和远方的假期。虽然假期总是难等，但我们依然在努力生活。"</div>
-            <div class="daily-quote-author">—— 某银行人的梦想</div>
+            <p class="daily-quote-text">"银行工作就像一场马拉松，不是看谁跑得快，而是看谁跑得久。保持热情、持续进步、笑对挑战，你就是下一个传奇！"</p>
+            <p class="daily-quote-author">—— 银YOUNG空间</p>
         </div>
 
-        <div class="back-home">
-            <a href="index.html" class="back-home-btn">← 返回首页</a>
-        </div>
+        <div class="back-home"><a href="index.html" class="back-home-btn">← 返回首页</a></div>
     </main>
 
-    <footer class="footer">
-        <p>银YOUNG空间 · 银行青年的成长加油站</p>
-    </footer>
+    <footer class="footer"><p>银YOUNG空间 · 银行青年的成长加油站</p></footer>
 </body>
 </html>
