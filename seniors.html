@@ -20,12 +20,16 @@
         .nav-links { display: flex; gap: 0.5rem; list-style: none; }
         .nav-links a { text-decoration: none; color: #4a5568; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 500; transition: all 0.3s; }
         .nav-links a:hover { background: var(--primary); color: white; }
-        .page-header { padding: 5rem 2rem 2rem; background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%); color: white; text-align: center; }
-        .page-header-content { max-width: 800px; margin: 0 auto; }
-        .page-badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1rem; }
-        .page-header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
-        .page-header p { font-size: 1rem; opacity: 0.9; }
-        .content { padding: 2.5rem 2rem; max-width: 1400px; margin: 0 auto; }
+        .page-header { padding: 4.5rem 2rem 2rem; background: linear-gradient(135deg, #3d1a00 0%, #7b3f00 40%, #ed8936 100%); color: white; text-align: center; position: relative; overflow: hidden; }
+        .page-header::before { content: ''; position: absolute; top: -80px; right: -80px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,200,100,0.3) 0%, transparent 65%); border-radius: 50%; }
+        .page-header::after { content: ''; position: absolute; bottom: -60px; left: -60px; width: 350px; height: 350px; background: radial-gradient(circle, rgba(255,100,50,0.2) 0%, transparent 65%); border-radius: 50%; }
+        .page-header-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+        .page-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.2); padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.8rem; }
+        .page-header h1 { font-size: 2rem; margin-bottom: 0.4rem; letter-spacing: 0.08em; font-weight: 700; }
+        .page-header p { font-size: 0.95rem; opacity: 0.85; }
+        .page-header-stat { display: inline-flex; gap: 1.5rem; margin-top: 1.2rem; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.8rem; color: rgba(255,255,255,0.9); }
+        .page-header-stat span::before { content: '·'; margin-right: 0.4rem; opacity: 0.5; }
+        .page-header-stat span:first-child::before { display: none; }
         .tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
         .tip-card { background: white; border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-soft); transition: all 0.3s; }
         .tip-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(26, 54, 93, 0.15); }
@@ -68,9 +72,15 @@
 
     <header class="page-header">
         <div class="page-header-content">
-            <div class="page-badge">💬 120+条经验</div>
+            <div class="page-badge">💬 120+ 条经验</div>
             <h1>前 辈 说</h1>
             <p>过来人的经验分享，让你少走弯路</p>
+            <div class="page-header-stat">
+                <span>经验分享</span>
+                <span>营销技巧</span>
+                <span>职场心理</span>
+                <span>合规提醒</span>
+            </div>
         </div>
     </header>
 
@@ -186,5 +196,13 @@
     </main>
 
     <footer class="footer"><p>银YOUNG空间 · 银行青年的成长加油站</p></footer>
+    <div id="progress-bar" style="position:fixed;top:0;left:0;z-index:9999;height:3px;width:0%;background:linear-gradient(90deg,#667eea,#f093fb,#ed8936);transition:width 0.1s ease;border-radius:0 3px 3px 0;"></div>
+    <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:2rem;right:2rem;z-index:999;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);color:white;display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;box-shadow:0 4px 16px rgba(102,126,234,0.4);opacity:0;transform:translateY(20px);transition:all 0.3s ease;border:none;">↑</button>
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('progress-bar').style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
+            document.getElementById('back-top').style.cssText += window.scrollY > 400 ? ';opacity:1;transform:translateY(0)' : ';opacity:0;transform:translateY(20px)';
+        });
+    </script>
 </body>
 </html>
