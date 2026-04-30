@@ -55,18 +55,19 @@
         .nav-cta { background: var(--accent) !important; color: white !important; }
 
         .page-header {
-            padding: 5rem 2rem 2rem;
-            background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%);
-            color: white;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            padding: 4.5rem 2rem 2rem;
+            background: linear-gradient(135deg, #0f1b3e 0%, #1a365d 40%, #0d4d6b 100%);
+            color: white; text-align: center; position: relative; overflow: hidden;
         }
-        .page-header::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); opacity: 0.5; }
+        .page-header::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(79,172,254,0.2) 0%, transparent 65%); border-radius: 50%; }
+        .page-header::after { content: ''; position: absolute; bottom: -80px; left: -80px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(102,126,234,0.25) 0%, transparent 65%); border-radius: 50%; }
         .page-header-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
-        .page-badge { display: inline-block; background: var(--accent); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; margin-bottom: 1rem; }
-        .page-header h1 { font-family: 'Noto Serif SC', serif; font-size: 2.2rem; margin-bottom: 0.5rem; }
-        .page-header p { font-size: 1rem; opacity: 0.9; }
+        .page-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(237,137,54,0.9); padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.8rem; }
+        .page-header h1 { font-family: 'Noto Serif SC', serif; font-size: 2rem; margin-bottom: 0.4rem; letter-spacing: 0.08em; }
+        .page-header p { font-size: 0.95rem; opacity: 0.8; }
+        .page-header-stat { display: inline-flex; gap: 1.5rem; margin-top: 1.2rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); backdrop-filter: blur(10px); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.8rem; color: rgba(255,255,255,0.85); }
+        .page-header-stat span::before { content: '·'; margin-right: 0.4rem; opacity: 0.5; }
+        .page-header-stat span:first-child::before { display: none; }
 
         .content { padding: 2.5rem 2rem; max-width: 1400px; margin: 0 auto; }
 
@@ -136,9 +137,16 @@
 
     <header class="page-header">
         <div class="page-header-content">
-            <div class="page-badge">📚 360+知识点</div>
+            <div class="page-badge">📚 360+ 知识点</div>
             <h1>银 行 知 识 库</h1>
             <p>涵盖存款、贷款、理财、信用卡、电子银行等核心业务</p>
+            <div class="page-header-stat">
+                <span>存款业务</span>
+                <span>贷款业务</span>
+                <span>理财投资</span>
+                <span>信用卡</span>
+                <span>电子银行</span>
+            </div>
         </div>
     </header>
 
@@ -254,6 +262,16 @@
                     window.scrollTo({ top: 300, behavior: 'smooth' });
                 });
             });
+        });
+    </script>
+    <div id="progress-bar" style="position:fixed;top:0;left:0;z-index:9999;height:3px;width:0%;background:linear-gradient(90deg,#667eea,#f093fb,#ed8936);transition:width 0.1s ease;border-radius:0 3px 3px 0;"></div>
+    <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:2rem;right:2rem;z-index:999;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);color:white;display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;box-shadow:0 4px 16px rgba(102,126,234,0.4);opacity:0;transform:translateY(20px);transition:all 0.3s ease;border:none;">↑</button>
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('progress-bar').style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
+            const bt = document.getElementById('back-top');
+            if(window.scrollY > 400){ bt.style.opacity='1'; bt.style.transform='translateY(0)'; }
+            else { bt.style.opacity='0'; bt.style.transform='translateY(20px)'; }
         });
     </script>
 </body>
