@@ -6,469 +6,431 @@
     <title>银YOUNG空间 - 银行青年的成长加油站</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #1a365d;
             --primary-light: #2c5282;
-            --primary-dark: #0d1f3c;
             --accent: #ed8936;
             --accent-light: #f6ad55;
-            --accent-soft: #fbd38d;
-            --bg-main: #f7fafc;
-            --bg-card: #ffffff;
-            --text-dark: #1a202c;
-            --text-body: #4a5568;
-            --text-light: #718096;
-            --gradient-hero: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #3182ce 100%);
-            --shadow-soft: 0 4px 20px rgba(26, 54, 93, 0.08);
-            --shadow-hover: 0 12px 40px rgba(26, 54, 93, 0.15);
-            --radius-lg: 20px;
-            --radius-md: 12px;
-            --radius-sm: 8px;
+            --pink: #f093fb;
+            --cyan: #4facfe;
+            --green: #43e97b;
+            --purple: #764ba2;
+            --bg: #f0f4ff;
+            --card: #ffffff;
+            --text: #1a202c;
+            --muted: #718096;
+            --r20: 20px;
+            --r12: 12px;
+            --s1: 0 4px 20px rgba(26,54,93,0.08);
+            --s2: 0 16px 48px rgba(26,54,93,0.16);
         }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-main);
-            color: var(--text-body);
+            font-family: 'Noto Sans SC', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.7;
             overflow-x: hidden;
+        }
+
+        /* 顶部进度条 */
+        #progress-bar {
+            position: fixed; top: 0; left: 0; z-index: 9999;
+            height: 3px; width: 0%;
+            background: linear-gradient(90deg, #667eea, #f093fb, #ed8936);
+            transition: width 0.1s ease;
+            border-radius: 0 3px 3px 0;
         }
 
         /* 导航栏 */
         .navbar {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(26, 54, 93, 0.05);
+            padding: 0.8rem 2rem;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(102,126,234,0.1);
+            transition: all 0.3s ease;
         }
-        .navbar.scrolled { padding: 0.7rem 2rem; box-shadow: var(--shadow-soft); }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
-        .logo-icon { width: 44px; height: 44px; background: var(--gradient-hero); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; font-weight: 700; box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3); }
-        .logo-text { font-family: 'Noto Serif SC', serif; font-size: 1.5rem; font-weight: 600; color: var(--primary); }
-        .logo-text span { color: var(--accent); }
-        .nav-links { display: flex; gap: 0.5rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--text-body); padding: 0.6rem 1.2rem; border-radius: var(--radius-sm); font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; }
-        .nav-links a:hover { background: var(--primary); color: white; }
-        .nav-links a.active { background: var(--primary); color: white; }
-        .nav-cta { background: var(--accent) !important; color: white !important; box-shadow: 0 4px 12px rgba(237, 137, 54, 0.4); }
-        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 0.5rem; }
-        .menu-toggle span { width: 24px; height: 2px; background: var(--primary); border-radius: 2px; }
+        .navbar.scrolled { padding: 0.6rem 2rem; background: rgba(255,255,255,0.95); box-shadow: var(--s1); }
+        .nav-container { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+        .logo-icon {
+            width: 40px; height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; color: white; font-weight: 900;
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+        .logo-text { font-family: 'Noto Serif SC', serif; font-size: 1.35rem; font-weight: 700; color: var(--primary); }
+        .logo-text em { font-style: normal; background: linear-gradient(135deg, #667eea, #f093fb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 0.3rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: #4a5568; padding: 0.45rem 0.9rem;
+            border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.25s ease;
+        }
+        .nav-links a:hover { background: linear-gradient(135deg,#667eea,#764ba2); color: white; transform: translateY(-1px); }
+        .nav-cta { background: linear-gradient(135deg, #ed8936, #f6ad55) !important; color: white !important; box-shadow: 0 4px 12px rgba(237,137,54,0.35); }
+        .nav-cta:hover { box-shadow: 0 6px 20px rgba(237,137,54,0.5) !important; }
+        .menu-toggle { display:none; flex-direction:column; gap:4px; cursor:pointer; padding:0.4rem; }
+        .menu-toggle span { width:22px; height:2px; background:var(--primary); border-radius:2px; transition: all 0.3s; }
 
         /* Hero */
         .hero {
             min-height: 100vh;
-            background: var(--gradient-hero);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            padding: 8rem 2rem 5rem;
+            background: linear-gradient(135deg, #0f1b3e 0%, #1a365d 40%, #2d1b69 80%, #0f1b3e 100%);
+            position: relative; overflow: hidden;
+            display: flex; align-items: center;
+            padding: 7rem 2rem 4rem;
         }
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.5;
+        /* 动态光圈背景 */
+        .hero-orb {
+            position: absolute; border-radius: 50%;
+            filter: blur(80px); opacity: 0.5; animation: orb-float 8s ease-in-out infinite;
         }
-        .hero-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            z-index: 1;
+        .orb1 { width: 500px; height: 500px; background: radial-gradient(circle, #667eea, transparent); top: -100px; left: -100px; animation-delay: 0s; }
+        .orb2 { width: 400px; height: 400px; background: radial-gradient(circle, #f093fb, transparent); bottom: -100px; right: -50px; animation-delay: 2s; }
+        .orb3 { width: 300px; height: 300px; background: radial-gradient(circle, #4facfe, transparent); top: 50%; left: 50%; animation-delay: 4s; }
+        @keyframes orb-float {
+            0%,100% { transform: translate(0,0) scale(1); }
+            33% { transform: translate(30px,-30px) scale(1.05); }
+            66% { transform: translate(-20px,20px) scale(0.95); }
         }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            animation: fadeInDown 0.8s ease-out;
+        /* 星星粒子 */
+        .stars { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+        .star {
+            position: absolute; width: 2px; height: 2px;
+            background: white; border-radius: 50%;
+            animation: twinkle var(--d) ease-in-out infinite var(--delay);
         }
-        .hero h1 {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 4rem;
-            font-weight: 700;
-            color: white;
-            line-height: 1.2;
+        @keyframes twinkle {
+            0%,100% { opacity: 0.1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.5); }
+        }
+
+        .hero-content { max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 1; text-align: center; }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 0.4rem 1rem; border-radius: 50px;
+            color: rgba(255,255,255,0.9); font-size: 0.85rem;
             margin-bottom: 1.5rem;
+            animation: fadeInDown 0.8s ease-out both;
+        }
+        .eyebrow-dot { width: 6px; height: 6px; background: #43e97b; border-radius: 50%; animation: pulse-green 2s infinite; }
+        @keyframes pulse-green { 0%,100%{box-shadow:0 0 0 0 rgba(67,233,123,0.4)} 50%{box-shadow:0 0 0 6px rgba(67,233,123,0)} }
+
+        .hero-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700; color: white; line-height: 1.2;
+            margin-bottom: 1.2rem;
             animation: fadeInUp 0.8s ease-out 0.2s both;
         }
-        .hero h1 em { font-style: normal; color: var(--accent-soft); }
-        .hero-desc {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 700px;
-            margin: 0 auto 3rem;
-            line-height: 1.9;
+        .hero-title .gradient-text {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 50%, #f093fb 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero-sub {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba(255,255,255,0.75); max-width: 600px; margin: 0 auto 2.5rem;
             animation: fadeInUp 0.8s ease-out 0.4s both;
         }
+        /* 打字机效果 */
+        .typewriter-wrap { color: rgba(255,255,255,0.85); font-size: 1rem; margin-bottom: 3rem; animation: fadeInUp 0.8s ease-out 0.6s both; }
+        .typewriter { color: #f6d365; font-weight: 600; }
+        .cursor { display: inline-block; width: 2px; height: 1em; background: #f6d365; margin-left: 2px; vertical-align: middle; animation: blink 1s infinite; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
         /* 入口卡片网格 */
         .entry-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            max-width: 1200px;
+            gap: 1.2rem;
+            max-width: 1050px;
             margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out 0.8s both;
         }
         .entry-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: var(--radius-lg);
-            padding: 2rem 1.5rem;
-            color: white;
-            text-align: center;
-            transition: all 0.4s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-            animation: fadeInUp 0.8s ease-out calc(0.6s + var(--delay)) both;
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 18px;
+            padding: 1.5rem 1.2rem;
+            color: white; text-align: center;
+            text-decoration: none; display: block;
+            transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+            position: relative; overflow: hidden;
         }
-        .entry-card:nth-child(1) { --delay: 0s; }
-        .entry-card:nth-child(2) { --delay: 0.1s; }
-        .entry-card:nth-child(3) { --delay: 0.2s; }
-        .entry-card:nth-child(4) { --delay: 0.3s; }
-        .entry-card:nth-child(5) { --delay: 0.4s; }
-        .entry-card:nth-child(6) { --delay: 0.5s; }
-        .entry-card:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-10px) scale(1.02);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        .entry-card::before {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            opacity: 0; transition: opacity 0.3s;
         }
-        .entry-icon { font-size: 3.5rem; margin-bottom: 1rem; }
-        .entry-card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-        .entry-card p { font-size: 0.9rem; opacity: 0.85; }
-        .entry-count {
-            display: inline-block;
-            background: rgba(237, 137, 54, 0.3);
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            margin-top: 1rem;
+        .entry-card:hover::before { opacity: 1; }
+        .entry-card:hover { transform: translateY(-8px) scale(1.02); border-color: rgba(255,255,255,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .entry-icon { font-size: 2.8rem; margin-bottom: 0.7rem; display: block; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); }
+        .entry-card h3 { font-size: 1.1rem; margin-bottom: 0.3rem; font-weight: 600; }
+        .entry-card p { font-size: 0.82rem; opacity: 0.8; line-height: 1.4; }
+        .entry-chip {
+            display: inline-block; margin-top: 0.7rem;
+            padding: 0.2rem 0.7rem; border-radius: 50px; font-size: 0.72rem; font-weight: 600;
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2);
         }
+        /* 卡片各自颜色 */
+        .card-blue:hover { background: rgba(102,126,234,0.25); }
+        .card-orange:hover { background: rgba(237,137,54,0.25); }
+        .card-teal:hover { background: rgba(79,172,254,0.25); }
+        .card-pink:hover { background: rgba(240,147,251,0.25); }
+        .card-purple:hover { background: rgba(118,75,162,0.25); }
+        .card-green:hover { background: rgba(67,233,123,0.25); }
+
+        /* 滚动提示箭头 */
+        .scroll-hint {
+            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+            color: rgba(255,255,255,0.5); font-size: 0.75rem;
+            animation: bounce-hint 2s infinite;
+        }
+        .scroll-hint::after { content: '↓'; font-size: 1.2rem; color: rgba(255,255,255,0.4); }
+        @keyframes bounce-hint { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+        /* 今日推荐 */
+        .today-section {
+            padding: 4rem 2rem;
+            background: white;
+            position: relative; overflow: hidden;
+        }
+        .today-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, #667eea, #f093fb, #ed8936, #43e97b);
+        }
+        .section-header { text-align: center; margin-bottom: 2.5rem; }
+        .section-label {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border: 1px solid #667eea30;
+            color: #667eea; padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+        .section-title { font-family: 'Noto Serif SC', serif; font-size: 2rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .section-sub { color: var(--muted); font-size: 0.95rem; }
+
+        .today-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .today-main { background: linear-gradient(135deg, #1a365d 0%, #2d1b69 100%); border-radius: 20px; padding: 2rem; color: white; position: relative; overflow: hidden; min-height: 200px; }
+        .today-main::after { content: '✨'; position: absolute; right: 1.5rem; top: 1.5rem; font-size: 2rem; opacity: 0.5; }
+        .today-main-label { background: rgba(255,255,255,0.2); display: inline-block; padding: 0.2rem 0.7rem; border-radius: 50px; font-size: 0.75rem; margin-bottom: 1rem; }
+        .today-main h3 { font-size: 1.3rem; margin-bottom: 0.8rem; line-height: 1.5; }
+        .today-main p { font-size: 0.9rem; opacity: 0.85; line-height: 1.7; }
+        .today-main-link { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.2rem; color: #f6d365; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: gap 0.2s; }
+        .today-main-link:hover { gap: 0.8rem; }
+
+        .today-side { display: flex; flex-direction: column; gap: 1rem; }
+        .today-mini {
+            background: linear-gradient(135deg, #f8fafc, #edf2f7);
+            border-radius: 16px; padding: 1.2rem; display: flex; align-items: center; gap: 1rem;
+            text-decoration: none; color: inherit; transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+        .today-mini:hover { transform: translateX(6px); box-shadow: var(--s1); border-color: #667eea40; }
+        .today-mini-icon { font-size: 1.8rem; flex-shrink: 0; }
+        .today-mini h4 { font-size: 0.9rem; color: var(--primary); margin-bottom: 0.2rem; font-weight: 600; }
+        .today-mini span { font-size: 0.78rem; color: var(--muted); }
 
         /* 特色板块 */
-        .features-section {
-            padding: 6rem 2rem;
-            background: white;
-        }
-        .features-header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 4rem;
-        }
-        .features-header h2 {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        .features-header p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .features-section { padding: 4rem 2rem; background: linear-gradient(180deg, #f0f4ff 0%, #f7fafc 100%); }
+        .features-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.2rem; max-width: 1200px; margin: 2.5rem auto 0; }
         .feature-card {
-            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.4s ease;
+            background: white; border-radius: 18px; padding: 1.8rem 1.5rem;
+            text-align: center; box-shadow: var(--s1); transition: all 0.35s ease;
+            border: 1px solid transparent;
         }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
+        .feature-card:hover { transform: translateY(-6px); box-shadow: var(--s2); border-color: #667eea20; }
+        .feature-icon-wrap {
+            width: 60px; height: 60px; border-radius: 16px; margin: 0 auto 1.2rem;
+            display: flex; align-items: center; justify-content: center; font-size: 1.8rem;
         }
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--gradient-hero);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto 1.5rem;
-        }
-        .feature-card h3 {
-            font-size: 1.1rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        .feature-card p {
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
+        .fi-blue { background: linear-gradient(135deg, #667eea20, #764ba220); }
+        .fi-orange { background: linear-gradient(135deg, #ed893620, #f6ad5520); }
+        .fi-cyan { background: linear-gradient(135deg, #4facfe20, #00f2fe20); }
+        .fi-green { background: linear-gradient(135deg, #43e97b20, #38f9d720); }
+        .feature-card h3 { font-size: 1rem; color: var(--primary); margin-bottom: 0.4rem; font-weight: 600; }
+        .feature-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
 
-        /* 热门内容预览 */
-        .hot-section {
-            padding: 6rem 2rem;
-            background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%);
-        }
-        .hot-header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 4rem;
-        }
-        .hot-header h2 {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        .hot-header p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-        }
-        .hot-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
+        /* 热门内容 */
+        .hot-section { padding: 4rem 2rem; background: white; }
+        .hot-tabs { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
         .hot-tab {
-            padding: 0.6rem 1.5rem;
-            border-radius: 50px;
-            border: 2px solid #e2e8f0;
-            background: white;
-            color: var(--text-body);
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            padding: 0.45rem 1.2rem; border-radius: 50px; border: 1.5px solid #e2e8f0;
+            background: white; color: #4a5568; font-size: 0.88rem; font-weight: 500;
+            cursor: pointer; transition: all 0.25s ease;
         }
-        .hot-tab:hover { border-color: var(--primary); color: var(--primary); }
-        .hot-tab.active { background: var(--primary); border-color: var(--primary); color: white; }
-        .hot-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .hot-tab:hover { border-color: #667eea; color: #667eea; }
+        .hot-tab.active { background: linear-gradient(135deg, #667eea, #764ba2); border-color: transparent; color: white; box-shadow: 0 4px 12px rgba(102,126,234,0.3); }
+        .hot-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.3rem; max-width: 1200px; margin: 0 auto; }
         .hot-card {
-            background: white;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.4s ease;
-            text-decoration: none;
-            color: inherit;
-            display: block;
+            background: white; border-radius: 18px; overflow: hidden;
+            box-shadow: var(--s1); transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+            text-decoration: none; color: inherit; display: block;
+            border: 1px solid #f0f4ff;
         }
-        .hot-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
+        .hot-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: var(--s2); }
+        .hot-card-cover {
+            height: 130px; position: relative;
+            display: flex; align-items: center; justify-content: center; font-size: 2.8rem;
         }
-        .hot-card-img {
-            height: 140px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
+        .hot-card-cover::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg,transparent 40%,rgba(15,27,62,0.6)); }
+        .hot-badge {
+            position: absolute; top: 0.7rem; right: 0.7rem; z-index: 1;
+            background: linear-gradient(135deg, #ed8936, #f6ad55);
+            color: white; padding: 0.2rem 0.55rem; border-radius: 50px; font-size: 0.68rem; font-weight: 700;
         }
-        .hot-card-img::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 30%, rgba(26, 54, 93, 0.7) 100%);
-        }
-        .hot-card-badge {
-            position: absolute;
-            top: 0.8rem;
-            right: 0.8rem;
-            background: var(--accent);
-            color: white;
-            padding: 0.25rem 0.6rem;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            z-index: 1;
-        }
-        .hot-card-content { padding: 1.2rem; }
-        .hot-card h3 {
-            font-size: 1rem;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-            line-height: 1.4;
-        }
-        .hot-card p {
-            color: var(--text-light);
-            font-size: 0.8rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .hot-card-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 0.8rem;
-            padding-top: 0.8rem;
-            border-top: 1px solid #eee;
-            font-size: 0.75rem;
-            color: var(--text-light);
-        }
+        .hot-card-body { padding: 1rem 1.1rem 1.1rem; }
+        .hot-card h3 { font-size: 0.93rem; color: var(--text); margin-bottom: 0.35rem; line-height: 1.45; font-weight: 600; }
+        .hot-card p { color: var(--muted); font-size: 0.78rem; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; line-height: 1.5; }
+        .hot-card-footer { display:flex; justify-content:space-between; align-items:center; margin-top:0.7rem; padding-top:0.7rem; border-top:1px solid #f0f4ff; font-size:0.72rem; color:var(--muted); }
+        .hot-badge-src { background: #f0f4ff; color: #667eea; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 600; }
 
-        /* 统计数据 */
-        .stats-bar {
-            background: var(--gradient-hero);
-            padding: 4rem 2rem;
-            color: white;
+        /* 每日一句 */
+        .quote-section { padding: 3rem 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .quote-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+        .quote-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; opacity: 0.9; }
+        .quote-text {
+            font-family: 'Noto Serif SC', serif; font-size: 1.5rem; color: white;
+            line-height: 1.9; margin-bottom: 0.8rem; font-weight: 400;
         }
-        .stats-grid {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            text-align: center;
+        .quote-text em { font-style: normal; color: #f6d365; }
+        .quote-author { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+        .quote-refresh {
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            margin-top: 1.5rem; padding: 0.5rem 1.2rem; border-radius: 50px;
+            background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+            color: white; font-size: 0.82rem; cursor: pointer; transition: all 0.25s;
         }
-        .stat-item h3 {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        .stat-item p { opacity: 0.85; font-size: 1rem; }
+        .quote-refresh:hover { background: rgba(255,255,255,0.25); }
 
-        /* 关于我们 */
-        .about-section {
-            padding: 6rem 2rem;
-            background: white;
+        /* 统计 */
+        .stats-section { padding: 3rem 2rem; background: var(--primary); }
+        .stats-grid { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; text-align: center; }
+        .stat-num { font-family: 'Noto Serif SC', serif; font-size: 2.5rem; font-weight: 700; color: #f6d365; margin-bottom: 0.3rem; }
+        .stat-label { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+
+        /* 最近更新 */
+        .updates-section { padding: 4rem 2rem; background: linear-gradient(180deg, #f0f4ff, white); }
+        .updates-list { max-width: 900px; margin: 2rem auto 0; display: flex; flex-direction: column; gap: 0.8rem; }
+        .update-item {
+            display: flex; align-items: center; gap: 1rem;
+            background: white; border-radius: 14px; padding: 1rem 1.3rem;
+            box-shadow: var(--s1); text-decoration: none; color: inherit;
+            transition: all 0.25s ease; border-left: 3px solid transparent;
         }
-        .about-content {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
+        .update-item:hover { transform: translateX(6px); box-shadow: var(--s2); border-left-color: #667eea; }
+        .update-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .update-content { flex: 1; }
+        .update-title { font-size: 0.92rem; color: var(--text); font-weight: 500; margin-bottom: 0.15rem; }
+        .update-meta { font-size: 0.75rem; color: var(--muted); }
+        .update-chip { background: #f0f4ff; color: #667eea; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.72rem; font-weight: 600; flex-shrink: 0; }
+        .update-arrow { color: var(--muted); font-size: 0.85rem; transition: transform 0.25s; }
+        .update-item:hover .update-arrow { transform: translateX(4px); color: #667eea; }
+
+        /* CTA */
+        .cta-section { padding: 5rem 2rem; background: white; text-align: center; }
+        .cta-inner { max-width: 600px; margin: 0 auto; }
+        .cta-emoji { font-size: 4rem; display: block; margin-bottom: 1rem; animation: float 3s ease-in-out infinite; }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+        .cta-title { font-family: 'Noto Serif SC', serif; font-size: 2rem; color: var(--primary); margin-bottom: 1rem; }
+        .cta-sub { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; line-height: 1.8; }
+        .cta-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .btn-primary {
+            padding: 0.75rem 2rem; border-radius: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; font-weight: 600; font-size: 0.95rem; text-decoration: none;
+            box-shadow: 0 6px 20px rgba(102,126,234,0.35); transition: all 0.3s ease;
         }
-        .about-icon { font-size: 5rem; margin-bottom: 2rem; }
-        .about-section h2 {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(102,126,234,0.45); }
+        .btn-secondary {
+            padding: 0.75rem 2rem; border-radius: 50px;
+            background: white; color: var(--primary); font-weight: 600; font-size: 0.95rem; text-decoration: none;
+            border: 2px solid #e2e8f0; transition: all 0.3s ease;
         }
-        .about-section p {
-            font-size: 1.15rem;
-            color: var(--text-body);
-            line-height: 2;
-            margin-bottom: 2rem;
-        }
-        .about-tags {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .about-tag {
-            background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
-            color: var(--primary);
-            padding: 0.6rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
+        .btn-secondary:hover { border-color: #667eea; color: #667eea; transform: translateY(-3px); }
 
         /* 页脚 */
-        .footer {
-            background: var(--primary-dark);
-            color: white;
-            padding: 4rem 2rem 2rem;
-        }
-        .footer-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr;
-            gap: 3rem;
-            padding-bottom: 3rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .footer-brand h3 { font-family: 'Noto Serif SC', serif; font-size: 1.5rem; margin-bottom: 1rem; }
-        .footer-brand h3 span { color: var(--accent); }
-        .footer-brand p { opacity: 0.7; font-size: 0.95rem; line-height: 1.8; }
-        .footer-col h4 { font-size: 1rem; margin-bottom: 1rem; opacity: 0.9; }
+        .footer { background: #0d1f3c; color: white; padding: 3rem 2rem 1.5rem; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 3rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .footer-brand h3 { font-family: 'Noto Serif SC', serif; font-size: 1.3rem; margin-bottom: 0.8rem; }
+        .footer-brand h3 em { font-style: normal; background: linear-gradient(135deg, #667eea, #f093fb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .footer-brand p { opacity: 0.6; font-size: 0.88rem; line-height: 1.8; }
+        .footer-col h4 { font-size: 0.9rem; margin-bottom: 1rem; opacity: 0.85; }
         .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 0.6rem; }
-        .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease; }
-        .footer-links a:hover { color: var(--accent); }
-        .footer-bottom { max-width: 1200px; margin: 2rem auto 0; text-align: center; opacity: 0.6; font-size: 0.9rem; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.85rem; transition: all 0.25s; }
+        .footer-links a:hover { color: #f6d365; padding-left: 4px; }
+        .footer-bottom { max-width: 1200px; margin: 1.5rem auto 0; text-align: center; opacity: 0.45; font-size: 0.82rem; }
+
+        /* 回到顶部 */
+        #back-top {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+            width: 44px; height: 44px; border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; cursor: pointer;
+            box-shadow: 0 4px 16px rgba(102,126,234,0.4);
+            opacity: 0; transform: translateY(20px);
+            transition: all 0.3s ease; border: none;
+        }
+        #back-top.show { opacity: 1; transform: translateY(0); }
+        #back-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(102,126,234,0.5); }
 
         /* 动画 */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .float { animation: float 3s ease-in-out infinite; }
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes fadeInDown { from{opacity:0;transform:translateY(-20px)} to{opacity:1;transform:translateY(0)} }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
         /* 响应式 */
-        @media (max-width: 1024px) {
-            .entry-grid { grid-template-columns: repeat(2, 1fr); }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        @media(max-width:1024px) {
+            .entry-grid { grid-template-columns: repeat(2,1fr); }
+            .features-grid { grid-template-columns: repeat(2,1fr); }
+            .hot-grid { grid-template-columns: repeat(2,1fr); }
+            .today-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2,1fr); }
             .footer-grid { grid-template-columns: 1fr 1fr; }
-            .features-grid { grid-template-columns: repeat(2, 1fr); }
-            .hot-grid { grid-template-columns: repeat(2, 1fr); }
         }
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .menu-toggle { display: flex; }
-            .hero h1 { font-size: 2.5rem; }
-            .hero-desc { font-size: 1.1rem; }
-            .entry-grid { grid-template-columns: 1fr; }
+        @media(max-width:768px) {
+            .nav-links { display:none; flex-direction:column; position:absolute; top:100%; left:0; right:0; background:white; padding:1rem; box-shadow:var(--s1); }
+            .nav-links.open { display:flex; }
+            .menu-toggle { display:flex; }
+            .hero-title { font-size: 2.3rem; }
+            .entry-grid { grid-template-columns: repeat(2,1fr); gap: 0.8rem; }
+            .hot-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: 1fr 1fr; }
             .stats-grid { grid-template-columns: 1fr 1fr; }
             .footer-grid { grid-template-columns: 1fr; text-align: center; }
-            .about-tags { justify-content: center; }
-            .features-grid { grid-template-columns: 1fr; }
-            .hot-grid { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+        }
+        @media(max-width:480px) {
+            .entry-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+            .entry-card { padding: 1rem 0.8rem; }
+            .entry-icon { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
+    <div id="progress-bar"></div>
+
     <!-- 导航栏 -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
                 <div class="logo-icon">Y</div>
-                <div class="logo-text">银<span>YOUNG</span>空间</div>
+                <div class="logo-text">银<em>YOUNG</em>空间</div>
             </a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="knowledge.html">📚 知识库</a></li>
                 <li><a href="marketing.html">💡 营销锦囊</a></li>
                 <li><a href="news.html">📰 最新动态</a></li>
@@ -482,192 +444,294 @@
         </div>
     </nav>
 
-    <!-- Hero区域 -->
+    <!-- Hero -->
     <section class="hero">
+        <div class="hero-orb orb1"></div>
+        <div class="hero-orb orb2"></div>
+        <div class="hero-orb orb3"></div>
+        <div class="stars" id="stars"></div>
+
         <div class="hero-content">
-            <div class="hero-badge">🌟 银行青年的成长加油站</div>
-            <h1>欢迎来到<br><em>银YOUNG空间</em></h1>
-            <p class="hero-desc">
-                这里是为银行青年打造的专属成长平台——<br>
-                从业务知识到营销技巧，从职场心理到轻松一刻，<br>
-                陪你一起成长，让工作更有趣！
-            </p>
-            
-            <!-- 六大入口卡片 -->
+            <div class="hero-eyebrow">
+                <span class="eyebrow-dot"></span>
+                为银行青年打造 · 每日更新 · 完全免费
+            </div>
+            <h1 class="hero-title">
+                银行人的<span class="gradient-text">专属成长</span><br>加油站
+            </h1>
+            <p class="hero-sub">从业务知识到营销技巧，从职场心理到轻松一刻，用一个平台，陪你成为更好的银行人。</p>
+
+            <div class="typewriter-wrap">
+                今天想了解一下
+                <span class="typewriter" id="typeText"></span>
+                <span class="cursor"></span>
+                ?
+            </div>
+
             <div class="entry-grid">
-                <a href="knowledge.html" class="entry-card">
-                    <div class="entry-icon">📚</div>
+                <a href="knowledge.html" class="entry-card card-blue">
+                    <span class="entry-icon">📚</span>
                     <h3>知识库</h3>
-                    <p>银行业务知识全覆盖</p>
-                    <span class="entry-count">360+ 知识点</span>
+                    <p>业务知识全覆盖</p>
+                    <span class="entry-chip">360+ 知识点</span>
                 </a>
-                <a href="marketing.html" class="entry-card">
-                    <div class="entry-icon">💡</div>
+                <a href="marketing.html" class="entry-card card-orange">
+                    <span class="entry-icon">💡</span>
                     <h3>营销锦囊</h3>
-                    <p>营销技巧与实战案例</p>
-                    <span class="entry-count">120+ 营销方案</span>
+                    <p>营销技巧与实战</p>
+                    <span class="entry-chip">120+ 方案</span>
                 </a>
-                <a href="news.html" class="entry-card">
-                    <div class="entry-icon">📰</div>
+                <a href="news.html" class="entry-card card-teal">
+                    <span class="entry-icon">📰</span>
                     <h3>最新动态</h3>
                     <p>金融资讯一手掌握</p>
-                    <span class="entry-count">每日更新</span>
+                    <span class="entry-chip">每日更新</span>
                 </a>
-                <a href="seniors.html" class="entry-card">
-                    <div class="entry-icon">💬</div>
+                <a href="seniors.html" class="entry-card card-pink">
+                    <span class="entry-icon">💬</span>
                     <h3>前辈说</h3>
                     <p>过来人的经验分享</p>
-                    <span class="entry-count">120+ 条经验</span>
+                    <span class="entry-chip">120+ 经验</span>
                 </a>
-                <a href="mental.html" class="entry-card">
-                    <div class="entry-icon">🧘</div>
+                <a href="mental.html" class="entry-card card-purple">
+                    <span class="entry-icon">🧘</span>
                     <h3>心灵驿站</h3>
                     <p>职场心理调适指南</p>
-                    <span class="entry-count">84+ 心理文章</span>
+                    <span class="entry-chip">84+ 文章</span>
                 </a>
-                <a href="relax.html" class="entry-card">
-                    <div class="entry-icon">😄</div>
+                <a href="relax.html" class="entry-card card-green">
+                    <span class="entry-icon">😄</span>
                     <h3>轻松一刻</h3>
                     <p>笑着面对每一天</p>
-                    <span class="entry-count">108+ 趣味内容</span>
+                    <span class="entry-chip">108+ 趣味内容</span>
                 </a>
+            </div>
+        </div>
+        <div class="scroll-hint">向下探索</div>
+    </section>
+
+    <!-- 今日推荐 -->
+    <section class="today-section reveal">
+        <div style="max-width:1200px;margin:0 auto">
+            <div class="section-header">
+                <div class="section-label">🔥 今日精选</div>
+                <h2 class="section-title">不知道看什么？试试这些</h2>
+                <p class="section-sub">编辑精选 · 每日更新 · 拒绝无效内容</p>
+            </div>
+            <div class="today-grid">
+                <div class="today-main">
+                    <span class="today-main-label">🏆 本周最热</span>
+                    <h3>切记不要代客操作！这是保护你自己的底线</h3>
+                    <p>无论客户多信任你，多着急，帮客户输密码都是职业红线。了解为什么这条规则不可逾越，以及如何用话术婉拒。</p>
+                    <a href="seniors.html" class="today-main-link">去看看前辈怎么说 →</a>
+                </div>
+                <div class="today-side">
+                    <a href="marketing.html" class="today-mini">
+                        <span class="today-mini-icon">💡</span>
+                        <div>
+                            <h4>客户说"再考虑一下"该怎么办？</h4>
+                            <span>营销锦囊 · 5分钟看完</span>
+                        </div>
+                    </a>
+                    <a href="mental.html" class="today-mini">
+                        <span class="today-mini-icon">🧘</span>
+                        <div>
+                            <h4>被客户骂了，心情还没调整好</h4>
+                            <span>心灵驿站 · 情绪管理</span>
+                        </div>
+                    </a>
+                    <a href="relax.html" class="today-mini">
+                        <span class="today-mini-icon">😂</span>
+                        <div>
+                            <h4>当客户说"我要销户"的那一刻…</h4>
+                            <span>轻松一刻 · 银行人才懂</span>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- 特色板块 -->
-    <section class="features-section">
-        <div class="features-header">
-            <h2>为什么选择银YOUNG空间？</h2>
-            <p>我们用心打造每一个板块，只为给你最好的学习体验</p>
+    <section class="features-section reveal">
+        <div class="section-header">
+            <div class="section-label">⭐ 为什么选我们</div>
+            <h2 class="section-title">银行人的专属社区</h2>
+            <p class="section-sub">不是大而全，而是专而精</p>
         </div>
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3>专注银行人</h3>
-                <p>专为银行业量身定制，内容贴合实际工作</p>
+                <div class="feature-icon-wrap fi-blue">🎯</div>
+                <h3>只为银行人</h3>
+                <p>内容100%聚焦银行业，告别泛泛而谈，每篇都接地气</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">📖</div>
-                <h3>实战经验</h3>
-                <p>来自一线前辈的真实分享，学完就能用</p>
+                <div class="feature-icon-wrap fi-orange">💬</div>
+                <h3>前辈真实分享</h3>
+                <p>来自一线从业者的真实经验，踩过的坑你不必再踩</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>持续更新</h3>
-                <p>每日更新最新资讯，紧跟行业动态</p>
+                <div class="feature-icon-wrap fi-cyan">⚡</div>
+                <h3>每日持续更新</h3>
+                <p>资讯、经验、笑话持续补充，每次进来都有新内容</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">💝</div>
-                <h3>身心关怀</h3>
-                <p>关注职场心理健康，陪你一起成长</p>
+                <div class="feature-icon-wrap fi-green">💝</div>
+                <h3>关注身心健康</h3>
+                <p>不只讲业务，也关心你的压力、情绪和职场状态</p>
             </div>
         </div>
     </section>
 
-    <!-- 热门内容预览 -->
-    <section class="hot-section">
-        <div class="hot-header">
-            <h2>热门内容推荐</h2>
-            <p>精选最受欢迎的内容，让你快速找到想要的</p>
+    <!-- 热门内容 -->
+    <section class="hot-section reveal">
+        <div class="section-header">
+            <div class="section-label">📈 热门推荐</div>
+            <h2 class="section-title">大家都在看</h2>
+            <p class="section-sub">根据阅读量和收藏数精选</p>
         </div>
         <div class="hot-tabs">
-            <div class="hot-tab active" onclick="switchTab(this, 'all')">全部</div>
-            <div class="hot-tab" onclick="switchTab(this, 'knowledge')">知识库</div>
-            <div class="hot-tab" onclick="switchTab(this, 'marketing')">营销</div>
-            <div class="hot-tab" onclick="switchTab(this, 'mental')">心理</div>
+            <div class="hot-tab active">全部</div>
+            <div class="hot-tab">知识库</div>
+            <div class="hot-tab">营销技巧</div>
+            <div class="hot-tab">心理疏导</div>
         </div>
-        <div class="hot-grid" id="hotContent">
+        <div class="hot-grid">
             <a href="knowledge.html" class="hot-card">
-                <div class="hot-card-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">🏦</div>
-                <span class="hot-card-badge">热门</span>
-                <div class="hot-card-content">
+                <div class="hot-card-cover" style="background:linear-gradient(135deg,#667eea,#764ba2)">🏦</div>
+                <span class="hot-badge">🔥热门</span>
+                <div class="hot-card-body">
                     <h3>定期存款营销话术大全</h3>
-                    <p>资深客户经理总结的存款营销必备话术</p>
-                    <div class="hot-card-meta">
-                        <span>📚 知识库</span>
-                        <span>🔥 2586阅读</span>
+                    <p>资深客户经理总结的存款营销必备话术，直接拿来用</p>
+                    <div class="hot-card-footer">
+                        <span class="hot-badge-src">📚知识库</span>
+                        <span>👁 2586</span>
                     </div>
                 </div>
             </a>
             <a href="marketing.html" class="hot-card">
-                <div class="hot-card-img" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">💰</div>
-                <span class="hot-card-badge">精华</span>
-                <div class="hot-card-content">
-                    <h3>客户分层维护技巧</h3>
-                    <p>如何有效维护不同层级的客户关系</p>
-                    <div class="hot-card-meta">
-                        <span>💡 营销锦囊</span>
-                        <span>🔥 2103阅读</span>
+                <div class="hot-card-cover" style="background:linear-gradient(135deg,#f093fb,#f5576c)">💰</div>
+                <span class="hot-badge">✨精华</span>
+                <div class="hot-card-body">
+                    <h3>客户分层维护的秘诀</h3>
+                    <p>VIP到普通客户，不同层级该用什么频率和方式维护</p>
+                    <div class="hot-card-footer">
+                        <span class="hot-badge-src">💡营销</span>
+                        <span>👁 2103</span>
                     </div>
                 </div>
             </a>
             <a href="mental.html" class="hot-card">
-                <div class="hot-card-img" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🧘</div>
-                <span class="hot-card-badge">推荐</span>
-                <div class="hot-card-content">
-                    <h3>如何应对工作压力</h3>
-                    <p>银行人的压力管理实用技巧</p>
-                    <div class="hot-card-meta">
-                        <span>🧘 心灵驿站</span>
-                        <span>🔥 1897阅读</span>
+                <div class="hot-card-cover" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">🧘</div>
+                <span class="hot-badge">💎推荐</span>
+                <div class="hot-card-body">
+                    <h3>如何快速从投诉中恢复</h3>
+                    <p>被客户骂完，用这5个方法让自己5分钟内回到状态</p>
+                    <div class="hot-card-footer">
+                        <span class="hot-badge-src">🧘心理</span>
+                        <span>👁 1897</span>
                     </div>
                 </div>
             </a>
             <a href="seniors.html" class="hot-card">
-                <div class="hot-card-img" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">💬</div>
-                <span class="hot-card-badge">精选</span>
-                <div class="hot-card-content">
-                    <h3>新员工入职必看建议</h3>
-                    <p>过来人告诉你银行入职的那些事</p>
-                    <div class="hot-card-meta">
-                        <span>💬 前辈说</span>
-                        <span>🔥 1654阅读</span>
+                <div class="hot-card-cover" style="background:linear-gradient(135deg,#fa709a,#fee140)">💬</div>
+                <span class="hot-badge">🆕新</span>
+                <div class="hot-card-body">
+                    <h3>新员工入职前必看10条</h3>
+                    <p>前辈亲测，这10条建议让你少走半年弯路</p>
+                    <div class="hot-card-footer">
+                        <span class="hot-badge-src">💬前辈说</span>
+                        <span>👁 1654</span>
                     </div>
                 </div>
             </a>
         </div>
     </section>
 
-    <!-- 统计数据 -->
-    <section class="stats-bar">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <h3>816+</h3>
-                <p>精选内容</p>
-            </div>
-            <div class="stat-item">
-                <h3>6</h3>
-                <p>专属板块</p>
-            </div>
-            <div class="stat-item">
-                <h3>每日</h3>
-                <p>持续更新</p>
-            </div>
-            <div class="stat-item">
-                <h3>免费</h3>
-                <p>永久使用</p>
-            </div>
+    <!-- 每日一句 -->
+    <section class="quote-section">
+        <div class="quote-inner">
+            <span class="quote-icon">💬</span>
+            <p class="quote-text" id="quoteText">"银行的工作不只是数字，更是<em>人与人之间的信任</em>。"</p>
+            <p class="quote-author" id="quoteAuthor">—— 某支行行长，从业20年</p>
+            <div class="quote-refresh" onclick="nextQuote()">🔄 换一句</div>
         </div>
     </section>
 
-    <!-- 关于我们 -->
-    <section class="about-section">
-        <div class="about-content">
-            <div class="about-icon">🌟</div>
-            <h2>关于银YOUNG空间</h2>
-            <p>
-                银YOUNG空间是专为银行青年打造的成长平台。我们相信，<br>
-                每一位银行人都有无限的潜力，值得被用心对待。<br>
-                在这里，你可以学习知识、提升技能、释放压力，<br>
-                找到属于自己的成长节奏和职场乐趣。
-            </p>
-            <div class="about-tags">
-                <span class="about-tag">🎯 专业</span>
-                <span class="about-tag">💪 实用</span>
-                <span class="about-tag">🌈 有趣</span>
-                <span class="about-tag">🤝 互助</span>
-                <span class="about-tag">📈 成长</span>
+    <!-- 统计 -->
+    <section class="stats-section reveal">
+        <div class="stats-grid">
+            <div><div class="stat-num" id="c1">0</div><div class="stat-label">📝 精选内容</div></div>
+            <div><div class="stat-num" id="c2">0</div><div class="stat-label">📂 专属板块</div></div>
+            <div><div class="stat-num">每日</div><div class="stat-label">⚡ 持续更新</div></div>
+            <div><div class="stat-num">免费</div><div class="stat-label">🎁 永久使用</div></div>
+        </div>
+    </section>
+
+    <!-- 最近更新 -->
+    <section class="updates-section reveal">
+        <div class="section-header">
+            <div class="section-label">🕐 最近更新</div>
+            <h2 class="section-title">新鲜出炉</h2>
+        </div>
+        <div class="updates-list">
+            <a href="seniors.html" class="update-item">
+                <span class="update-icon">💬</span>
+                <div class="update-content">
+                    <div class="update-title">「卫师傅」分享：电脑密码安全那些事</div>
+                    <div class="update-meta">前辈说 · 今日更新</div>
+                </div>
+                <span class="update-chip">前辈说</span>
+                <span class="update-arrow">›</span>
+            </a>
+            <a href="knowledge.html" class="update-item">
+                <span class="update-icon">📚</span>
+                <div class="update-content">
+                    <div class="update-title">贷款业务：抵押率与风险控制详解</div>
+                    <div class="update-meta">知识库 · 1小时前</div>
+                </div>
+                <span class="update-chip">知识库</span>
+                <span class="update-arrow">›</span>
+            </a>
+            <a href="marketing.html" class="update-item">
+                <span class="update-icon">💡</span>
+                <div class="update-content">
+                    <div class="update-title">五一节日营销全攻略：节假日存款冲刺</div>
+                    <div class="update-meta">营销锦囊 · 今日更新</div>
+                </div>
+                <span class="update-chip">营销锦囊</span>
+                <span class="update-arrow">›</span>
+            </a>
+            <a href="relax.html" class="update-item">
+                <span class="update-icon">😂</span>
+                <div class="update-content">
+                    <div class="update-title">月末冲刺第三天，我已经不是我了…</div>
+                    <div class="update-meta">轻松一刻 · 2小时前</div>
+                </div>
+                <span class="update-chip">轻松一刻</span>
+                <span class="update-arrow">›</span>
+            </a>
+            <a href="mental.html" class="update-item">
+                <span class="update-icon">🧘</span>
+                <div class="update-content">
+                    <div class="update-title">快速减压：银行人的5分钟正念练习</div>
+                    <div class="update-meta">心灵驿站 · 3小时前</div>
+                </div>
+                <span class="update-chip">心灵驿站</span>
+                <span class="update-arrow">›</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section reveal">
+        <div class="cta-inner">
+            <span class="cta-emoji">🚀</span>
+            <h2 class="cta-title">准备好开始了吗？</h2>
+            <p class="cta-sub">银YOUNG空间，每天花10分钟，让自己在银行业做得更好、活得更开心。</p>
+            <div class="cta-buttons">
+                <a href="knowledge.html" class="btn-primary">📚 开始学习</a>
+                <a href="relax.html" class="btn-secondary">😄 先轻松一下</a>
             </div>
         </div>
     </section>
@@ -676,53 +740,121 @@
     <footer class="footer">
         <div class="footer-grid">
             <div class="footer-brand">
-                <h3>银<span>YOUNG</span>空间</h3>
-                <p>银行青年的成长加油站，让学习更有趣，让工作更轻松。</p>
+                <h3>银<em>YOUNG</em>空间</h3>
+                <p>银行青年的成长加油站，让学习更有趣，让工作更轻松。专为银行一线员工打造，每日持续更新。</p>
             </div>
             <div class="footer-col">
                 <h4>📂 内容板块</h4>
                 <ul class="footer-links">
-                    <li><a href="knowledge.html">知识库</a></li>
-                    <li><a href="marketing.html">营销锦囊</a></li>
-                    <li><a href="news.html">最新动态</a></li>
-                    <li><a href="seniors.html">前辈说</a></li>
+                    <li><a href="knowledge.html">📚 知识库</a></li>
+                    <li><a href="marketing.html">💡 营销锦囊</a></li>
+                    <li><a href="news.html">📰 最新动态</a></li>
+                    <li><a href="seniors.html">💬 前辈说</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>💝 身心关怀</h4>
                 <ul class="footer-links">
-                    <li><a href="mental.html">心灵驿站</a></li>
-                    <li><a href="relax.html">轻松一刻</a></li>
+                    <li><a href="mental.html">🧘 心灵驿站</a></li>
+                    <li><a href="relax.html">😄 轻松一刻</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            © 2026 银YOUNG空间 · 用心陪伴每一位银行青年
+            © 2026 银YOUNG空间 · 用心陪伴每一位银行青年 ✨
         </div>
     </footer>
 
+    <!-- 回到顶部 -->
+    <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
     <script>
-        // 导航栏滚动效果
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+    // 进度条
+    window.addEventListener('scroll', () => {
+        const el = document.getElementById('progress-bar');
+        const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        el.style.width = pct + '%';
+
+        const navbar = document.getElementById('navbar');
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+
+        const backTop = document.getElementById('back-top');
+        backTop.classList.toggle('show', window.scrollY > 400);
+    });
+
+    // 移动端菜单
+    function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    // 生成星星
+    const starsEl = document.getElementById('stars');
+    for (let i = 0; i < 80; i++) {
+        const s = document.createElement('div');
+        s.className = 'star';
+        s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--delay:${Math.random()*4}s`;
+        starsEl.appendChild(s);
+    }
+
+    // 打字机效果
+    const words = ['存款营销话术', '贷款业务流程', '理财风险揭示', '客户维护技巧', '信用卡推广', '压力缓解方法', '月末冲刺秘诀'];
+    let wi = 0, ci = 0, deleting = false;
+    const typeEl = document.getElementById('typeText');
+    function typeLoop() {
+        const word = words[wi];
+        if (!deleting) {
+            typeEl.textContent = word.slice(0, ++ci);
+            if (ci === word.length) { deleting = true; setTimeout(typeLoop, 1600); return; }
+        } else {
+            typeEl.textContent = word.slice(0, --ci);
+            if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
+        }
+        setTimeout(typeLoop, deleting ? 60 : 100);
+    }
+    typeLoop();
+
+    // 每日一句
+    const quotes = [
+        { text: '"银行的工作不只是数字，更是<em>人与人之间的信任</em>。"', author: '—— 某支行行长，从业20年' },
+        { text: '"每一次被拒绝，都是下一次成功的<em>养分</em>。"', author: '—— 优秀客户经理的自我修养' },
+        { text: '"一个微笑，有时候比任何话术都<em>有用</em>。"', author: '—— 大堂经理经验谈' },
+        { text: '"慢即是快，把基础打牢了，<em>营销自然就顺了</em>。"', author: '—— 钱主任，运营主管16年' },
+        { text: '"做银行，不是在卖产品，是在<em>帮客户解决问题</em>。"', author: '—— 周经理，对公业务14年' },
+    ];
+    let qi = 0;
+    function nextQuote() {
+        qi = (qi + 1) % quotes.length;
+        const q = quotes[qi];
+        const textEl = document.getElementById('quoteText');
+        const authEl = document.getElementById('quoteAuthor');
+        textEl.style.opacity = 0;
+        setTimeout(() => { textEl.innerHTML = q.text; authEl.textContent = q.author; textEl.style.opacity = 1; }, 300);
+    }
+    document.getElementById('quoteText').style.transition = 'opacity 0.3s';
+
+    // 数字滚动
+    function animateNum(el, target, suffix='') {
+        let n = 0; const step = Math.ceil(target / 60);
+        const t = setInterval(() => {
+            n = Math.min(n + step, target);
+            el.textContent = n + suffix;
+            if (n >= target) clearInterval(t);
+        }, 25);
+    }
+
+    // 滚动进入动画
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                if (e.target.classList.contains('stats-section')) {
+                    animateNum(document.getElementById('c1'), 816, '+');
+                    animateNum(document.getElementById('c2'), 6, '');
+                }
             }
         });
-
-        // 移动端菜单
-        function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        // 热门内容Tab切换
-        function switchTab(el, type) {
-            document.querySelectorAll('.hot-tab').forEach(t => t.classList.remove('active'));
-            el.classList.add('active');
-        }
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
