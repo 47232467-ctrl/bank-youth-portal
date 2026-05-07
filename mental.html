@@ -146,12 +146,13 @@
                 <div class="logo-text">银<span>YOUNG</span>空间</div>
             </a>
             <ul class="nav-links">
-                <li><a href="index.html">首页</a></li>
-                <li><a href="knowledge.html">知识库</a></li>
-                <li><a href="marketing.html">营销锦囊</a></li>
-                <li><a href="seniors.html">前辈说</a></li>
-                <li><a href="mental.html" class="active">心灵驿站</a></li>
-                <li><a href="relax.html" class="nav-cta">轻松一刻</a></li>
+                <li><a href="index.html">🏠 首页</a></li>
+                <li><a href="knowledge.html">📚 知识库</a></li>
+                <li><a href="marketing.html">💡 营销锦囊</a></li>
+                <li><a href="news.html">📰 最新动态</a></li>
+                <li><a href="seniors.html">💬 前辈说</a></li>
+                <li><a href="mental.html" class="active">🧘 心灵驿站</a></li>
+                <li><a href="relax.html" class="nav-cta">😄 轻松一刻</a></li>
             </ul>
         </div>
     </nav>
@@ -402,6 +403,7 @@
 
     <script>
         const content = {
+            // ========== 压力管理 ==========
             pressure1: {
                 icon: '💆',
                 title: '识别压力信号',
@@ -478,6 +480,74 @@
                     </div>
                 `
             },
+            pressure4: {
+                icon: '⏰',
+                title: '番茄工作法',
+                content: `
+                    <p>番茄工作法是简单有效的时间管理工具，帮助你保持专注、提高效率。</p>
+                    <div class="modal-section">
+                        <h4>🍅 如何操作</h4>
+                        <ul>
+                            <li>选择一个待完成的任务</li>
+                            <li>设定25分钟倒计时（一个番茄钟）</li>
+                            <li>专注工作，中途不允许做任何与任务无关的事</li>
+                            <li>25分钟后，休息5分钟</li>
+                            <li>每4个番茄钟后，休息15-30分钟</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>💡 技巧</h4>
+                        <ul>
+                            <li>手机调静音或放到看不见的地方</li>
+                            <li>休息时站起来活动，不要看手机</li>
+                            <li>记录每天完成的番茄钟数量</li>
+                        </ul>
+                    </div>
+                `
+            },
+            pressure5: {
+                icon: '🛏️',
+                title: '告别加班熬夜',
+                content: `
+                    <p>加班熬夜不仅影响健康，还会降低工作效率。试试这些方法准时下班。</p>
+                    <div class="modal-section">
+                        <h4>🚀 提高效率的技巧</h4>
+                        <ul>
+                            <li>每天上班前列出当天最重要的3件事</li>
+                            <li>用「不紧急但重要」的原则拒绝临时任务</li>
+                            <li>减少无效社交和闲聊</li>
+                            <li>善用工具自动化重复性工作</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>🗣️ 沟通话术</h4>
+                        <p>"我今天的工作已经完成了，明早我会优先处理这个。"</p>
+                    </div>
+                `
+            },
+            pressure6: {
+                icon: '🧠',
+                title: '正念冥想入门',
+                content: `
+                    <p>正念冥想是一种让身心平静的练习，每天10分钟，可以有效减轻压力。</p>
+                    <div class="modal-section">
+                        <h4>🧘 基础冥想</h4>
+                        <ul>
+                            <li>找一个安静的角落，坐下或躺下</li>
+                            <li>闭上眼睛，自然呼吸</li>
+                            <li>把注意力放在呼吸上，感受气流</li>
+                            <li>当杂念出现时，温柔地把注意力拉回呼吸</li>
+                            <li>从5分钟开始，逐渐增加到10-20分钟</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>📱 推荐APP</h4>
+                        <p>Insight Timer、Headspace、Calm 都有免费的正念冥想课程。</p>
+                    </div>
+                `
+            },
+
+            // ========== 情绪调节 ==========
             emotion1: {
                 icon: '😤',
                 title: '愤怒管理技巧',
@@ -498,6 +568,107 @@
                     </div>
                 `
             },
+            emotion2: {
+                icon: '😰',
+                title: '焦虑情绪化解',
+                content: `
+                    <p>焦虑往往来自对未知的恐惧。学会与焦虑和平共处，而不是对抗它。</p>
+                    <div class="modal-section">
+                        <h4>🌊 焦虑急救法</h4>
+                        <ul>
+                            <li>命名法：心里默念"我感到焦虑了"</li>
+                            <li>5-4-3-2-1感官 grounding：说出5样看到的、4样摸到的、3样听到的、2样闻到的、1样尝到的</li>
+                            <li>写下最坏的结果，往往发现没那么可怕</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>💡 长期策略</h4>
+                        <ul>
+                            <li>保持规律运动</li>
+                            <li>限制咖啡因摄入</li>
+                            <li>每天给自己一些"无计划"时间</li>
+                        </ul>
+                    </div>
+                `
+            },
+            emotion3: {
+                icon: '😢',
+                title: '允许自己脆弱',
+                content: `
+                    <p>承认情绪不是软弱，而是自我关怀的开始。允许自己脆弱，才是真正的坚强。</p>
+                    <div class="modal-section">
+                        <h4>💜 打破"必须坚强"的迷思</h4>
+                        <ul>
+                            <li>哭泣是身体释放压力的方式</li>
+                            <li>说"我不知道"是一种诚实</li>
+                            <li>求助是能力的体现，不是无能</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>🌱 练习自我接纳</h4>
+                        <p>每天对镜子里的自己说："你已经很努力了，你值得被善待。"</p>
+                    </div>
+                `
+            },
+            emotion4: {
+                icon: '😊',
+                title: '培养积极心态',
+                content: `
+                    <p>每天3件好事，改变看世界的角度。积极不是盲目乐观，而是一种选择。</p>
+                    <div class="modal-section">
+                        <h4>📝 三件好事练习</h4>
+                        <ul>
+                            <li>每天晚上写下3件让你感到好的事</li>
+                            <li>可以是大事（晋升）也可以是小事（一杯好喝的咖啡）</li>
+                            <li>记录为什么会发生，它是怎么让你感觉变好的</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>🔄 思维转换</h4>
+                        <p>"这个问题" → "这个挑战" → "这个成长机会"</p>
+                    </div>
+                `
+            },
+            emotion5: {
+                icon: '🙏',
+                title: '感恩的力量',
+                content: `
+                    <p>研究表明，感恩可以显著提升幸福感。感恩让人更幸福，你今天感恩了吗？</p>
+                    <div class="modal-section">
+                        <h4>🙏 感恩练习</h4>
+                        <ul>
+                            <li>每天对一个人表达感谢</li>
+                            <li>写感恩日记，记录值得感恩的事</li>
+                            <li>不要把好东西视为理所当然</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>💬 表达感谢的话术</h4>
+                        <p>"谢谢你做的那件事，它对我帮助很大，因为..."</p>
+                    </div>
+                `
+            },
+            emotion6: {
+                icon: '🎭',
+                title: '情绪ABC理论',
+                content: `
+                    <p>换个想法，就能换个情绪。ABC理论帮你找到情绪背后的真正原因。</p>
+                    <div class="modal-section">
+                        <h4>🔤 ABC模型</h4>
+                        <ul>
+                            <li><b>A (Activating event)</b>：发生的事情</li>
+                            <li><b>B (Belief)</b>：你对这件事的看法/信念</li>
+                            <li><b>C (Consequence)</b>：你的情绪和行为结果</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>🔄 关键改变B</h4>
+                        <p>事件A相同，但改变B（看法），结果C就会不同。同样被领导批评，可以理解为"我被针对了"，也可以理解为"他在帮我成长"。</p>
+                    </div>
+                `
+            },
+
+            // ========== 人际关系 ==========
             relation1: {
                 icon: '👥',
                 title: '与难缠客户相处',
@@ -519,6 +690,110 @@
                     </div>
                 `
             },
+            relation2: {
+                icon: '👔',
+                title: '与领导沟通技巧',
+                content: `
+                    <p>汇报工作有技巧，让领导看到你的价值，同时也建立良好的上下级关系。</p>
+                    <div class="modal-section">
+                        <h4>📊 高效汇报</h4>
+                        <ul>
+                            <li>先说结论，再说道理</li>
+                            <li>准备好备选方案，不只是问题</li>
+                            <li>用数据和事实说话</li>
+                            <li>了解领导偏好（细节型还是概览型）</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>🗣️ 常用话术</h4>
+                        <p>"领导，关于XX问题，我分析后有3个方案，权衡后建议A，因为..."</p>
+                    </div>
+                `
+            },
+            relation3: {
+                icon: '💼',
+                title: '同事关系经营',
+                content: `
+                    <p>既合作又不卷，职场关系轻松处。好的同事关系让工作更愉快。</p>
+                    <div class="modal-section">
+                        <h4>🤝 关系建立</h4>
+                        <ul>
+                            <li>记住同事的名字和基本信息</li>
+                            <li>适度分享（工作生活平衡）</li>
+                            <li>真诚赞美，不敷衍</li>
+                            <li>同事有困难时主动帮忙</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>🚫 避免踩雷</h4>
+                        <ul>
+                            <li>不在背后议论他人</li>
+                            <li>不打听隐私</li>
+                            <li>不抢他人功劳</li>
+                        </ul>
+                    </div>
+                `
+            },
+            relation4: {
+                icon: '🚪',
+                title: '设立心理边界',
+                content: `
+                    <p>学会说"不"，不当职场老好人。设立边界不是自私，而是自我保护。</p>
+                    <div class="modal-section">
+                        <h4>🗣️ 拒绝话术</h4>
+                        <ul>
+                            <li>"这个时间我无法接新任务，因为我正在处理XX。你看是否可以调整优先级？"</li>
+                            <li>"我很想帮忙，但这次确实不方便。我们可以另找时间..."</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>💪 边界练习</h4>
+                        <p>从小的"不"开始练习，比如拒绝不重要的聚会邀请。记住：答应每一件事，意味着无法兑现任何承诺。</p>
+                    </div>
+                `
+            },
+            relation5: {
+                icon: '🗣️',
+                title: '非暴力沟通',
+                content: `
+                    <p>好好说话，让沟通更高效。非暴力沟通让你既能表达自己，也能理解他人。</p>
+                    <div class="modal-section">
+                        <h4>🔢 四步公式</h4>
+                        <ul>
+                            <li><b>观察</b>：我看到/听到...</li>
+                            <li><b>感受</b>：我感到...</li>
+                            <li><b>需求</b>：因为我需要...</li>
+                            <li><b>请求</b>：你是否愿意...</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>📝 例子</h4>
+                        <p>"当我看到你开会迟到时，我感到有些着急，因为我希望我们能准时开始。你能下次提前5分钟到吗？"</p>
+                    </div>
+                `
+            },
+            relation6: {
+                icon: '🎁',
+                title: '接受批评的心态',
+                content: `
+                    <p>批评是成长的礼物，学会欣然接受。批评往往包含有价值的信息。</p>
+                    <div class="modal-section">
+                        <h4>🎯 正确对待批评</h4>
+                        <ul>
+                            <li>先听完整，不要急于辩解</li>
+                            <li>问清楚具体是哪里的问题</li>
+                            <li>把"我"和"我的行为"分开</li>
+                            <li>感谢对方的反馈</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>💭 心态转换</h4>
+                        <p>"被批评=我在成长" 而不是 "被批评=我很差"</p>
+                    </div>
+                `
+            },
+
+            // ========== 工作生活平衡 ==========
             balance1: {
                 icon: '🏠',
                 title: '下班后断开连接',
@@ -536,6 +811,232 @@
                     <div class="modal-section">
                         <h4>💬 沟通话术</h4>
                         <p>"下班后我有私人安排，紧急事务请联系我手机。"</p>
+                    </div>
+                `
+            },
+            balance2: {
+                icon: '🎯',
+                title: '找到工作的意义',
+                content: `
+                    <p>每一份工作都有价值，你的是什么呢？找到意义让工作更有动力。</p>
+                    <div class="modal-section">
+                        <h4>🔍 寻找意义的问题</h4>
+                        <ul>
+                            <li>我的工作帮到了谁？</li>
+                            <li>如果没有我这份工作，会发生什么？</li>
+                            <li>过去最有成就感的工作是什么？</li>
+                            <li>我理想中一天的工作是什么样的？</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>🌱 小行动</h4>
+                        <p>每天做一件让自己觉得"有意义"的小事，即使是帮同事一个小忙。</p>
+                    </div>
+                `
+            },
+            balance3: {
+                icon: '🎨',
+                title: '培养工作外爱好',
+                content: `
+                    <p>工作之外，还有诗和远方。一个爱好可以是你情绪的避风港。</p>
+                    <div class="modal-section">
+                        <h4>🎯 找爱好的建议</h4>
+                        <ul>
+                            <li>尝试新鲜事物，多体验</li>
+                            <li>不需要"有用"，开心就行</li>
+                            <li>可以是运动、手工、艺术、学习...</li>
+                            <li>从低成本、低门槛的开始</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>📅 保持习惯</h4>
+                        <p>把爱好时间写进日程表，像对待工作会议一样对待它。</p>
+                    </div>
+                `
+            },
+            balance4: {
+                icon: '👨‍👩‍👧',
+                title: '高效陪伴家人',
+                content: `
+                    <p>时间不在多，在于用心。忙碌不是借口，陪伴质量比时长更重要。</p>
+                    <div class="modal-section">
+                        <h4>⏱️ 高效陪伴技巧</h4>
+                        <ul>
+                            <li>设定"无手机"家庭时间</li>
+                            <li>做需要互动的事情，而不是各玩各的</li>
+                            <li>认真倾听，不评判</li>
+                            <li>表达爱意：拥抱、说"我爱你"</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>💡 每日小仪式</h4>
+                        <p>一起吃晚餐、睡前聊天、周末家庭活动...</p>
+                    </div>
+                `
+            },
+            balance5: {
+                icon: '🏃',
+                title: '运动是最好的减压',
+                content: `
+                    <p>运动释放内啡肽，是最天然的抗抑郁药。每天30分钟，彻底释放压力。</p>
+                    <div class="modal-section">
+                        <h4>🏋️ 开始运动的建议</h4>
+                        <ul>
+                            <li>从每天10分钟开始，不追求强度</li>
+                            <li>选择自己喜欢的运动</li>
+                            <li>利用碎片时间：走路、爬楼梯</li>
+                            <li>找运动伙伴互相监督</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>🧘 办公室微运动</h4>
+                        <p>每小时站起来伸展、午餐后散步10分钟、深呼吸3次</p>
+                    </div>
+                `
+            },
+            balance6: {
+                icon: '📚',
+                title: '持续学习成长',
+                content: `
+                    <p>成长让你更有掌控感。持续学习不仅提升能力，也增强自信。</p>
+                    <div class="modal-section">
+                        <h4>📖 学习方式</h4>
+                        <ul>
+                            <li>每天阅读30分钟</li>
+                            <li>听播客（通勤时间）</li>
+                            <li>参加线上课程</li>
+                            <li>向同事学习</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>🎯 学习方向</h4>
+                        <p>每年设定1-2个学习目标，可以与工作相关，也可以是纯粹兴趣。</p>
+                    </div>
+                `
+            },
+
+            // ========== 自我成长 ==========
+            growth1: {
+                icon: '⭐',
+                title: '银行人的职业规划',
+                content: `
+                    <p>在银行发展，你有哪些可能？清晰的职业规划让努力更有方向。</p>
+                    <div class="modal-section">
+                        <h4>📈 银行常见发展路径</h4>
+                        <ul>
+                            <li>柜员 → 高级柜员 → 会计主管</li>
+                            <li>客户经理 → 高级客户经理 → 支行副行长</li>
+                            <li>中后台 → 部门负责人</li>
+                            <li>专业序列：风控、合规、稽核...</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>🔑 规划建议</h4>
+                        <ul>
+                            <li>了解自己想成为什么样的人</li>
+                            <li>识别岗位需要的能力</li>
+                            <li>主动争取机会</li>
+                            <li>建立内部人脉</li>
+                        </ul>
+                    </div>
+                `
+            },
+            growth2: {
+                icon: '💪',
+                title: '建立自信心态',
+                content: `
+                    <p>相信自己能行，你就真的能行。自信是可以练习的。</p>
+                    <div class="modal-section">
+                        <h4>🌱 建立自信的方法</h4>
+                        <ul>
+                            <li>记录每天的小成就</li>
+                            <li>改变身体语言：挺胸、抬头</li>
+                            <li>用"我可以学"代替"我不会"</li>
+                            <li>停止比较，专注自己的成长</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>💭 自我对话</h4>
+                        <p>把"我不行"换成"我现在还不会，但我可以学"</p>
+                    </div>
+                `
+            },
+            growth3: {
+                icon: '🔄',
+                title: '接受不完美',
+                content: `
+                    <p>完美主义是进步的大敌。完成比完美更重要。</p>
+                    <div class="modal-section">
+                        <h4>⚖️ 完美主义的陷阱</h4>
+                        <ul>
+                            <li>害怕犯错而不敢行动</li>
+                            <li>过度纠结细节</li>
+                            <li>总是觉得自己不够好</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>✅ 行动策略</h4>
+                        <p>先完成，再优化。设定"足够好"的标准，而不是"完美"的标准。</p>
+                    </div>
+                `
+            },
+            growth4: {
+                icon: '🎯',
+                title: '设定合理目标',
+                content: `
+                    <p>SMART原则，让目标更可行。把大梦想拆成小步骤。</p>
+                    <div class="modal-section">
+                        <h4>📋 SMART原则</h4>
+                        <ul>
+                            <li><b>S (Specific)</b>：具体</li>
+                            <li><b>M (Measurable)</b>：可衡量</li>
+                            <li><b>A (Achievable)</b>：可达成</li>
+                            <li><b>R (Relevant)</b>：相关性</li>
+                            <li><b>T (Time-bound)</b>：有时间限制</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>📝 例子</h4>
+                        <p>"我要变好" → "我要在3个月内通过AFP考试"（更具体可行）</p>
+                    </div>
+                `
+            },
+            growth5: {
+                icon: '🏆',
+                title: '庆祝每一个小进步',
+                content: `
+                    <p>别忘了给自己点赞！庆祝进步可以强化积极行为，让你更有动力。</p>
+                    <div class="modal-section">
+                        <h4>🎉 庆祝的方式</h4>
+                        <ul>
+                            <li>完成目标后给自己一个小奖励</li>
+                            <li>在日记里记录进步</li>
+                            <li>和重要的人分享你的成就</li>
+                            <li>做一件让自己开心的事</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>💡 每日小庆祝</h4>
+                        <p>即使是很小的进步也值得庆祝：今天按时下班、拒绝了一次不必要的加班...</p>
+                    </div>
+                `
+            },
+            growth6: {
+                icon: '🌅',
+                title: '做自己的人生主角',
+                content: `
+                    <p>你的人生，你做主。不要活在别人的期待里，定义自己的成功。</p>
+                    <div class="modal-section">
+                        <h4>🌟 自我主导的思维</h4>
+                        <ul>
+                            <li>我的选择，我负责</li>
+                            <li>我可以改变，也接受改变不了</li>
+                            <li>成功是按自己的标准，不是别人的</li>
+                        </ul>
+                    </div>
+                    <div class="modal-section">
+                        <h4>💭 问问自己</h4>
+                        <p>如果这不是为了证明给别人看，我还会这样选择吗？</p>
                     </div>
                 `
             }
