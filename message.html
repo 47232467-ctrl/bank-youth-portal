@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板 - 银YOUNG空间</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2c5282;
+            --accent: #ed8936;
+            --accent-light: #f6ad55;
+            --bg: #f0f4ff;
+            --card: #ffffff;
+            --text: #1a202c;
+            --muted: #718096;
+            --green: #43e97b;
+            --pink: #f093fb;
+            --purple: #764ba2;
+            --s1: 0 4px 20px rgba(26,54,93,0.08);
+            --s2: 0 16px 48px rgba(26,54,93,0.16);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Noto Sans SC', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 0.8rem 2rem;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(102,126,234,0.1);
+        }
+        .nav-container { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+        .logo-icon {
+            width: 40px; height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; color: white; font-weight: 900;
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+        .logo-text { font-family: 'Noto Serif SC', serif; font-size: 1.35rem; font-weight: 700; color: var(--primary); }
+        .logo-text em { font-style: normal; background: linear-gradient(135deg, #667eea, #f093fb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; gap: 0.3rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: #4a5568; padding: 0.45rem 0.9rem;
+            border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.25s ease;
+        }
+        .nav-links a:hover { background: linear-gradient(135deg,#667eea,#764ba2); color: white; transform: translateY(-1px); }
+        .nav-links a.active { background: linear-gradient(135deg,#667eea,#764ba2); color: white; }
+        .nav-cta { background: linear-gradient(135deg, #ed8936, #f6ad55) !important; color: white !important; box-shadow: 0 4px 12px rgba(237,137,54,0.35); }
+        .nav-cta:hover { box-shadow: 0 6px 20px rgba(237,137,54,0.5) !important; }
+        .menu-toggle { display:none; flex-direction:column; gap:4px; cursor:pointer; padding:0.4rem; }
+        .menu-toggle span { width:22px; height:2px; background:var(--primary); border-radius:2px; transition: all 0.3s; }
+
+        /* 页面头部 */
+        .page-header {
+            background: linear-gradient(135deg, #0f1b3e 0%, #1a365d 50%, #2d1b69 100%);
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(102,126,234,0.3), transparent);
+            top: -100px; left: -100px;
+            border-radius: 50%;
+        }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(240,147,251,0.25), transparent);
+            bottom: -50px; right: -50px;
+            border-radius: 50%;
+        }
+        .page-title { font-family: 'Noto Serif SC', serif; font-size: clamp(2rem, 4vw, 3rem); color: white; margin-bottom: 0.8rem; position: relative; }
+        .page-title em { font-style: normal; background: linear-gradient(135deg, #f6d365, #f093fb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .page-sub { color: rgba(255,255,255,0.75); font-size: 1.05rem; position: relative; max-width: 600px; margin: 0 auto; }
+        .header-stats { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; position: relative; }
+        .header-stat { color: white; text-align: center; }
+        .header-stat-num { font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #f6d365, #f6ad55); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header-stat-label { font-size: 0.8rem; opacity: 0.7; }
+
+        /* 主内容 */
+        .main-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 2rem;
+        }
+
+        /* 发表留言表单 */
+        .write-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem;
+            box-shadow: var(--s1);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        .write-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.5rem; }
+        .write-header-icon { font-size: 1.8rem; }
+        .write-header h3 { font-size: 1.15rem; color: var(--primary); }
+        .write-header span { font-size: 0.78rem; color: var(--muted); }
+
+        /* 匿名/实名切换 */
+        .identity-toggle {
+            display: flex;
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 1.2rem;
+        }
+        .identity-btn {
+            flex: 1;
+            padding: 0.6rem;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.25s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+        .identity-btn.active { background: white; color: var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .identity-btn:hover:not(.active) { color: var(--primary); }
+
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; font-size: 0.82rem; color: var(--muted); margin-bottom: 0.4rem; font-weight: 500; }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: all 0.25s;
+            background: #fafbfc;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.15);
+            background: white;
+        }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .form-hint { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; }
+
+        /* 分类选择 */
+        .category-select {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+        .category-btn {
+            padding: 0.5rem 0.3rem;
+            border: 1.5px solid #e2e8f0;
+            background: #fafbfc;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .category-btn:hover { border-color: #667eea; color: #667eea; }
+        .category-btn.active { background: linear-gradient(135deg, #667eea15, #764ba215); border-color: #667eea; color: #667eea; font-weight: 600; }
+
+        /* 提交按钮 */
+        .submit-btn {
+            width: 100%;
+            padding: 0.85rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 16px rgba(102,126,234,0.35);
+            margin-top: 1.2rem;
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(102,126,234,0.45); }
+        .submit-btn:active { transform: translateY(0); }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        /* 留言列表 */
+        .messages-section { }
+        .messages-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        .messages-header h2 { font-size: 1.3rem; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; }
+        .messages-count { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 0.2rem 0.6rem; border-radius: 50px; font-size: 0.75rem; font-weight: 600; }
+
+        /* 筛选标签 */
+        .filter-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .filter-tab {
+            padding: 0.4rem 1rem;
+            border: 1.5px solid #e2e8f0;
+            background: white;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-tab:hover { border-color: #667eea; color: #667eea; }
+        .filter-tab.active { background: linear-gradient(135deg, #667eea, #764ba2); border-color: transparent; color: white; }
+
+        /* 空状态 */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 16px;
+        }
+        .empty-icon { font-size: 4rem; margin-bottom: 1rem; opacity: 0.5; }
+        .empty-title { font-size: 1.1rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .empty-text { color: var(--muted); font-size: 0.9rem; }
+
+        /* 留言卡片 */
+        .message-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--s1);
+            transition: all 0.25s;
+            border: 1px solid transparent;
+        }
+        .message-card:hover { box-shadow: var(--s2); border-color: rgba(102,126,234,0.1); transform: translateY(-2px); }
+        .message-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.8rem; }
+        .message-author { display: flex; align-items: center; gap: 0.7rem; }
+        .author-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+        }
+        .author-info {}
+        .author-name { font-weight: 600; font-size: 0.95rem; color: var(--text); }
+        .author-meta { font-size: 0.75rem; color: var(--muted); display: flex; align-items: center; gap: 0.5rem; }
+        .author-tag { 
+            padding: 0.1rem 0.5rem; 
+            border-radius: 4px; 
+            font-size: 0.68rem; 
+            font-weight: 600;
+        }
+        .tag-anonymous { background: #fef3c7; color: #92400e; }
+        .tag-realname { background: #dbeafe; color: #1e40af; }
+        .message-category { background: #f0f4ff; color: #667eea; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.72rem; font-weight: 600; }
+        .message-content { font-size: 0.92rem; color: var(--text); line-height: 1.8; margin-bottom: 1rem; white-space: pre-wrap; }
+        .message-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 0.8rem; border-top: 1px solid #f0f4ff; }
+        .message-time { font-size: 0.75rem; color: var(--muted); }
+        .message-actions { display: flex; gap: 0.8rem; }
+        .action-btn {
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 0.78rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: color 0.2s;
+            padding: 0.3rem 0.5rem;
+            border-radius: 6px;
+        }
+        .action-btn:hover { background: #f0f4ff; color: #667eea; }
+
+        /* 回复区域 */
+        .replies-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #e2e8f0;
+        }
+        .reply-item {
+            display: flex;
+            gap: 0.7rem;
+            margin-bottom: 0.8rem;
+        }
+        .reply-avatar {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+        .reply-content { flex: 1; }
+        .reply-author { font-weight: 600; font-size: 0.82rem; color: var(--text); }
+        .reply-text { font-size: 0.85rem; color: var(--text); line-height: 1.6; margin-top: 0.2rem; }
+        .reply-time { font-size: 0.68rem; color: var(--muted); margin-top: 0.2rem; }
+
+        .reply-form { margin-top: 0.8rem; display: flex; gap: 0.5rem; }
+        .reply-input {
+            flex: 1;
+            padding: 0.5rem 0.8rem;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-family: inherit;
+            transition: all 0.25s;
+        }
+        .reply-input:focus { outline: none; border-color: #667eea; }
+        .reply-submit {
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+        .reply-submit:hover { box-shadow: 0 4px 12px rgba(102,126,234,0.35); }
+
+        /* Toast提示 */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 2rem;
+            padding: 1rem 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            z-index: 9999;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+            border-left: 4px solid #43e97b;
+        }
+        .toast.show { transform: translateX(0); }
+        .toast-icon { font-size: 1.4rem; }
+        .toast-text { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+        .toast.error { border-left-color: #f56565; }
+
+        /* 加载动画 */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e2e8f0;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { color: var(--muted); font-size: 0.9rem; }
+
+        /* 回到顶部 */
+        #back-top {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+            width: 44px; height: 44px; border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; cursor: pointer;
+            box-shadow: 0 4px 16px rgba(102,126,234,0.4);
+            opacity: 0; transform: translateY(20px);
+            transition: all 0.3s ease; border: none;
+        }
+        #back-top.show { opacity: 1; transform: translateY(0); }
+        #back-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(102,126,234,0.5); }
+
+        /* 页脚 */
+        .footer { background: #0d1f3c; color: white; padding: 2rem; text-align: center; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; }
+        .footer p { opacity: 0.5; font-size: 0.82rem; }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .main-content { grid-template-columns: 1fr; }
+            .write-card { position: static; }
+            .header-stats { flex-wrap: wrap; gap: 1rem; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display:none; flex-direction:column; position:absolute; top:100%; left:0; right:0; background:white; padding:1rem; box-shadow:var(--s1); }
+            .nav-links.open { display:flex; }
+            .menu-toggle { display:flex; }
+            .category-select { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">Y</div>
+                <div class="logo-text">银<em>YOUNG</em>空间</div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">🏠 首页</a></li>
+                <li><a href="knowledge.html">📚 知识库</a></li>
+                <li><a href="marketing.html">💡 营销锦囊</a></li>
+                <li><a href="news.html">📰 最新动态</a></li>
+                <li><a href="seniors.html">💬 前辈说</a></li>
+                <li><a href="mental.html">🧘 心灵驿站</a></li>
+                <li><a href="message.html" class="active">💭 留言板</a></li>
+                <li><a href="relax.html" class="nav-cta">😄 轻松一刻</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面头部 -->
+    <header class="page-header">
+        <h1 class="page-title">银YOUNG <em>留言板</em></h1>
+        <p class="page-sub">想说就说，可以匿名，也可以实名。在这里，每一个声音都值得被听见。</p>
+        <div class="header-stats">
+            <div class="header-stat">
+                <div class="header-stat-num" id="totalCount">0</div>
+                <div class="header-stat-label">条留言</div>
+            </div>
+            <div class="header-stat">
+                <div class="header-stat-num" id="todayCount">0</div>
+                <div class="header-stat-label">今日新增</div>
+            </div>
+            <div class="header-stat">
+                <div class="header-stat-num" id="replyCount">0</div>
+                <div class="header-stat-label">条回复</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容 -->
+    <main class="main-content">
+        <!-- 发表留言 -->
+        <div class="write-card">
+            <div class="write-header">
+                <span class="write-header-icon">✍️</span>
+                <div>
+                    <h3>发表留言</h3>
+                    <span>匿名/实名自由切换</span>
+                </div>
+            </div>
+
+            <!-- 匿名/实名切换 -->
+            <div class="identity-toggle">
+                <button class="identity-btn active" onclick="setAnonymous(false)" id="btnRealname">
+                    👤 实名留言
+                </button>
+                <button class="identity-btn" onclick="setAnonymous(true)" id="btnAnonymous">
+                    🎭 匿名留言
+                </button>
+            </div>
+
+            <form id="messageForm">
+                <div class="form-group" id="nameGroup">
+                    <label>你的称呼</label>
+                    <input type="text" id="authorName" placeholder="请输入昵称" maxlength="20">
+                </div>
+
+                <div class="form-group">
+                    <label>留言分类</label>
+                    <div class="category-select">
+                        <button type="button" class="category-btn active" data-category="share">💬 交流分享</button>
+                        <button type="button" class="category-btn" data-category="question">❓ 提问求助</button>
+                        <button type="button" class="category-btn" data-category="suggestion">💡 建议反馈</button>
+                        <button type="button" class="category-btn" data-category="confession">💝 表白感谢</button>
+                        <button type="button" class="category-btn" data-category="vent">😤 吐槽发泄</button>
+                        <button type="button" class="category-btn" data-category="other">🎈 其他</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>留言内容</label>
+                    <textarea id="messageContent" placeholder="在这里写下你想说的话..." maxlength="1000"></textarea>
+                    <div class="form-hint"><span id="charCount">0</span>/1000 字</div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span>🚀</span> 发表留言
+                </button>
+            </form>
+        </div>
+
+        <!-- 留言列表 -->
+        <div class="messages-section">
+            <div class="messages-header">
+                <h2>📋 留言列表 <span class="messages-count" id="listCount">0</span></h2>
+            </div>
+
+            <!-- 筛选标签 -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">全部</button>
+                <button class="filter-tab" data-filter="share">💬 交流分享</button>
+                <button class="filter-tab" data-filter="question">❓ 提问求助</button>
+                <button class="filter-tab" data-filter="suggestion">💡 建议反馈</button>
+                <button class="filter-tab" data-filter="confession">💝 表白感谢</button>
+                <button class="filter-tab" data-filter="vent">😤 吐槽发泄</button>
+                <button class="filter-tab" data-filter="other">🎈 其他</button>
+            </div>
+
+            <div id="messagesList">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <div class="loading-text">正在加载留言...</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast提示 -->
+    <div class="toast" id="toast">
+        <span class="toast-icon">✅</span>
+        <span class="toast-text" id="toastText">操作成功</span>
+    </div>
+
+    <!-- 回到顶部 -->
+    <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <p>© 2026 银YOUNG空间 · 用心陪伴每一位银行青年 ✨</p>
+        </div>
+    </footer>
+
+    <script>
+        // ============ 配置 ============
+        const GITHUB_REPO = '47232467-ctrl/bank-youth-portal';
+        const GITHUB_ISSUE_LABEL = '留言板';
+        const STORAGE_KEY = 'yinyoung_messages';
+        const REPLIES_KEY = 'yinyoung_replies';
+
+        // ============ 状态 ============
+        let isAnonymous = false;
+        let selectedCategory = 'share';
+        let currentFilter = 'all';
+        let allMessages = [];
+
+        // ============ 初始化 ============
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavHighlight();
+            initCategorySelect();
+            initFilterTabs();
+            initForm();
+            initIdentityToggle();
+            loadMessages();
+            updateStats();
+            initBackTop();
+        });
+
+        // 导航高亮
+        function initNavHighlight() {
+            const links = document.querySelectorAll('.nav-links a');
+            links.forEach(link => {
+                if (link.getAttribute('href') === 'message.html') {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // 移动端菜单
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('open');
+        }
+
+        // 分类选择
+        function initCategorySelect() {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    selectedCategory = btn.dataset.category;
+                });
+            });
+        }
+
+        // 筛选标签
+        function initFilterTabs() {
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentFilter = tab.dataset.filter;
+                    renderMessages();
+                });
+            });
+        }
+
+        // 匿名/实名切换
+        function initIdentityToggle() {
+            const nameGroup = document.getElementById('nameGroup');
+            const nameInput = document.getElementById('authorName');
+
+            // 从localStorage恢复
+            const savedName = localStorage.getItem('yinyoung_nickname');
+            if (savedName) {
+                nameInput.value = savedName;
+            }
+        }
+
+        function setAnonymous(value) {
+            isAnonymous = value;
+            document.getElementById('btnAnonymous').classList.toggle('active', value);
+            document.getElementById('btnRealname').classList.toggle('active', !value);
+            document.getElementById('nameGroup').style.display = value ? 'none' : 'block';
+        }
+
+        // 表单提交
+        function initForm() {
+            const textarea = document.getElementById('messageContent');
+            const charCount = document.getElementById('charCount');
+
+            textarea.addEventListener('input', () => {
+                charCount.textContent = textarea.value.length;
+            });
+
+            document.getElementById('messageForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                await submitMessage();
+            });
+        }
+
+        // 字数统计
+        document.getElementById('messageContent')?.addEventListener('input', function() {
+            document.getElementById('charCount').textContent = this.value.length;
+        });
+
+        // ============ 留言功能 ============
+        async function submitMessage() {
+            const content = document.getElementById('messageContent').value.trim();
+            const authorName = document.getElementById('authorName').value.trim();
+
+            if (!content) {
+                showToast('请输入留言内容', true);
+                return;
+            }
+
+            if (!isAnonymous && !authorName) {
+                showToast('请输入昵称', true);
+                return;
+            }
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading-spinner" style="width:18px;height:18px;border-width:2px;"></span> 发表中...';
+
+            const name = isAnonymous ? '匿名银行人' : authorName;
+            const message = {
+                id: Date.now(),
+                author: name,
+                isAnonymous: isAnonymous,
+                category: selectedCategory,
+                content: content,
+                time: new Date().toISOString(),
+                avatar: generateAvatar(name),
+                avatarColor: generateColor(name)
+            };
+
+            try {
+                // 保存到本地
+                const messages = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+                messages.unshift(message);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+
+                // 保存昵称
+                if (!isAnonymous) {
+                    localStorage.setItem('yinyoung_nickname', authorName);
+                }
+
+                // 清空表单
+                document.getElementById('messageContent').value = '';
+                document.getElementById('charCount').textContent = '0';
+
+                // 重新加载
+                await loadMessages();
+                updateStats();
+                showToast('留言发表成功！');
+
+            } catch (error) {
+                console.error('提交失败:', error);
+                showToast('提交失败，请重试', true);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<span>🚀</span> 发表留言';
+            }
+        }
+
+        // 加载留言
+        async function loadMessages() {
+            try {
+                // 优先从localStorage加载
+                allMessages = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+
+                // 尝试从GitHub API获取Issues作为额外留言源
+                try {
+                    const response = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/issues?labels=${encodeURIComponent(GITHUB_ISSUE_LABEL)}&state=open&per_page=100`);
+                    if (response.ok) {
+                        const issues = await response.json();
+                        issues.forEach(issue => {
+                            // 解析留言数据
+                            const data = parseIssueToMessage(issue);
+                            if (data && !allMessages.find(m => m.id === data.id)) {
+                                allMessages.push(data);
+                            }
+                        });
+                        // 按时间排序
+                        allMessages.sort((a, b) => new Date(b.time) - new Date(a.time));
+                    }
+                } catch (e) {
+                    // GitHub API失败时继续使用本地数据
+                }
+
+                renderMessages();
+            } catch (error) {
+                console.error('加载失败:', error);
+                document.getElementById('messagesList').innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">😵</div>
+                        <div class="empty-title">加载失败</div>
+                        <div class="empty-text">请刷新页面重试</div>
+                    </div>
+                `;
+            }
+        }
+
+        // 解析GitHub Issue为留言格式
+        function parseIssueToMessage(issue) {
+            try {
+                const body = issue.body || '';
+                const lines = body.split('\n');
+                let category = 'share';
+                let content = body;
+
+                for (const line of lines) {
+                    if (line.startsWith('**分类:**')) {
+                        category = line.replace('**分类:**', '').trim();
+                    }
+                    if (line.startsWith('**内容:**')) {
+                        content = line.replace('**内容:**', '').trim();
+                    }
+                }
+
+                return {
+                    id: 'gh_' + issue.id,
+                    author: issue.user?.login || '匿名银行人',
+                    isAnonymous: false,
+                    category: category,
+                    content: content || body,
+                    time: issue.created_at,
+                    avatar: generateAvatar(issue.user?.login || '匿名'),
+                    avatarColor: generateColor(issue.user?.login || '匿名'),
+                    isFromGitHub: true
+                };
+            } catch {
+                return null;
+            }
+        }
+
+        // 渲染留言列表
+        function renderMessages() {
+            const container = document.getElementById('messagesList');
+            const filtered = currentFilter === 'all'
+                ? allMessages
+                : allMessages.filter(m => m.category === currentFilter);
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">💭</div>
+                        <div class="empty-title">暂无留言</div>
+                        <div class="empty-text">成为第一个留言的人吧！</div>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(msg => renderMessageCard(msg)).join('');
+
+            // 绑定回复事件
+            bindReplyEvents();
+        }
+
+        // 渲染单条留言
+        function renderMessageCard(msg) {
+            const categoryMap = {
+                share: { label: '交流分享', emoji: '💬' },
+                question: { label: '提问求助', emoji: '❓' },
+                suggestion: { label: '建议反馈', emoji: '💡' },
+                confession: { label: '表白感谢', emoji: '💝' },
+                vent: { label: '吐槽发泄', emoji: '😤' },
+                other: { label: '其他', emoji: '🎈' }
+            };
+            const cat = categoryMap[msg.category] || categoryMap.other;
+            const replies = getReplies(msg.id);
+            const timeAgo = formatTimeAgo(msg.time);
+
+            return `
+                <div class="message-card" data-id="${msg.id}">
+                    <div class="message-header">
+                        <div class="message-author">
+                            <div class="author-avatar" style="background: ${msg.avatarColor}">
+                                ${msg.avatar}
+                            </div>
+                            <div class="author-info">
+                                <div class="author-name">${escapeHtml(msg.author)}</div>
+                                <div class="author-meta">
+                                    <span class="author-tag ${msg.isAnonymous ? 'tag-anonymous' : 'tag-realname'}">
+                                        ${msg.isAnonymous ? '🎭 匿名' : '👤 实名'}
+                                    </span>
+                                    <span>${timeAgo}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="message-category">${cat.emoji} ${cat.label}</span>
+                    </div>
+                    <div class="message-content">${escapeHtml(msg.content)}</div>
+                    <div class="message-footer">
+                        <span class="message-time">${new Date(msg.time).toLocaleString('zh-CN')}</span>
+                        <div class="message-actions">
+                            <button class="action-btn" onclick="toggleReply('${msg.id}')">
+                                💬 回复 <span class="reply-count">${replies.length}</span>
+                            </button>
+                        </div>
+                    </div>
+                    ${renderReplies(msg.id, replies)}
+                </div>
+            `;
+        }
+
+        // 渲染回复
+        function renderReplies(messageId, replies) {
+            if (replies.length === 0) {
+                return `<div class="replies-section" id="replies-${messageId}" style="display:none;">
+                    <div class="reply-form">
+                        <input type="text" class="reply-input" placeholder="写下你的回复..." id="reply-input-${messageId}">
+                        <button class="reply-submit" onclick="submitReply('${messageId}')">发送</button>
+                    </div>
+                </div>`;
+            }
+
+            return `
+                <div class="replies-section" id="replies-${messageId}">
+                    ${replies.map(r => `
+                        <div class="reply-item">
+                            <div class="reply-avatar" style="background: ${generateColor(r.author)}">${generateAvatar(r.author)}</div>
+                            <div class="reply-content">
+                                <div class="reply-author">${escapeHtml(r.author)}</div>
+                                <div class="reply-text">${escapeHtml(r.content)}</div>
+                                <div class="reply-time">${formatTimeAgo(r.time)}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                    <div class="reply-form">
+                        <input type="text" class="reply-input" placeholder="写下你的回复..." id="reply-input-${messageId}">
+                        <button class="reply-submit" onclick="submitReply('${messageId}')">发送</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 获取回复
+        function getReplies(messageId) {
+            const allReplies = JSON.parse(localStorage.getItem(REPLIES_KEY) || '{}');
+            return allReplies[messageId] || [];
+        }
+
+        // 提交回复
+        function submitReply(messageId) {
+            const input = document.getElementById(`reply-input-${messageId}`);
+            const content = input.value.trim();
+            if (!content) return;
+
+            const nickname = localStorage.getItem('yinyoung_nickname') || '匿名银行人';
+            const reply = {
+                id: Date.now(),
+                author: nickname,
+                content: content,
+                time: new Date().toISOString()
+            };
+
+            const allReplies = JSON.parse(localStorage.getItem(REPLIES_KEY) || '{}');
+            if (!allReplies[messageId]) allReplies[messageId] = [];
+            allReplies[messageId].push(reply);
+            localStorage.setItem(REPLIES_KEY, JSON.stringify(allReplies));
+
+            input.value = '';
+            renderMessages();
+            updateStats();
+            showToast('回复成功！');
+        }
+
+        // 切换回复显示
+        function toggleReply(messageId) {
+            const section = document.getElementById(`replies-${messageId}`);
+            section.style.display = section.style.display === 'none' ? 'block' : 'none';
+            if (section.style.display === 'block') {
+                document.getElementById(`reply-input-${messageId}`).focus();
+            }
+        }
+
+        // 绑定回复事件
+        function bindReplyEvents() {
+            document.querySelectorAll('.reply-input').forEach(input => {
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const messageId = input.id.replace('reply-input-', '');
+                        submitReply(messageId);
+                    }
+                });
+            });
+        }
+
+        // ============ 工具函数 ============
+        function generateAvatar(name) {
+            return name.charAt(0).toUpperCase();
+        }
+
+        function generateColor(name) {
+            const colors = [
+                'linear-gradient(135deg, #667eea, #764ba2)',
+                'linear-gradient(135deg, #f093fb, #f5576c)',
+                'linear-gradient(135deg, #4facfe, #00f2fe)',
+                'linear-gradient(135deg, #43e97b, #38f9d7)',
+                'linear-gradient(135deg, #fa709a, #fee140)',
+                'linear-gradient(135deg, #a18cd1, #fbc2eb)',
+                'linear-gradient(135deg, #ff9a9e, #fecfef)',
+                'linear-gradient(135deg, #ffecd2, #fcb69f)'
+            ];
+            let hash = 0;
+            for (let i = 0; i < name.length; i++) {
+                hash = name.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            return colors[Math.abs(hash) % colors.length];
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatTimeAgo(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diff = now - date;
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(diff / 3600000);
+            const days = Math.floor(diff / 86400000);
+
+            if (minutes < 1) return '刚刚';
+            if (minutes < 60) return `${minutes}分钟前`;
+            if (hours < 24) return `${hours}小时前`;
+            if (days < 30) return `${days}天前`;
+            return date.toLocaleDateString('zh-CN');
+        }
+
+        // 统计数据
+        function updateStats() {
+            const messages = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const replies = JSON.parse(localStorage.getItem(REPLIES_KEY) || '{}');
+            const today = new Date().toDateString();
+            const todayCount = messages.filter(m => new Date(m.time).toDateString() === today).length;
+            let replyCount = 0;
+            Object.values(replies).forEach(arr => replyCount += arr.length);
+
+            document.getElementById('totalCount').textContent = messages.length;
+            document.getElementById('todayCount').textContent = todayCount;
+            document.getElementById('replyCount').textContent = replyCount;
+            document.getElementById('listCount').textContent = messages.length;
+        }
+
+        // Toast提示
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toastText');
+            toastText.textContent = message;
+            toast.querySelector('.toast-icon').textContent = isError ? '❌' : '✅';
+            toast.classList.toggle('error', isError);
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // 回到顶部
+        function initBackTop() {
+            window.addEventListener('scroll', () => {
+                document.getElementById('back-top').classList.toggle('show', window.scrollY > 400);
+            });
+        }
+    </script>
+</body>
+</html>
