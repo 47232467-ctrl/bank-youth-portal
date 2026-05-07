@@ -30,6 +30,65 @@
         .page-header-stat { display: inline-flex; gap: 1.5rem; margin-top: 1.2rem; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.8rem; color: rgba(255,255,255,0.9); }
         .page-header-stat span::before { content: '·'; margin-right: 0.4rem; opacity: 0.5; }
         .page-header-stat span:first-child::before { display: none; }
+
+        /* 内容索引 */
+        .content-index {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            margin: 2rem auto;
+            max-width: 1200px;
+            overflow: hidden;
+        }
+        .content-index-header {
+            padding: 1.2rem 1.5rem;
+            background: linear-gradient(135deg, #ed8936, #f6ad55);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .content-index-header h3 { font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .content-index-header .toggle-icon { transition: transform 0.3s; }
+        .content-index-header.collapsed .toggle-icon { transform: rotate(-90deg); }
+        .content-index-body { padding: 1rem 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .content-index-body.hidden { display: none; }
+        .index-category { border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
+        .index-category-header {
+            padding: 0.8rem 1rem;
+            background: #f7fafc;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1a365d;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.2s;
+        }
+        .index-category-header:hover { background: #edf2f7; }
+        .index-category-header .arrow { transition: transform 0.3s; font-size: 0.75rem; color: #718096; }
+        .index-category-header.collapsed .arrow { transform: rotate(-90deg); }
+        .index-category-items { padding: 0.5rem 0; background: white; }
+        .index-category-items.hidden { display: none; }
+        .index-item {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            color: #4a5568;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+        .index-item:hover { background: #fff7ed; color: #ed8936; padding-left: 1.2rem; }
+        .index-item::before { content: '💬'; font-size: 0.75rem; }
+        .index-item.read::before { content: '✅'; }
+        .index-more { padding: 0.5rem 1rem; font-size: 0.78rem; color: #ed8936; cursor: pointer; display: flex; align-items: center; gap: 0.3rem; }
+        .index-more:hover { text-decoration: underline; }
+        .index-more::before { content: '更多 →'; }
+
         .tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
         .tip-card { background: white; border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-soft); transition: all 0.3s; }
         .tip-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(26, 54, 93, 0.15); }
@@ -87,6 +146,61 @@
     </header>
 
     <main class="content">
+        <!-- 内容索引 -->
+        <div class="content-index" id="contentIndex">
+            <div class="content-index-header" onclick="toggleIndex()">
+                <h3>📋 前辈索引 <span style="opacity:0.7;font-weight:400;font-size:0.85rem">共120+条经验</span></h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="content-index-body" id="indexBody">
+                <div class="index-category">
+                    <div class="index-category-header" onclick="toggleCategory(this)">
+                        💡 经验分享 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items">
+                        <div class="index-item" onclick="goToTip(this)">张经理：客户接待话术</div>
+                        <div class="index-item" onclick="goToTip(this)">赵老师：手机银行营销技巧</div>
+                        <div class="index-item" onclick="goToTip(this)">周经理：企业客户维护</div>
+                        <div class="index-item" onclick="goToTip(this)">钱主任：新员工成长建议</div>
+                        <div class="index-more" onclick="goToSection('experience')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        🎯 业务技巧 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="goToTip(this)">李姐：基金销售话术</div>
+                        <div class="index-item" onclick="goToTip(this)">刘姐：客户分流技巧</div>
+                        <div class="index-item" onclick="goToTip(this)">孙姐：理财风险揭示</div>
+                        <div class="index-more" onclick="goToSection('skill')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        ⚠️ 重要提醒 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="goToTip(this)">王师傅：设备检查清单</div>
+                        <div class="index-item" onclick="goToTip(this)">吴姐：代客操作红线</div>
+                        <div class="index-item" onclick="goToTip(this)">郑老师：反洗钱要点</div>
+                        <div class="index-more" onclick="goToSection('warning')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        🧘 心理调适 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="goToTip(this)">陈主任：应对客户投诉</div>
+                        <div class="index-item" onclick="goToTip(this)">冯姐：调整工作心态</div>
+                        <div class="index-item" onclick="goToTip(this)">韩姐：化解客户抱怨</div>
+                        <div class="index-more" onclick="goToSection('psychology')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="tips-grid">
             <div class="tip-card"><div class="tip-header"><div class="tip-avatar" style="background: linear-gradient(135deg, #667eea, #764ba2);">张</div><div class="tip-author"><h4>张经理</h4><span>支行行长 · 15年</span></div><span class="tip-tag experience">经验</span></div><div class="tip-content">客户来办业务，第一句话永远不要说"请问您要办什么？"要说"您好，请问有什么可以帮到您？"前者把主动权给了客户，后者让客户感受到你的专业和热情。</div><div class="tip-footer"><span>📅 2026-04-28</span><div class="tip-likes">❤️ 286</div></div></div>
             <div class="tip-card"><div class="tip-header"><div class="tip-avatar" style="background: linear-gradient(135deg, #f093fb, #f5576c);">李</div><div class="tip-author"><h4>李姐</h4><span>理财经理 · 12年</span></div><span class="tip-tag skill">技巧</span></div><div class="tip-content">销售基金的时候，客户说"等跌一跌再买"，你要问他："那您觉得跌到多少合适呢？"通常他答不上来，这就是个很好的切入点，告诉他定投可以解决这个问题。</div><div class="tip-footer"><span>📅 2026-04-28</span><div class="tip-likes">❤️ 245</div></div></div>
@@ -205,6 +319,47 @@
             document.getElementById('progress-bar').style.width = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
             document.getElementById('back-top').style.cssText += window.scrollY > 400 ? ';opacity:1;transform:translateY(0)' : ';opacity:0;transform:translateY(20px)';
         });
+        // 内容索引功能
+        function toggleIndex(){
+            const header = document.querySelector('.content-index-header');
+            const body = document.getElementById('indexBody');
+            header.classList.toggle('collapsed');
+            body.classList.toggle('hidden');
+        }
+        function toggleCategory(el){
+            el.classList.toggle('collapsed');
+            el.nextElementSibling.classList.toggle('hidden');
+        }
+        function goToSection(tag){
+            // 关闭索引
+            document.getElementById('indexBody').classList.add('hidden');
+            document.querySelector('.content-index-header').classList.add('collapsed');
+            // 滚动到第一个对应标签的内容
+            setTimeout(() => {
+                const cards = document.querySelectorAll('.tip-tag.' + tag);
+                if(cards.length > 0){
+                    cards[0].closest('.tip-card').scrollIntoView({behavior: 'smooth', block: 'center'});
+                } else {
+                    window.scrollTo({top: 350, behavior: 'smooth'});
+                }
+            }, 100);
+        }
+        function goToTip(el){
+            // 关闭索引
+            document.getElementById('indexBody').classList.add('hidden');
+            document.querySelector('.content-index-header').classList.add('collapsed');
+            // 获取文本并滚动
+            const text = el.textContent;
+            const cards = document.querySelectorAll('.tip-card');
+            for(let card of cards){
+                if(card.textContent.includes(text.substring(0, 8))){
+                    card.scrollIntoView({behavior: 'smooth', block: 'center'});
+                    card.style.boxShadow = '0 0 0 3px #ed8936';
+                    setTimeout(() => { card.style.boxShadow = ''; }, 2000);
+                    break;
+                }
+            }
+        }
     </script>
 </body>
 </html>

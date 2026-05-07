@@ -65,6 +65,63 @@
         .page-header-stat span::before { content: '·'; margin-right: 0.4rem; opacity: 0.5; }
         .page-header-stat span:first-child::before { display: none; }
         .content { padding: 2.5rem 2rem; max-width: 1400px; margin: 0 auto; }
+        /* 内容索引 */
+        .content-index {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .content-index-header {
+            padding: 1.2rem 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .content-index-header h3 { font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .content-index-header .toggle-icon { transition: transform 0.3s; }
+        .content-index-header.collapsed .toggle-icon { transform: rotate(-90deg); }
+        .content-index-body { padding: 1rem 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+        .content-index-body.hidden { display: none; }
+        .index-category { border: 1px solid #e2e8f0; border-radius: var(--radius-md); overflow: hidden; }
+        .index-category-header {
+            padding: 0.8rem 1rem;
+            background: #f7fafc;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.2s;
+        }
+        .index-category-header:hover { background: #edf2f7; }
+        .index-category-header .arrow { transition: transform 0.3s; font-size: 0.75rem; }
+        .index-category-header.collapsed .arrow { transform: rotate(-90deg); }
+        .index-category-items { padding: 0.5rem 0; background: white; }
+        .index-category-items.hidden { display: none; }
+        .index-item {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            color: var(--text-body);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+        .index-item:hover { background: #f0f4ff; color: var(--primary); padding-left: 1.2rem; }
+        .index-item::before { content: '📄'; font-size: 0.75rem; }
+        .index-item.read::before { content: '✅'; }
+        .index-more { padding: 0.5rem 1rem; font-size: 0.78rem; color: var(--accent); cursor: pointer; display: flex; align-items: center; gap: 0.3rem; }
+        .index-more:hover { text-decoration: underline; }
+        .index-more::before { content: '更多'; }
+
         .category-tabs { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
         .category-tab { padding: 0.6rem 1.2rem; border-radius: 50px; border: 2px solid #e2e8f0; background: white; color: var(--text-body); font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; }
         .category-tab:hover { border-color: var(--primary); color: var(--primary); }
@@ -168,7 +225,84 @@
             <div class="category-tab" data-category="digital">电子银行</div>
             <div class="category-tab" data-category="forex">外汇保险</div>
         </div>
-        <h2 class="section-title">💰 存款业务</h2>
+
+        <!-- 内容索引 -->
+        <div class="content-index" id="contentIndex">
+            <div class="content-index-header" onclick="toggleIndex()">
+                <h3>📋 内容索引 <span style="opacity:0.7;font-weight:400;font-size:0.85rem">共36篇内容</span></h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="content-index-body" id="indexBody">
+                <div class="index-category">
+                    <div class="index-category-header" onclick="toggleCategory(this)">
+                        💰 存款业务 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items">
+                        <div class="index-item" onclick="goToSection('deposit')">个人定期存款业务详解</div>
+                        <div class="index-item" onclick="goToSection('deposit')">大额存单业务操作指南</div>
+                        <div class="index-item" onclick="goToSection('deposit')">结构性存款产品介绍</div>
+                        <div class="index-more" onclick="goToSection('deposit')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        🏠 贷款业务 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="goToSection('loan')">住房贷款申请全流程</div>
+                        <div class="index-item" onclick="goToSection('loan')">个人汽车贷款指南</div>
+                        <div class="index-item" onclick="goToSection('loan')">企业经营贷款详解</div>
+                        <div class="index-more" onclick="goToSection('loan')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        💎 理财投资 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="goToSection('finance')">理财产品风险等级划分</div>
+                        <div class="index-item" onclick="goToSection('finance')">基金定投操作策略</div>
+                        <div class="index-item" onclick="goToSection('finance')">国债产品完全指南</div>
+                        <div class="index-more" onclick="goToSection('finance')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        💳 信用卡 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="goToSection('credit')">信用卡申请与使用指南</div>
+                        <div class="index-item" onclick="goToSection('credit')">信用卡分期业务解析</div>
+                        <div class="index-item" onclick="goToSection('credit')">信用卡安全使用指南</div>
+                        <div class="index-more" onclick="goToSection('credit')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        📱 电子银行 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="goToSection('digital')">手机银行新功能操作手册</div>
+                        <div class="index-item" onclick="goToSection('digital')">快捷支付操作指南</div>
+                        <div class="index-item" onclick="goToSection('digital')">数字人民币使用全解</div>
+                        <div class="index-more" onclick="goToSection('digital')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        🌍 外汇保险 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="goToSection('forex')">外汇业务基础知识</div>
+                        <div class="index-item" onclick="goToSection('forex')">人身保险产品介绍</div>
+                        <div class="index-item" onclick="goToSection('forex')">反洗钱客户身份识别</div>
+                        <div class="index-more" onclick="goToSection('forex')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title" id="section-deposit">💰 存款业务</h2>
         <div class="knowledge-grid" data-category="deposit">
             <div class="knowledge-card" data-id="0"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">🏦</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>个人定期存款业务详解</h3><p>详细介绍各类定期存款产品、利率计算方式及支取规则。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">业</div>业务部</div><span class="knowledge-card-time">5分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
             <div class="knowledge-card" data-id="1"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">💵</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>大额存单业务操作指南</h3><p>大额存单起点、利率、计息规则及转让流程全解析。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">存</div>存款中心</div><span class="knowledge-card-time">10分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
@@ -177,7 +311,7 @@
             <div class="knowledge-card" data-id="4"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #e65c00 0%, #f9d423 100%);">💎</div><span class="knowledge-card-badge">新品</span><div class="knowledge-card-content"><h3>智能存款产品解析</h3><p>支持随存随取的智能存款产品特点及计息规则。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">创</div>创新部</div><span class="knowledge-card-time">25分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
             <div class="knowledge-card" data-id="5"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);">🧮</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>存款利率计算方法</h3><p>定期、活期、通知存款的利率计算公式及示例。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">计</div>计财部</div><span class="knowledge-card-time">30分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
         </div>
-        <h2 class="section-title">🏠 贷款业务</h2>
+        <h2 class="section-title" id="section-loan">🏠 贷款业务</h2>
         <div class="knowledge-grid" data-category="loan">
             <div class="knowledge-card" data-id="6"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #e65c00 0%, #f9d423 100%);">🏠</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>住房贷款申请全流程</h3><p>从材料准备到审批放款，完整业务流程详解。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">贷</div>贷款中心</div><span class="knowledge-card-time">8分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
             <div class="knowledge-card" data-id="7"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);">🚗</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>个人汽车贷款指南</h3><p>车贷产品类型、贷款比例、还款方式及注意事项。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">车</div>消费贷</div><span class="knowledge-card-time">12分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
@@ -186,7 +320,7 @@
             <div class="knowledge-card" data-id="10"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">🏪</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>个人消费贷款产品</h3><p>信用贷款、装修贷款、旅游贷款等产品对比。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">消</div>消费金融</div><span class="knowledge-card-time">35分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
             <div class="knowledge-card" data-id="11"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🏢</div><span class="knowledge-card-badge">重要</span><div class="knowledge-card-content"><h3>商业用房贷款指南</h3><p>商铺、写字楼贷款的申请条件及还款方式。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">商</div>商贷部</div><span class="knowledge-card-time">40分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
         </div>
-        <h2 class="section-title">💎 理财投资</h2>
+        <h2 class="section-title" id="section-finance">💎 理财投资</h2>
         <div class="knowledge-grid" data-category="finance">
             <div class="knowledge-card" data-id="12"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">📈</div><span class="knowledge-card-badge">必读</span><div class="knowledge-card-content"><h3>理财产品风险等级划分</h3><p>R1到R5各等级产品特点及适合客群分析。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">理</div>理财部</div><span class="knowledge-card-time">6分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
             <div class="knowledge-card" data-id="13"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">🏆</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>基金定投操作策略</h3><p>基金定投的优势、选基方法、定投技巧及误区规避。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">基</div>基金专员</div><span class="knowledge-card-time">9分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
@@ -195,7 +329,7 @@
             <div class="knowledge-card" data-id="16"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">📊</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>银行理财子公司产品</h3><p>理财子公司的产品特点、优势及购买渠道。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">子</div>理财子</div><span class="knowledge-card-time">28分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
             <div class="knowledge-card" data-id="17"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);">📉</div><span class="knowledge-card-badge">重要</span><div class="knowledge-card-content"><h3>净值型理财产品解读</h3><p>净值型理财与传统理财的区别及选购要点。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">净</div>产品部</div><span class="knowledge-card-time">33分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
         </div>
-        <h2 class="section-title">💳 信用卡业务</h2>
+        <h2 class="section-title" id="section-credit">💳 信用卡业务</h2>
         <div class="knowledge-grid" data-category="credit">
             <div class="knowledge-card" data-id="18"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);">💳</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>信用卡申请与使用指南</h3><p>信用卡申请流程、账单还款及优惠活动介绍。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">卡</div>信用卡部</div><span class="knowledge-card-time">7分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
             <div class="knowledge-card" data-id="19"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #3f51b1 0%, #5a55ae 100%);">🔄</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>信用卡分期业务解析</h3><p>账单分期、消费分期、现金分期的费率及选择技巧。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">分</div>分期专员</div><span class="knowledge-card-time">11分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
@@ -204,7 +338,7 @@
             <div class="knowledge-card" data-id="22"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">💎</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>高端信用卡权益盘点</h3><p>白金卡、钻石卡的机场贵宾厅、健康管理等权益。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">高</div>高端卡部</div><span class="knowledge-card-time">26分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
             <div class="knowledge-card" data-id="23"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);">🔍</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>信用卡账单管理技巧</h3><p>如何看懂账单、设置自动还款、避免逾期。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">账</div>账务部</div><span class="knowledge-card-time">31分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
         </div>
-        <h2 class="section-title">📱 电子银行业务</h2>
+        <h2 class="section-title" id="section-digital">📱 电子银行业务</h2>
         <div class="knowledge-grid" data-category="digital">
             <div class="knowledge-card" data-id="24"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #4776e6 0%, #8e54e9 100%);">📱</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>手机银行新功能操作手册</h3><p>最新版手机银行功能介绍及操作指引。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">数</div>数字银行部</div><span class="knowledge-card-time">4分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
             <div class="knowledge-card" data-id="25"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #11998e 0%, #21a366 100%);">💳</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>快捷支付操作指南</h3><p>云闪付、支付宝、微信支付绑定及使用技巧。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">支</div>支付部</div><span class="knowledge-card-time">13分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
@@ -213,7 +347,7 @@
             <div class="knowledge-card" data-id="28"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">🏪</div><span class="knowledge-card-badge">热门</span><div class="knowledge-card-content"><h3>二维码支付商户入网</h3><p>商户二维码收款申请流程及费率说明。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">商</div>收单业务</div><span class="knowledge-card-time">29分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
             <div class="knowledge-card" data-id="29"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">📲</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>手机号码转账操作指南</h3><p>手机号转账功能开通及使用注意事项。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">转</div>转账业务</div><span class="knowledge-card-time">34分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
         </div>
-        <h2 class="section-title">🌍 外汇与保险</h2>
+        <h2 class="section-title" id="section-forex">🌍 外汇与保险</h2>
         <div class="knowledge-grid" data-category="forex">
             <div class="knowledge-card" data-id="30"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);">🌎</div><span class="knowledge-card-badge">实用</span><div class="knowledge-card-content"><h3>外汇业务基础知识</h3><p>常见外币产品及结售汇业务操作要点。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">外</div>外汇部</div><span class="knowledge-card-time">3分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
             <div class="knowledge-card" data-id="31"><div class="knowledge-card-img" style="background: linear-gradient(135deg, #56ab2f 0%, #a8e063 100%);">🛡️</div><span class="knowledge-card-badge">重要</span><div class="knowledge-card-content"><h3>人身保险产品介绍</h3><p>寿险、重疾险、医疗险、意外险的区别及配置建议。</p><div class="knowledge-card-meta"><div class="knowledge-card-author"><div class="knowledge-card-avatar">保</div>保险代理</div><span class="knowledge-card-time">17分钟前</span></div><span class="knowledge-card-read">查看详情</span></div></div>
@@ -242,6 +376,47 @@
     document.body.appendChild(Object.assign(document.createElement('button'),{innerHTML:'↑',style:'position:fixed;bottom:2rem;right:2rem;z-index:999;width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);color:white;display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;box-shadow:0 4px 16px rgba(102,126,234,0.4);opacity:0;transform:translateY(20px);transition:all 0.3s ease;border:none;',id:'backTop'}));
     window.addEventListener('scroll',()=>{document.getElementById('progress').style.width=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%';const bt=document.getElementById('backTop');if(window.scrollY>400){bt.style.opacity='1';bt.style.transform='translateY(0)';}else{bt.style.opacity='0';bt.style.transform='translateY(20px)';}});
     document.getElementById('backTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+    // 内容索引功能
+    function toggleIndex(){
+        const header = document.querySelector('.content-index-header');
+        const body = document.getElementById('indexBody');
+        header.classList.toggle('collapsed');
+        body.classList.toggle('hidden');
+    }
+    function toggleCategory(el){
+        el.classList.toggle('collapsed');
+        el.nextElementSibling.classList.toggle('hidden');
+    }
+    function goToSection(category){
+        const sectionMap = {
+            'deposit': 'section-deposit',
+            'loan': 'section-loan',
+            'finance': 'section-finance',
+            'credit': 'section-credit',
+            'digital': 'section-digital',
+            'forex': 'section-forex'
+        };
+        const targetCategory = sectionMap[category];
+        // 触发对应的分类tab
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            if(tab.dataset.category === category){
+                tab.click();
+            }
+        });
+        // 关闭索引
+        document.getElementById('indexBody').classList.add('hidden');
+        document.querySelector('.content-index-header').classList.add('collapsed');
+        // 滚动到内容区
+        setTimeout(() => {
+            const section = document.getElementById(targetCategory);
+            if(section){
+                section.scrollIntoView({behavior: 'smooth', block: 'start'});
+            } else {
+                window.scrollTo({top: 320, behavior: 'smooth'});
+            }
+        }, 100);
+    }
     </script>
 </body>
 </html>

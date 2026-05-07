@@ -99,6 +99,64 @@
         }
         .section-title:first-of-type { margin-top: 0; }
 
+        /* 内容索引 */
+        .content-index {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .content-index-header {
+            padding: 1.2rem 1.5rem;
+            background: linear-gradient(135deg, #ed8936, #f6ad55);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .content-index-header h3 { font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .content-index-header .toggle-icon { transition: transform 0.3s; }
+        .content-index-header.collapsed .toggle-icon { transform: rotate(-90deg); }
+        .content-index-body { padding: 1rem 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        .content-index-body.hidden { display: none; }
+        .index-category { border: 1px solid rgba(255,255,255,0.2); border-radius: var(--radius-md); overflow: hidden; }
+        .index-category-header {
+            padding: 0.8rem 1rem;
+            background: rgba(255,255,255,0.1);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.2s;
+        }
+        .index-category-header:hover { background: rgba(255,255,255,0.2); }
+        .index-category-header .arrow { transition: transform 0.3s; font-size: 0.75rem; }
+        .index-category-header.collapsed .arrow { transform: rotate(-90deg); }
+        .index-category-items { padding: 0.5rem 0; background: rgba(255,255,255,0.95); }
+        .index-category-items.hidden { display: none; }
+        .index-item {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            color: var(--text-body);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+        .index-item:hover { background: #fff3e0; color: var(--accent); padding-left: 1.2rem; }
+        .index-item::before { content: '📄'; font-size: 0.75rem; }
+        .index-item.read::before { content: '✅'; }
+        .index-more { padding: 0.5rem 1rem; font-size: 0.78rem; color: var(--accent); cursor: pointer; display: flex; align-items: center; gap: 0.3rem; }
+        .index-more:hover { text-decoration: underline; }
+        .index-more::before { content: '更多'; }
+
         .marketing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
         .marketing-card {
             background: rgba(255, 255, 255, 0.1);
@@ -179,7 +237,62 @@
     </header>
 
     <main class="content">
-        <h2 class="section-title">🎊 节日营销方案</h2>
+        <!-- 内容索引 -->
+        <div class="content-index" id="contentIndex">
+            <div class="content-index-header" onclick="toggleIndex()">
+                <h3>📋 内容索引 <span style="opacity:0.7;font-weight:400;font-size:0.85rem">共120+篇方案</span></h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="content-index-body" id="indexBody">
+                <div class="index-category">
+                    <div class="index-category-header" onclick="toggleCategory(this)">
+                        🎊 节日营销 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items">
+                        <div class="index-item" onclick="goToSection('festival')">元旦开门红营销</div>
+                        <div class="index-item" onclick="goToSection('festival')">春节揽储大战</div>
+                        <div class="index-item" onclick="goToSection('festival')">情人节甜蜜营销</div>
+                        <div class="index-item" onclick="goToSection('festival')">三八女神节营销</div>
+                        <div class="index-more" onclick="goToSection('festival')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        🎯 场景营销 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="goToSection('scene')">厅堂吸金术</div>
+                        <div class="index-item" onclick="goToSection('scene')">沙龙活动策划</div>
+                        <div class="index-item" onclick="goToSection('scene')">社区渗透策略</div>
+                        <div class="index-more" onclick="goToSection('scene')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        👥 客群维护 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="goToSection('customer')">VIP客户分层维护</div>
+                        <div class="index-item" onclick="goToSection('customer')">存量客户激活</div>
+                        <div class="index-item" onclick="goToSection('customer')">流失客户挽回</div>
+                        <div class="index-more" onclick="goToSection('customer')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        💬 产品话术 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="goToSection('script')">存款营销话术</div>
+                        <div class="index-item" onclick="goToSection('script')">理财推荐话术</div>
+                        <div class="index-item" onclick="goToSection('script')">保险销售话术</div>
+                        <div class="index-more" onclick="goToSection('script')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title" id="section-festival">🎊 节日营销方案</h2>
         <div class="marketing-grid">
             <div class="marketing-card">
                 <div class="marketing-card-number">01</div>
@@ -321,7 +434,7 @@
             </div>
         </div>
 
-        <h2 class="section-title">🏠 场景营销方案</h2>
+        <h2 class="section-title" id="section-scene">🏠 场景营销方案</h2>
         <div class="marketing-grid">
             <div class="marketing-card">
                 <div class="marketing-card-number">07</div>
@@ -463,7 +576,7 @@
             </div>
         </div>
 
-        <h2 class="section-title">🎯 客户维护技巧</h2>
+        <h2 class="section-title" id="section-customer">🎯 客户维护技巧</h2>
         <div class="marketing-grid">
             <div class="marketing-card">
                 <div class="marketing-card-number">13</div>
@@ -581,7 +694,7 @@
             </div>
         </div>
 
-        <h2 class="section-title">📱 数字化营销工具</h2>
+        <h2 class="section-title" id="section-script">📱 数字化营销工具</h2>
         <div class="marketing-grid">
             <div class="marketing-card">
                 <div class="marketing-card-number">19</div>
@@ -726,7 +839,31 @@
             document.getElementById('progress-bar').style.width = pct + '%';
             document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
             document.getElementById('back-top').classList.toggle('show', window.scrollY > 400);
-        });
+        // 内容索引功能
+        function toggleIndex(){
+            const header = document.querySelector('.content-index-header');
+            const body = document.getElementById('indexBody');
+            header.classList.toggle('collapsed');
+            body.classList.toggle('hidden');
+        }
+        function toggleCategory(el){
+            el.classList.toggle('collapsed');
+            el.nextElementSibling.classList.toggle('hidden');
+        }
+        function goToSection(sectionId){
+            // 关闭索引
+            document.getElementById('indexBody').classList.add('hidden');
+            document.querySelector('.content-index-header').classList.add('collapsed');
+            // 滚动到对应区域
+            setTimeout(() => {
+                const section = document.getElementById('section-' + sectionId);
+                if(section){
+                    section.scrollIntoView({behavior: 'smooth', block: 'start'});
+                } else {
+                    window.scrollTo({top: 300, behavior: 'smooth'});
+                }
+            }, 100);
+        }
     </script>
 </body>
 </html>

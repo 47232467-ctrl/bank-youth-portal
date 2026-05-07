@@ -68,6 +68,64 @@
         .page-header-stat span::before { content: '·'; margin-right: 0.4rem; opacity: 0.5; }
         .page-header-stat span:first-child::before { display: none; }
 
+        /* 内容索引 */
+        .content-index {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            margin: 2rem auto;
+            max-width: 1200px;
+            overflow: hidden;
+        }
+        .content-index-header {
+            padding: 1.2rem 1.5rem;
+            background: linear-gradient(135deg, #5b21b6, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .content-index-header h3 { font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .content-index-header .toggle-icon { transition: transform 0.3s; }
+        .content-index-header.collapsed .toggle-icon { transform: rotate(-90deg); }
+        .content-index-body { padding: 1rem 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .content-index-body.hidden { display: none; }
+        .index-category { border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
+        .index-category-header {
+            padding: 0.8rem 1rem;
+            background: #f7fafc;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1a365d;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.2s;
+        }
+        .index-category-header:hover { background: #edf2f7; }
+        .index-category-header .arrow { transition: transform 0.3s; font-size: 0.75rem; color: #718096; }
+        .index-category-header.collapsed .arrow { transform: rotate(-90deg); }
+        .index-category-items { padding: 0.5rem 0; background: white; }
+        .index-category-items.hidden { display: none; }
+        .index-item {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            color: #4a5568;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+        .index-item:hover { background: #f5f3ff; color: #764ba2; padding-left: 1.2rem; }
+        .index-item::before { content: '🧘'; font-size: 0.75rem; }
+        .index-item.read::before { content: '✅'; }
+        .index-more { padding: 0.5rem 1rem; font-size: 0.78rem; color: #764ba2; cursor: pointer; display: flex; align-items: center; gap: 0.3rem; }
+        .index-more:hover { text-decoration: underline; }
+        .index-more::before { content: '更多 →'; }
+
         .content { padding: 2.5rem 2rem; max-width: 1400px; margin: 0 auto; }
 
         .section-title {
@@ -173,6 +231,71 @@
     </header>
 
     <main class="content">
+        <!-- 内容索引 -->
+        <div class="content-index" id="contentIndex">
+            <div class="content-index-header" onclick="toggleIndex()">
+                <h3>📋 心理文章索引 <span style="opacity:0.7;font-weight:400;font-size:0.85rem">共24篇内容</span></h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="content-index-body" id="indexBody">
+                <div class="index-category">
+                    <div class="index-category-header" onclick="toggleCategory(this)">
+                        💆 压力管理 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items">
+                        <div class="index-item" onclick="openModal('pressure1')">识别压力信号</div>
+                        <div class="index-item" onclick="openModal('pressure2')">5分钟呼吸放松法</div>
+                        <div class="index-item" onclick="openModal('pressure3')">四象限时间管理</div>
+                        <div class="index-more" onclick="goToSection('pressure')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        😊 情绪调节 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="openModal('emotion1')">焦虑情绪化解</div>
+                        <div class="index-item" onclick="openModal('emotion2')">允许自己脆弱</div>
+                        <div class="index-item" onclick="openModal('emotion3')">培养积极心态</div>
+                        <div class="index-more" onclick="goToSection('emotion')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        🤝 人际关系 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="openModal('relation1')">与领导沟通技巧</div>
+                        <div class="index-item" onclick="openModal('relation2')">同事关系经营</div>
+                        <div class="index-item" onclick="openModal('relation3')">设立心理边界</div>
+                        <div class="index-more" onclick="goToSection('relation')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        ⚖️ 工作生活平衡 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="openModal('balance1')">找到工作的意义</div>
+                        <div class="index-item" onclick="openModal('balance2')">培养工作外爱好</div>
+                        <div class="index-item" onclick="openModal('balance3')">高效陪伴家人</div>
+                        <div class="index-more" onclick="goToSection('balance')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        🌱 自我成长 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="openModal('growth1')">银行人的职业规划</div>
+                        <div class="index-item" onclick="openModal('growth2')">建立自信心态</div>
+                        <div class="index-item" onclick="openModal('growth3')">接受不完美</div>
+                        <div class="index-more" onclick="goToSection('growth')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <h2 class="section-title">🌟 压力管理</h2>
         <div class="mental-grid">
             <div class="mental-card" onclick="openModal('pressure1')">
@@ -1098,6 +1221,40 @@
             if(window.scrollY > 400){ bt.style.opacity='1'; bt.style.transform='translateY(0)'; }
             else { bt.style.opacity='0'; bt.style.transform='translateY(20px)'; }
         });
+        // 内容索引功能
+        function toggleIndex(){
+            const header = document.querySelector('.content-index-header');
+            const body = document.getElementById('indexBody');
+            header.classList.toggle('collapsed');
+            body.classList.toggle('hidden');
+        }
+        function toggleCategory(el){
+            el.classList.toggle('collapsed');
+            el.nextElementSibling.classList.toggle('hidden');
+        }
+        function goToSection(section){
+            // 关闭索引
+            document.getElementById('indexBody').classList.add('hidden');
+            document.querySelector('.content-index-header').classList.add('collapsed');
+            // 滚动到对应章节
+            setTimeout(() => {
+                const sectionMap = {
+                    'pressure': '压力管理',
+                    'emotion': '情绪调节',
+                    'relation': '人际关系',
+                    'balance': '工作生活平衡',
+                    'growth': '自我成长'
+                };
+                const title = sectionMap[section];
+                const titles = document.querySelectorAll('.section-title');
+                for(let t of titles){
+                    if(t.textContent.includes(title)){
+                        t.scrollIntoView({behavior: 'smooth', block: 'start'});
+                        break;
+                    }
+                }
+            }, 100);
+        }
     </script>
 </body>
 </html>

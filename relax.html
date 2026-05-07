@@ -31,6 +31,65 @@
         .page-header-stat { display: inline-flex; gap: 1.5rem; margin-top: 1.2rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.8rem; color: rgba(255,255,255,0.85); }
         .page-header-stat span::before { content: '·'; margin-right: 0.4rem; opacity: 0.5; }
         .page-header-stat span:first-child::before { display: none; }
+
+        /* 内容索引 */
+        .content-index {
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-soft);
+            margin: 2rem auto;
+            max-width: 1200px;
+            overflow: hidden;
+        }
+        .content-index-header {
+            padding: 1.2rem 1.5rem;
+            background: linear-gradient(135deg, #ed8936, #f6ad55);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+        .content-index-header h3 { font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .content-index-header .toggle-icon { transition: transform 0.3s; }
+        .content-index-header.collapsed .toggle-icon { transform: rotate(-90deg); }
+        .content-index-body { padding: 1rem 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+        .content-index-body.hidden { display: none; }
+        .index-category { border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
+        .index-category-header {
+            padding: 0.8rem 1rem;
+            background: #fef9f3;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1a365d;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.2s;
+        }
+        .index-category-header:hover { background: #fef3e2; }
+        .index-category-header .arrow { transition: transform 0.3s; font-size: 0.75rem; color: #718096; }
+        .index-category-header.collapsed .arrow { transform: rotate(-90deg); }
+        .index-category-items { padding: 0.5rem 0; background: white; }
+        .index-category-items.hidden { display: none; }
+        .index-item {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            color: #4a5568;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+        .index-item:hover { background: #fff7ed; color: #ed8936; padding-left: 1.2rem; }
+        .index-item::before { content: '😂'; font-size: 0.75rem; }
+        .index-item.read::before { content: '✅'; }
+        .index-more { padding: 0.5rem 1rem; font-size: 0.78rem; color: #ed8936; cursor: pointer; display: flex; align-items: center; gap: 0.3rem; }
+        .index-more:hover { text-decoration: underline; }
+        .index-more::before { content: '更多 →'; }
+
         .section-title { font-family: 'Noto Serif SC', serif; font-size: 1.5rem; color: var(--primary); margin: 3rem 0 1.5rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--accent); display: inline-block; }
         .section-title:first-of-type { margin-top: 0; }
         .relax-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
@@ -88,6 +147,60 @@
     </header>
 
     <main class="content">
+        <!-- 内容索引 -->
+        <div class="content-index" id="contentIndex">
+            <div class="content-index-header" onclick="toggleIndex()">
+                <h3>📋 趣味内容索引 <span style="opacity:0.7;font-weight:400;font-size:0.85rem">共108+条内容</span></h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="content-index-body" id="indexBody">
+                <div class="index-category">
+                    <div class="index-category-header" onclick="toggleCategory(this)">
+                        😂 银行人梗 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items">
+                        <div class="index-item" onclick="goToSection('joke')">开户的哲学</div>
+                        <div class="index-item" onclick="goToSection('joke')">利息怎么算</div>
+                        <div class="index-item" onclick="goToSection('joke')">柜员日常</div>
+                        <div class="index-more" onclick="goToSection('joke')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        😤 崩溃瞬间 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="goToSection('crash')">系统崩了</div>
+                        <div class="index-item" onclick="goToSection('crash')">授权被拒</div>
+                        <div class="index-item" onclick="goToSection('crash')">客户发飙</div>
+                        <div class="index-more" onclick="goToSection('crash')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        🏆 专属福利 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="goToSection('benefit')">节日礼包</div>
+                        <div class="index-item" onclick="goToSection('benefit')">年度体检</div>
+                        <div class="index-item" onclick="goToSection('benefit')">统一着装</div>
+                        <div class="index-more" onclick="goToSection('benefit')"></div>
+                    </div>
+                </div>
+                <div class="index-category">
+                    <div class="index-category-header collapsed" onclick="toggleCategory(this)">
+                        🎭 职业感悟 <span class="arrow">▼</span>
+                    </div>
+                    <div class="index-category-items hidden">
+                        <div class="index-item" onclick="goToSection('feeling')">银行人的坚持</div>
+                        <div class="index-item" onclick="goToSection('feeling')">成长的烦恼</div>
+                        <div class="index-item" onclick="goToSection('feeling')">坚持的理由</div>
+                        <div class="index-more" onclick="goToSection('feeling')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <h2 class="section-title">😂 银行人才能懂的梗</h2>
         <div class="relax-grid">
             <div class="relax-card"><div class="relax-card-emoji">😂</div><h3>开户的哲学</h3><p>"您好，请问办什么业务？"<br>"我要开户。"<br>"好的，请出示身份证。"<br>"我没带。"<br>"……"<br>懂的都懂！</p><span class="relax-card-tag">#开户日常</span></div>
@@ -202,6 +315,39 @@
             if(window.scrollY > 400){ bt.style.opacity='1'; bt.style.transform='translateY(0)'; }
             else { bt.style.opacity='0'; bt.style.transform='translateY(20px)'; }
         });
+        // 内容索引功能
+        function toggleIndex(){
+            const header = document.querySelector('.content-index-header');
+            const body = document.getElementById('indexBody');
+            header.classList.toggle('collapsed');
+            body.classList.toggle('hidden');
+        }
+        function toggleCategory(el){
+            el.classList.toggle('collapsed');
+            el.nextElementSibling.classList.toggle('hidden');
+        }
+        function goToSection(section){
+            // 关闭索引
+            document.getElementById('indexBody').classList.add('hidden');
+            document.querySelector('.content-index-header').classList.add('collapsed');
+            // 滚动到对应章节
+            setTimeout(() => {
+                const sectionMap = {
+                    'joke': '银行人才能懂的梗',
+                    'crash': '银行人的崩溃瞬间',
+                    'benefit': '银行人专属福利',
+                    'feeling': '职业感悟'
+                };
+                const title = sectionMap[section];
+                const titles = document.querySelectorAll('.section-title');
+                for(let t of titles){
+                    if(t.textContent.includes(title)){
+                        t.scrollIntoView({behavior: 'smooth', block: 'start'});
+                        break;
+                    }
+                }
+            }, 100);
+        }
     </script>
 </body>
 </html>
