@@ -658,11 +658,6 @@
             });
         }
 
-        // 字数统计
-        document.getElementById('messageContent')?.addEventListener('input', function() {
-            document.getElementById('charCount').textContent = this.value.length;
-        });
-
         // ============ 留言功能 ============
         async function submitMessage() {
             const content = document.getElementById('messageContent').value.trim();

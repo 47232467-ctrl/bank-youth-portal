@@ -203,7 +203,7 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
                 <div class="logo-icon">Y</div>
@@ -839,7 +839,8 @@
             document.getElementById('progress-bar').style.width = pct + '%';
             document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
             document.getElementById('back-top').classList.toggle('show', window.scrollY > 400);
-        // 内容索引功能
+        });
+        // 内容索引功能（全局作用域，供 onclick 调用）
         function toggleIndex(){
             const header = document.querySelector('.content-index-header');
             const body = document.getElementById('indexBody');
