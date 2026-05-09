@@ -67,34 +67,41 @@
         /* 页面头部 */
         .page-header {
             background: linear-gradient(135deg, #0f1b3e 0%, #1a365d 50%, #2d1b69 100%);
-            padding: 8rem 2rem 4rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            padding: 6.5rem 3rem 3rem;
+            position: relative; overflow: hidden;
+            display: flex; align-items: center; gap: 2rem; min-height: 280px;
         }
         .page-header::before {
-            content: '';
-            position: absolute;
-            width: 400px; height: 400px;
+            content: ''; position: absolute;
+            width: 500px; height: 500px;
             background: radial-gradient(circle, rgba(102,126,234,0.3), transparent);
-            top: -100px; left: -100px;
-            border-radius: 50%;
+            top: -100px; left: -100px; border-radius: 50%; pointer-events: none;
         }
         .page-header::after {
-            content: '';
-            position: absolute;
-            width: 300px; height: 300px;
+            content: ''; position: absolute;
+            width: 400px; height: 400px;
             background: radial-gradient(circle, rgba(240,147,251,0.25), transparent);
-            bottom: -50px; right: -50px;
-            border-radius: 50%;
+            bottom: -80px; right: -80px; border-radius: 50%; pointer-events: none;
         }
-        .page-title { font-family: 'Noto Serif SC', serif; font-size: clamp(2rem, 4vw, 3rem); color: white; margin-bottom: 0.8rem; position: relative; }
+        .ph-side { flex: 0 0 200px; display: flex; flex-direction: column; gap: 0.75rem; position: relative; z-index: 1; }
+        .ph-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); backdrop-filter: blur(14px); border-radius: 16px; padding: 1rem 1.2rem; color: white; }
+        .ph-card-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.55; margin-bottom: 0.35rem; }
+        .ph-card-value { font-size: 1.5rem; font-weight: 800; line-height: 1.1; }
+        .ph-card-sub { font-size: 0.78rem; opacity: 0.7; margin-top: 0.2rem; }
+        .ph-card-row { display: flex; align-items: baseline; gap: 0.4rem; }
+        .ph-card-unit { font-size: 0.82rem; opacity: 0.75; }
+        .ph-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+        .ph-tag { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.18); padding: 0.22rem 0.6rem; border-radius: 50px; font-size: 0.72rem; cursor: pointer; transition: all 0.2s; }
+        .ph-tag:hover { background: rgba(255,255,255,0.25); transform: translateY(-1px); }
+        .ph-center { flex: 1; text-align: center; position: relative; z-index: 1; }
+        .page-title { font-family: 'Noto Serif SC', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: white; margin-bottom: 0.8rem; }
         .page-title em { font-style: normal; background: linear-gradient(135deg, #f6d365, #f093fb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .page-sub { color: rgba(255,255,255,0.75); font-size: 1.05rem; position: relative; max-width: 600px; margin: 0 auto; }
-        .header-stats { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; position: relative; }
+        .page-sub { color: rgba(255,255,255,0.75); font-size: 0.95rem; max-width: 460px; margin: 0 auto; }
+        .header-stats { display: flex; justify-content: center; gap: 2.5rem; margin-top: 1.8rem; }
         .header-stat { color: white; text-align: center; }
         .header-stat-num { font-size: 1.8rem; font-weight: 700; background: linear-gradient(135deg, #f6d365, #f6ad55); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .header-stat-label { font-size: 0.8rem; opacity: 0.7; }
+        @media (max-width: 860px) { .ph-side { display: none; } .page-header { display: block; padding: 5.5rem 2rem 3rem; text-align: center; } }
 
         /* 主内容 */
         .main-content {
@@ -449,20 +456,60 @@
 
     <!-- 页面头部 -->
     <header class="page-header">
-        <h1 class="page-title">银YOUNG <em>留言板</em></h1>
-        <p class="page-sub">想说就说，可以匿名，也可以实名。在这里，每一个声音都值得被听见。</p>
-        <div class="header-stats">
-            <div class="header-stat">
-                <div class="header-stat-num" id="totalCount">0</div>
-                <div class="header-stat-label">条留言</div>
+        <!-- 左侧 -->
+        <div class="ph-side">
+            <div class="ph-card">
+                <div class="ph-card-label">💬 社区氛围</div>
+                <div style="font-size:0.82rem;line-height:1.7;opacity:0.88;margin-top:0.3rem">
+                    🤝 支持匿名留言<br>
+                    💌 真实倾诉空间<br>
+                    🛡 温暖安全社区
+                </div>
             </div>
-            <div class="header-stat">
-                <div class="header-stat-num" id="todayCount">0</div>
-                <div class="header-stat-label">今日新增</div>
+            <div class="ph-card">
+                <div class="ph-card-label">🔥 热门话题</div>
+                <div class="ph-tags">
+                    <span class="ph-tag">#吐槽区</span>
+                    <span class="ph-tag">#求助</span>
+                    <span class="ph-tag">#经验分享</span>
+                    <span class="ph-tag">#正能量</span>
+                </div>
             </div>
-            <div class="header-stat">
-                <div class="header-stat-num" id="replyCount">0</div>
-                <div class="header-stat-label">条回复</div>
+        </div>
+        <!-- 中间 -->
+        <div class="ph-center">
+            <h1 class="page-title">银YOUNG <em>留言板</em></h1>
+            <p class="page-sub">想说就说，可以匿名，也可以实名。在这里，每一个声音都值得被听见。</p>
+            <div class="header-stats">
+                <div class="header-stat">
+                    <div class="header-stat-num" id="totalCount">0</div>
+                    <div class="header-stat-label">条留言</div>
+                </div>
+                <div class="header-stat">
+                    <div class="header-stat-num" id="todayCount">0</div>
+                    <div class="header-stat-label">今日新增</div>
+                </div>
+                <div class="header-stat">
+                    <div class="header-stat-num" id="replyCount">0</div>
+                    <div class="header-stat-label">条回复</div>
+                </div>
+            </div>
+        </div>
+        <!-- 右侧 -->
+        <div class="ph-side">
+            <div class="ph-card">
+                <div class="ph-card-label">📋 留言须知</div>
+                <div style="font-size:0.8rem;line-height:1.8;opacity:0.85;margin-top:0.3rem">
+                    ✅ 保持友善尊重<br>
+                    🚫 请勿泄露客户信息<br>
+                    💡 欢迎真实分享<br>
+                    🎭 可选择匿名发布
+                </div>
+            </div>
+            <div class="ph-card">
+                <div class="ph-card-label">📣 最近精华</div>
+                <div style="font-size:0.82rem;line-height:1.6;opacity:0.9;margin-top:0.3rem">「今天帮一位老人找到了 20 年前的存单，她哭了，我也差点哭了。」</div>
+                <div style="font-size:0.75rem;opacity:0.5;margin-top:0.3rem">— 匿名用户 · 昨天</div>
             </div>
         </div>
     </header>

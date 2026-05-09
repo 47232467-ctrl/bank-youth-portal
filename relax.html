@@ -21,16 +21,29 @@
         .nav-links a { text-decoration: none; color: #4a5568; padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.95rem; font-weight: 500; transition: all 0.3s; }
         .nav-links a:hover { background: var(--primary); color: white; }
         .nav-cta { background: var(--accent) !important; color: white !important; }
-        .page-header { padding: 4.5rem 2rem 2rem; background: linear-gradient(135deg, #1a365d 0%, #0d1f3c 100%); text-align: center; position: relative; overflow: hidden; }
-        .page-header::before { content: ''; position: absolute; top: -80px; right: -80px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(237,137,54,0.3) 0%, transparent 65%); border-radius: 50%; }
-        .page-header::after { content: ''; position: absolute; bottom: -60px; left: -60px; width: 350px; height: 350px; background: radial-gradient(circle, rgba(246,173,85,0.2) 0%, transparent 65%); border-radius: 50%; }
-        .page-header-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+        .page-header { padding: 6.5rem 3rem 3rem; background: linear-gradient(135deg, #1a365d 0%, #0d1f3c 100%); text-align: center; position: relative; overflow: hidden; display: flex; align-items: center; gap: 2rem; min-height: 300px; }
+        .page-header::before { content: ''; position: absolute; top: -80px; right: -80px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(237,137,54,0.3) 0%, transparent 65%); border-radius: 50%; pointer-events: none; }
+        .page-header::after { content: ''; position: absolute; bottom: -60px; left: -60px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(246,173,85,0.2) 0%, transparent 65%); border-radius: 50%; pointer-events: none; }
+        .page-header-content { flex: 1; text-align: center; position: relative; z-index: 1; }
+        .ph-side { flex: 0 0 210px; display: flex; flex-direction: column; gap: 0.75rem; position: relative; z-index: 1; }
+        .ph-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(237,137,54,0.2); backdrop-filter: blur(14px); border-radius: 16px; padding: 1rem 1.2rem; color: white; }
+        .ph-card-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.55; margin-bottom: 0.35rem; }
+        .ph-card-value { font-size: 1.6rem; font-weight: 800; line-height: 1.1; }
+        .ph-card-sub { font-size: 0.78rem; opacity: 0.7; margin-top: 0.25rem; }
+        .ph-card-row { display: flex; align-items: baseline; gap: 0.4rem; }
+        .ph-card-unit { font-size: 0.85rem; opacity: 0.75; }
+        .ph-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+        .ph-tag { background: rgba(237,137,54,0.18); border: 1px solid rgba(237,137,54,0.3); padding: 0.22rem 0.6rem; border-radius: 50px; font-size: 0.72rem; cursor: pointer; transition: all 0.2s; color: white; }
+        .ph-tag:hover { background: rgba(237,137,54,0.35); transform: translateY(-1px); }
+        .ph-action-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(237,137,54,0.8); border: 1px solid rgba(237,137,54,0.5); color: white; padding: 0.5rem 1.1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-decoration: none; margin-top: 0.5rem; }
+        .ph-action-btn:hover { background: rgba(237,137,54,1); transform: translateY(-2px); }
         .page-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(237,137,54,0.9); color: white; padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.8rem; }
-        .page-header h1 { font-family: 'Noto Serif SC', serif; font-size: 2rem; color: white; margin-bottom: 0.4rem; letter-spacing: 0.08em; }
-        .page-header p { font-size: 0.95rem; color: rgba(255,255,255,0.75); }
+        .page-header h1 { font-family: 'Noto Serif SC', serif; font-size: 2.2rem; color: white; margin-bottom: 0.5rem; letter-spacing: 0.08em; }
+        .page-header p { font-size: 0.95rem; color: rgba(255,255,255,0.75); max-width: 420px; margin: 0 auto; }
         .page-header-stat { display: inline-flex; gap: 1.5rem; margin-top: 1.2rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.8rem; color: rgba(255,255,255,0.85); }
         .page-header-stat span::before { content: '·'; margin-right: 0.4rem; opacity: 0.5; }
         .page-header-stat span:first-child::before { display: none; }
+        @media (max-width: 860px) { .ph-side { display: none; } .page-header { display: block; padding: 5rem 2rem 2.5rem; text-align: center; } }
 
         /* 内容索引 */
         .content-index {
@@ -133,15 +146,56 @@
     </nav>
 
     <header class="page-header">
+        <!-- 左侧 -->
+        <div class="ph-side">
+            <div class="ph-card">
+                <div class="ph-card-label">😂 趣味内容</div>
+                <div class="ph-card-row">
+                    <div class="ph-card-value">108</div>
+                    <div class="ph-card-unit">+ 个</div>
+                </div>
+                <div class="ph-card-sub">每周持续更新</div>
+            </div>
+            <div class="ph-card">
+                <div class="ph-card-label">🎭 今日彩蛋</div>
+                <div style="font-size:0.82rem;line-height:1.6;opacity:0.9;margin-top:0.3rem;font-style:italic">「客户：你们利率这么低，我存什么存！行员：...我也觉得。」</div>
+            </div>
+            <div class="ph-card">
+                <div class="ph-card-label">🔥 热门标签</div>
+                <div class="ph-tags">
+                    <span class="ph-tag">银行人梗</span>
+                    <span class="ph-tag">客户神操作</span>
+                    <span class="ph-tag">领导名言</span>
+                    <span class="ph-tag">考核吐槽</span>
+                </div>
+            </div>
+        </div>
+        <!-- 中间 -->
         <div class="page-header-content">
             <div class="page-badge">😄 108+ 趣味内容</div>
             <h1>轻 松 一 刻</h1>
-            <p>笑一笑，十年少，轻松面对每一天</p>
+            <p>笑一笑，十年少，快乐的银行人更有战斗力</p>
             <div class="page-header-stat">
                 <span>银行人梗</span>
                 <span>崩溃瞬间</span>
                 <span>绝妙反击</span>
                 <span>每日一笑</span>
+            </div>
+        </div>
+        <!-- 右侧 -->
+        <div class="ph-side">
+            <div class="ph-card">
+                <div class="ph-card-label">🏆 本周最火</div>
+                <div style="font-size:0.8rem;line-height:1.8;opacity:0.88;margin-top:0.3rem">
+                    🥇 存款考核的 100 种说法<br>
+                    🥈 被客户问懵的那些问题<br>
+                    🥉 年终奖数字的心理游戏
+                </div>
+            </div>
+            <div class="ph-card">
+                <div class="ph-card-label">🎰 今日推荐</div>
+                <div style="font-size:0.82rem;line-height:1.6;opacity:0.9;margin-top:0.3rem">「银行人的隐语大全」-- 懂的都懂，不懂你还新吗？</div>
+                <a class="ph-action-btn" href="#" onclick="window.scrollTo({top:400,behavior:'smooth'});return false">😄 开始快乐</a>
             </div>
         </div>
     </header>

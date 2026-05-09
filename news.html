@@ -42,18 +42,35 @@
         .nav-links a.active { background: var(--primary); color: white; }
 
         .page-header {
-            padding: 4.5rem 2rem 2rem;
+            padding: 6.5rem 3rem 3rem;
             background: linear-gradient(135deg, #0f1b3e 0%, #1a365d 50%, #2d1b69 100%);
-            color: white; text-align: center; position: relative; overflow: hidden;
+            color: white; position: relative; overflow: hidden;
+            display: flex; align-items: center; gap: 2rem; min-height: 300px;
         }
-        .page-header::before { content: ''; position: absolute; top: -80px; right: -80px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(79,172,254,0.25) 0%, transparent 65%); border-radius: 50%; }
-        .page-header-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+        .page-header::before { content: ''; position: absolute; top: -80px; right: -80px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(79,172,254,0.25) 0%, transparent 65%); border-radius: 50%; pointer-events: none; }
+        .page-header::after { content: ''; position: absolute; bottom: -80px; left: -60px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(102,126,234,0.2) 0%, transparent 65%); border-radius: 50%; pointer-events: none; }
+        .page-header-content { flex: 1; text-align: center; position: relative; z-index: 1; }
+        .ph-side { flex: 0 0 210px; display: flex; flex-direction: column; gap: 0.75rem; position: relative; z-index: 1; }
+        .ph-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); backdrop-filter: blur(14px); border-radius: 16px; padding: 1rem 1.2rem; color: white; }
+        .ph-card-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.55; margin-bottom: 0.35rem; }
+        .ph-card-value { font-size: 1.6rem; font-weight: 800; line-height: 1.1; }
+        .ph-card-sub { font-size: 0.78rem; opacity: 0.7; margin-top: 0.25rem; }
+        .ph-card-row { display: flex; align-items: baseline; gap: 0.4rem; }
+        .ph-card-unit { font-size: 0.85rem; opacity: 0.75; }
+        .ph-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+        .ph-tag { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.18); padding: 0.22rem 0.6rem; border-radius: 50px; font-size: 0.72rem; cursor: pointer; transition: all 0.2s; }
+        .ph-tag:hover { background: rgba(255,255,255,0.25); transform: translateY(-1px); }
+        .ph-action-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(237,137,54,0.85); border: 1px solid rgba(237,137,54,0.6); color: white; padding: 0.5rem 1.1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-decoration: none; margin-top: 0.5rem; }
+        .ph-action-btn:hover { background: rgba(237,137,54,1); transform: translateY(-2px); }
         .page-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(237,137,54,0.9); padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.8rem; }
-        .page-header h1 { font-size: 2rem; margin-bottom: 0.4rem; letter-spacing: 0.08em; font-weight: 700; }
-        .page-header p { font-size: 0.95rem; opacity: 0.8; }
+        .page-header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; letter-spacing: 0.08em; font-weight: 700; }
+        .page-header p { font-size: 0.95rem; opacity: 0.8; max-width: 420px; margin: 0 auto; }
         .page-header-stat { display: inline-flex; gap: 1.5rem; margin-top: 1.2rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.8rem; color: rgba(255,255,255,0.85); }
         .page-header-stat span::before { content: '·'; margin-right: 0.4rem; opacity: 0.5; }
         .page-header-stat span:first-child::before { display: none; }
+        .ph-live-dot { display: inline-block; width: 7px; height: 7px; background: #48bb78; border-radius: 50%; margin-right: 0.3rem; animation: blink 1.5s ease-in-out infinite; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+        @media (max-width: 860px) { .ph-side { display: none; } .page-header { display: block; padding: 5rem 2rem 2.5rem; text-align: center; } }
 
         .content { padding: 2.5rem 2rem; max-width: 1400px; margin: 0 auto; }
 
@@ -117,15 +134,63 @@
     </nav>
 
     <header class="page-header">
+        <!-- 左侧面板 -->
+        <div class="ph-side">
+            <div class="ph-card">
+                <div class="ph-card-label"><span class="ph-live-dot"></span>实时更新</div>
+                <div class="ph-card-row">
+                    <div class="ph-card-value" id="newsCount">30</div>
+                    <div class="ph-card-unit">+ 条 / 日</div>
+                </div>
+                <div class="ph-card-sub">每天 07:00 准时推送</div>
+            </div>
+            <div class="ph-card">
+                <div class="ph-card-label">📌 今日关键词</div>
+                <div class="ph-tags">
+                    <span class="ph-tag">LPR</span>
+                    <span class="ph-tag">降准</span>
+                    <span class="ph-tag">存款利率</span>
+                    <span class="ph-tag">监管新规</span>
+                    <span class="ph-tag">理财净值</span>
+                </div>
+            </div>
+            <div class="ph-card">
+                <div class="ph-card-label">📅 更新时间</div>
+                <div style="font-size:0.82rem;opacity:0.85;margin-top:0.3rem;line-height:1.7">
+                    🌅 晨报 07:00<br>
+                    ☀️ 午间 12:00<br>
+                    🌆 晚报 18:00
+                </div>
+            </div>
+        </div>
+        <!-- 中间 -->
         <div class="page-header-content">
             <div class="page-badge">📈 每日更新 · 30+ 条资讯</div>
             <h1>最新金融动态</h1>
-            <p>每天早上7点准时更新，助你掌握行业最新资讯</p>
+            <p>每天早上 7 点准时更新，助你掌握行业最新资讯，做最懂市场的银行人</p>
             <div class="page-header-stat">
                 <span>监管政策</span>
                 <span>市场行情</span>
                 <span>银行资讯</span>
                 <span>行业动态</span>
+            </div>
+        </div>
+        <!-- 右侧面板 -->
+        <div class="ph-side">
+            <div class="ph-card">
+                <div class="ph-card-label">🔍 快速浏览</div>
+                <div style="font-size:0.8rem;line-height:1.8;opacity:0.88;margin-top:0.3rem">
+                    📊 央行政策动态<br>
+                    🏦 银行业同业资讯<br>
+                    💹 债券 / 外汇行情<br>
+                    📋 监管通知公告<br>
+                    🌐 国际金融要闻
+                </div>
+            </div>
+            <div class="ph-card">
+                <div class="ph-card-label">💡 阅读建议</div>
+                <div style="font-size:0.82rem;line-height:1.6;opacity:0.85;margin-top:0.3rem">每日花 5 分钟读完，与客户沟通时自带"懂行"气质</div>
+                <a class="ph-action-btn" href="#" onclick="window.scrollTo({top:400,behavior:'smooth'});return false">📰 查看今日动态</a>
             </div>
         </div>
     </header>

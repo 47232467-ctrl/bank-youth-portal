@@ -54,19 +54,33 @@
         .nav-cta { background: var(--accent) !important; color: white !important; }
 
         .page-header {
-            padding: 4.5rem 2rem 2rem;
+            padding: 6.5rem 3rem 3rem;
             background: linear-gradient(135deg, #1a0b3d 0%, #2d1b69 40%, #5b21b6 100%);
-            color: white; text-align: center; position: relative; overflow: hidden;
+            color: white; position: relative; overflow: hidden;
+            display: flex; align-items: center; gap: 2rem; min-height: 300px;
         }
-        .page-header::before { content: ''; position: absolute; top: -80px; right: -80px; width: 450px; height: 450px; background: radial-gradient(circle, rgba(167,139,250,0.3) 0%, transparent 65%); border-radius: 50%; }
-        .page-header::after { content: ''; position: absolute; bottom: -60px; left: -60px; width: 350px; height: 350px; background: radial-gradient(circle, rgba(240,147,251,0.2) 0%, transparent 65%); border-radius: 50%; }
-        .page-header-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+        .page-header::before { content: ''; position: absolute; top: -80px; right: -80px; width: 550px; height: 550px; background: radial-gradient(circle, rgba(167,139,250,0.3) 0%, transparent 65%); border-radius: 50%; pointer-events: none; }
+        .page-header::after { content: ''; position: absolute; bottom: -60px; left: -60px; width: 450px; height: 450px; background: radial-gradient(circle, rgba(240,147,251,0.2) 0%, transparent 65%); border-radius: 50%; pointer-events: none; }
+        .page-header-content { flex: 1; text-align: center; position: relative; z-index: 1; }
+        .ph-side { flex: 0 0 210px; display: flex; flex-direction: column; gap: 0.75rem; position: relative; z-index: 1; }
+        .ph-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(167,139,250,0.2); backdrop-filter: blur(14px); border-radius: 16px; padding: 1rem 1.2rem; color: white; }
+        .ph-card-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.55; margin-bottom: 0.35rem; }
+        .ph-card-value { font-size: 1.6rem; font-weight: 800; line-height: 1.1; }
+        .ph-card-sub { font-size: 0.78rem; opacity: 0.7; margin-top: 0.25rem; }
+        .ph-card-row { display: flex; align-items: baseline; gap: 0.4rem; }
+        .ph-card-unit { font-size: 0.85rem; opacity: 0.75; }
+        .ph-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+        .ph-tag { background: rgba(167,139,250,0.2); border: 1px solid rgba(167,139,250,0.3); padding: 0.22rem 0.6rem; border-radius: 50px; font-size: 0.72rem; cursor: pointer; transition: all 0.2s; }
+        .ph-tag:hover { background: rgba(167,139,250,0.4); transform: translateY(-1px); }
+        .ph-action-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(167,139,250,0.3); border: 1px solid rgba(167,139,250,0.4); color: white; padding: 0.5rem 1.1rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-decoration: none; margin-top: 0.5rem; }
+        .ph-action-btn:hover { background: rgba(167,139,250,0.5); transform: translateY(-2px); }
         .page-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(240,147,251,0.3); border: 1px solid rgba(240,147,251,0.4); padding: 0.3rem 0.9rem; border-radius: 50px; font-size: 0.8rem; font-weight: 600; margin-bottom: 0.8rem; }
-        .page-header h1 { font-family: 'Noto Serif SC', serif; font-size: 2rem; margin-bottom: 0.4rem; letter-spacing: 0.08em; }
-        .page-header p { font-size: 0.95rem; opacity: 0.8; }
+        .page-header h1 { font-family: 'Noto Serif SC', serif; font-size: 2.2rem; margin-bottom: 0.5rem; letter-spacing: 0.08em; }
+        .page-header p { font-size: 0.95rem; opacity: 0.8; max-width: 420px; margin: 0 auto; }
         .page-header-stat { display: inline-flex; gap: 1.5rem; margin-top: 1.2rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.8rem; color: rgba(255,255,255,0.85); }
         .page-header-stat span::before { content: '·'; margin-right: 0.4rem; opacity: 0.5; }
         .page-header-stat span:first-child::before { display: none; }
+        @media (max-width: 860px) { .ph-side { display: none; } .page-header { display: block; padding: 5rem 2rem 2.5rem; text-align: center; } }
 
         /* 内容索引 */
         .content-index {
@@ -217,15 +231,57 @@
     </nav>
 
     <header class="page-header">
+        <!-- 左侧 -->
+        <div class="ph-side">
+            <div class="ph-card">
+                <div class="ph-card-label">🧘 心理文章</div>
+                <div class="ph-card-row">
+                    <div class="ph-card-value">84</div>
+                    <div class="ph-card-unit">+ 篇</div>
+                </div>
+                <div class="ph-card-sub">专业心理学内容</div>
+            </div>
+            <div class="ph-card">
+                <div class="ph-card-label">💜 今日正念</div>
+                <div style="font-size:0.82rem;line-height:1.6;opacity:0.9;margin-top:0.3rem;font-style:italic">「感到疲惫不是软弱，而是你一直在努力的证明。」</div>
+            </div>
+            <div class="ph-card">
+                <div class="ph-card-label">🌿 热门话题</div>
+                <div class="ph-tags">
+                    <span class="ph-tag">减压</span>
+                    <span class="ph-tag">冥想入门</span>
+                    <span class="ph-tag">职业耗竭</span>
+                    <span class="ph-tag">焦虑缓解</span>
+                    <span class="ph-tag">睡眠改善</span>
+                </div>
+            </div>
+        </div>
+        <!-- 中间 -->
         <div class="page-header-content">
             <div class="page-badge">🧘 84+ 心理文章</div>
             <h1>心 灵 驿 站</h1>
-            <p>累了就停一停，在这里找回平静的自己</p>
+            <p>累了就停一停，在这里找回平静的自己，银行人的心理加油站</p>
             <div class="page-header-stat">
                 <span>情绪调节</span>
                 <span>压力管理</span>
                 <span>职场适应</span>
                 <span>正念冥想</span>
+            </div>
+        </div>
+        <!-- 右侧 -->
+        <div class="ph-side">
+            <div class="ph-card">
+                <div class="ph-card-label">📊 你并不孤单</div>
+                <div style="font-size:0.82rem;line-height:1.7;opacity:0.88;margin-top:0.3rem">
+                    🙋 78% 银行人有过<br>"想辞职"的念头<br>
+                    😮‍💨 65% 表示工作压力<br>影响了睡眠质量<br>
+                    <span style="opacity:0.6;font-size:0.75rem">— 2024银行业心理健康调研</span>
+                </div>
+            </div>
+            <div class="ph-card">
+                <div class="ph-card-label">🌟 本周推荐</div>
+                <div style="font-size:0.82rem;line-height:1.6;opacity:0.9;margin-top:0.3rem">《5 分钟正念呼吸法》· 让你在柜台后面也能悄悄减压</div>
+                <a class="ph-action-btn" href="#" onclick="window.scrollTo({top:400,behavior:'smooth'});return false">🌸 开始阅读</a>
             </div>
         </div>
     </header>
